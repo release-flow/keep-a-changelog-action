@@ -1,0 +1,27 @@
+name: Node.js CI
+
+on:
+  pull_request:
+    branches: 
+    - $default-branch
+    - 'release/*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+    - run: npm ci
+    - run: npm run all
+    - name: Ensure dist/ directory is up to date
+      run: |
+        if [ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]; then
+          echo "Detected uncommitted changes after build.  See status below:"
+          git diff
+          exit 1
+        fi
