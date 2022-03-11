@@ -1,0 +1,43 @@
+name: 'Keep-a-Changelog Prepare Release'
+description: 'Starts a maintenance window in the website availability monitoring system'
+inputs:
+    release-type:
+      description: >-
+        The release type, which determines how the version number is
+        incremented. Must be one of: major, premajor, minor, preminor, patch,
+        prepatch, or prerelease. See the documentation for the inc function at
+        https://github.com/npm/node-semver#functions.
+      required: true
+    changelog:
+      description: >-
+        The filename of the changelog to modify. If a relative path is
+        specified, it is appended to the GitHub workspace path.
+      required: false
+      default: 'CHANGELOG.md'
+    release-date:
+      description: >-
+        The release date that is written into the changelog for the new release,
+        in ISO 8601 format, e.g. 2022-03-03.
+      required: false
+    prerelease-identifier:
+      description: >-
+        The identifier to use as part of the prerelease string, if the new
+        version is a prerelease version. For example, it would specify the
+        'beta' in '1.0.0-beta.1'.
+      required: false
+    tag-prefix:
+      description: 'The prefix that is applied to the release number to generate the release tag.'
+      required: false
+      default: 'v'
+    output-file:
+      description: >-
+        The name of the modified changelog file, which is written to the same
+        directory as the input changelog. If not specified, the input changelog
+        is overwritten. Note this must not contain a path, just a filename.
+      required: false
+outputs:
+  new-release-version:
+    description: 'The next release version that was determined from the changelog.'
+runs:
+    using: 'node16'
+    main: ../dist/start/index.js

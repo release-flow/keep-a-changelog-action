@@ -1,0 +1,29 @@
+* text=auto
+
+*.gitattributes text
+.gitignore      text
+*.md            text diff=markdown
+
+*.js                text
+*.js.map            text
+*.ts                text
+*.json              text
+*.cjs               text
+*.mjs               text
+.github             text
+.eslintignore       text
+.js                 text
+.gitattributes      text
+.gitignore          text
+.prettierignore     text
+.prettierrc         text
+
+*.editorconfig      text
+*.eslintignore      text
+*.eslintrc          text
+
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+
+dist/** -diff linguist-generated=true 

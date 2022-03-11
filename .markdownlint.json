@@ -1,0 +1,5 @@
+{
+    "line-length": { "line_length": 120, "code_blocks": false, "tables": false },
+    "first-line-heading": false,
+    "no-duplicate-heading": false
+}
