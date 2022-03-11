@@ -40,4 +40,4 @@ outputs:
     description: 'The next release version that was determined from the changelog.'
 runs:
     using: 'node16'
-    main: ../dist/start/index.js
+    main: dist/index.js
