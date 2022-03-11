@@ -69,6 +69,15 @@ describe('gh start action', () => {
     );
   });
 
+  it('errors when the changelog has no [Unreleased] section', () => {
+    const params = { ...DefaultParams };
+    params.changelog = 'changelog_no_unreleased.md';
+    params.outputFile = 'changelog_no_unreleased_output.md';
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+  });
+
   it('produces a correctly updated changelog', () => {
     const params = { ...DefaultParams };
     params.outputFile = 'changelog_1_output.md';

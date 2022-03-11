@@ -52,7 +52,10 @@ const attacher: Plugin<[], Root, Root> = function () {
       }
     });
 
-    // Iterate through the release headings to ensure they are in descending order
+    // Iterate through the release headings to validate the rules:
+    //  1. Check that the 'unreleased' heading, if present, is the first one in the file
+    //  2. Ensure the release versions are in descending order (we don't validate the dates,
+    //     just the version numbers).
     for (let i = 0; i < releaseHeadings.length; i++) {
       const currentHeading = releaseHeadings[i];
 
@@ -81,7 +84,11 @@ const attacher: Plugin<[], Root, Root> = function () {
       }
     }
 
+    // Save the release headings into the processor data so we can use it later instead of re-processing
+    // all the headings
     const t = processorData('releaseHeadings') as ReleaseHeading[];
+
+    // There shouldn't be anything in the array at this point, but clear it just in case
     t.length = 0;
     t.push(...releaseHeadings);
   };

@@ -19,7 +19,7 @@
           "kind": "test",
           "isDefault": true
         },
-        "problemMatcher": ["$tsc"],
+        "problemMatcher": [],
         "label": "npm: test",
         "detail": "Runs the tests"
       }

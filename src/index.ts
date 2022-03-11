@@ -13,6 +13,7 @@ import bridge from './plugins/bridge.js';
 import releaseParser from './plugins/release-parser.js';
 import preprocess from './plugins/preprocessor.js';
 import assert from './plugins/assert.js';
+import checkUnreleasedSectionExists from './plugins/check-unreleased-section-exists.js';
 import extractReleaseContent from './plugins/extract-release-content.js';
 import incrementRelease from './plugins/increment-release.js';
 import calculateNextRelease from './plugins/calculate-next-release.js';
@@ -25,6 +26,7 @@ async function processChangelog(file: VFile, options: ChangelogOptions): Promise
     .data('releaseHeadings', releaseHeadings)
     .use(releaseParser)
     .use(preprocess)
+    .use(checkUnreleasedSectionExists)
     .use(assert)
     .use(bridge, 'unreleasedContent', unified().use(extractReleaseContent).use(stringify))
     .use(calculateNextRelease, options)
@@ -58,10 +60,18 @@ async function run(): Promise<void> {
 
     core.setOutput('new-release-version', updated.data['nextReleaseVersion']);
 
-    console.log(reporter(updated));
+    if (updated.messages.length > 0) {
+      core.warning('Changelog: warnings were encountered');
+      core.startGroup('Changelog warning report');
+      console.log(reporter(updated));
+      core.endGroup();
+    }
   } catch (error) {
     if (error instanceof ChangelogError) {
+      core.setFailed('Changelog contains errors');
+      core.startGroup('Changelog error report');
       console.log(reporter(changelog));
+      core.endGroup();
     } else {
       console.error(error);
     }

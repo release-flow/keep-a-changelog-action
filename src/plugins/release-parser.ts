@@ -116,8 +116,8 @@ function parseReleaseHeading(node: Heading, file: VFile): void {
 }
 
 /**
- * A unified attacher that returns a transforner that processes a changelog file. The
- * pre-processing step analyses each level 2 heading and parses the release information
+ * A unified attacher that returns a transformer that processes a changelog file. The
+ * processing step analyses each level 2 heading and parses the release information
  * from it. Parsed release information is attached to the node's data. At the end of this
  * stage, if a h2 node has missing release data, this indicates that it could not be
  * successfully parsed, and a corresponding fatal message will be generated.
