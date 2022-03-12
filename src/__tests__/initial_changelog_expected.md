@@ -9,6 +9,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-* Initial content including change log
+- Initial content including change log
 
 [0.1.0]: https://github.com/test/dummy/releases/tag/v0.1.0

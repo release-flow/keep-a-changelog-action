@@ -1,11 +1,12 @@
 {
-  "name": "keep-a-changelog-release",
+  "name": "keep-a-changelog-actions",
   "version": "0.0.1",
-  "description": "A GitHub Action to update a changelog that adheres to keep-a-changelog and Semantic Versioning conventions.",
+  "description": "A set of GitHub Actions to work with a changelog that adheres to keep-a-changelog and Semantic Versioning conventions.",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "build-and-test": "tsc --incremental && cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
     "build": "tsc",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
@@ -42,7 +43,6 @@
   },
   "dependencies": {
     "@actions/core": "^1.6.0",
-    "@stefanprobst/unified-util-bridge": "^2.0.1",
     "date-fns": "^2.28.0",
     "remark": "^14.0.2",
     "remark-stringify": "^10.0.2",

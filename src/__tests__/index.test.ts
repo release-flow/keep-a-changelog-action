@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import { fileURLToPath } from 'url';
 import { globby } from 'globby';
 
-import './jest-file-diff';
+import './jest-file-diff.js';
 
 import { invokeActionScript, getAllErrors, getOutputVariables, ActionResult } from './test-utils.js';
 
@@ -138,7 +138,8 @@ describe('gh start action', () => {
     expect(result.isError).toBeFalsy();
 
     const o = getOutputVariables(result);
-    expect(o).toHaveProperty('new-release-version', '1.1.0-beta.0');
+    expect(o).toHaveProperty('release-version', '1.1.0-beta.0');
+    expect(o).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
   });
 });
 

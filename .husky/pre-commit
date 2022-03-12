@@ -22,5 +22,5 @@ if [ -z "$STAGED_DIST_FILES" ]; then
     echo
     echo "Or use the git commit --no-verify option to bypass the checks"
     echo
-    exit 
+    exit 1
 fi

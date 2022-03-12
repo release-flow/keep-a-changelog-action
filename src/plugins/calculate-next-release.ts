@@ -25,7 +25,7 @@ const attacher: Plugin = function (options: ChangelogOptions) {
 
     const latestVersion = latestRelease ? (<ReleaseProps>latestRelease.release).version : new SemVer('0.0.0');
 
-    file.data['nextReleaseVersion'] = semver.inc(
+    file.data['releaseVersion'] = semver.inc(
       latestVersion.format(),
       options.releaseType,
       undefined,

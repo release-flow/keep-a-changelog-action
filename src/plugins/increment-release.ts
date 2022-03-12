@@ -15,14 +15,14 @@ const attacher: Plugin<[ChangelogOptions], Root, Root> = function (options: Chan
 
   return (tree: Root, file: VFile) => {
     const releaseHeadings = processorData('releaseHeadings') as ReleaseHeading[];
-    const nextReleaseVersion = file.data['nextReleaseVersion'] as string;
+    const releaseVersion = file.data['releaseVersion'] as string;
 
     if (releaseHeadings.length === 0 || releaseHeadings[0].release !== 'unreleased') {
       file.fail("The 'Unreleased' section must be present");
     }
 
     const unreleasedSection = releaseHeadings[0].node;
-    const versionText = nextReleaseVersion;
+    const versionText = releaseVersion;
     const dateText = ' - ' + format(options.releaseDate, 'yyyy-MM-dd');
 
     const newReleaseSection: [LinkReference, Text] = [
@@ -45,7 +45,7 @@ const attacher: Plugin<[ChangelogOptions], Root, Root> = function (options: Chan
     ];
 
     unreleasedSection.children = newReleaseSection;
-    releaseHeadings[0].release = { version: new SemVer(nextReleaseVersion), date: options.releaseDate, suffix: '' };
+    releaseHeadings[0].release = { version: new SemVer(releaseVersion), date: options.releaseDate, suffix: '' };
 
     return tree;
   };

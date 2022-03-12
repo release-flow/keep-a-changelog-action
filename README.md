@@ -42,7 +42,10 @@ the format `@v1.x.x`.
 
 The following outputs can be used by subsequent workflow steps.
 
-- `new-release-version` - The next release version that was calculated from the changelog and the input parameters.
+- `release-version` - The release version that was calculated from the changelog and the input parameters, and was used
+      to update the changelog.
+
+- `release-notes` - The markdown content of the previously unreleased changelog section.
 
 Step outputs can be accessed as in the following example. Note that in order to read the step outputs the action step
 must have an id.
@@ -56,7 +59,7 @@ must have an id.
 
     - name: Display version number
       run: |
-        echo "New release version: ${{ steps.update-changelog.outputs.new-release-version }}"
+        echo "New release version: ${{ steps.update-changelog.outputs.release-version }}"
 ```
 
 ## License
