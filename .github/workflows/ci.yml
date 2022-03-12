@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-
+    name: 'Build & Test'
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
     - name: Ensure dist/ directory is up to date
       id: diff
       run: |
-        if [ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]; then
+        if [[ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]]; then
           echo "Detected uncommitted changes after build.  See status below:"
           git diff
           exit 1
