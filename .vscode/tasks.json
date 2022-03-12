@@ -14,7 +14,7 @@
     },
     {
         "type": "npm",
-        "script": "test",
+        "script": "build-and-test",
         "group": {
           "kind": "test",
           "isDefault": true

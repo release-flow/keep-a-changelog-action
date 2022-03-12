@@ -36,8 +36,12 @@ inputs:
         is overwritten. Note this must not contain a path, just a filename.
       required: false
 outputs:
-  new-release-version:
-    description: 'The next release version that was calculated from the changelog and the input parameters.'
+  release-version:
+    description: >
+      The release version that was calculated from the changelog and the input parameters, and was used to update the
+      changelog.
+  release-notes:
+    description: 'The markdown content of the previously unreleased changelog section.'
 runs:
     using: 'node16'
     main: dist/index.js

@@ -19,15 +19,19 @@
         {
             "type": "pwa-node",
             "request": "launch",
-            "name": "Debug pipeline",
+            "name": "Debug tests",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/src/index.ts",
-            "args": ["src/__tests__/good_changelog.md"],
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+            "args": ["-i"],
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
-            ]
+            ],
+            "internalConsoleOptions": "openOnSessionStart",
+            "env": {
+                "NODE_OPTIONS": "--experimental-vm-modules"
+            }
         }
     ]
 }

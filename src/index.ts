@@ -14,7 +14,7 @@ import releaseParser from './plugins/release-parser.js';
 import preprocess from './plugins/preprocessor.js';
 import assert from './plugins/assert.js';
 import checkUnreleasedSectionExists from './plugins/check-unreleased-section-exists.js';
-import extractReleaseContent from './plugins/extract-release-content.js';
+import extractUnreleasedNotes from './plugins/extract-unreleased-notes.js';
 import incrementRelease from './plugins/increment-release.js';
 import calculateNextRelease from './plugins/calculate-next-release.js';
 import updateLinkDefinitions from './plugins/update-link-definitions.js';
@@ -28,14 +28,18 @@ async function processChangelog(file: VFile, options: ChangelogOptions): Promise
     .use(preprocess)
     .use(checkUnreleasedSectionExists)
     .use(assert)
-    .use(bridge, 'unreleasedContent', unified().use(extractReleaseContent).use(stringify))
+    .use(
+      bridge,
+      'releaseNotes',
+      unified().use(extractUnreleasedNotes).use(stringify, { listItemIndent: 'one', bullet: '-' })
+    )
     .use(calculateNextRelease, options)
     .use(incrementRelease, options)
     .use(updateLinkDefinitions, options)
-    .use(stringify, { listItemIndent: 'one' })
+    .use(stringify, { listItemIndent: 'one', bullet: '-' })
     .process(file);
 
-  console.log(file.data.unreleasedContent);
+  console.log(file.data.releaseNotes);
   return updated;
 }
 
@@ -58,7 +62,8 @@ async function run(): Promise<void> {
 
     await write(updated, { encoding: 'utf-8', mode: null });
 
-    core.setOutput('new-release-version', updated.data['nextReleaseVersion']);
+    core.setOutput('release-version', updated.data['releaseVersion']);
+    core.setOutput('release-notes', updated.data['releaseNotes']);
 
     if (updated.messages.length > 0) {
       core.warning('Changelog: warnings were encountered');

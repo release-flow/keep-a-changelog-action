@@ -46766,12 +46766,12 @@ const findAllAfter =
     }
   )
 
-;// CONCATENATED MODULE: ./lib/plugins/extract-release-content.js
+;// CONCATENATED MODULE: ./lib/plugins/extract-unreleased-notes.js
 
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const extract_release_content_attacher = function extractUnreleasedContents() {
+const extract_unreleased_notes_attacher = function extractUnreleasedContents() {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return (tree, _file) => {
@@ -46798,8 +46798,8 @@ const extract_release_content_attacher = function extractUnreleasedContents() {
         return newRoot;
     };
 };
-/* harmony default export */ const extract_release_content = (extract_release_content_attacher);
-//# sourceMappingURL=extract-release-content.js.map
+/* harmony default export */ const extract_unreleased_notes = (extract_unreleased_notes_attacher);
+//# sourceMappingURL=extract-unreleased-notes.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/increment-release.js
 
 
@@ -46809,12 +46809,12 @@ const increment_release_attacher = function (options) {
     const processorData = this.data;
     return (tree, file) => {
         const releaseHeadings = processorData('releaseHeadings');
-        const nextReleaseVersion = file.data['nextReleaseVersion'];
+        const releaseVersion = file.data['releaseVersion'];
         if (releaseHeadings.length === 0 || releaseHeadings[0].release !== 'unreleased') {
             file.fail("The 'Unreleased' section must be present");
         }
         const unreleasedSection = releaseHeadings[0].node;
-        const versionText = nextReleaseVersion;
+        const versionText = releaseVersion;
         const dateText = ' - ' + (0,date_fns.format)(options.releaseDate, 'yyyy-MM-dd');
         const newReleaseSection = [
             {
@@ -46835,7 +46835,7 @@ const increment_release_attacher = function (options) {
             },
         ];
         unreleasedSection.children = newReleaseSection;
-        releaseHeadings[0].release = { version: new SemVer(nextReleaseVersion), date: options.releaseDate, suffix: '' };
+        releaseHeadings[0].release = { version: new SemVer(releaseVersion), date: options.releaseDate, suffix: '' };
         return tree;
     };
 };
@@ -46858,7 +46858,7 @@ const calculate_next_release_attacher = function (options) {
             return isReleaseProps(h.release);
         });
         const latestVersion = latestRelease ? latestRelease.release.version : new calculate_next_release_SemVer('0.0.0');
-        file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.releaseType, undefined, options.prereleaseIdentifier);
+        file.data['releaseVersion'] = semver.inc(latestVersion.format(), options.releaseType, undefined, options.prereleaseIdentifier);
     }
 };
 /* harmony default export */ const calculate_next_release = (calculate_next_release_attacher);
@@ -47067,13 +47067,13 @@ async function processChangelog(file, options) {
         .use(preprocessor)
         .use(check_unreleased_section_exists)
         .use(assert)
-        .use(bridge, 'unreleasedContent', unified().use(extract_release_content).use(remark_stringify))
+        .use(bridge, 'releaseNotes', unified().use(extract_unreleased_notes).use(remark_stringify, { listItemIndent: 'one', bullet: '-' }))
         .use(calculate_next_release, options)
         .use(increment_release, options)
         .use(update_link_definitions, options)
-        .use(remark_stringify, { listItemIndent: 'one' })
+        .use(remark_stringify, { listItemIndent: 'one', bullet: '-' })
         .process(file);
-    console.log(file.data.unreleasedContent);
+    console.log(file.data.releaseNotes);
     return updated;
 }
 async function run() {
@@ -47089,7 +47089,8 @@ async function run() {
             updated.basename = options.outputFile;
         }
         await write(updated, { encoding: 'utf-8', mode: null });
-        core.setOutput('new-release-version', updated.data['nextReleaseVersion']);
+        core.setOutput('release-version', updated.data['releaseVersion']);
+        core.setOutput('release-notes', updated.data['releaseNotes']);
         if (updated.messages.length > 0) {
             core.warning('Changelog: warnings were encountered');
             core.startGroup('Changelog warning report');
