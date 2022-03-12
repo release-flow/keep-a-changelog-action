@@ -1,9 +1,13 @@
 name: Node.js CI
 
 on:
+  push:
+    branches:
+    - feature/*
+    - bugfix/*
   pull_request:
     branches: 
-    - $default-branch
+    - main
     - 'release/*'
   workflow_dispatch:
 
