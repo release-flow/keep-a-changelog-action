@@ -22,8 +22,6 @@ jobs:
     - name: Ensure dist/ directory is up to date
       id: diff
       run: |
-        git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map'
-        echo "Exit code: $?"
         if [[ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]]; then
           echo "Detected uncommitted changes after build.  See status below:"
           git diff
