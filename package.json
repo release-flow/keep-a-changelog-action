@@ -1,7 +1,7 @@
 {
   "name": "keep-a-changelog-release",
   "version": "0.0.1",
-  "description": "",
+  "description": "A GitHub Action to update a changelog that adheres to keep-a-changelog and Semantic Versioning conventions.",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -14,8 +14,8 @@
     "all": "npm ci && npm run build && npm run format-check && npm run lint && npm test && npm run package",
     "prepare": "husky install"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Release Flow <info@releaseflow.io>",
+  "license": "MIT",
   "devDependencies": {
     "@jest/globals": "^27.5.1",
     "@types/jest": "^27.4.1",
