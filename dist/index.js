@@ -46693,12 +46693,12 @@ const check_unreleased_section_exists_attacher = function checkUnreleasedSection
         }
         // If there are no releases then pass on an empty document
         if (releaseHeadings.length === 0) {
-            file.message('No release sections found. The changelog must contain an unreleased section.').fatal = true;
+            file.message('No release sections found. The changelog must contain an unreleased section').fatal = true;
             return;
         }
         // If the first release section is not 'Unreleased' then pass on an empty document
         if (releaseHeadings[0].release !== 'unreleased') {
-            file.message("The changelog must contain an 'unreleased' section as the first release section.").fatal = true;
+            file.message("The changelog must contain an 'unreleased' section as the first release section").fatal = true;
             return;
         }
     };
