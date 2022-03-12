@@ -8,27 +8,27 @@ inputs:
         prepatch, or prerelease. See the documentation for the inc function at
         https://github.com/npm/node-semver#functions.
       required: true
-    changelog:
-      description: >-
-        The filename of the changelog to modify. If a relative path is
-        specified, it is appended to the GitHub workspace path.
-      required: false
-      default: 'CHANGELOG.md'
-    release-date:
-      description: >-
-        The release date that is written into the changelog for the new release,
-        in ISO 8601 format, e.g. 2022-03-03.
-      required: false
     prerelease-identifier:
       description: >-
         The identifier to use as part of the prerelease string, if the new
         version is a prerelease version. For example, it would specify the
         'beta' in '1.0.0-beta.1'.
       required: false
+    release-date:
+      description: >-
+        The release date that is written into the changelog for the new release,
+        in ISO 8601 format, e.g. 2022-03-03.
+      required: false
     tag-prefix:
       description: 'The prefix that is applied to the release number to generate the release tag.'
       required: false
       default: 'v'
+    changelog:
+      description: >-
+        The path to the changelog to modify. If a relative path is specified, it is appended to the GitHub workspace
+        path.
+      required: false
+      default: 'CHANGELOG.md'
     output-file:
       description: >-
         The name of the modified changelog file, which is written to the same
@@ -37,7 +37,7 @@ inputs:
       required: false
 outputs:
   new-release-version:
-    description: 'The next release version that was determined from the changelog.'
+    description: 'The next release version that was calculated from the changelog and the input parameters.'
 runs:
     using: 'node16'
     main: dist/index.js
