@@ -1,0 +1,67 @@
+on: 
+  workflow_dispatch:
+    inputs:
+      release-type:
+        description: 'Release type'
+        type: choice
+        required: true
+        options:
+        - major
+        - minor
+        - patch
+        - premajor
+        - preminor
+        - prepatch
+        - prerelease
+        default: patch
+      prerelease-identifier:
+        description: 'Pre-release identifier (only for pre-release builds)'
+        required: false
+
+name: '[autorelease] Prepare release PR'
+
+jobs:
+  changelog:
+    name: Update changelog and create PR
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+
+    - name: 'Ensure autorelease label exists'
+      run: |
+        LABEL=$(gh api repos/$GITHUB_REPOSITORY/labels --jq '.[] | select(.name=="autorelease")')
+        if [[ -z "$LABEL" ]]; then
+          echo "Creating 'autorelease' label"
+          gh api --silent repos/$GITHUB_REPOSITORY/labels -f name="autorelease" -f color="baa938" -f description="This is an automatically-created PR to trigger a release"
+        else
+          echo "'autorelease' label exists"
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Update changelog
+      id: update-changelog
+      uses: ./prepare-release
+      with:
+        release-type: ${{ github.event.inputs.release-type }}
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: 'chore: Update changelog for release ${{ steps.update-changelog.outputs.release-version }}'
+        committer: 'releasebot <noreply@github.com>'
+        branch: 'autorelease/${{ steps.update-changelog.outputs.release-version }}'
+        title: '[autorelease] Release ${{ steps.update-changelog.outputs.release-version }}'
+        # Be careful of newlines here. We need to use the literal block chomping style (|) so that the
+        # contents of the release notes don't get chomped. See https://yaml-multiline.info/
+        body: |
+          **This PR was created automatically by the releasebot**
+
+          **NOTE: Approving this PR will trigger a workflow that generates a draft release. You need to publish this release when you are happy with it.**
+
+          The changes in this PR prepare for release ${{ steps.update-changelog.outputs.release-version }}. They include:
+
+          ${{ steps.update-changelog.outputs.release-notes }}
+        labels: autorelease
