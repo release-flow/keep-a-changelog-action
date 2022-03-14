@@ -11,7 +11,7 @@
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build lib/index.js --source-map --license licenses.txt -o dist",
+    "package": "ncc build lib/prepare-release.js --source-map --license licenses.txt -o dist/prepare-release && ncc build lib/get-release-notes.js --source-map --license licenses.txt -o dist/get-release-notes",
     "all": "npm ci && npm run build && npm run format-check && npm run lint && npm test && npm run package",
     "prepare": "husky install"
   },

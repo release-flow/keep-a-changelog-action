@@ -1,5 +1,5 @@
 name: 'Keep-a-Changelog Prepare Release'
-description: 'Starts a maintenance window in the website availability monitoring system'
+description: 'Prepares a changelog for a new release'
 inputs:
     release-type:
       description: >-
@@ -44,4 +44,4 @@ outputs:
     description: 'The markdown content of the previously unreleased changelog section.'
 runs:
     using: 'node16'
-    main: dist/index.js
+    main: dist/prepare-release/index.js
