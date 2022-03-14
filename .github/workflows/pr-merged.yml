@@ -1,0 +1,52 @@
+on:
+  pull_request:
+    branches:
+    - main
+    types: [closed]
+
+name: '[autorelease] PR merged'
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'autorelease')
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Get release version
+      id: get-release-version
+      run: |
+        # Head branch should be named autorelease/<version>
+        if ! [[ "${{ github.event.pull_request.head.ref }}" =~ ^autorelease\/[A-Za-z0-9.+-]+$ ]]; then
+          echo "Invalid branch"
+          exit 1
+        fi
+        VERSION=$(echo "${{ github.event.pull_request.head.ref }}" | awk -F/ '{print $2}')
+        echo "VERSION=$VERSION"
+        echo "::set-output name=release-version::$VERSION"
+
+    - name: Get release notes
+      id: get-release-notes
+      uses: ./get-release-notes
+      with:
+        release-version: ${{ steps.get-release-version.outputs.release-version}}
+
+    - name: Display release notes
+      run: |
+        echo "${{ steps.get-release-notes.outputs.release-notes }}"
+
+    - name: Create Draft Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: 'v${{ steps.get-release-version.outputs.release-version }}'
+        release_name: 'Release ${{ steps.get-release-version.outputs.release-version }}'
+        draft: true
+        body: ${{ steps.get-release-notes.outputs.release-notes }}
+
+    - name: Display Instructions
+      run: |
+        echo "::notice title=Draft Release Prepared::A draft release has been prepared for you to approve: ${{ steps.create_release.outputs.html_url }}"
+  
