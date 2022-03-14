@@ -35,25 +35,10 @@ the format `@v1.x.x`.
 | Name | Description | Default |
 | --- | --- | --- |
 | `release-version` | The version for which to extract the release notes. Can be 'unreleased' to get the unreleased notes.  | `unreleased` |
-| `changelog` | The path to the changelog to modify. If a relative path is specified, it is appended to the GitHub workspace path. | `CHANGELOG.md` |
+| `changelog` | The path to the changelog to examine. If a relative path is specified, it is appended to the GitHub workspace path. | `CHANGELOG.md` |
 
 ### Action outputs
 
 The following outputs can be used by subsequent workflow steps.
 
-- `release-notes` - The markdown content of the previously unreleased changelog section.
-
-Step outputs can be accessed as in the following example. Note that in order to read the step outputs the action step
-must have an id.
-
-```yml
-    - name: Get release notes
-      id: get-release-notes
-      uses: release-flow/keep-a-changelog-action/get-release-notes@v1
-      with:
-        release-version: 1.0.1-beta.2
-
-    - name: Display release notes
-      run: |
-        echo "${{ steps.get-release-notes.outputs.release-notes }}"
-```
+- `release-notes` - The markdown content of the specified changelog section.
