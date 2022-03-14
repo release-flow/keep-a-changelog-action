@@ -17,4 +17,4 @@ outputs:
     description: 'The markdown content of the previously unreleased changelog section.'
 runs:
     using: 'node16'
-    main: dist/get-release-notes/index.js
+    main: ../dist/get-release-notes/index.js
