@@ -46364,9 +46364,9 @@ function size(value) {
 }
 
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __nccwpck_require__(2186);
+var lib_core = __nccwpck_require__(2186);
 // EXTERNAL MODULE: ./node_modules/semver/index.js
-var semver = __nccwpck_require__(1383);
+var node_modules_semver = __nccwpck_require__(1383);
 ;// CONCATENATED MODULE: ./lib/types.js
 
 function isReleaseSpec(maybe) {
@@ -46377,7 +46377,7 @@ function isReleaseProps(maybe) {
         maybe !== undefined &&
         typeof maybe === 'object' &&
         'version' in maybe &&
-        maybe.version instanceof semver.SemVer &&
+        maybe.version instanceof node_modules_semver.SemVer &&
         'date' in maybe &&
         maybe.date instanceof Date);
 }
@@ -46401,6 +46401,7 @@ var date_fns = __nccwpck_require__(3314);
 
 
 
+
 // This is a compiler-safe mechanism to ensure that all possible ReleaseType
 // values are defined. If the ReleaseType type definition changes (not under our
 // control, it's part of the node-semver library) then this definition will
@@ -46418,36 +46419,43 @@ const validReleaseTypes = {
 function isValidReleaseType(maybe) {
     return validReleaseTypes.hasOwnProperty(maybe);
 }
-function getOptions() {
-    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
+function getRepoOptions() {
+    const githubRepository = external_process_namespaceObject.env.GITHUB_REPOSITORY ?? '';
+    const [owner, repo] = githubRepository.split('/');
+    if (!owner || !repo) {
+        lib_core.setFailed('Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set');
+        return;
+    }
+    return { owner, repo };
+}
+function getPrepareReleaseOptions() {
+    let changelogPath = lib_core.getInput('changelog') ?? 'CHANGELOG.md';
     if (!external_path_.isAbsolute(changelogPath)) {
         const root = external_process_namespaceObject.env.GITHUB_WORKSPACE ?? external_process_namespaceObject.cwd();
         changelogPath = external_path_.join(root, changelogPath);
     }
-    const releaseType = core.getInput('release-type') ?? 'patch';
+    const releaseType = lib_core.getInput('release-type') ?? 'patch';
     if (!isValidReleaseType(releaseType)) {
-        core.setFailed(`Input 'release-type' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`);
+        lib_core.setFailed(`Input 'release-type' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`);
         return;
     }
     let releaseDate = new Date();
-    const releaseDateText = core.getInput('release-date');
+    const releaseDateText = lib_core.getInput('release-date');
     if (releaseDateText) {
         releaseDate = (0,date_fns.parseISO)(releaseDateText);
         if (!(0,date_fns.isValid)(releaseDate)) {
-            core.setFailed(`Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`);
+            lib_core.setFailed(`Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`);
             return;
         }
     }
-    const prereleaseIdentifier = core.getInput('prerelease-identifier');
-    let tagPrefix = core.getInput('tag-prefix');
+    const prereleaseIdentifier = lib_core.getInput('prerelease-identifier');
+    let tagPrefix = lib_core.getInput('tag-prefix');
     if (tagPrefix === null || tagPrefix === undefined) {
         tagPrefix = 'v';
     }
-    const outputFile = core.getInput('output-file');
-    const githubRepository = external_process_namespaceObject.env.GITHUB_REPOSITORY ?? '';
-    const [owner, repo] = githubRepository.split('/');
-    if (!owner || !repo) {
-        core.setFailed('Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set');
+    const outputFile = lib_core.getInput('output-file');
+    const repoOptions = getRepoOptions();
+    if (!repoOptions) {
         return;
     }
     const options = {
@@ -46456,11 +46464,34 @@ function getOptions() {
         releaseType,
         tagPrefix,
         prereleaseIdentifier,
-        owner,
-        repo,
+        repo: repoOptions,
         outputFile,
     };
     return options;
+}
+function getGetReleaseNotesOptions() {
+    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
+    if (!path.isAbsolute(changelogPath)) {
+        const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
+        changelogPath = path.join(root, changelogPath);
+    }
+    const version = core.getInput('release-version') ?? 'unreleased';
+    let target;
+    if (version !== 'unreleased') {
+        const parsed = semver.parse(version);
+        if (!parsed) {
+            core.setFailed(`Input 'release-version' contains invalid value '${version}'. It must contain a valid version or 'unreleased'`);
+            return;
+        }
+        target = parsed;
+    }
+    else {
+        target = version;
+    }
+    return {
+        changelogPath,
+        version: target,
+    };
 }
 //# sourceMappingURL=options.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/bridge.js
@@ -46505,7 +46536,7 @@ function parseReleaseHeadingTextOnly(node, file) {
         release = 'unreleased';
     }
     else {
-        const version = semver.parse(m[1]);
+        const version = node_modules_semver.parse(m[1]);
         if (!version) {
             const msg = file.message('Unable to parse semantic version', textNode.position);
             msg.fatal = true;
@@ -46527,7 +46558,7 @@ function parseReleaseHeadingWithLink(node, file) {
         node.data = { ...node.data, ...{ release: 'unreleased' } };
         return;
     }
-    const version = semver.parse(linkNode.label);
+    const version = node_modules_semver.parse(linkNode.label);
     if (!version) {
         const msg = file.message('Unable to parse semantic version', linkNode.position);
         msg.fatal = true;
@@ -46654,7 +46685,7 @@ const preprocessor_attacher = function () {
                 msg.fatal = true;
                 break;
             }
-            if (semver.gte(currentHeading.release.version, previousHeading.release.version, { includePrerelease: true })) {
+            if (node_modules_semver.gte(currentHeading.release.version, previousHeading.release.version, { includePrerelease: true })) {
                 const msg = file.message('Release sections must be in descending order', currentHeading.node.position);
                 msg.fatal = true;
             }
@@ -46766,44 +46797,62 @@ const findAllAfter =
     }
   )
 
-;// CONCATENATED MODULE: ./lib/plugins/extract-unreleased-notes.js
+;// CONCATENATED MODULE: ./lib/plugins/extract-release-notes.js
 
 
 
+const { SemVer } = node_modules_semver;
+
+function getReleaseNotes(heading, tree) {
+    const root = { type: 'root', children: [] };
+    // The terminator node can be undefined, e.g. if the section is the last section in the file
+    // and there are no definitions at the end
+    const terminatorNode = heading.node.data?.['nextSection'];
+    const result = terminatorNode ? unist_util_find_all_between(tree, heading.node, terminatorNode) : findAllAfter(tree, heading.node);
+    root.children.push(...result);
+    return root;
+}
+function findReleaseHeading(target, headings) {
+    for (let i = 0; i < headings.length; i++) {
+        const heading = headings[i];
+        if (heading.release === 'unreleased') {
+            if (target === 'unreleased') {
+                return heading;
+            }
+            continue;
+        }
+        else if (target instanceof SemVer && node_modules_semver.eq(heading.release.version, target)) {
+            return heading;
+        }
+    }
+    return null;
+}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const extract_unreleased_notes_attacher = function extractUnreleasedContents() {
+const extract_release_notes_attacher = function extractUnreleasedContents(target) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
-    return (tree, _file) => {
+    return (tree, file) => {
         const releaseHeadings = processorData('releaseHeadings');
         if (!releaseHeadings) {
             throw new BoneheadedError('File should have been preprocessed before calling this plugin');
         }
-        const newRoot = { type: 'root', children: [] };
-        // If there are no releases then pass on an empty document
         if (releaseHeadings.length === 0) {
-            return newRoot;
+            file.fail('No releases in changelog');
         }
-        // If the first release section is not 'Unreleased' then pass on an empty document
-        if (releaseHeadings[0].release !== 'unreleased') {
-            return newRoot;
+        const heading = findReleaseHeading(target, releaseHeadings);
+        if (!heading) {
+            const releaseText = target === 'unreleased' ? 'unreleased' : target.format();
+            throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
         }
-        // The terminator node can be undefined, e.g. if the section is the last section in the file
-        // and there are no definitions at the end
-        const terminatorNode = releaseHeadings[0].node.data?.['nextSection'];
-        const result = terminatorNode
-            ? unist_util_find_all_between(tree, releaseHeadings[0].node, terminatorNode)
-            : findAllAfter(tree, releaseHeadings[0].node);
-        newRoot.children.push(...result);
-        return newRoot;
+        return getReleaseNotes(heading, tree);
     };
 };
-/* harmony default export */ const extract_unreleased_notes = (extract_unreleased_notes_attacher);
-//# sourceMappingURL=extract-unreleased-notes.js.map
+/* harmony default export */ const extract_release_notes = (extract_release_notes_attacher);
+//# sourceMappingURL=extract-release-notes.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/increment-release.js
 
 
-const { SemVer } = semver;
+const { SemVer: increment_release_SemVer } = node_modules_semver;
 const increment_release_attacher = function (options) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
@@ -46835,7 +46884,7 @@ const increment_release_attacher = function (options) {
             },
         ];
         unreleasedSection.children = newReleaseSection;
-        releaseHeadings[0].release = { version: new SemVer(releaseVersion), date: options.releaseDate, suffix: '' };
+        releaseHeadings[0].release = { version: new increment_release_SemVer(releaseVersion), date: options.releaseDate, suffix: '' };
         return tree;
     };
 };
@@ -46843,7 +46892,7 @@ const increment_release_attacher = function (options) {
 //# sourceMappingURL=increment-release.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/calculate-next-release.js
 
-const { SemVer: calculate_next_release_SemVer } = semver;
+const { SemVer: calculate_next_release_SemVer } = node_modules_semver;
 
 const calculate_next_release_attacher = function (options) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -46858,7 +46907,7 @@ const calculate_next_release_attacher = function (options) {
             return isReleaseProps(h.release);
         });
         const latestVersion = latestRelease ? latestRelease.release.version : new calculate_next_release_SemVer('0.0.0');
-        file.data['releaseVersion'] = semver.inc(latestVersion.format(), options.releaseType, undefined, options.prereleaseIdentifier);
+        file.data['releaseVersion'] = node_modules_semver.inc(latestVersion.format(), options.releaseType, undefined, options.prereleaseIdentifier);
     }
 };
 /* harmony default export */ const calculate_next_release = (calculate_next_release_attacher);
@@ -47017,7 +47066,7 @@ const update_link_definitions_attacher = function (options) {
                 }
                 const nextVersionText = nextProps.version.format();
                 const nextTagText = `${options.tagPrefix}${nextVersionText}`;
-                const url = `https://github.com/${options.owner}/${options.repo}/compare/${nextTagText}...${tagText}`;
+                const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/compare/${nextTagText}...${tagText}`;
                 const definition = {
                     type: 'definition',
                     url,
@@ -47027,7 +47076,7 @@ const update_link_definitions_attacher = function (options) {
                 tree.children.push(definition);
             }
             else {
-                const url = `https://github.com/${options.owner}/${options.repo}/releases/tag/${tagText}`;
+                const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/releases/tag/${tagText}`;
                 const definition = {
                     type: 'definition',
                     url,
@@ -47041,7 +47090,7 @@ const update_link_definitions_attacher = function (options) {
 };
 /* harmony default export */ const update_link_definitions = (update_link_definitions_attacher);
 //# sourceMappingURL=update-link-definitions.js.map
-;// CONCATENATED MODULE: ./lib/index.js
+;// CONCATENATED MODULE: ./lib/prepare-release.js
 
 
 
@@ -47067,17 +47116,16 @@ async function processChangelog(file, options) {
         .use(preprocessor)
         .use(check_unreleased_section_exists)
         .use(assert)
-        .use(bridge, 'releaseNotes', unified().use(extract_unreleased_notes).use(remark_stringify, { listItemIndent: 'one', bullet: '-' }))
+        .use(bridge, 'releaseNotes', unified().use(extract_release_notes, 'unreleased').use(remark_stringify, { listItemIndent: 'one', bullet: '-' }))
         .use(calculate_next_release, options)
         .use(increment_release, options)
         .use(update_link_definitions, options)
         .use(remark_stringify, { listItemIndent: 'one', bullet: '-' })
         .process(file);
-    console.log(file.data.releaseNotes);
     return updated;
 }
 async function run() {
-    const options = getOptions();
+    const options = getPrepareReleaseOptions();
     if (!options) {
         // Input error - core.setFailed() should already have been called
         return;
@@ -47089,21 +47137,26 @@ async function run() {
             updated.basename = options.outputFile;
         }
         await write(updated, { encoding: 'utf-8', mode: null });
-        core.setOutput('release-version', updated.data['releaseVersion']);
-        core.setOutput('release-notes', updated.data['releaseNotes']);
+        lib_core.setOutput('release-version', updated.data['releaseVersion']);
+        lib_core.setOutput('release-notes', updated.data['releaseNotes']);
         if (updated.messages.length > 0) {
-            core.warning('Changelog: warnings were encountered');
-            core.startGroup('Changelog warning report');
+            lib_core.warning('Changelog: warnings were encountered');
+            lib_core.startGroup('Changelog warning report');
             console.log(reporter(updated));
-            core.endGroup();
+            lib_core.endGroup();
         }
     }
     catch (error) {
         if (error instanceof ChangelogError) {
-            core.setFailed('Changelog contains errors');
-            core.startGroup('Changelog error report');
-            console.log(reporter(changelog));
-            core.endGroup();
+            if (changelog.messages.length === 0) {
+                lib_core.setFailed(error.message);
+            }
+            else {
+                lib_core.setFailed('Changelog contains errors');
+                lib_core.startGroup('Changelog error report');
+                console.log(reporter(changelog));
+                lib_core.endGroup();
+            }
         }
         else {
             console.error(error);
@@ -47111,7 +47164,7 @@ async function run() {
     }
 }
 void run();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=prepare-release.js.map
 })();
 
 

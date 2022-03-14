@@ -176,5 +176,5 @@ function runAction(params: ActionParams): ActionResult {
     env['GITHUB_REPOSITORY'] = params.githubRepo;
   }
 
-  return invokeActionScript(path.join(__dirname, '../index.js'), env);
+  return invokeActionScript(path.join(__dirname, '../prepare-release.js'), env);
 }

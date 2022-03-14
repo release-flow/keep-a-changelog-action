@@ -7,19 +7,19 @@ import stringify from 'remark-stringify';
 import * as core from '@actions/core';
 
 import { ChangelogError, ReleaseHeading } from './types.js';
-import getOptions, { ChangelogOptions } from './options.js';
+import { getPrepareReleaseOptions, PrepareReleaseOptions } from './options.js';
 
 import bridge from './plugins/bridge.js';
 import releaseParser from './plugins/release-parser.js';
 import preprocess from './plugins/preprocessor.js';
 import assert from './plugins/assert.js';
 import checkUnreleasedSectionExists from './plugins/check-unreleased-section-exists.js';
-import extractUnreleasedNotes from './plugins/extract-unreleased-notes.js';
+import extractReleaseNotes from './plugins/extract-release-notes.js';
 import incrementRelease from './plugins/increment-release.js';
 import calculateNextRelease from './plugins/calculate-next-release.js';
 import updateLinkDefinitions from './plugins/update-link-definitions.js';
 
-async function processChangelog(file: VFile, options: ChangelogOptions): Promise<VFile> {
+async function processChangelog(file: VFile, options: PrepareReleaseOptions): Promise<VFile> {
   const releaseHeadings: ReleaseHeading[] = [];
 
   const updated = await remark()
@@ -31,7 +31,7 @@ async function processChangelog(file: VFile, options: ChangelogOptions): Promise
     .use(
       bridge,
       'releaseNotes',
-      unified().use(extractUnreleasedNotes).use(stringify, { listItemIndent: 'one', bullet: '-' })
+      unified().use(extractReleaseNotes, 'unreleased').use(stringify, { listItemIndent: 'one', bullet: '-' })
     )
     .use(calculateNextRelease, options)
     .use(incrementRelease, options)
@@ -39,12 +39,11 @@ async function processChangelog(file: VFile, options: ChangelogOptions): Promise
     .use(stringify, { listItemIndent: 'one', bullet: '-' })
     .process(file);
 
-  console.log(file.data.releaseNotes);
   return updated;
 }
 
 async function run(): Promise<void> {
-  const options = getOptions();
+  const options = getPrepareReleaseOptions();
 
   if (!options) {
     // Input error - core.setFailed() should already have been called
@@ -73,10 +72,14 @@ async function run(): Promise<void> {
     }
   } catch (error) {
     if (error instanceof ChangelogError) {
-      core.setFailed('Changelog contains errors');
-      core.startGroup('Changelog error report');
-      console.log(reporter(changelog));
-      core.endGroup();
+      if (changelog.messages.length === 0) {
+        core.setFailed(error.message);
+      } else {
+        core.setFailed('Changelog contains errors');
+        core.startGroup('Changelog error report');
+        console.log(reporter(changelog));
+        core.endGroup();
+      }
     } else {
       console.error(error);
     }

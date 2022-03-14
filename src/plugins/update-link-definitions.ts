@@ -4,11 +4,11 @@ import type { Root, LinkReference, Text, Definition } from 'mdast';
 import { remove } from 'unist-util-remove';
 import { format } from 'date-fns';
 
-import { ChangelogOptions } from '../options.js';
+import { PrepareReleaseOptions } from '../options.js';
 import { BoneheadedError, ReleaseHeading } from '../types.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const attacher: Plugin<[ChangelogOptions], Root, Root> = function (options: ChangelogOptions) {
+const attacher: Plugin<[PrepareReleaseOptions], Root, Root> = function (options: PrepareReleaseOptions) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
   return transformer;
@@ -70,7 +70,7 @@ const attacher: Plugin<[ChangelogOptions], Root, Root> = function (options: Chan
         }
         const nextVersionText = nextProps.version.format();
         const nextTagText = `${options.tagPrefix}${nextVersionText}`;
-        const url = `https://github.com/${options.owner}/${options.repo}/compare/${nextTagText}...${tagText}`;
+        const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/compare/${nextTagText}...${tagText}`;
         const definition: Definition = {
           type: 'definition',
           url,
@@ -79,7 +79,7 @@ const attacher: Plugin<[ChangelogOptions], Root, Root> = function (options: Chan
         };
         tree.children.push(definition);
       } else {
-        const url = `https://github.com/${options.owner}/${options.repo}/releases/tag/${tagText}`;
+        const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/releases/tag/${tagText}`;
         const definition: Definition = {
           type: 'definition',
           url,

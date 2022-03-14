@@ -3,16 +3,26 @@ import path from 'path';
 import { ReleaseType } from 'semver';
 import { isValid, parseISO } from 'date-fns';
 import * as core from '@actions/core';
+import semver from 'semver';
 
-export interface ChangelogOptions {
+export interface RepoOptions {
+  owner: string;
+  repo: string;
+}
+
+export interface PrepareReleaseOptions {
   changelogPath: string;
   releaseType: ReleaseType;
   prereleaseIdentifier?: string;
   releaseDate: Date;
   tagPrefix: string;
-  owner: string;
-  repo: string;
+  repo: RepoOptions;
   outputFile: string | undefined;
+}
+
+export interface GetReleaseNotesOptions {
+  changelogPath: string;
+  version: semver.SemVer | 'unreleased';
 }
 
 // This is a compiler-safe mechanism to ensure that all possible ReleaseType
@@ -34,7 +44,21 @@ function isValidReleaseType(maybe: string): maybe is ReleaseType {
   return validReleaseTypes.hasOwnProperty(maybe);
 }
 
-export default function getOptions(): ChangelogOptions | undefined {
+function getRepoOptions(): RepoOptions | undefined {
+  const githubRepository = process.env['GITHUB_REPOSITORY'] ?? '';
+  const [owner, repo] = githubRepository.split('/');
+
+  if (!owner || !repo) {
+    core.setFailed(
+      'Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set'
+    );
+    return;
+  }
+
+  return { owner, repo };
+}
+
+export function getPrepareReleaseOptions(): PrepareReleaseOptions | undefined {
   let changelogPath: string = core.getInput('changelog') ?? 'CHANGELOG.md';
   if (!path.isAbsolute(changelogPath)) {
     const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
@@ -71,26 +95,49 @@ export default function getOptions(): ChangelogOptions | undefined {
 
   const outputFile = core.getInput('output-file');
 
-  const githubRepository = process.env['GITHUB_REPOSITORY'] ?? '';
-  const [owner, repo] = githubRepository.split('/');
+  const repoOptions = getRepoOptions();
 
-  if (!owner || !repo) {
-    core.setFailed(
-      'Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set'
-    );
+  if (!repoOptions) {
     return;
   }
 
-  const options: ChangelogOptions = {
+  const options: PrepareReleaseOptions = {
     changelogPath,
     releaseDate,
     releaseType,
     tagPrefix,
     prereleaseIdentifier,
-    owner,
-    repo,
+    repo: repoOptions,
     outputFile,
   };
 
   return options;
+}
+
+export function getGetReleaseNotesOptions(): GetReleaseNotesOptions | undefined {
+  let changelogPath: string = core.getInput('changelog') ?? 'CHANGELOG.md';
+  if (!path.isAbsolute(changelogPath)) {
+    const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
+    changelogPath = path.join(root, changelogPath);
+  }
+
+  const version = core.getInput('release-version') ?? 'unreleased';
+  let target: semver.SemVer | 'unreleased';
+  if (version !== 'unreleased') {
+    const parsed = semver.parse(version);
+    if (!parsed) {
+      core.setFailed(
+        `Input 'release-version' contains invalid value '${version}'. It must contain a valid version or 'unreleased'`
+      );
+      return;
+    }
+    target = parsed;
+  } else {
+    target = version;
+  }
+
+  return {
+    changelogPath,
+    version: target,
+  };
 }

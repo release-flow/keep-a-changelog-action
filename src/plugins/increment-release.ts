@@ -4,12 +4,12 @@ import type { Root, LinkReference, Text } from 'mdast';
 import { format } from 'date-fns';
 
 import { ReleaseHeading } from '../types.js';
-import { ChangelogOptions } from '../options.js';
+import { PrepareReleaseOptions } from '../options.js';
 import semver from 'semver';
 
 const { SemVer } = semver;
 
-const attacher: Plugin<[ChangelogOptions], Root, Root> = function (options: ChangelogOptions) {
+const attacher: Plugin<[PrepareReleaseOptions], Root, Root> = function (options: PrepareReleaseOptions) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
 
