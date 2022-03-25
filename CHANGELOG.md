@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Update the release workflows for more automation
+- Automatically move the major version tag when a release is published
+
+- Add `check_dist` workflow to ensure the `dist/` directory is up-to-date
 
 ### Fixed
 
