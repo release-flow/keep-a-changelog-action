@@ -12,7 +12,7 @@ This action will:
 ## Usage
 
 ```yml
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Get release notes
       id: get-release-notes
@@ -27,7 +27,7 @@ This action will:
 
 Note that in order to read the step outputs the action step must have an id.
 
-You can also pin to a [specific release](https://github.com/release-flow/keep-a-changelog-release/releases) version in
+You can also pin to a [specific release](https://github.com/release-flow/keep-a-changelog-action/releases) version in
 the format `@v1.x.x`.
 
 ### Action inputs
@@ -41,4 +41,6 @@ the format `@v1.x.x`.
 
 The following outputs can be used by subsequent workflow steps.
 
-- `release-notes` - The markdown content of the specified changelog section.
+| Name | Description |
+| --- | --- |
+| `release-notes` | The markdown content of the specified changelog section. |
