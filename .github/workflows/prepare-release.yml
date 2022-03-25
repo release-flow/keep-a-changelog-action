@@ -59,9 +59,11 @@ jobs:
         body: |
           **This PR was created automatically by the releasebot**
 
-          **NOTE: Approving this PR will trigger a workflow that generates a draft release. You need to publish this release when you are happy with it.**
+          **:warning: Approving this PR will trigger a workflow that generates a draft release. You need to publish this release when you are happy with it.**
 
-          The changes in this PR prepare for release ${{ steps.update-changelog.outputs.release-version }}. They include:
+          The changes in this PR prepare for release ${{ steps.update-changelog.outputs.release-version }}. The release notes are:
+
+          ---
 
           ${{ steps.update-changelog.outputs.release-notes }}
         labels: autorelease
