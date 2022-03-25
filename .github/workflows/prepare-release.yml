@@ -48,6 +48,7 @@ jobs:
         release-type: ${{ github.event.inputs.release-type }}
 
     - name: Create Pull Request
+      id: create-release-pr
       uses: peter-evans/create-pull-request@v3
       with:
         commit-message: 'chore: Update changelog for release ${{ steps.update-changelog.outputs.release-version }}'
@@ -67,3 +68,8 @@ jobs:
 
           ${{ steps.update-changelog.outputs.release-notes }}
         labels: autorelease
+
+    - name: Output summary
+      run: |
+        echo "::notice title=Release PR Prepared::A release PR has been created, please merge it to continue with the release process: ${{ steps.create-release-pr.outputs.pull-request-url }}"
+  
