@@ -18,7 +18,7 @@ jobs:
       run: |
         # Head branch should be named autorelease/<version>
         if ! [[ "${{ github.event.pull_request.head.ref }}" =~ ^autorelease\/[A-Za-z0-9.+-]+$ ]]; then
-          echo "Invalid branch"
+          echo "::error::Invalid branch '${{ github.event.pull_request.head.ref }}'"
           exit 1
         fi
         VERSION=$(echo "${{ github.event.pull_request.head.ref }}" | awk -F/ '{print $2}')
