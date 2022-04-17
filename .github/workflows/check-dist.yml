@@ -35,10 +35,10 @@ jobs:
 
     - name: Test echo
       run: |
-        if [ "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}" -eq "true" ]; then
+        if [[ "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}" == "true" ]]; then
           echo "Hmm"
         fi
-        if [ "${{ startsWith(github.event.pull_request.title, '[SnykXXX]') }}" -ne "true" ]; then
+        if [[ "${{ startsWith(github.event.pull_request.title, '[SnykXXX]') }}" != "true" ]]; then
           echo "Fee fi fo fum"
         fi
         echo "Committing rebuild code"
