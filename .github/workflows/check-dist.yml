@@ -31,6 +31,11 @@ jobs:
         npm run build
         npm run package
 
+    - name: Commit dist directory (Snyk)
+      if: startsWith(github.event.pull_request.title, '[Snyk]')
+      run: |
+        echo "Committing rebuild code"
+
     - name: Compare the expected and actual dist/ directories
       run: |
         if [ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]; then
