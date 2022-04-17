@@ -17,6 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
 
     - name: Set Node.js 16.x
       uses: actions/setup-node@v3
@@ -31,10 +33,14 @@ jobs:
         npm run build
         npm run package
 
-    - name: Commit dist directory (Snyk)
-      if: startsWith(github.event.pull_request.title, '[Snyk]')
+    - name: Test echo
       run: |
+        echo "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}"
+        if [ "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}" ]; then
+          echo "Hmm"
+        fi
         echo "Committing rebuild code"
+        echo "${{ github.ref }}"
 
     - name: Compare the expected and actual dist/ directories
       run: |
@@ -44,6 +50,19 @@ jobs:
           exit 1
         fi
       id: diff
+
+    # - uses: tibdex/github-app-token@v1
+    #   if: startsWith(github.event.pull_request.title, '[Snyk]')
+    #   id: generate-token
+    #   with:
+    #     app_id: ${{ secrets.TAGRELEASEBOT_APP_ID }}
+    #     private_key: ${{ secrets.TAGRELEASEBOT_APP_KEY }}
+
+    # - name: Commit dist directory (Snyk)
+    #   if: startsWith(github.event.pull_request.title, '[Snyk]')
+    #   run: |
+    #     echo "Committing rebuild code"
+    #     echo "${{ github.ref }}"
 
     # If index.js was different than expected, upload the expected version as an artifact
     - uses: actions/upload-artifact@v2
