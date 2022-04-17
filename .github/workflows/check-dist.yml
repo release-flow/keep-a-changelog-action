@@ -35,12 +35,15 @@ jobs:
 
     - name: Test echo
       run: |
-        echo "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}"
-        if [ "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}" ]; then
+        if [ "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}" -eq "true" ]; then
           echo "Hmm"
+        fi
+        if [ "${{ startsWith(github.event.pull_request.title, '[SnykXXX]') }}" -ne "true" ]; then
+          echo "Fee fi fo fum"
         fi
         echo "Committing rebuild code"
         echo "${{ github.ref }}"
+        echo "${{ github.event.pull_request.head.ref }}"
 
     - name: Compare the expected and actual dist/ directories
       run: |
