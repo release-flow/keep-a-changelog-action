@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ref: ${{ github.event.pull_request.head.sha }}
+        ref: ${{ github.event.pull_request.head.ref }}
 
     - name: Set Node.js 16.x
       uses: actions/setup-node@v3
@@ -33,24 +33,28 @@ jobs:
         npm run build
         npm run package
 
-    - name: Test echo
-      run: |
-        if [[ "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}" == "true" ]]; then
-          echo "Hmm"
-        fi
-        if [[ "${{ startsWith(github.event.pull_request.title, '[SnykXXX]') }}" != "true" ]]; then
-          echo "Fee fi fo fum"
-        fi
-        echo "Committing rebuild code"
-        echo "${{ github.ref }}"
-        echo "${{ github.event.pull_request.head.ref }}"
+    # - name: Test echo
+    #   run: |
+    #     if [[ "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}" == "true" ]]; then
+    #       echo "Hmm"
+    #     fi
+    #     if [[ "${{ startsWith(github.event.pull_request.title, '[SnykXXX]') }}" != "true" ]]; then
+    #       echo "Fee fi fo fum"
+    #     fi
+    #     echo "Committing rebuild code"
+    #     echo "${{ github.ref }}"
+    #     echo "${{ github.event.pull_request.head.ref }}"
 
     - name: Compare the expected and actual dist/ directories
       run: |
         if [ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]; then
-          echo "Detected uncommitted changes after build.  See status below:"
-          git diff
-          exit 1
+          if [[ "${{ startsWith(github.event.pull_request.title, '[Snyk]') }}" == "true" ]]; then
+            echo "::set-output name=dist_update_required::true"
+          else
+            echo "Detected uncommitted changes after build.  See status below:"
+            git diff
+            exit 1
+          fi
         fi
       id: diff
 
@@ -61,11 +65,11 @@ jobs:
     #     app_id: ${{ secrets.TAGRELEASEBOT_APP_ID }}
     #     private_key: ${{ secrets.TAGRELEASEBOT_APP_KEY }}
 
-    # - name: Commit dist directory (Snyk)
-    #   if: startsWith(github.event.pull_request.title, '[Snyk]')
-    #   run: |
-    #     echo "Committing rebuild code"
-    #     echo "${{ github.ref }}"
+    - name: Commit dist directory (Snyk)
+      if: contains(steps.diff.outputs.dist_update_required, 'true')
+      run: |
+        echo "Committing rebuild code"
+        echo "${{ github.ref }}"
 
     # If index.js was different than expected, upload the expected version as an artifact
     - uses: actions/upload-artifact@v2
