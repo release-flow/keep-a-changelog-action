@@ -46,7 +46,7 @@
     "date-fns": "^2.28.0",
     "remark": "^14.0.2",
     "remark-stringify": "^10.0.2",
-    "semver": "^7.3.5",
+    "semver": "^7.3.6",
     "to-vfile": "^7.2.3",
     "unified": "^10.1.1",
     "unist-util-find-all-after": "^4.0.0",
