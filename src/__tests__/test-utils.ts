@@ -27,6 +27,14 @@ export function getAllErrors(result: ActionResult): string[] {
   return errors ?? [];
 }
 
+export function getAllWarnings(result: ActionResult): string[] {
+  const errors = result.stdout.match(/^::warning::.*$/m)?.map((e) => {
+    return e.replace(/^::warning::/, '');
+  });
+
+  return errors ?? [];
+}
+
 export function getOutputVariables(result: ActionResult): OutputVariables {
   const regexp = /^::set-output name=(.+)::(.*)$/m;
   const v = result.stdout.split(/\r?\n/).reduce((acc, item) => {

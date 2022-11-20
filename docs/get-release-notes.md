@@ -1,6 +1,7 @@
 # Keep a Changelog Get Release Notes
 
-:heavy_exclamation_mark: This action is deprecated, and will be removed in a future version.
+:heavy_exclamation_mark: This action is deprecated, and will be removed in a future version. Use the get-release-info
+action instead.
 
 A GitHub Action to extract release notes from a changelog that adheres to
 [keep-a-changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/) conventions.

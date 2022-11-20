@@ -24539,7 +24539,7 @@ async function processChangelog(file, options) {
     return updated;
 }
 async function run() {
-    lib_core.warning('This action is deprecated, and will be removed in a future version.');
+    lib_core.warning('This action is deprecated, and will be removed in a future version. Use the get-release-info action instead.');
     const options = getGetReleaseNotesOptions();
     if (!options) {
         // Input error - core.setFailed() should already have been called
