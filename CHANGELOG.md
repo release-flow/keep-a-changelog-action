@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.2.0] - 2022-11-20
 
 ### Added
 
@@ -38,6 +38,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Initial content including change log
+
+[1.2.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v1.1.0...v1.2.0
 
 [1.1.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v1.0.0...v1.1.0
 
