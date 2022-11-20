@@ -49943,7 +49943,6 @@ function releaseParser() {
 
 
 
-// eslint-disable-next-line import/extensions
 
 const preprocessor_attacher = function () {
     // eslint-disable-next-line @typescript-eslint/unbound-method

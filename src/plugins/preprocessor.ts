@@ -6,7 +6,6 @@ import semver from 'semver';
 import { visit } from 'unist-util-visit';
 import { is } from 'unist-util-is';
 
-// eslint-disable-next-line import/extensions
 import { isReleaseSpec, ReleaseHeading } from '../types.js';
 
 const attacher: Plugin<[], Root, Root> = function () {

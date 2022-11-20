@@ -49924,7 +49924,6 @@ function releaseParser() {
 
 
 
-// eslint-disable-next-line import/extensions
 
 const attacher = function () {
     // eslint-disable-next-line @typescript-eslint/unbound-method
