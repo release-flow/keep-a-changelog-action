@@ -24036,7 +24036,7 @@ function size(value) {
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
 var lib_core = __nccwpck_require__(2186);
 // EXTERNAL MODULE: ./node_modules/semver/index.js
-var semver = __nccwpck_require__(1383);
+var node_modules_semver = __nccwpck_require__(1383);
 ;// CONCATENATED MODULE: ./lib/types.js
 
 function isReleaseSpec(maybe) {
@@ -24047,7 +24047,7 @@ function isReleaseProps(maybe) {
         maybe !== undefined &&
         typeof maybe === 'object' &&
         'version' in maybe &&
-        maybe.version instanceof semver.SemVer &&
+        maybe.version instanceof node_modules_semver.SemVer &&
         'date' in maybe &&
         maybe.date instanceof Date);
 }
@@ -24096,6 +24096,12 @@ function getRepoOptions() {
     }
     return { owner, repo };
 }
+/**
+ * Gets a PrepareReleaseOptions instance with values derived from the action inputs.
+ *
+ * @export
+ * @returns {(PrepareReleaseOptions | undefined)}
+ */
 function getPrepareReleaseOptions() {
     let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
     if (!path.isAbsolute(changelogPath)) {
@@ -24146,7 +24152,7 @@ function getGetReleaseNotesOptions() {
     const version = lib_core.getInput('release-version') ?? 'unreleased';
     let target;
     if (version !== 'unreleased') {
-        const parsed = semver.parse(version);
+        const parsed = node_modules_semver.parse(version);
         if (!parsed) {
             lib_core.setFailed(`Input 'release-version' contains invalid value '${version}'. It must contain a valid version or 'unreleased'`);
             return;
@@ -24155,6 +24161,39 @@ function getGetReleaseNotesOptions() {
     }
     else {
         target = version;
+    }
+    return {
+        changelogPath,
+        version: target,
+    };
+}
+/**
+ * Gets a GetReleaseInfoOptions instance with values derived from the action inputs.
+ *
+ * @export
+ * @returns {(GetReleaseInfoOptions | undefined)}
+ */
+function getGetReleaseInfoOptions() {
+    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
+    if (!path.isAbsolute(changelogPath)) {
+        const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
+        changelogPath = path.join(root, changelogPath);
+    }
+    const version = core.getInput('release-version') ?? 'latest';
+    let target;
+    switch (version) {
+        case 'unreleased':
+        case 'latest':
+            target = version;
+            break;
+        default:
+            const parsed = semver.parse(version);
+            if (!parsed) {
+                core.setFailed(`Input 'release-version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased')`);
+                return;
+            }
+            target = parsed;
+            break;
     }
     return {
         changelogPath,
@@ -24187,7 +24226,7 @@ function parseReleaseHeadingTextOnly(node, file) {
         release = 'unreleased';
     }
     else {
-        const version = semver.parse(m[1]);
+        const version = node_modules_semver.parse(m[1]);
         if (!version) {
             const msg = file.message('Unable to parse semantic version', textNode.position);
             msg.fatal = true;
@@ -24209,7 +24248,7 @@ function parseReleaseHeadingWithLink(node, file) {
         node.data = { ...node.data, ...{ release: 'unreleased' } };
         return;
     }
-    const version = semver.parse(linkNode.label);
+    const version = node_modules_semver.parse(linkNode.label);
     if (!version) {
         const msg = file.message('Unable to parse semantic version', linkNode.position);
         msg.fatal = true;
@@ -24336,7 +24375,7 @@ const attacher = function () {
                 msg.fatal = true;
                 break;
             }
-            if (semver.gte(currentHeading.release.version, previousHeading.release.version, { includePrerelease: true })) {
+            if (node_modules_semver.gte(currentHeading.release.version, previousHeading.release.version, { includePrerelease: true })) {
                 const msg = file.message('Release sections must be in descending order', currentHeading.node.position);
                 msg.fatal = true;
             }
@@ -24427,7 +24466,7 @@ const findAllAfter =
 
 
 
-const { SemVer } = semver;
+const { SemVer } = node_modules_semver;
 
 function getReleaseNotes(heading, tree) {
     const root = { type: 'root', children: [] };
@@ -24447,7 +24486,7 @@ function findReleaseHeading(target, headings) {
             }
             continue;
         }
-        else if (target instanceof SemVer && semver.eq(heading.release.version, target)) {
+        else if (target instanceof SemVer && node_modules_semver.eq(heading.release.version, target)) {
             return heading;
         }
     }
@@ -24500,6 +24539,7 @@ async function processChangelog(file, options) {
     return updated;
 }
 async function run() {
+    lib_core.warning('This action is deprecated, and will be removed in a future version.');
     const options = getGetReleaseNotesOptions();
     if (!options) {
         // Input error - core.setFailed() should already have been called

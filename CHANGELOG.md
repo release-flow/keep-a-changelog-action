@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Add `get-release-info` action.
 
+### Deprecated
+
+- Deprecate `get-release-notes` action.
+
 ## [1.1.0] - 2022-03-25
 
 ### Added

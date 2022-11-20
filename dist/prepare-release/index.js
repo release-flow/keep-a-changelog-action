@@ -46428,6 +46428,12 @@ function getRepoOptions() {
     }
     return { owner, repo };
 }
+/**
+ * Gets a PrepareReleaseOptions instance with values derived from the action inputs.
+ *
+ * @export
+ * @returns {(PrepareReleaseOptions | undefined)}
+ */
 function getPrepareReleaseOptions() {
     let changelogPath = lib_core.getInput('changelog') ?? 'CHANGELOG.md';
     if (!external_path_.isAbsolute(changelogPath)) {
@@ -46487,6 +46493,39 @@ function getGetReleaseNotesOptions() {
     }
     else {
         target = version;
+    }
+    return {
+        changelogPath,
+        version: target,
+    };
+}
+/**
+ * Gets a GetReleaseInfoOptions instance with values derived from the action inputs.
+ *
+ * @export
+ * @returns {(GetReleaseInfoOptions | undefined)}
+ */
+function getGetReleaseInfoOptions() {
+    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
+    if (!path.isAbsolute(changelogPath)) {
+        const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
+        changelogPath = path.join(root, changelogPath);
+    }
+    const version = core.getInput('release-version') ?? 'latest';
+    let target;
+    switch (version) {
+        case 'unreleased':
+        case 'latest':
+            target = version;
+            break;
+        default:
+            const parsed = semver.parse(version);
+            if (!parsed) {
+                core.setFailed(`Input 'release-version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased')`);
+                return;
+            }
+            target = parsed;
+            break;
     }
     return {
         changelogPath,
@@ -46858,12 +46897,12 @@ const increment_release_attacher = function (options) {
     const processorData = this.data;
     return (tree, file) => {
         const releaseHeadings = processorData('releaseHeadings');
-        const releaseVersion = file.data['releaseVersion'];
+        const nextReleaseVersion = file.data['nextReleaseVersion'];
         if (releaseHeadings.length === 0 || releaseHeadings[0].release !== 'unreleased') {
             file.fail("The 'Unreleased' section must be present");
         }
         const unreleasedSection = releaseHeadings[0].node;
-        const versionText = releaseVersion;
+        const versionText = nextReleaseVersion;
         const dateText = ' - ' + (0,date_fns.format)(options.releaseDate, 'yyyy-MM-dd');
         const newReleaseSection = [
             {
@@ -46884,7 +46923,7 @@ const increment_release_attacher = function (options) {
             },
         ];
         unreleasedSection.children = newReleaseSection;
-        releaseHeadings[0].release = { version: new increment_release_SemVer(releaseVersion), date: options.releaseDate, suffix: '' };
+        releaseHeadings[0].release = { version: new increment_release_SemVer(nextReleaseVersion), date: options.releaseDate, suffix: '' };
         return tree;
     };
 };
@@ -46907,7 +46946,7 @@ const calculate_next_release_attacher = function (options) {
             return isReleaseProps(h.release);
         });
         const latestVersion = latestRelease ? latestRelease.release.version : new calculate_next_release_SemVer('0.0.0');
-        file.data['releaseVersion'] = node_modules_semver.inc(latestVersion.format(), options.releaseType, undefined, options.prereleaseIdentifier);
+        file.data['nextReleaseVersion'] = node_modules_semver.inc(latestVersion.format(), options.releaseType, undefined, options.prereleaseIdentifier);
     }
 };
 /* harmony default export */ const calculate_next_release = (calculate_next_release_attacher);
@@ -47137,7 +47176,7 @@ async function run() {
             updated.basename = options.outputFile;
         }
         await write(updated, { encoding: 'utf-8', mode: null });
-        lib_core.setOutput('release-version', updated.data['releaseVersion']);
+        lib_core.setOutput('release-version', updated.data['nextReleaseVersion']);
         lib_core.setOutput('release-notes', updated.data['releaseNotes']);
         if (updated.messages.length > 0) {
             lib_core.warning('Changelog: warnings were encountered');
