@@ -16,13 +16,15 @@ This action will:
 
     - name: Get latest release info
       id: get-release-info
-      uses: release-flow/keep-a-changelog-action/get-release-notes@v1
+      uses: release-flow/keep-a-changelog-action/get-release-info@v1
       with:
         release-version: latest
 
-    - name: Display release notes
+    - name: Display release info
       run: |
-        echo "${{ steps.get-release-notes.outputs.release-notes }}"
+        echo "$Version: {{ steps.get-release-info.outputs.release-version }}"
+        echo "$Date: {{ steps.get-release-info.outputs.release-date }}"
+        echo "${{ steps.get-release-info.outputs.release-notes }}"
 ```
 
 ### Action inputs
