@@ -28,9 +28,14 @@ jobs:
           echo "::error::Version '$VERSION' is not in a valid format" && exit 1
         fi
 
-        echo "::set-output name=major-ref::v$MAJOR"
         if [[ "$PRERELEASE" ]]; then pre=true; else pre=false; fi
-        echo "::set-output name=is-prerelease::$pre"
+        if [[ -f $GITHUB_OUTPUT ]]; then
+          echo "major-ref=v$MAJOR" >> $GITHUB_OUTPUT
+          echo "is-prerelease=$pre" >> $GITHUB_OUTPUT
+        else
+          echo "::set-output name=major-ref::v$MAJOR"
+          echo "::set-output name=is-prerelease::$pre"
+        fi
 
     - name: Prerelease
       if: fromJSON(steps.get-release-version.outputs.is-prerelease)

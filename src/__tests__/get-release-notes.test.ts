@@ -5,7 +5,7 @@ import { globby } from 'globby';
 
 import './jest-file-diff.js';
 
-import { invokeActionScript, getAllErrors, getOutputVariables, ActionResult, getAllWarnings } from './test-utils.js';
+import { invokeActionScript, getAllErrors, ActionResult, getAllWarnings } from './test-utils.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -72,8 +72,7 @@ describe('gh start action', () => {
 
     expect(result.isError).toBeFalsy();
 
-    const o = getOutputVariables(result);
-    expect(o).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
+    expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
   });
 
   it('emits a deprecation warning', () => {

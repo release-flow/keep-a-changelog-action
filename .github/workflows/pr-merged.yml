@@ -23,7 +23,11 @@ jobs:
         fi
         VERSION=$(echo "${{ github.event.pull_request.head.ref }}" | awk -F/ '{print $2}')
         echo "VERSION=$VERSION"
-        echo "::set-output name=release-version::$VERSION"
+        if [[ -f $GITHUB_OUTPUT ]]; then
+          echo "release-version=$VERSION" >> $GITHUB_OUTPUT
+        else
+          echo "::set-output name=release-version::$VERSION"
+        fi
 
     - name: Get release notes
       id: get-release-notes
