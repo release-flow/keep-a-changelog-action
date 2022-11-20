@@ -25,6 +25,13 @@ export interface GetReleaseNotesOptions {
   version: semver.SemVer | 'unreleased';
 }
 
+export type VersionOptionSpec = semver.SemVer | 'unreleased' | 'latest';
+
+export interface GetReleaseInfoOptions {
+  changelogPath: string;
+  version: VersionOptionSpec;
+}
+
 // This is a compiler-safe mechanism to ensure that all possible ReleaseType
 // values are defined. If the ReleaseType type definition changes (not under our
 // control, it's part of the node-semver library) then this definition will
@@ -58,6 +65,12 @@ function getRepoOptions(): RepoOptions | undefined {
   return { owner, repo };
 }
 
+/**
+ * Gets a PrepareReleaseOptions instance with values derived from the action inputs.
+ *
+ * @export
+ * @returns {(PrepareReleaseOptions | undefined)}
+ */
 export function getPrepareReleaseOptions(): PrepareReleaseOptions | undefined {
   let changelogPath: string = core.getInput('changelog') ?? 'CHANGELOG.md';
   if (!path.isAbsolute(changelogPath)) {
@@ -134,6 +147,46 @@ export function getGetReleaseNotesOptions(): GetReleaseNotesOptions | undefined 
     target = parsed;
   } else {
     target = version;
+  }
+
+  return {
+    changelogPath,
+    version: target,
+  };
+}
+
+/**
+ * Gets a GetReleaseInfoOptions instance with values derived from the action inputs.
+ *
+ * @export
+ * @returns {(GetReleaseInfoOptions | undefined)}
+ */
+export function getGetReleaseInfoOptions(): GetReleaseInfoOptions | undefined {
+  let changelogPath: string = core.getInput('changelog') ?? 'CHANGELOG.md';
+  if (!path.isAbsolute(changelogPath)) {
+    const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
+    changelogPath = path.join(root, changelogPath);
+  }
+
+  const version = core.getInput('release-version') ?? 'latest';
+  let target: VersionOptionSpec;
+
+  switch (version) {
+    case 'unreleased':
+    case 'latest':
+      target = version;
+      break;
+
+    default:
+      const parsed = semver.parse(version);
+      if (!parsed) {
+        core.setFailed(
+          `Input 'release-version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased')`
+        );
+        return;
+      }
+      target = parsed;
+      break;
   }
 
   return {

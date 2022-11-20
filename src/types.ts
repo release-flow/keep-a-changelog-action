@@ -1,9 +1,33 @@
 import { Heading } from 'mdast';
 import semver from 'semver';
 
+/**
+ * The properties of a release (extracted from the heading).
+ *
+ * @export
+ * @interface ReleaseProps
+ */
 export interface ReleaseProps {
+  /**
+   * The release version number.
+   *
+   * @type {semver.SemVer}
+   * @memberof ReleaseProps
+   */
   version: semver.SemVer;
+  /**
+   * The release date.
+   *
+   * @type {Date}
+   * @memberof ReleaseProps
+   */
   date: Date;
+  /**
+   * The release suffix (everything in the header that comes after the date).
+   *
+   * @type {(string | undefined)}
+   * @memberof ReleaseProps
+   */
   suffix: string | undefined;
 }
 
