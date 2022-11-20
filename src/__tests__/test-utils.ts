@@ -28,7 +28,7 @@ export function getAllErrors(result: ActionResult): string[] {
 }
 
 export function getOutputVariables(result: ActionResult): OutputVariables {
-  const regexp = /^::set-output name=(.+)::(.+)$/m;
+  const regexp = /^::set-output name=(.+)::(.*)$/m;
   const v = result.stdout.split(/\r?\n/).reduce((acc, item) => {
     const match = regexp.exec(item);
     if (match) {

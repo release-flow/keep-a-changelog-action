@@ -1,6 +1,6 @@
 {
   "name": "keep-a-changelog-actions",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "description": "A set of GitHub Actions to work with a changelog that adheres to keep-a-changelog and Semantic Versioning conventions.",
   "type": "module",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build lib/prepare-release.js --source-map --license licenses.txt -o dist/prepare-release && ncc build lib/get-release-notes.js --source-map --license licenses.txt -o dist/get-release-notes",
+    "package": "ncc build lib/prepare-release.js --source-map --license licenses.txt -o dist/prepare-release && ncc build lib/get-release-notes.js --source-map --license licenses.txt -o dist/get-release-notes && ncc build lib/get-release-info.js --source-map --license licenses.txt -o dist/get-release-info",
     "all": "npm run build && npm run format-check && npm run lint && npm test && npm run package",
     "prepare": "husky install"
   },

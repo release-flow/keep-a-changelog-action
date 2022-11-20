@@ -10,6 +10,10 @@ A set of GitHub Actions that operate on changelogs that adhere to
 Updates a changelog by converting the 'Unreleased' section to the latest release number. The release number is
 automatically incremented according to the action parameters.
 
+### [get-release-info](./docs/get-release-info.md)
+
+Extracts the release information for a specified version from a changelog.
+
 ### [get-release-notes](./docs/get-release-notes.md)
 
 Extracts the release notes markdown for a specified version from a changelog.

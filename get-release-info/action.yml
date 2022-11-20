@@ -1,0 +1,21 @@
+name: 'Keep-a-Changelog Get Release Info'
+description: 'Extracts the release information for a version from a changelog'
+inputs:
+    release-version:
+      description: >-
+        The version for which to extract the release information. Can be 'unreleased' to get unreleased changes (the 
+        `version-number` output is `[unreleased]`), or 'latest' to get the latest version.
+      required: false
+      default: 'latest'
+    changelog:
+      description: >-
+        The path to the changelog to examine. If a relative path is specified, it is appended to the GitHub workspace
+        path.
+      required: false
+      default: 'CHANGELOG.md'
+outputs:
+  release-notes:
+    description: 'The markdown content of the previously unreleased changelog section.'
+runs:
+    using: 'node16'
+    main: ../dist/get-release-info/index.js

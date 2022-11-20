@@ -1,41 +1,28 @@
-import { unified } from 'unified';
 import { VFile } from 'vfile';
-import { read, write } from 'to-vfile';
+import { read } from 'to-vfile';
 import { remark } from 'remark';
 import { reporter } from 'vfile-reporter';
 import stringify from 'remark-stringify';
 import * as core from '@actions/core';
 
 import { ChangelogError, ReleaseHeading } from './types.js';
-import { getPrepareReleaseOptions, PrepareReleaseOptions } from './options.js';
+import { getGetReleaseInfoOptions, GetReleaseInfoOptions } from './options.js';
 
-import bridge from './plugins/bridge.js';
 import releaseParser from './plugins/release-parser.js';
 import preprocess from './plugins/preprocessor.js';
 import assert from './plugins/assert.js';
-import checkUnreleasedSectionExists from './plugins/check-unreleased-section-exists.js';
-import extractReleaseNotes from './plugins/extract-release-notes.js';
-import incrementRelease from './plugins/increment-release.js';
-import calculateNextRelease from './plugins/calculate-next-release.js';
-import updateLinkDefinitions from './plugins/update-link-definitions.js';
+import extractReleaseInfo from './plugins/extract-release-info.js';
+import { format } from 'date-fns';
 
-async function processChangelog(file: VFile, options: PrepareReleaseOptions): Promise<VFile> {
+async function processChangelog(file: VFile, options: GetReleaseInfoOptions): Promise<VFile> {
   const releaseHeadings: ReleaseHeading[] = [];
 
   const updated = await remark()
     .data('releaseHeadings', releaseHeadings)
     .use(releaseParser)
     .use(preprocess)
-    .use(checkUnreleasedSectionExists)
     .use(assert)
-    .use(
-      bridge,
-      'releaseNotes',
-      unified().use(extractReleaseNotes, 'unreleased').use(stringify, { listItemIndent: 'one', bullet: '-' })
-    )
-    .use(calculateNextRelease, options)
-    .use(incrementRelease, options)
-    .use(updateLinkDefinitions, options)
+    .use(extractReleaseInfo, options.version)
     .use(stringify, { listItemIndent: 'one', bullet: '-' })
     .process(file);
 
@@ -43,7 +30,7 @@ async function processChangelog(file: VFile, options: PrepareReleaseOptions): Pr
 }
 
 async function run(): Promise<void> {
-  const options = getPrepareReleaseOptions();
+  const options = getGetReleaseInfoOptions();
 
   if (!options) {
     // Input error - core.setFailed() should already have been called
@@ -55,14 +42,16 @@ async function run(): Promise<void> {
   try {
     const updated = await processChangelog(changelog, options);
 
-    if (options.outputFile) {
-      updated.basename = options.outputFile;
+    const result = updated.toString();
+    core.setOutput('release-notes', result);
+    core.setOutput('release-version', updated.data['matchedReleaseVersion']);
+    const date = updated.data['matchedReleaseDate'];
+    if (date instanceof Date) {
+      core.setOutput('release-date', format(date, 'yyyy-MM-dd'));
+    } else {
+      core.setOutput('release-date', '');
     }
-
-    await write(updated, { encoding: 'utf-8', mode: null });
-
-    core.setOutput('release-version', updated.data['nextReleaseVersion']);
-    core.setOutput('release-notes', updated.data['releaseNotes']);
+    core.setOutput('release-suffix', updated.data['matchedReleaseSuffix'] ?? '');
 
     if (updated.messages.length > 0) {
       core.warning('Changelog: warnings were encountered');
