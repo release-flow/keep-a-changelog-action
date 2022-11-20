@@ -5,7 +5,7 @@ import { globby } from 'globby';
 
 import './jest-file-diff.js';
 
-import { invokeActionScript, getAllErrors, getOutputVariables, ActionResult } from './test-utils.js';
+import { invokeActionScript, getAllErrors, getOutputVariables, ActionResult, getAllWarnings } from './test-utils.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -74,6 +74,18 @@ describe('gh start action', () => {
 
     const o = getOutputVariables(result);
     expect(o).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
+  });
+
+  it('emits a deprecation warning', () => {
+    const params = { ...DefaultParams };
+    const result = runAction(params);
+
+    expect(result.isError).toBeFalsy();
+
+    const o = getAllWarnings(result);
+    expect(o).toContain(
+      'This action is deprecated, and will be removed in a future version. Use the get-release-info action instead.'
+    );
   });
 });
 

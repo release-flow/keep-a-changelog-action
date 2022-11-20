@@ -29,7 +29,9 @@ async function processChangelog(file: VFile, options: GetReleaseNotesOptions): P
 }
 
 async function run(): Promise<void> {
-  core.warning('This action is deprecated, and will be removed in a future version.');
+  core.warning(
+    'This action is deprecated, and will be removed in a future version. Use the get-release-info action instead.'
+  );
 
   const options = getGetReleaseNotesOptions();
 
