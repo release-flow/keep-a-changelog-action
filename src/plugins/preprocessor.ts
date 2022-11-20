@@ -6,6 +6,7 @@ import semver from 'semver';
 import { visit } from 'unist-util-visit';
 import { is } from 'unist-util-is';
 
+// eslint-disable-next-line import/extensions
 import { isReleaseSpec, ReleaseHeading } from '../types.js';
 
 const attacher: Plugin<[], Root, Root> = function () {
@@ -78,7 +79,7 @@ const attacher: Plugin<[], Root, Root> = function () {
         break;
       }
 
-      if (semver.gte(currentHeading.release.version, previousHeading.release.version, { includePrerelease: true })) {
+      if (semver.gte(currentHeading.release.version, previousHeading.release.version)) {
         const msg = file.message('Release sections must be in descending order', currentHeading.node.position);
         msg.fatal = true;
       }
