@@ -16,6 +16,8 @@ Extracts the release information for a specified version from a changelog.
 
 ### [get-release-notes](./docs/get-release-notes.md)
 
+:heavy_exclamation_mark: This action is deprecated, and will be removed in a future version.
+
 Extracts the release notes markdown for a specified version from a changelog.
 
 ## License
