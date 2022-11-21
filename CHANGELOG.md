@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Handle the changes to GitHub output variables caused by the deprecation of the
+  [set-output](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/)
+  workflow command. This implemented in a backwardly-compatible way so that it continues to work with downlevel (e.g.
+  self-hosted) agents although it has not been tested on any.
+
 ## [1.2.0] - 2022-11-20
 
 ### Added
