@@ -8,7 +8,7 @@
 # files and compares them to the committed versions. This would be too expensive to perform on every
 # commit, so we just do a simple test to prevent silly mistakes caused by forgetfulness.
 
-STAGED_SRC_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep "^src/" || true)
+STAGED_SRC_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep "^src/(?!__tests__)." || true)
 STAGED_DIST_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep "^dist/" || true)
 
 # If no source files have changed, assume no dist (generated) files will need to change
