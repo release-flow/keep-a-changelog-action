@@ -5,6 +5,8 @@ on:
     branches: 
     - main
     - autorelease/*
+  workflow_dispatch:
+    
 
 jobs:
   build:
