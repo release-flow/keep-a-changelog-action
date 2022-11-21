@@ -10,7 +10,9 @@ on:
     branches: 
     - main
     - autorelease/*
-
+  workflow_dispatch:
+    
+    
 jobs:
   check-dist:
     runs-on: ubuntu-latest
