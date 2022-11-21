@@ -128,7 +128,6 @@ export function invokeActionScript(filePath: string, env: NodeJS.ProcessEnv, new
   const fileId = uuidv4();
   const filepath = path.join(os.tmpdir(), fileId);
 
-  console.log(`process.env: ${process.env.GITHUB_OUTPUT ?? ''}`);
   delete process.env.GITHUB_OUTPUT;
   const extraEnv = newOutputMechanism ? { GITHUB_OUTPUT: filepath } : {};
 
@@ -145,7 +144,6 @@ export function invokeActionScript(filePath: string, env: NodeJS.ProcessEnv, new
     const stdout = cp.execFileSync(np, [ip], options).toString();
 
     const data = fs.readFileSync(filepath, 'utf8');
-    console.log(data);
     const outputs = newOutputMechanism ? getOutputVariablesV2(data) : getOutputVariables(stdout);
 
     return {
