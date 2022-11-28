@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.4.0] - 2022-11-28
 
 ### Changed
 
-- The `get-release-info` action supports a new option for the `release-version` input - `latest-or-unreleased`. This
+- The `get-release-info` action supports a new option for the `release-version` input: `latest-or-unreleased`. This
   option provides support for changelogs that only have an `[Unreleased]` section.
 
 ## [1.3.0] - 2022-11-21
@@ -54,6 +54,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Initial content including change log
+
+[1.4.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v1.3.0...v1.4.0
 
 [1.3.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v1.2.0...v1.3.0
 
