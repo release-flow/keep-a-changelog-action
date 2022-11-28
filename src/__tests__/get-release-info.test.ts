@@ -135,6 +135,40 @@ it('sets the output variables for a specified version, old output mechanism', ()
   expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Some features%0A');
 });
 
+it('returns latest version when latest-or-unreleased requested and the changelog has a release section', () => {
+  const params = { ...DefaultParams };
+  params.changelog = 'good_changelog.md';
+  params.version = 'latest-or-unreleased';
+  const result = runAction(params);
+
+  expect(result.isError).toBeFalsy();
+  expect(result.outputs).toHaveProperty('release-version', '1.0.0');
+  expect(result.outputs).toHaveProperty('release-date', '2022-02-04');
+  expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Final polish%0A');
+});
+
+it('returns unreleased when latest-or-unreleased requested and the changelog only has unreleased section', () => {
+  const params = { ...DefaultParams };
+  params.changelog = 'initial_changelog_2.md';
+  params.version = 'latest-or-unreleased';
+  const result = runAction(params);
+
+  expect(result.isError).toBeFalsy();
+  expect(result.outputs).toHaveProperty('release-version', '[unreleased]');
+  expect(result.outputs).toHaveProperty('release-date', '');
+  expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
+});
+
+it('errors when latest-or-unreleased requested but the changelog does not have any versions', () => {
+  const params = { ...DefaultParams };
+  params.changelog = 'changelog_empty.md';
+  params.version = 'latest-or-unreleased';
+  const result = runAction(params);
+
+  expect(result.isError).toBeTruthy();
+  expect(getAllErrors(result)).toContain('No release headings in changelog');
+});
+
 function runAction(params: ActionParams): ActionResult {
   const env: NodeJS.ProcessEnv = {
     GITHUB_WORKSPACE: __dirname,

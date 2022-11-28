@@ -8,7 +8,7 @@ import semver from 'semver';
 const { SemVer } = semver;
 
 import { BoneheadedError, ChangelogError, isReleaseProps, ReleaseHeading } from '../types.js';
-import { VersionOptionSpec } from '../options.js';
+import { VersionOptionSpec, isSpecialVersionOption } from '../options.js';
 
 function getReleaseNotes(heading: ReleaseHeading, tree: Root): Root {
   const root: Root = { type: 'root', children: [] };
@@ -24,22 +24,24 @@ function getReleaseNotes(heading: ReleaseHeading, tree: Root): Root {
 }
 
 function findReleaseHeading(target: VersionOptionSpec, headings: ReleaseHeading[]): ReleaseHeading | null {
+  let unreleasedHeading: ReleaseHeading | null = null;
   for (let i = 0; i < headings.length; i++) {
     const heading = headings[i];
 
     if (heading.release === 'unreleased') {
+      unreleasedHeading = heading;
       if (target === 'unreleased') {
         return heading;
       }
       continue;
-    } else if (target === 'latest') {
+    } else if (target === 'latest' || target === 'latest-or-unreleased') {
       return heading;
     } else if (target instanceof SemVer && semver.eq(heading.release.version, target)) {
       return heading;
     }
   }
 
-  return null;
+  return target === 'latest-or-unreleased' ? unreleasedHeading : null;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -57,12 +59,12 @@ const attacher: Plugin<[VersionOptionSpec], Root, Root> = function extractUnrele
     }
 
     if (releaseHeadings.length === 0) {
-      file.fail('No releases in changelog');
+      file.fail('No release headings in changelog');
     }
 
     const heading = findReleaseHeading(target, releaseHeadings);
     if (!heading) {
-      const releaseText = target === 'unreleased' || target === 'latest' ? target : target.format();
+      const releaseText = isSpecialVersionOption(target) ? target : target.format();
       throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
     }
 

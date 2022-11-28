@@ -3,8 +3,12 @@ description: 'Extracts the release information for a version from a changelog'
 inputs:
     release-version:
       description: >-
-        The version for which to extract the release information. Can be 'unreleased' to get unreleased changes (the 
-        `version-number` output is `[unreleased]`), or 'latest' to get the latest version.
+        The version for which to extract the release information. Can be a semantic version string, or one of the
+        following values: `latest`, `unreleased`, or `latest-or-unreleased`. `latest` gets the most recent release.
+        `unreleased` gets the details of unreleased changes. `latest-or-unreleased` is a combination of the other two:
+        if any releases are present, it behaves like `latest`, but if the changelog only contains unreleased information
+        then that is returned. When unreleased details are returned, the `version-number` output is set to
+        `[unreleased]`).
       required: false
       default: 'latest'
     changelog:
