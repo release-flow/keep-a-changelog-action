@@ -49698,6 +49698,9 @@ function getRepoOptions() {
     }
     return { owner, repo };
 }
+function isSpecialVersionOption(maybe) {
+    return maybe === 'latest' || maybe === 'unreleased' || maybe === 'latest-or-unreleased';
+}
 /**
  * Gets a PrepareReleaseOptions instance with values derived from the action inputs.
  *
@@ -49786,6 +49789,7 @@ function getGetReleaseInfoOptions() {
     switch (version) {
         case 'unreleased':
         case 'latest':
+        case 'latest-or-unreleased':
             target = version;
             break;
         default:
@@ -50070,6 +50074,7 @@ const findAllAfter =
 
 const { SemVer } = node_modules_semver;
 
+
 function getReleaseNotes(heading, tree) {
     const root = { type: 'root', children: [] };
     // The terminator node can be undefined, e.g. if the section is the last section in the file
@@ -50080,22 +50085,24 @@ function getReleaseNotes(heading, tree) {
     return root;
 }
 function findReleaseHeading(target, headings) {
+    let unreleasedHeading = null;
     for (let i = 0; i < headings.length; i++) {
         const heading = headings[i];
         if (heading.release === 'unreleased') {
+            unreleasedHeading = heading;
             if (target === 'unreleased') {
                 return heading;
             }
             continue;
         }
-        else if (target === 'latest') {
+        else if (target === 'latest' || target === 'latest-or-unreleased') {
             return heading;
         }
         else if (target instanceof SemVer && node_modules_semver.eq(heading.release.version, target)) {
             return heading;
         }
     }
-    return null;
+    return target === 'latest-or-unreleased' ? unreleasedHeading : null;
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const extract_release_info_attacher = function extractUnreleasedContents(target) {
@@ -50107,11 +50114,11 @@ const extract_release_info_attacher = function extractUnreleasedContents(target)
             throw new BoneheadedError('File should have been preprocessed before calling this plugin');
         }
         if (releaseHeadings.length === 0) {
-            file.fail('No releases in changelog');
+            file.fail('No release headings in changelog');
         }
         const heading = findReleaseHeading(target, releaseHeadings);
         if (!heading) {
-            const releaseText = target === 'unreleased' || target === 'latest' ? target : target.format();
+            const releaseText = isSpecialVersionOption(target) ? target : target.format();
             throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
         }
         if (isReleaseProps(heading.release)) {
@@ -50195,8 +50202,14 @@ async function run() {
                 lib_core.endGroup();
             }
         }
-        else {
+        else if (error instanceof Error) {
+            lib_core.setFailed(error.message);
+            lib_core.startGroup('Error details');
             console.error(error);
+            lib_core.endGroup();
+        }
+        else {
+            console.log(error);
         }
     }
 }
