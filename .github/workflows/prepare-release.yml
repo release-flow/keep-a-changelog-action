@@ -29,6 +29,12 @@ jobs:
       with:
         ref: ${{ github.head_ref }}
 
+    - uses: tibdex/github-app-token@v1
+      id: generate-token
+      with:
+        app_id: ${{ secrets.RELEASEBOT_APP_ID }}
+        private_key: ${{ secrets.RELEASEBOT_PRIVATE_KEY }}
+
     - name: 'Ensure autorelease label exists'
       run: |
         LABEL=$(gh api repos/$GITHUB_REPOSITORY/labels --jq '.[] | select(.name=="autorelease")')
@@ -49,7 +55,7 @@ jobs:
 
     - name: Create Pull Request
       id: create-release-pr
-      uses: peter-evans/create-pull-request@v3
+      uses: peter-evans/create-pull-request@v4
       with:
         commit-message: 'chore: Update changelog for release ${{ steps.update-changelog.outputs.release-version }}'
         committer: 'releasebot <noreply@github.com>'
@@ -68,6 +74,7 @@ jobs:
 
           ${{ steps.update-changelog.outputs.release-notes }}
         labels: autorelease
+        token: ${{ steps.generate-token.outputs.token }}
 
     - name: Output summary
       run: |
