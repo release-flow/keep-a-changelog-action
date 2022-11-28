@@ -25,7 +25,8 @@ export interface GetReleaseNotesOptions {
   version: semver.SemVer | 'unreleased';
 }
 
-export type VersionOptionSpec = semver.SemVer | 'unreleased' | 'latest';
+export type SpecialVersionOption = 'unreleased' | 'latest' | 'latest-or-unreleased';
+export type VersionOptionSpec = semver.SemVer | SpecialVersionOption;
 
 export interface GetReleaseInfoOptions {
   changelogPath: string;
@@ -63,6 +64,10 @@ function getRepoOptions(): RepoOptions | undefined {
   }
 
   return { owner, repo };
+}
+
+export function isSpecialVersionOption(maybe: VersionOptionSpec): maybe is SpecialVersionOption {
+  return maybe === 'latest' || maybe === 'unreleased' || maybe === 'latest-or-unreleased';
 }
 
 /**
@@ -174,6 +179,7 @@ export function getGetReleaseInfoOptions(): GetReleaseInfoOptions | undefined {
   switch (version) {
     case 'unreleased':
     case 'latest':
+    case 'latest-or-unreleased':
       target = version;
       break;
 

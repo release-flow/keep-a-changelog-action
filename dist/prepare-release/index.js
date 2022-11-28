@@ -49700,6 +49700,9 @@ function getRepoOptions() {
     }
     return { owner, repo };
 }
+function isSpecialVersionOption(maybe) {
+    return maybe === 'latest' || maybe === 'unreleased' || maybe === 'latest-or-unreleased';
+}
 /**
  * Gets a PrepareReleaseOptions instance with values derived from the action inputs.
  *
@@ -49788,6 +49791,7 @@ function getGetReleaseInfoOptions() {
     switch (version) {
         case 'unreleased':
         case 'latest':
+        case 'latest-or-unreleased':
             target = version;
             break;
         default:

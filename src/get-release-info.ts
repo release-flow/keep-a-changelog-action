@@ -69,8 +69,13 @@ async function run(): Promise<void> {
         console.log(reporter(changelog));
         core.endGroup();
       }
-    } else {
+    } else if (error instanceof Error) {
+      core.setFailed(error.message);
+      core.startGroup('Error details');
       console.error(error);
+      core.endGroup();
+    } else {
+      console.log(error);
     }
   }
 }
