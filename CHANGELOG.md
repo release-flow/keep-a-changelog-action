@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- Get the automated checks to run on an autorelease PR (see
+  [here](https://github.com/release-flow/keep-a-changelog-action/pull/31)).
+
 ## [1.4.0] - 2022-11-28
 
 ### Changed
