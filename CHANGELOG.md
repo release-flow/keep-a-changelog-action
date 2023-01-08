@@ -78,9 +78,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Initial content including change log
 
-[2.0.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v2.0.0-alpha.0...v2.0.0
-
-[2.0.0-alpha.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v1.4.1...v2.0.0-alpha.0
+[2.0.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v1.4.1...v2.0.0
 
 [1.4.1]: https://github.com/release-flow/keep-a-changelog-action/compare/v1.4.0...v1.4.1
 

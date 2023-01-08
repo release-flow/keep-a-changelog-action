@@ -1,4 +1,4 @@
-# Keep a Changelog Action
+# Keep-a-Changelog Action
 
 A GitHub Action that performs various operations on changelogs that adhere to
 [keep-a-changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/) conventions.
