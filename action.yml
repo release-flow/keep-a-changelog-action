@@ -1,9 +1,10 @@
 name: 'Keep-a-Changelog Action'
-description: 'Manages changelogs that are in Keep-a-Changelog format. Bump the version, query release info.'
+description: >-
+  Performs operations on changelogs that are in Keep-a-Changelog format: bump the version, query release info.
 inputs:
-  action:
+  command:
     description: >-
-      The action to perform: 'bump' or 'query'.
+      The command to perform: 'bump' or 'query'.
     required: true
   changelog:
     description: >-

@@ -1,25 +1,18 @@
-# Keep a Changelog Actions
+# Keep a Changelog Action
 
-A set of GitHub Actions that operate on changelogs that adhere to
+A GitHub Action that applies various commands to changelogs that adhere to
 [keep-a-changelog](https://keepachangelog.com/en/1.0.0/) and [Semantic Versioning](https://semver.org/) conventions.
 
-## Actions
+## Commands
 
-### [prepare-release](./docs/prepare-release.md)
+### [bump](./docs/bump.md)
 
-Updates a changelog by converting the 'Unreleased' section to the latest release number. The release number is
+Updates a changelog by converting the '[Unreleased]' section to the latest release number. The release number is
 automatically incremented according to the action parameters.
 
-### [get-release-info](./docs/get-release-info.md)
+### [query](./docs/query.md)
 
-Extracts the release information for a specified version from a changelog.
-
-### [get-release-notes](./docs/get-release-notes.md)
-
-:heavy_exclamation_mark: This action is deprecated, and will be removed in a future version. Use the get-release-info
-action instead.
-
-Extracts the release notes markdown for a specified version from a changelog.
+Queries release information for a specified version from a changelog.
 
 ## License
 
