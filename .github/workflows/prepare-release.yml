@@ -58,10 +58,10 @@ jobs:
       id: create-release-pr
       uses: peter-evans/create-pull-request@v4
       with:
-        commit-message: 'chore: Update changelog for release ${{ steps.update-changelog.outputs.release-version }}'
+        commit-message: 'chore: Update changelog for release ${{ steps.update-changelog.outputs.version }}'
         committer: 'releasebot <noreply@github.com>'
-        branch: 'autorelease/${{ steps.update-changelog.outputs.release-version }}'
-        title: '[autorelease] Release ${{ steps.update-changelog.outputs.release-version }}'
+        branch: 'autorelease/${{ steps.update-changelog.outputs.version }}'
+        title: '[autorelease] Release ${{ steps.update-changelog.outputs.version }}'
         # Be careful of newlines here. We need to use the literal block chomping style (|) so that the
         # contents of the release notes don't get chomped. See https://yaml-multiline.info/
         body: |
@@ -69,7 +69,7 @@ jobs:
 
           **:warning: Approving this PR will trigger a workflow that generates a draft release. You need to publish this release when you are happy with it.**
 
-          The changes in this PR prepare for release ${{ steps.update-changelog.outputs.release-version }}. The release notes are:
+          The changes in this PR prepare for release ${{ steps.update-changelog.outputs.version }}. The release notes are:
 
           ---
 
