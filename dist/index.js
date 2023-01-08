@@ -50598,8 +50598,8 @@ async function query() {
 
 
 async function run() {
-    const action = core.getInput('action');
-    switch (action) {
+    const command = core.getInput('command');
+    switch (command) {
         case 'query':
             await query();
             break;
@@ -50607,7 +50607,7 @@ async function run() {
             await bump();
             break;
         default:
-            core.error(`'Invalid value for input 'action': '${action}'`);
+            core.error(`'Invalid value for input 'command': '${command}'`);
             break;
     }
 }
