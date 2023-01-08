@@ -10,7 +10,7 @@ import stringify from 'remark-stringify';
 import * as core from '@actions/core';
 
 import { ChangelogError, ReleaseHeading } from './types.js';
-import { QueryOptions, VersionOptionSpec } from './options.js';
+import { QueryOptions, QueryVersionOptionSpec } from './options.js';
 
 import releaseParser from './plugins/release-parser.js';
 import preprocess from './plugins/preprocessor.js';
@@ -31,7 +31,7 @@ function getQueryOptions(): QueryOptions | undefined {
   }
 
   const version = core.getInput('version') ?? 'latest';
-  let target: VersionOptionSpec;
+  let target: QueryVersionOptionSpec;
 
   switch (version) {
     case 'unreleased':

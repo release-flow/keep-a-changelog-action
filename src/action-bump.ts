@@ -90,7 +90,7 @@ function getPrepareReleaseOptions(): BumpOptions | undefined {
     }
   }
 
-  const prereleaseIdentifier = core.getInput('preid');
+  const preid = core.getInput('preid');
 
   let tagPrefix = core.getInput('tag-prefix');
   if (tagPrefix === null || tagPrefix === undefined) {
@@ -108,9 +108,9 @@ function getPrepareReleaseOptions(): BumpOptions | undefined {
   const options: BumpOptions = {
     changelogPath,
     releaseDate,
-    releaseType,
+    version: releaseType,
     tagPrefix,
-    prereleaseIdentifier,
+    preid: preid,
     repo: repoOptions,
     outputFile,
   };

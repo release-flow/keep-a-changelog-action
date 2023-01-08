@@ -9,22 +9,22 @@ export interface RepoSpec {
 
 export interface BumpOptions {
   changelogPath: string;
-  releaseType: ReleaseType;
-  prereleaseIdentifier?: string;
+  version: ReleaseType;
+  preid?: string;
   releaseDate: Date;
   tagPrefix: string;
   repo: RepoSpec;
   outputFile: string | undefined;
 }
 
-export type SpecialVersionOption = 'unreleased' | 'latest' | 'latest-or-unreleased';
-export type VersionOptionSpec = semver.SemVer | SpecialVersionOption;
+export type QuerySpecialVersionOption = 'unreleased' | 'latest' | 'latest-or-unreleased';
+export type QueryVersionOptionSpec = semver.SemVer | QuerySpecialVersionOption;
 
 export interface QueryOptions {
   changelogPath: string;
-  version: VersionOptionSpec;
+  version: QueryVersionOptionSpec;
 }
 
-export function isSpecialVersionOption(maybe: VersionOptionSpec): maybe is SpecialVersionOption {
+export function isQuerySpecialVersionOption(maybe: QueryVersionOptionSpec): maybe is QuerySpecialVersionOption {
   return maybe === 'latest' || maybe === 'unreleased' || maybe === 'latest-or-unreleased';
 }

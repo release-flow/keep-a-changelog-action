@@ -17,7 +17,7 @@ const root = path.join(__dirname, '../..');
 interface ActionParams {
   changelog: string | null;
   releaseType: string | null;
-  prereleaseIdentifier: string | null;
+  preid: string | null;
   releaseDate: string | null;
   tagPrefix: string | null;
   outputFile: string | null;
@@ -27,7 +27,7 @@ interface ActionParams {
 const DefaultParams: ActionParams = {
   changelog: 'good_changelog.md',
   releaseType: 'minor',
-  prereleaseIdentifier: null,
+  preid: null,
   releaseDate: '2022-03-31',
   tagPrefix: 'v',
   outputFile: 'tmp_changelog.md',
@@ -132,7 +132,7 @@ describe('gh start action', () => {
   it('sets the output variables', () => {
     const params = { ...DefaultParams };
     params.releaseType = 'preminor';
-    params.prereleaseIdentifier = 'beta';
+    params.preid = 'beta';
     const result = runAction(params);
 
     expect(result.isError).toBeFalsy();
@@ -157,8 +157,8 @@ function runAction(params: ActionParams): ActionResult {
     env['INPUT_VERSION'] = params.releaseType;
   }
 
-  if (params.prereleaseIdentifier !== null) {
-    env['INPUT_PREID'] = params.prereleaseIdentifier;
+  if (params.preid !== null) {
+    env['INPUT_PREID'] = params.preid;
   }
 
   if (params.releaseDate !== null) {

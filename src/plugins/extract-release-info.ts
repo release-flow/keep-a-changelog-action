@@ -8,7 +8,7 @@ import semver from 'semver';
 const { SemVer } = semver;
 
 import { BoneheadedError, ChangelogError, isReleaseProps, ReleaseHeading } from '../types.js';
-import { VersionOptionSpec, isSpecialVersionOption } from '../options.js';
+import { QueryVersionOptionSpec, isQuerySpecialVersionOption } from '../options.js';
 
 function getReleaseNotes(heading: ReleaseHeading, tree: Root): Root {
   const root: Root = { type: 'root', children: [] };
@@ -23,7 +23,7 @@ function getReleaseNotes(heading: ReleaseHeading, tree: Root): Root {
   return root;
 }
 
-function findReleaseHeading(target: VersionOptionSpec, headings: ReleaseHeading[]): ReleaseHeading | null {
+function findReleaseHeading(target: QueryVersionOptionSpec, headings: ReleaseHeading[]): ReleaseHeading | null {
   let unreleasedHeading: ReleaseHeading | null = null;
   for (let i = 0; i < headings.length; i++) {
     const heading = headings[i];
@@ -45,8 +45,8 @@ function findReleaseHeading(target: VersionOptionSpec, headings: ReleaseHeading[
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const attacher: Plugin<[VersionOptionSpec], Root, Root> = function extractUnreleasedContents(
-  target: VersionOptionSpec
+const attacher: Plugin<[QueryVersionOptionSpec], Root, Root> = function extractUnreleasedContents(
+  target: QueryVersionOptionSpec
 ) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
@@ -64,7 +64,7 @@ const attacher: Plugin<[VersionOptionSpec], Root, Root> = function extractUnrele
 
     const heading = findReleaseHeading(target, releaseHeadings);
     if (!heading) {
-      const releaseText = isSpecialVersionOption(target) ? target : target.format();
+      const releaseText = isQuerySpecialVersionOption(target) ? target : target.format();
       throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
     }
 

@@ -27,9 +27,9 @@ const attacher: Plugin = function (options: BumpOptions) {
 
     file.data['nextReleaseVersion'] = semver.inc(
       latestVersion.format(),
-      options.releaseType,
+      options.version,
       undefined,
-      options.prereleaseIdentifier
+      options.preid
     );
   }
 };
