@@ -53,4 +53,4 @@ outputs:
       heading  is '## [0.0.5] - 2014-12-13 [YANKED]', this output would contain '[YANKED]'.
 runs:
     using: 'node16'
-    main: ../dist/index.js
+    main: dist/index.js
