@@ -1,6 +1,10 @@
 name: 'Keep-a-Changelog Action'
 description: >-
   Performs operations on changelogs that are in Keep-a-Changelog format: bump the version, query release info.
+author: Release Flow
+branding:
+  icon: list
+  color: purple
 inputs:
   command:
     description: >-

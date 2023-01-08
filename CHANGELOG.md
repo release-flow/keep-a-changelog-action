@@ -5,13 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Add GitHub Action branding
+
 ## [2.0.0] - 2023-01-08
 
 ### Added
 
 - Added documentation on upgrading to V2
-
-## [2.0.0-alpha.0] - 2023-01-08
 
 ### Changed
 
