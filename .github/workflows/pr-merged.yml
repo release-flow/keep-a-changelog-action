@@ -31,9 +31,10 @@ jobs:
 
     - name: Get release notes
       id: get-release-notes
-      uses: ./get-release-notes
+      uses: ./
       with:
-        release-version: ${{ steps.get-release-version.outputs.release-version}}
+        command: query
+        version: ${{ steps.get-release-version.outputs.release-version}}
 
     - name: Display release notes
       run: |
