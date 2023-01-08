@@ -4,9 +4,9 @@ import { default as bump } from './action-bump.js';
 import { default as query } from './action-query.js';
 
 async function run(): Promise<void> {
-  const action = core.getInput('action');
+  const command = core.getInput('command');
 
-  switch (action) {
+  switch (command) {
     case 'query':
       await query();
       break;
@@ -16,7 +16,7 @@ async function run(): Promise<void> {
       break;
 
     default:
-      core.error(`'Invalid value for input 'action': '${action}'`);
+      core.error(`'Invalid value for input 'command': '${command}'`);
       break;
   }
 }

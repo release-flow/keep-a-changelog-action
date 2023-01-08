@@ -174,7 +174,7 @@ function runAction(params: ActionParams): ActionResult {
     GITHUB_WORKSPACE: __dirname,
   };
 
-  env['INPUT_ACTION'] = 'query';
+  env['INPUT_COMMAND'] = 'query';
 
   if (params.changelog !== null) {
     env['INPUT_CHANGELOG'] = params.changelog;
