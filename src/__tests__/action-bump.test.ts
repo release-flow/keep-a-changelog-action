@@ -47,14 +47,14 @@ describe('gh start action', () => {
     }
   });
 
-  it('errors when release-type is invalid', () => {
+  it('errors when version is invalid', () => {
     const params = { ...DefaultParams };
     params.releaseType = 'invalid';
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
     expect(getAllErrors(result)).toContain(
-      "Input 'release-type' has an invalid value 'invalid'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease"
+      "Input 'version' has an invalid value 'invalid'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease"
     );
   });
 
@@ -137,7 +137,7 @@ describe('gh start action', () => {
 
     expect(result.isError).toBeFalsy();
 
-    expect(result.outputs).toHaveProperty('release-version', '1.1.0-beta.0');
+    expect(result.outputs).toHaveProperty('version', '1.1.0-beta.0');
     expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
   });
 });
@@ -147,16 +147,18 @@ function runAction(params: ActionParams): ActionResult {
     GITHUB_WORKSPACE: __dirname,
   };
 
+  env['INPUT_ACTION'] = 'bump';
+
   if (params.changelog !== null) {
     env['INPUT_CHANGELOG'] = params.changelog;
   }
 
   if (params.releaseType !== null) {
-    env['INPUT_RELEASE-TYPE'] = params.releaseType;
+    env['INPUT_VERSION'] = params.releaseType;
   }
 
   if (params.prereleaseIdentifier !== null) {
-    env['INPUT_PRERELEASE-IDENTIFIER'] = params.prereleaseIdentifier;
+    env['INPUT_PREID'] = params.prereleaseIdentifier;
   }
 
   if (params.releaseDate !== null) {
@@ -175,5 +177,5 @@ function runAction(params: ActionParams): ActionResult {
     env['GITHUB_REPOSITORY'] = params.githubRepo;
   }
 
-  return invokeActionScript(path.join(__dirname, '../prepare-release.js'), env);
+  return invokeActionScript(path.join(__dirname, '../index.js'), env);
 }

@@ -5,9 +5,9 @@ import semver from 'semver';
 const { SemVer } = semver;
 
 import { BoneheadedError, isReleaseProps, ReleaseHeading, ReleaseProps } from '../types.js';
-import { PrepareReleaseOptions } from '../options.js';
+import { BumpOptions } from '../options.js';
 
-const attacher: Plugin = function (options: PrepareReleaseOptions) {
+const attacher: Plugin = function (options: BumpOptions) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
   return transformer;
