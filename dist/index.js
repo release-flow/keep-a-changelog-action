@@ -8183,7 +8183,7 @@ module.exports = exports.default;
 
 /***/ }),
 
-/***/ 2168:
+/***/ 8566:
 /***/ ((module, exports, __nccwpck_require__) => {
 
 
@@ -9869,7 +9869,7 @@ var _index = __nccwpck_require__(9307);
 
 var _index2 = _interopRequireDefault(__nccwpck_require__(3086));
 
-var _index3 = _interopRequireDefault(__nccwpck_require__(2168));
+var _index3 = _interopRequireDefault(__nccwpck_require__(8566));
 
 var _index4 = _interopRequireDefault(__nccwpck_require__(618));
 
@@ -13281,7 +13281,7 @@ var _index60 = _interopRequireDefault(__nccwpck_require__(7079));
 
 var _index61 = _interopRequireDefault(__nccwpck_require__(66));
 
-var _index62 = _interopRequireDefault(__nccwpck_require__(2168));
+var _index62 = _interopRequireDefault(__nccwpck_require__(8566));
 
 var _index63 = _interopRequireDefault(__nccwpck_require__(8149));
 
@@ -33335,7 +33335,7 @@ function ok() {
 
 /***/ }),
 
-/***/ 4216:
+/***/ 2168:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 
@@ -33427,7 +33427,7 @@ function toResult(value) {
 
 module.exports = visit
 
-var visitParents = __nccwpck_require__(4216)
+var visitParents = __nccwpck_require__(2168)
 
 var CONTINUE = visitParents.CONTINUE
 var SKIP = visitParents.SKIP
@@ -34078,6 +34078,14 @@ __nccwpck_require__.d(constructs_namespaceObject, {
   "text": () => (constructs_text)
 });
 
+// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(2186);
+;// CONCATENATED MODULE: external "process"
+const external_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("process");
+// EXTERNAL MODULE: external "path"
+var external_path_ = __nccwpck_require__(1017);
+// EXTERNAL MODULE: ./node_modules/date-fns/index.js
+var date_fns = __nccwpck_require__(3314);
 ;// CONCATENATED MODULE: ./node_modules/bail/index.js
 /**
  * Throw a given error.
@@ -34488,10 +34496,6 @@ VFileMessage.prototype.source = null
 VFileMessage.prototype.ruleId = null
 VFileMessage.prototype.position = null
 
-// EXTERNAL MODULE: external "path"
-var external_path_ = __nccwpck_require__(1017);
-;// CONCATENATED MODULE: external "process"
-const external_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("process");
 ;// CONCATENATED MODULE: ./node_modules/vfile/lib/minurl.shared.js
 /**
  * @typedef URL
@@ -49635,10 +49639,8 @@ function size(value) {
   return stringWidth(match ? value.slice(0, match.index) : value)
 }
 
-// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var lib_core = __nccwpck_require__(2186);
 // EXTERNAL MODULE: ./node_modules/semver/index.js
-var node_modules_semver = __nccwpck_require__(1383);
+var semver = __nccwpck_require__(1383);
 ;// CONCATENATED MODULE: ./lib/types.js
 
 function isReleaseSpec(maybe) {
@@ -49649,7 +49651,7 @@ function isReleaseProps(maybe) {
         maybe !== undefined &&
         typeof maybe === 'object' &&
         'version' in maybe &&
-        maybe.version instanceof node_modules_semver.SemVer &&
+        maybe.version instanceof semver.SemVer &&
         'date' in maybe &&
         maybe.date instanceof Date);
 }
@@ -49666,149 +49668,6 @@ class BoneheadedError extends Error {
     }
 }
 //# sourceMappingURL=types.js.map
-// EXTERNAL MODULE: ./node_modules/date-fns/index.js
-var date_fns = __nccwpck_require__(3314);
-;// CONCATENATED MODULE: ./lib/options.js
-
-
-
-
-
-// This is a compiler-safe mechanism to ensure that all possible ReleaseType
-// values are defined. If the ReleaseType type definition changes (not under our
-// control, it's part of the node-semver library) then this definition will
-// cause a compile-time error. See https://stackoverflow.com/a/66820587/260213
-// for the inspiration.
-const validReleaseTypes = {
-    major: true,
-    premajor: true,
-    minor: true,
-    preminor: true,
-    patch: true,
-    prepatch: true,
-    prerelease: true,
-};
-function isValidReleaseType(maybe) {
-    return validReleaseTypes.hasOwnProperty(maybe);
-}
-function getRepoOptions() {
-    const githubRepository = external_process_namespaceObject.env.GITHUB_REPOSITORY ?? '';
-    const [owner, repo] = githubRepository.split('/');
-    if (!owner || !repo) {
-        lib_core.setFailed('Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set');
-        return;
-    }
-    return { owner, repo };
-}
-function isSpecialVersionOption(maybe) {
-    return maybe === 'latest' || maybe === 'unreleased' || maybe === 'latest-or-unreleased';
-}
-/**
- * Gets a PrepareReleaseOptions instance with values derived from the action inputs.
- *
- * @export
- * @returns {(PrepareReleaseOptions | undefined)}
- */
-function getPrepareReleaseOptions() {
-    let changelogPath = lib_core.getInput('changelog') ?? 'CHANGELOG.md';
-    if (!external_path_.isAbsolute(changelogPath)) {
-        const root = external_process_namespaceObject.env.GITHUB_WORKSPACE ?? external_process_namespaceObject.cwd();
-        changelogPath = external_path_.join(root, changelogPath);
-    }
-    const releaseType = lib_core.getInput('release-type') ?? 'patch';
-    if (!isValidReleaseType(releaseType)) {
-        lib_core.setFailed(`Input 'release-type' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`);
-        return;
-    }
-    let releaseDate = new Date();
-    const releaseDateText = lib_core.getInput('release-date');
-    if (releaseDateText) {
-        releaseDate = (0,date_fns.parseISO)(releaseDateText);
-        if (!(0,date_fns.isValid)(releaseDate)) {
-            lib_core.setFailed(`Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`);
-            return;
-        }
-    }
-    const prereleaseIdentifier = lib_core.getInput('prerelease-identifier');
-    let tagPrefix = lib_core.getInput('tag-prefix');
-    if (tagPrefix === null || tagPrefix === undefined) {
-        tagPrefix = 'v';
-    }
-    const outputFile = lib_core.getInput('output-file');
-    const repoOptions = getRepoOptions();
-    if (!repoOptions) {
-        return;
-    }
-    const options = {
-        changelogPath,
-        releaseDate,
-        releaseType,
-        tagPrefix,
-        prereleaseIdentifier,
-        repo: repoOptions,
-        outputFile,
-    };
-    return options;
-}
-function getGetReleaseNotesOptions() {
-    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
-    if (!path.isAbsolute(changelogPath)) {
-        const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
-        changelogPath = path.join(root, changelogPath);
-    }
-    const version = core.getInput('release-version') ?? 'unreleased';
-    let target;
-    if (version !== 'unreleased') {
-        const parsed = semver.parse(version);
-        if (!parsed) {
-            core.setFailed(`Input 'release-version' contains invalid value '${version}'. It must contain a valid version or 'unreleased'`);
-            return;
-        }
-        target = parsed;
-    }
-    else {
-        target = version;
-    }
-    return {
-        changelogPath,
-        version: target,
-    };
-}
-/**
- * Gets a GetReleaseInfoOptions instance with values derived from the action inputs.
- *
- * @export
- * @returns {(GetReleaseInfoOptions | undefined)}
- */
-function getGetReleaseInfoOptions() {
-    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
-    if (!path.isAbsolute(changelogPath)) {
-        const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
-        changelogPath = path.join(root, changelogPath);
-    }
-    const version = core.getInput('release-version') ?? 'latest';
-    let target;
-    switch (version) {
-        case 'unreleased':
-        case 'latest':
-        case 'latest-or-unreleased':
-            target = version;
-            break;
-        default:
-            const parsed = semver.parse(version);
-            if (!parsed) {
-                core.setFailed(`Input 'release-version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased')`);
-                return;
-            }
-            target = parsed;
-            break;
-    }
-    return {
-        changelogPath,
-        version: target,
-    };
-}
-//# sourceMappingURL=options.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/bridge.js
 const attacher = function (field, processor) {
     // Copy the processor data from the input pipeline to the new pipeline
@@ -49851,7 +49710,7 @@ function parseReleaseHeadingTextOnly(node, file) {
         release = 'unreleased';
     }
     else {
-        const version = node_modules_semver.parse(m[1]);
+        const version = semver.parse(m[1]);
         if (!version) {
             const msg = file.message('Unable to parse semantic version', textNode.position);
             msg.fatal = true;
@@ -49873,7 +49732,7 @@ function parseReleaseHeadingWithLink(node, file) {
         node.data = { ...node.data, ...{ release: 'unreleased' } };
         return;
     }
-    const version = node_modules_semver.parse(linkNode.label);
+    const version = semver.parse(linkNode.label);
     if (!version) {
         const msg = file.message('Unable to parse semantic version', linkNode.position);
         msg.fatal = true;
@@ -50000,7 +49859,7 @@ const preprocessor_attacher = function () {
                 msg.fatal = true;
                 break;
             }
-            if (node_modules_semver.gte(currentHeading.release.version, previousHeading.release.version)) {
+            if (semver.gte(currentHeading.release.version, previousHeading.release.version)) {
                 const msg = file.message('Release sections must be in descending order', currentHeading.node.position);
                 msg.fatal = true;
             }
@@ -50116,7 +49975,7 @@ const findAllAfter =
 
 
 
-const { SemVer } = node_modules_semver;
+const { SemVer } = semver;
 
 function getReleaseNotes(heading, tree) {
     const root = { type: 'root', children: [] };
@@ -50136,7 +49995,7 @@ function findReleaseHeading(target, headings) {
             }
             continue;
         }
-        else if (target instanceof SemVer && node_modules_semver.eq(heading.release.version, target)) {
+        else if (target instanceof SemVer && semver.eq(heading.release.version, target)) {
             return heading;
         }
     }
@@ -50167,7 +50026,7 @@ const extract_release_notes_attacher = function extractUnreleasedContents(target
 ;// CONCATENATED MODULE: ./lib/plugins/increment-release.js
 
 
-const { SemVer: increment_release_SemVer } = node_modules_semver;
+const { SemVer: increment_release_SemVer } = semver;
 const increment_release_attacher = function (options) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
@@ -50207,7 +50066,7 @@ const increment_release_attacher = function (options) {
 //# sourceMappingURL=increment-release.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/calculate-next-release.js
 
-const { SemVer: calculate_next_release_SemVer } = node_modules_semver;
+const { SemVer: calculate_next_release_SemVer } = semver;
 
 const calculate_next_release_attacher = function (options) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -50222,7 +50081,7 @@ const calculate_next_release_attacher = function (options) {
             return isReleaseProps(h.release);
         });
         const latestVersion = latestRelease ? latestRelease.release.version : new calculate_next_release_SemVer('0.0.0');
-        file.data['nextReleaseVersion'] = node_modules_semver.inc(latestVersion.format(), options.releaseType, undefined, options.prereleaseIdentifier);
+        file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid);
     }
 };
 /* harmony default export */ const calculate_next_release = (calculate_next_release_attacher);
@@ -50405,7 +50264,7 @@ const update_link_definitions_attacher = function (options) {
 };
 /* harmony default export */ const update_link_definitions = (update_link_definitions_attacher);
 //# sourceMappingURL=update-link-definitions.js.map
-;// CONCATENATED MODULE: ./lib/prepare-release.js
+;// CONCATENATED MODULE: ./lib/action-bump.js
 
 
 
@@ -50423,6 +50282,80 @@ const update_link_definitions_attacher = function (options) {
 
 
 
+
+
+// This is a compiler-safe mechanism to ensure that all possible ReleaseType
+// values are defined. If the ReleaseType type definition changes (not under our
+// control, it's part of the node-semver library) then this definition will
+// cause a compile-time error. See https://stackoverflow.com/a/66820587/260213
+// for the inspiration.
+const validReleaseTypes = {
+    major: true,
+    premajor: true,
+    minor: true,
+    preminor: true,
+    patch: true,
+    prepatch: true,
+    prerelease: true,
+};
+function isValidReleaseType(maybe) {
+    return validReleaseTypes.hasOwnProperty(maybe);
+}
+function getRepoOptions() {
+    const githubRepository = external_process_namespaceObject.env.GITHUB_REPOSITORY ?? '';
+    const [owner, repo] = githubRepository.split('/');
+    if (!owner || !repo) {
+        core.setFailed('Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set');
+        return;
+    }
+    return { owner, repo };
+}
+/**
+ * Gets a BumpOptions instance with values derived from the action inputs.
+ *
+ * @returns {(BumpOptions | undefined)}
+ */
+function getPrepareReleaseOptions() {
+    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
+    if (!external_path_.isAbsolute(changelogPath)) {
+        const root = external_process_namespaceObject.env.GITHUB_WORKSPACE ?? external_process_namespaceObject.cwd();
+        changelogPath = external_path_.join(root, changelogPath);
+    }
+    const releaseType = core.getInput('version') ?? 'patch';
+    if (!isValidReleaseType(releaseType)) {
+        core.setFailed(`Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`);
+        return;
+    }
+    let releaseDate = new Date();
+    const releaseDateText = core.getInput('release-date');
+    if (releaseDateText) {
+        releaseDate = (0,date_fns.parseISO)(releaseDateText);
+        if (!(0,date_fns.isValid)(releaseDate)) {
+            core.setFailed(`Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`);
+            return;
+        }
+    }
+    const preid = core.getInput('preid');
+    let tagPrefix = core.getInput('tag-prefix');
+    if (tagPrefix === null || tagPrefix === undefined) {
+        tagPrefix = 'v';
+    }
+    const outputFile = core.getInput('output-file');
+    const repoOptions = getRepoOptions();
+    if (!repoOptions) {
+        return;
+    }
+    const options = {
+        changelogPath,
+        releaseDate,
+        version: releaseType,
+        tagPrefix,
+        preid: preid,
+        repo: repoOptions,
+        outputFile,
+    };
+    return options;
+}
 async function processChangelog(file, options) {
     const releaseHeadings = [];
     const updated = await remark()
@@ -50439,7 +50372,7 @@ async function processChangelog(file, options) {
         .process(file);
     return updated;
 }
-async function run() {
+async function bump() {
     const options = getPrepareReleaseOptions();
     if (!options) {
         // Input error - core.setFailed() should already have been called
@@ -50452,25 +50385,25 @@ async function run() {
             updated.basename = options.outputFile;
         }
         await write(updated, { encoding: 'utf-8', mode: null });
-        lib_core.setOutput('release-version', updated.data['nextReleaseVersion']);
-        lib_core.setOutput('release-notes', updated.data['releaseNotes']);
+        core.setOutput('version', updated.data['nextReleaseVersion']);
+        core.setOutput('release-notes', updated.data['releaseNotes']);
         if (updated.messages.length > 0) {
-            lib_core.warning('Changelog: warnings were encountered');
-            lib_core.startGroup('Changelog warning report');
+            core.warning('Changelog: warnings were encountered');
+            core.startGroup('Changelog warning report');
             console.log(reporter(updated));
-            lib_core.endGroup();
+            core.endGroup();
         }
     }
     catch (error) {
         if (error instanceof ChangelogError) {
             if (changelog.messages.length === 0) {
-                lib_core.setFailed(error.message);
+                core.setFailed(error.message);
             }
             else {
-                lib_core.setFailed('Changelog contains errors');
-                lib_core.startGroup('Changelog error report');
+                core.setFailed('Changelog contains errors');
+                core.startGroup('Changelog error report');
                 console.log(reporter(changelog));
-                lib_core.endGroup();
+                core.endGroup();
             }
         }
         else {
@@ -50478,8 +50411,208 @@ async function run() {
         }
     }
 }
+//# sourceMappingURL=action-bump.js.map
+;// CONCATENATED MODULE: ./lib/options.js
+function isQuerySpecialVersionOption(maybe) {
+    return maybe === 'latest' || maybe === 'unreleased' || maybe === 'latest-or-unreleased';
+}
+//# sourceMappingURL=options.js.map
+;// CONCATENATED MODULE: ./lib/plugins/extract-release-info.js
+
+
+
+const { SemVer: extract_release_info_SemVer } = semver;
+
+
+function extract_release_info_getReleaseNotes(heading, tree) {
+    const root = { type: 'root', children: [] };
+    // The terminator node can be undefined, e.g. if the section is the last section in the file
+    // and there are no definitions at the end
+    const terminatorNode = heading.node.data?.['nextSection'];
+    const result = terminatorNode ? unist_util_find_all_between(tree, heading.node, terminatorNode) : findAllAfter(tree, heading.node);
+    root.children.push(...result);
+    return root;
+}
+function extract_release_info_findReleaseHeading(target, headings) {
+    let unreleasedHeading = null;
+    for (let i = 0; i < headings.length; i++) {
+        const heading = headings[i];
+        if (heading.release === 'unreleased') {
+            unreleasedHeading = heading;
+            if (target === 'unreleased') {
+                return heading;
+            }
+            continue;
+        }
+        else if (target === 'latest' || target === 'latest-or-unreleased') {
+            return heading;
+        }
+        else if (target instanceof extract_release_info_SemVer && semver.eq(heading.release.version, target)) {
+            return heading;
+        }
+    }
+    return target === 'latest-or-unreleased' ? unreleasedHeading : null;
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const extract_release_info_attacher = function extractUnreleasedContents(target) {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const processorData = this.data;
+    return (tree, file) => {
+        const releaseHeadings = processorData('releaseHeadings');
+        if (!releaseHeadings) {
+            throw new BoneheadedError('File should have been preprocessed before calling this plugin');
+        }
+        if (releaseHeadings.length === 0) {
+            file.fail('No release headings in changelog');
+        }
+        const heading = extract_release_info_findReleaseHeading(target, releaseHeadings);
+        if (!heading) {
+            const releaseText = isQuerySpecialVersionOption(target) ? target : target.format();
+            throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
+        }
+        if (isReleaseProps(heading.release)) {
+            file.data['matchedReleaseVersion'] = heading.release.version.format();
+            file.data['matchedReleaseDate'] = heading.release.date;
+            file.data['matchedReleaseSuffix'] = heading.release.suffix;
+        }
+        else {
+            file.data['matchedReleaseVersion'] = '[unreleased]';
+            file.data['matchedReleaseDate'] = undefined;
+            file.data['matchedReleaseSuffix'] = undefined;
+        }
+        return extract_release_info_getReleaseNotes(heading, tree);
+    };
+};
+/* harmony default export */ const extract_release_info = (extract_release_info_attacher);
+//# sourceMappingURL=extract-release-info.js.map
+;// CONCATENATED MODULE: ./lib/action-query.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Gets a QueryOptions instance with values derived from the action inputs.
+ *
+ * @returns {(QueryOptions | undefined)}
+ */
+function getQueryOptions() {
+    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
+    if (!external_path_.isAbsolute(changelogPath)) {
+        const root = external_process_namespaceObject.env.GITHUB_WORKSPACE ?? external_process_namespaceObject.cwd();
+        changelogPath = external_path_.join(root, changelogPath);
+    }
+    const version = core.getInput('version') ?? 'latest';
+    let target;
+    switch (version) {
+        case 'unreleased':
+        case 'latest':
+        case 'latest-or-unreleased':
+            target = version;
+            break;
+        default:
+            const parsed = semver.parse(version);
+            if (!parsed) {
+                core.setFailed(`Input 'version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')`);
+                return;
+            }
+            target = parsed;
+            break;
+    }
+    return {
+        changelogPath,
+        version: target,
+    };
+}
+async function action_query_processChangelog(file, options) {
+    const releaseHeadings = [];
+    const updated = await remark()
+        .data('releaseHeadings', releaseHeadings)
+        .use(releaseParser)
+        .use(preprocessor)
+        .use(assert)
+        .use(extract_release_info, options.version)
+        .use(remark_stringify, { listItemIndent: 'one', bullet: '-' })
+        .process(file);
+    return updated;
+}
+async function query() {
+    const options = getQueryOptions();
+    if (!options) {
+        // Input error - core.setFailed() should already have been called
+        return;
+    }
+    const changelog = await read(options.changelogPath, { encoding: 'utf-8' });
+    try {
+        const updated = await action_query_processChangelog(changelog, options);
+        const result = updated.toString();
+        core.setOutput('release-notes', result);
+        core.setOutput('version', updated.data['matchedReleaseVersion']);
+        const date = updated.data['matchedReleaseDate'];
+        if (date instanceof Date) {
+            core.setOutput('release-date', (0,date_fns.format)(date, 'yyyy-MM-dd'));
+        }
+        else {
+            core.setOutput('release-date', '');
+        }
+        core.setOutput('release-suffix', updated.data['matchedReleaseSuffix'] ?? '');
+        if (updated.messages.length > 0) {
+            core.warning('Changelog: warnings were encountered');
+            core.startGroup('Changelog warning report');
+            console.log(reporter(updated));
+            core.endGroup();
+        }
+    }
+    catch (error) {
+        if (error instanceof ChangelogError) {
+            core.setFailed(error.message);
+            if (changelog.messages.length !== 0) {
+                core.startGroup('Changelog error report');
+                core.error(reporter(changelog));
+                core.endGroup();
+            }
+        }
+        else if (error instanceof Error) {
+            core.setFailed(error.message);
+            core.startGroup('Error details');
+            console.error(error);
+            core.endGroup();
+        }
+        else {
+            console.log(error);
+        }
+    }
+}
+//# sourceMappingURL=action-query.js.map
+;// CONCATENATED MODULE: ./lib/index.js
+
+
+
+async function run() {
+    const command = core.getInput('command');
+    switch (command) {
+        case 'query':
+            await query();
+            break;
+        case 'bump':
+            await bump();
+            break;
+        default:
+            core.error(`'Invalid value for input 'command': '${command}'`);
+            break;
+    }
+}
 void run();
-//# sourceMappingURL=prepare-release.js.map
+//# sourceMappingURL=index.js.map
 })();
 
 

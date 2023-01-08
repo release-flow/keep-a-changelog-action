@@ -1,3 +1,7 @@
+import process from 'process';
+import path from 'path';
+
+import { default as semver } from 'semver';
 import { VFile } from 'vfile';
 import { read } from 'to-vfile';
 import { remark } from 'remark';
@@ -6,7 +10,7 @@ import stringify from 'remark-stringify';
 import * as core from '@actions/core';
 
 import { ChangelogError, ReleaseHeading } from './types.js';
-import { getGetReleaseInfoOptions, GetReleaseInfoOptions } from './options.js';
+import { QueryOptions, QueryVersionOptionSpec } from './options.js';
 
 import releaseParser from './plugins/release-parser.js';
 import preprocess from './plugins/preprocessor.js';
@@ -14,7 +18,47 @@ import assert from './plugins/assert.js';
 import extractReleaseInfo from './plugins/extract-release-info.js';
 import { format } from 'date-fns';
 
-async function processChangelog(file: VFile, options: GetReleaseInfoOptions): Promise<VFile> {
+/**
+ * Gets a QueryOptions instance with values derived from the action inputs.
+ *
+ * @returns {(QueryOptions | undefined)}
+ */
+function getQueryOptions(): QueryOptions | undefined {
+  let changelogPath: string = core.getInput('changelog') ?? 'CHANGELOG.md';
+  if (!path.isAbsolute(changelogPath)) {
+    const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
+    changelogPath = path.join(root, changelogPath);
+  }
+
+  const version = core.getInput('version') ?? 'latest';
+  let target: QueryVersionOptionSpec;
+
+  switch (version) {
+    case 'unreleased':
+    case 'latest':
+    case 'latest-or-unreleased':
+      target = version;
+      break;
+
+    default:
+      const parsed = semver.parse(version);
+      if (!parsed) {
+        core.setFailed(
+          `Input 'version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')`
+        );
+        return;
+      }
+      target = parsed;
+      break;
+  }
+
+  return {
+    changelogPath,
+    version: target,
+  };
+}
+
+async function processChangelog(file: VFile, options: QueryOptions): Promise<VFile> {
   const releaseHeadings: ReleaseHeading[] = [];
 
   const updated = await remark()
@@ -29,8 +73,8 @@ async function processChangelog(file: VFile, options: GetReleaseInfoOptions): Pr
   return updated;
 }
 
-async function run(): Promise<void> {
-  const options = getGetReleaseInfoOptions();
+export default async function query(): Promise<void> {
+  const options = getQueryOptions();
 
   if (!options) {
     // Input error - core.setFailed() should already have been called
@@ -44,7 +88,7 @@ async function run(): Promise<void> {
 
     const result = updated.toString();
     core.setOutput('release-notes', result);
-    core.setOutput('release-version', updated.data['matchedReleaseVersion']);
+    core.setOutput('version', updated.data['matchedReleaseVersion']);
     const date = updated.data['matchedReleaseDate'];
     if (date instanceof Date) {
       core.setOutput('release-date', format(date, 'yyyy-MM-dd'));
@@ -61,12 +105,10 @@ async function run(): Promise<void> {
     }
   } catch (error) {
     if (error instanceof ChangelogError) {
-      if (changelog.messages.length === 0) {
-        core.setFailed(error.message);
-      } else {
-        core.setFailed('Changelog contains errors');
+      core.setFailed(error.message);
+      if (changelog.messages.length !== 0) {
         core.startGroup('Changelog error report');
-        console.log(reporter(changelog));
+        core.error(reporter(changelog));
         core.endGroup();
       }
     } else if (error instanceof Error) {
@@ -79,5 +121,3 @@ async function run(): Promise<void> {
     }
   }
 }
-
-void run();

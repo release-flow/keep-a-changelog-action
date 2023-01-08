@@ -49,9 +49,10 @@ jobs:
 
     - name: Update changelog
       id: update-changelog
-      uses: ./prepare-release
+      uses: ./
       with:
-        release-type: ${{ github.event.inputs.release-type }}
+        command: bump
+        version: ${{ github.event.inputs.release-type }}
 
     - name: Create Pull Request
       id: create-release-pr

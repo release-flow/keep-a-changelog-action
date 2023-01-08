@@ -4,11 +4,11 @@ import type { Root, LinkReference, Text, Definition } from 'mdast';
 import { remove } from 'unist-util-remove';
 import { format } from 'date-fns';
 
-import { PrepareReleaseOptions } from '../options.js';
+import { BumpOptions } from '../options.js';
 import { BoneheadedError, ReleaseHeading } from '../types.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const attacher: Plugin<[PrepareReleaseOptions], Root, Root> = function (options: PrepareReleaseOptions) {
+const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptions) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
   return transformer;

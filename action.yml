@@ -1,0 +1,56 @@
+name: 'Keep-a-Changelog Action'
+description: >-
+  Performs operations on changelogs that are in Keep-a-Changelog format: bump the version, query release info.
+inputs:
+  command:
+    description: >-
+      The command to perform: 'bump' or 'query'.
+    required: true
+  changelog:
+    description: >-
+      The path to the changelog. If a relative path is specified, it is appended to the GitHub workspace path.
+    required: false
+    default: 'CHANGELOG.md'
+  version:
+    description: >-
+      The release version. When bumping, determines the next version number. When querying, indicates the version for
+      which to extract the release information. See readme for a full description and a list of special values.
+    required: true
+  preid:
+    description: >-
+      The "prerelease identifier" to use as a prefix for the "prerelease" part of a semver. For example, it would
+      specify the 'beta' in '1.0.0-beta.1'.
+    required: false
+  release-date:
+    description: >-
+      When bumping, indicates the release date that is written into the changelog for the new release, in ISO 8601
+      format, e.g. 2022-03-03. Defaults to the current system date.
+    required: false
+  tag-prefix:
+    description: >-
+      When bumping, specifies the prefix that is applied to the release number to generate the release tag.
+    required: false
+    default: 'v'
+  output-file:
+    description: >-
+      When bumping, specifies the name of the modified changelog file relative to the input changelog directory. If not
+      specified, the input changelog is overwritten.
+    required: false
+outputs:
+  version:
+    description: >-
+      When bumping, contains the release version that was used to update the changelog. When querying, contains the
+      release version that was matched.
+  release-notes:
+    description: >-
+      The markdown content of the changelog section for the release.
+  release-date:
+    description: >-
+      The release date in the form yyyy-MM-dd, or blank if the matched version was '[unreleased]'.
+  release-suffix:
+    description: >-
+      The final part of the release heading, after the version and date have been parsed. For example, if the release
+      heading  is '## [0.0.5] - 2014-12-13 [YANKED]', this output would contain '[YANKED]'.
+runs:
+    using: 'node16'
+    main: ../dist/index.js

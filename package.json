@@ -5,13 +5,14 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "clean": "shx rm -rf lib",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
     "build-and-test": "tsc --incremental && cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
     "build": "tsc",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build lib/prepare-release.js --source-map --license licenses.txt -o dist/prepare-release && ncc build lib/get-release-notes.js --source-map --license licenses.txt -o dist/get-release-notes && ncc build lib/get-release-info.js --source-map --license licenses.txt -o dist/get-release-info",
+    "package": "ncc build lib/index.js --source-map --license licenses.txt -o dist",
     "all": "npm run build && npm run format-check && npm run lint && npm test && npm run package",
     "prepare": "husky install"
   },
@@ -40,6 +41,7 @@
     "husky": "^8.0.2",
     "jest": "^29.3.1",
     "jest-diff": "^29.3.1",
+    "shx": "^0.3.4",
     "typescript": "^4.9.3",
     "uuid": "^9.0.0"
   },

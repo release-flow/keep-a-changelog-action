@@ -46,14 +46,14 @@ describe('gh start action', () => {
     }
   });
 
-  it('errors when release-version is invalid', () => {
+  it('errors when version is invalid', () => {
     const params = { ...DefaultParams };
     params.version = 'burble';
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
     expect(getAllErrors(result)).toContain(
-      "Input 'release-version' contains invalid value 'burble'. It must contain a valid version or one of the values ('latest', 'unreleased')"
+      "Input 'version' contains invalid value 'burble'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')"
     );
   });
 
@@ -92,7 +92,7 @@ describe('gh start action', () => {
 
     expect(result.isError).toBeFalsy();
 
-    expect(result.outputs).toHaveProperty('release-version', '1.0.0');
+    expect(result.outputs).toHaveProperty('version', '1.0.0');
     expect(result.outputs).toHaveProperty('release-date', '2022-02-04');
     expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Final polish%0A');
   });
@@ -104,7 +104,7 @@ describe('gh start action', () => {
 
     expect(result.isError).toBeFalsy();
 
-    expect(result.outputs).toHaveProperty('release-version', '[unreleased]');
+    expect(result.outputs).toHaveProperty('version', '[unreleased]');
     expect(result.outputs).toHaveProperty('release-date', '');
     expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
   });
@@ -117,7 +117,7 @@ it('sets the output variables for a specified version', () => {
 
   expect(result.isError).toBeFalsy();
 
-  expect(result.outputs).toHaveProperty('release-version', '1.0.0-beta.1');
+  expect(result.outputs).toHaveProperty('version', '1.0.0-beta.1');
   expect(result.outputs).toHaveProperty('release-date', '2022-02-03');
   expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Some features%0A');
 });
@@ -130,7 +130,7 @@ it('sets the output variables for a specified version, old output mechanism', ()
 
   expect(result.isError).toBeFalsy();
 
-  expect(result.outputs).toHaveProperty('release-version', '1.0.0-beta.1');
+  expect(result.outputs).toHaveProperty('version', '1.0.0-beta.1');
   expect(result.outputs).toHaveProperty('release-date', '2022-02-03');
   expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Some features%0A');
 });
@@ -142,7 +142,7 @@ it('returns latest version when latest-or-unreleased requested and the changelog
   const result = runAction(params);
 
   expect(result.isError).toBeFalsy();
-  expect(result.outputs).toHaveProperty('release-version', '1.0.0');
+  expect(result.outputs).toHaveProperty('version', '1.0.0');
   expect(result.outputs).toHaveProperty('release-date', '2022-02-04');
   expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Final polish%0A');
 });
@@ -154,7 +154,7 @@ it('returns unreleased when latest-or-unreleased requested and the changelog onl
   const result = runAction(params);
 
   expect(result.isError).toBeFalsy();
-  expect(result.outputs).toHaveProperty('release-version', '[unreleased]');
+  expect(result.outputs).toHaveProperty('version', '[unreleased]');
   expect(result.outputs).toHaveProperty('release-date', '');
   expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
 });
@@ -174,13 +174,15 @@ function runAction(params: ActionParams): ActionResult {
     GITHUB_WORKSPACE: __dirname,
   };
 
+  env['INPUT_COMMAND'] = 'query';
+
   if (params.changelog !== null) {
     env['INPUT_CHANGELOG'] = params.changelog;
   }
 
   if (params.version !== null) {
-    env['INPUT_RELEASE-VERSION'] = params.version;
+    env['INPUT_VERSION'] = params.version;
   }
 
-  return invokeActionScript(path.join(__dirname, '../get-release-info.js'), env, params.newMechanism);
+  return invokeActionScript(path.join(__dirname, '../index.js'), env, params.newMechanism);
 }
