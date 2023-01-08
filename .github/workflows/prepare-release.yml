@@ -14,7 +14,7 @@ on:
         - prepatch
         - prerelease
         default: patch
-      prerelease-identifier:
+      preid:
         description: 'Pre-release identifier (only for pre-release builds)'
         required: false
 
@@ -53,6 +53,7 @@ jobs:
       with:
         command: bump
         version: ${{ github.event.inputs.release-type }}
+        preid: ${{ github.event.inputs.preid }}
 
     - name: Create Pull Request
       id: create-release-pr
