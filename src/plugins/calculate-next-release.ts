@@ -25,12 +25,7 @@ const attacher: Plugin = function (options: BumpOptions) {
 
     const latestVersion = latestRelease ? (<ReleaseProps>latestRelease.release).version : new SemVer('0.0.0');
 
-    file.data['nextReleaseVersion'] = semver.inc(
-      latestVersion.format(),
-      options.version,
-      undefined,
-      options.preid
-    );
+    file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid);
   }
 };
 
