@@ -14,6 +14,10 @@ automatically incremented according to the action parameters.
 
 Queries release information for a specified version from a changelog.
 
+## Updating from V1 to V2
+
+The upgrade is fairly straightforward, documented [here](./docs/upgrade-v2.md).
+
 ## License
 
 The scripts and documentation in this project are released under the [MIT License](./LICENSE).
