@@ -36,6 +36,7 @@ number is automatically incremented according to the action parameters. The comm
 | `tag-prefix` | The prefix that is applied to the release number to generate the release tag. | `v` |
 | `changelog` | The path to the changelog to modify. If a relative path is specified, it is appended to the GitHub workspace path. | `CHANGELOG.md` |
 | `output-file` | The name of the modified changelog file, which is written to the same directory as the input changelog. If not specified, the input changelog is overwritten. Note this must not contain a path, just a filename. | Empty string |
+| `keep-unreleased-section` | Keeps an empty 'Unreleased' section in the output changelog after bumping the input changelog's 'Unreleased' section. | `false` |
 
 ## Action outputs
 

@@ -19,7 +19,7 @@ const attacher: Plugin<[], Root, Root> = function () {
 
     // First pass - add the 'nextSection' data property to each release heading node to indicate the
     // node that starts the next section
-    visit(tree, [{ type: 'heading', depth: 2 }, 'definition'], (node) => {
+    visit(tree, [{ type: 'heading', depth: 2 }, 'definition'], (node, _index, parent) => {
       if (is<Heading>(node, 'heading')) {
         const currentRelease = node.data?.release;
 
@@ -43,7 +43,7 @@ const attacher: Plugin<[], Root, Root> = function () {
         }
 
         previousReleaseHeading = node;
-        releaseHeadings.push({ node, release: currentRelease });
+        releaseHeadings.push({ node, parent: parent || tree, release: currentRelease });
       }
 
       if (is<Definition>(node, 'definition') && previousReleaseHeading) {

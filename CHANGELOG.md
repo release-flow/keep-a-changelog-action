@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+- Add support for optionally keeping an 'Unreleased' section in the output changelog after bumping.
+
+### Added
+
 - Add GitHub Action branding
 
 ## [2.0.0] - 2023-01-08

@@ -3,7 +3,7 @@ description: >-
   Performs operations on changelogs that are in Keep-a-Changelog format: bump the version, query release info.
 author: Release Flow
 branding:
-  icon: list
+  icon: layers
   color: purple
 inputs:
   command:
@@ -40,6 +40,12 @@ inputs:
       When bumping, specifies the name of the modified changelog file relative to the input changelog directory. If not
       specified, the input changelog is overwritten.
     required: false
+  keep-unreleased-section:
+    description: >-
+      When bumping, keeps an empty 'Unreleased' section in the output changelog after bumping the input changelog's
+      'Unreleased' section.
+    required: false
+    default: 'false'
 outputs:
   version:
     description: >-
