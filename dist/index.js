@@ -34341,21 +34341,27 @@ function index(value) {
 
 ;// CONCATENATED MODULE: ./node_modules/vfile-message/index.js
 /**
- * @typedef {Record<string, unknown> & {type: string, position?: Position|undefined}} NodeLike
+ * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Position} Position
  * @typedef {import('unist').Point} Point
+ * @typedef {object & {type: string, position?: Position|undefined}} NodeLike
  */
 
 
 
 class VFileMessage extends Error {
   /**
-   * Constructor of a message for `reason` at `place` from `origin`.
-   * When an error is passed in as `reason`, copies the `stack`.
+   * Create a message for `reason` at `place` from `origin`.
    *
-   * @param {string|Error} reason Reason for message (`string` or `Error`). Uses the stack and message of the error if given.
-   * @param {NodeLike|Position|Point} [place] Place at which the message occurred in a file (`Node`, `Position`, or `Point`, optional).
-   * @param {string} [origin] Place in code the message originates from (`string`, optional).
+   * When an error is passed in as `reason`, the `stack` is copied.
+   *
+   * @param {string|Error|VFileMessage} reason
+   *   Reason for message.
+   *   Uses the stack and message of the error if given.
+   * @param {Node|NodeLike|Position|Point} [place]
+   *   Place at which the message occurred in a file.
+   * @param {string} [origin]
+   *   Place in code the message originates from (example `'my-package:my-rule-name'`)
    */
   constructor(reason, place, origin) {
     /** @type {[string|null, string|null]} */
@@ -34390,93 +34396,126 @@ class VFileMessage extends Error {
       // Node.
       if ('type' in place || 'position' in place) {
         if (place.position) {
+          // @ts-expect-error: looks like a position.
           position = place.position
         }
       }
       // Position.
       else if ('start' in place || 'end' in place) {
-        // @ts-ignore Looks like a position.
+        // @ts-expect-error: looks like a position.
         position = place
       }
       // Point.
       else if ('line' in place || 'column' in place) {
-        // @ts-ignore Looks like a point.
         position.start = place
       }
     }
 
     // Fields from `Error`
     this.name = stringifyPosition(place) || '1:1'
+    /** @type {string} */
     this.message = typeof reason === 'object' ? reason.message : reason
-    this.stack = typeof reason === 'object' ? reason.stack : ''
+    /** @type {string} */
+    this.stack = ''
+
+    if (typeof reason === 'object' && reason.stack) {
+      this.stack = reason.stack
+    }
 
     /**
      * Reason for message.
+     *
      * @type {string}
      */
     this.reason = this.message
+
+    /* eslint-disable no-unused-expressions */
     /**
-     * If true, marks associated file as no longer processable.
+     * Whether this is a fatal problem that marks an associated file as no
+     * longer processable.
+     * If `true`, marks associated file as no longer processable.
+     * If `false`, necessitates a (potential) change.
+     * The value can also be `null` or `undefined`, for things that might not
+     * need changing.
+     *
      * @type {boolean?}
      */
-    // eslint-disable-next-line no-unused-expressions
     this.fatal
+
     /**
      * Starting line of error.
+     *
      * @type {number?}
      */
     this.line = position.start.line
+
     /**
      * Starting column of error.
+     *
      * @type {number?}
      */
     this.column = position.start.column
-    /**
-     * Namespace of warning.
-     * @type {string?}
-     */
-    this.source = parts[0]
-    /**
-     * Category of message.
-     * @type {string?}
-     */
-    this.ruleId = parts[1]
+
     /**
      * Full range information, when available.
-     * Has start and end properties, both set to an object with line and column, set to number?.
+     * Has `start` and `end` fields, both set to an object with `line` and
+     * `column`, set to `number?`.
+     *
      * @type {Position?}
      */
     this.position = position
+
+    /**
+     * Namespace of warning (example: `'my-package'`).
+     *
+     * @type {string?}
+     */
+    this.source = parts[0]
+
+    /**
+     * Category of message (example: `'my-rule-name'`).
+     *
+     * @type {string?}
+     */
+    this.ruleId = parts[1]
+
+    /**
+     * Path of a file (used throughout the VFile ecosystem).
+     *
+     * @type {string?}
+     */
+    this.file
 
     // The following fields are “well known”.
     // Not standard.
     // Feel free to add other non-standard fields to your messages.
 
-    /* eslint-disable no-unused-expressions */
     /**
-     * You can use this to specify the source value that’s being reported, which
-     * is deemed incorrect.
+     * Specify the source value that’s being reported, which is deemed
+     * incorrect.
+     *
      * @type {string?}
      */
     this.actual
+
     /**
-     * You can use this to suggest values that should be used instead of
-     * `actual`, one or more values that are deemed as acceptable.
+     * Suggest values that should be used instead of `actual`, one or more
+     * values that are deemed as acceptable.
+     *
      * @type {Array<string>?}
      */
     this.expected
+
     /**
-     * You may add a file property with a path of a file (used throughout the VFile ecosystem).
-     * @type {string?}
-     */
-    this.file
-    /**
-     * You may add a url property with a link to documentation for the message.
+     * Link to documentation for the message.
+     *
      * @type {string?}
      */
     this.url
+
     /**
-     * You may add a note property with a long form description of the message (supported by vfile-reporter).
+     * Long form description of the message (supported by `vfile-reporter`).
+     *
      * @type {string?}
      */
     this.note
@@ -49816,7 +49855,7 @@ const preprocessor_attacher = function () {
         const releaseHeadings = [];
         // First pass - add the 'nextSection' data property to each release heading node to indicate the
         // node that starts the next section
-        visit(tree, [{ type: 'heading', depth: 2 }, 'definition'], (node) => {
+        visit(tree, [{ type: 'heading', depth: 2 }, 'definition'], (node, _index, parent) => {
             if (is(node, 'heading')) {
                 const currentRelease = node.data?.release;
                 if (!isReleaseSpec(currentRelease)) {
@@ -49833,7 +49872,7 @@ const preprocessor_attacher = function () {
                     previousReleaseHeading.data['nextSection'] = node;
                 }
                 previousReleaseHeading = node;
-                releaseHeadings.push({ node, release: currentRelease });
+                releaseHeadings.push({ node, parent: parent || tree, release: currentRelease });
             }
             if (is(node, 'definition') && previousReleaseHeading) {
                 previousReleaseHeading.data['nextSection'] = node;
@@ -50204,57 +50243,56 @@ const update_link_definitions_attacher = function (options) {
         for (let i = 0; i < releaseHeadings.length; i++) {
             const node = releaseHeadings[i].node;
             const props = releaseHeadings[i].release;
-            if (props === 'unreleased') {
-                throw new BoneheadedError('Unreleased section should have been converted to release. Did you forget to run the increment-release plugin?');
-            }
             // Update the heading
-            const versionText = props.version.format();
-            const tagText = `${options.tagPrefix}${versionText}`;
-            const dateText = ' - ' + (0,date_fns.format)(props.date, 'yyyy-MM-dd');
-            const suffix = props.suffix ? ` ${props.suffix}` : '';
-            const newHeadingContents = [
-                {
-                    type: 'linkReference',
-                    identifier: versionText,
-                    label: versionText,
-                    referenceType: 'shortcut',
-                    children: [
-                        {
-                            type: 'text',
-                            value: versionText,
-                        },
-                    ],
-                },
-                {
+            const versionText = isReleaseProps(props) ? props.version.format() : 'Unreleased';
+            const gitRef = isReleaseProps(props) ? `${options.tagPrefix}${versionText}` : 'HEAD';
+            const headingLink = {
+                type: 'linkReference',
+                identifier: versionText,
+                label: versionText,
+                referenceType: 'shortcut',
+                children: [
+                    {
+                        type: 'text',
+                        value: versionText,
+                    },
+                ],
+            };
+            const newHeadingContents = [headingLink];
+            if (isReleaseProps(props)) {
+                const dateText = ' - ' + (0,date_fns.format)(props.date, 'yyyy-MM-dd');
+                const suffix = props.suffix ? ` ${props.suffix}` : '';
+                const text = {
                     type: 'text',
                     value: `${dateText}${suffix}`,
-                },
-            ];
+                };
+                newHeadingContents.push(text);
+            }
             node.children = newHeadingContents;
-            // Regenerate the definition node. If we are processing the last release,
+            // Regenerate the link definition node. If we are processing the last release in the changelog,
             // the link is in a different format from the others
-            if (i + 1 < releaseHeadings.length) {
-                const nextProps = releaseHeadings[i + 1].release;
-                if (nextProps === 'unreleased') {
-                    throw new BoneheadedError('Unreleased section should have been converted to release. Did you forget to run the increment-release plugin?');
-                }
-                const nextVersionText = nextProps.version.format();
-                const nextTagText = `${options.tagPrefix}${nextVersionText}`;
-                const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/compare/${nextTagText}...${tagText}`;
+            if (i === releaseHeadings.length - 1) {
+                const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/releases/tag/${gitRef}`;
                 const definition = {
                     type: 'definition',
                     url,
-                    identifier: tagText,
+                    identifier: gitRef,
                     label: versionText,
                 };
                 tree.children.push(definition);
             }
             else {
-                const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/releases/tag/${tagText}`;
+                const nextRelease = releaseHeadings[i + 1].release;
+                if (nextRelease === 'unreleased') {
+                    throw new BoneheadedError('Unreleased section should be the first level 2 heading in the changelog');
+                }
+                const nextVersionText = nextRelease.version.format();
+                const nextTagText = `${options.tagPrefix}${nextVersionText}`;
+                const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/compare/${nextTagText}...${gitRef}`;
                 const definition = {
                     type: 'definition',
                     url,
-                    identifier: tagText,
+                    identifier: gitRef,
                     label: versionText,
                 };
                 tree.children.push(definition);
@@ -50264,7 +50302,57 @@ const update_link_definitions_attacher = function (options) {
 };
 /* harmony default export */ const update_link_definitions = (update_link_definitions_attacher);
 //# sourceMappingURL=update-link-definitions.js.map
+;// CONCATENATED MODULE: ./lib/plugins/add-unreleased-section.js
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const add_unreleased_section_attacher = function () {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const processorData = this.data;
+    return (tree, _file) => {
+        const releaseHeadings = processorData('releaseHeadings');
+        if (releaseHeadings.length > 0 && releaseHeadings[0].release === 'unreleased') {
+            // Unreleased already exists - no-op
+            return tree;
+        }
+        const unreleasedSection = { type: 'heading', depth: 2, children: [] };
+        const versionText = 'Unreleased';
+        const unreleaseHeadingContents = [
+            {
+                type: 'linkReference',
+                identifier: versionText,
+                label: versionText,
+                referenceType: 'shortcut',
+                children: [
+                    {
+                        type: 'text',
+                        value: versionText,
+                    },
+                ],
+            },
+        ];
+        unreleasedSection.children = unreleaseHeadingContents;
+        // Insert the new Unreleased section into the correct place in the document. This should be before the
+        // first release heading if present, otherwise at the end of the document
+        let parent;
+        if (releaseHeadings.length === 0) {
+            // No release headings in the file - add the new section at the end of the syntax tree
+            tree.children.push(unreleasedSection);
+            parent = tree;
+        }
+        else {
+            // Insert unreleasedSection before releaseHeadings[0].node
+            parent = releaseHeadings[0].parent ?? tree;
+            const index = parent.children.indexOf(releaseHeadings[0].node);
+            parent.children.splice(index, 0, unreleasedSection);
+        }
+        const unreleasedHeading = { node: unreleasedSection, parent, release: 'unreleased' };
+        releaseHeadings.splice(0, 0, unreleasedHeading);
+        return tree;
+    };
+};
+/* harmony default export */ const add_unreleased_section = (add_unreleased_section_attacher);
+//# sourceMappingURL=add-unreleased-section.js.map
 ;// CONCATENATED MODULE: ./lib/action-bump.js
+
 
 
 
@@ -50345,6 +50433,7 @@ function getPrepareReleaseOptions() {
     if (!repoOptions) {
         return;
     }
+    const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
     const options = {
         changelogPath,
         releaseDate,
@@ -50353,12 +50442,13 @@ function getPrepareReleaseOptions() {
         preid: preid,
         repo: repoOptions,
         outputFile,
+        keepUnreleasedSection,
     };
     return options;
 }
 async function processChangelog(file, options) {
     const releaseHeadings = [];
-    const updated = await remark()
+    let processor = remark()
         .data('releaseHeadings', releaseHeadings)
         .use(releaseParser)
         .use(preprocessor)
@@ -50366,7 +50456,11 @@ async function processChangelog(file, options) {
         .use(assert)
         .use(bridge, 'releaseNotes', unified().use(extract_release_notes, 'unreleased').use(remark_stringify, { listItemIndent: 'one', bullet: '-' }))
         .use(calculate_next_release, options)
-        .use(increment_release, options)
+        .use(increment_release, options);
+    if (options.keepUnreleasedSection) {
+        processor = processor.use(add_unreleased_section);
+    }
+    const updated = await processor
         .use(update_link_definitions, options)
         .use(remark_stringify, { listItemIndent: 'one', bullet: '-' })
         .process(file);
