@@ -22,6 +22,7 @@ interface ActionParams {
   tagPrefix: string | null;
   outputFile: string | null;
   githubRepo: string | null;
+  keepUnreleasedSection: boolean;
 }
 
 const DefaultParams: ActionParams = {
@@ -32,9 +33,10 @@ const DefaultParams: ActionParams = {
   tagPrefix: 'v',
   outputFile: 'tmp_changelog.md',
   githubRepo: 'test/dummy',
+  keepUnreleasedSection: false,
 };
 
-describe('gh start action', () => {
+describe('bump subcommand', () => {
   beforeAll(async () => {
     // Globby requires Posix file paths i.e. with forward slashes
     const posixRoot = root.replace(/\\/g, '/');
@@ -129,6 +131,19 @@ describe('gh start action', () => {
     expect(actualFile).toMatchFileSnapshot(expectedFile);
   });
 
+  it('keeps the unreleased section', () => {
+    const params = { ...DefaultParams };
+    params.outputFile = 'changelog_1_keep_unreleased_output.md';
+    params.keepUnreleasedSection = true;
+    const result = runAction(params);
+
+    expect(result.isError).toBeFalsy();
+
+    const expectedFile = path.join(__dirname, 'changelog_1_keep_unreleased_expected.md');
+    const actualFile = path.join(__dirname, 'changelog_1_keep_unreleased_output.md');
+    expect(actualFile).toMatchFileSnapshot(expectedFile);
+  });
+
   it('sets the output variables', () => {
     const params = { ...DefaultParams };
     params.releaseType = 'preminor';
@@ -172,6 +187,8 @@ function runAction(params: ActionParams): ActionResult {
   if (params.outputFile !== null) {
     env['INPUT_OUTPUT-FILE'] = params.outputFile;
   }
+
+  env['INPUT_KEEP-UNRELEASED-SECTION'] = params.keepUnreleasedSection.toString();
 
   if (params.githubRepo !== null) {
     env['GITHUB_REPOSITORY'] = params.githubRepo;

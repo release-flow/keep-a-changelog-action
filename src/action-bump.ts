@@ -23,6 +23,7 @@ import extractReleaseNotes from './plugins/extract-release-notes.js';
 import incrementRelease from './plugins/increment-release.js';
 import calculateNextRelease from './plugins/calculate-next-release.js';
 import updateLinkDefinitions from './plugins/update-link-definitions.js';
+import addEmptyUnreleasedSection from './plugins/add-unreleased-section.js';
 
 // This is a compiler-safe mechanism to ensure that all possible ReleaseType
 // values are defined. If the ReleaseType type definition changes (not under our
@@ -105,6 +106,8 @@ function getPrepareReleaseOptions(): BumpOptions | undefined {
     return;
   }
 
+  const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
+
   const options: BumpOptions = {
     changelogPath,
     releaseDate,
@@ -113,6 +116,7 @@ function getPrepareReleaseOptions(): BumpOptions | undefined {
     preid: preid,
     repo: repoOptions,
     outputFile,
+    keepUnreleasedSection,
   };
 
   return options;
@@ -121,7 +125,7 @@ function getPrepareReleaseOptions(): BumpOptions | undefined {
 async function processChangelog(file: VFile, options: BumpOptions): Promise<VFile> {
   const releaseHeadings: ReleaseHeading[] = [];
 
-  const updated = await remark()
+  let processor = remark()
     .data('releaseHeadings', releaseHeadings)
     .use(releaseParser)
     .use(preprocess)
@@ -133,7 +137,13 @@ async function processChangelog(file: VFile, options: BumpOptions): Promise<VFil
       unified().use(extractReleaseNotes, 'unreleased').use(stringify, { listItemIndent: 'one', bullet: '-' })
     )
     .use(calculateNextRelease, options)
-    .use(incrementRelease, options)
+    .use(incrementRelease, options);
+
+  if (options.keepUnreleasedSection) {
+    processor = processor.use(addEmptyUnreleasedSection);
+  }
+
+  const updated = await processor
     .use(updateLinkDefinitions, options)
     .use(stringify, { listItemIndent: 'one', bullet: '-' })
     .process(file);

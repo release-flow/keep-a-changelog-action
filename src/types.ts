@@ -1,3 +1,4 @@
+import type { Parent } from 'unist';
 import { Heading } from 'mdast';
 import semver from 'semver';
 
@@ -50,7 +51,11 @@ export function isReleaseProps(maybe: unknown): maybe is ReleaseProps {
 }
 
 export interface ReleaseHeading {
+  // The heading's node in the syntax tree
   node: Heading;
+  // The heading's parent node in the syntax tree
+  parent: Parent;
+  // The release associated with this heading
   release: ReleaseSpec;
 }
 
