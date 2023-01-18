@@ -23,6 +23,7 @@ interface ActionParams {
   outputFile: string | null;
   githubRepo: string | null;
   keepUnreleasedSection: boolean;
+  failOnEmptyReleaseNotes: boolean;
 }
 
 const DefaultParams: ActionParams = {
@@ -34,6 +35,7 @@ const DefaultParams: ActionParams = {
   outputFile: 'tmp_changelog.md',
   githubRepo: 'test/dummy',
   keepUnreleasedSection: false,
+  failOnEmptyReleaseNotes: false,
 };
 
 describe('bump subcommand', () => {
@@ -78,6 +80,29 @@ describe('bump subcommand', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
+  });
+
+  it('errors when the changelog has an empty [Unreleased] section when configured to check', () => {
+    const params = { ...DefaultParams };
+    params.changelog = 'changelog_empty_unreleased.md';
+    params.outputFile = 'dummy.md';
+    params.failOnEmptyReleaseNotes = true;
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(getAllErrors(result)).toContain(
+      'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.'
+    );
+  });
+
+  it("doesn't error when the changelog has a non-empty [Unreleased] section when configured to check", () => {
+    const params = { ...DefaultParams };
+    params.changelog = 'good_changelog.md';
+    params.outputFile = 'dummy.md';
+    params.failOnEmptyReleaseNotes = true;
+    const result = runAction(params);
+
+    expect(result.isError).toBeFalsy();
   });
 
   it('produces a correctly updated changelog', () => {
@@ -189,6 +214,7 @@ function runAction(params: ActionParams): ActionResult {
   }
 
   env['INPUT_KEEP-UNRELEASED-SECTION'] = params.keepUnreleasedSection.toString();
+  env['INPUT_FAIL-ON-EMPTY-RELEASE-NOTES'] = params.failOnEmptyReleaseNotes.toString();
 
   if (params.githubRepo !== null) {
     env['GITHUB_REPOSITORY'] = params.githubRepo;

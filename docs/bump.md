@@ -37,6 +37,7 @@ number is automatically incremented according to the action parameters. The comm
 | `changelog` | The path to the changelog to modify. If a relative path is specified, it is appended to the GitHub workspace path. | `CHANGELOG.md` |
 | `output-file` | The name of the modified changelog file, which is written to the same directory as the input changelog. If not specified, the input changelog is overwritten. Note this must not contain a path, just a filename. | Empty string |
 | `keep-unreleased-section` | Keeps an empty 'Unreleased' section in the output changelog after bumping the input changelog's 'Unreleased' section. | `false` |
+| `fail-on-empty-release-notes` | If this input is true then the action will report an error if it detects an empty 'Unreleased' section in the input changelog. | `false` |
 
 ## Action outputs
 

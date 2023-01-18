@@ -5,13 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+## Added
+
+- Add the `fail-on-empty-release-notes` input to enable reporting an error if there are no release notes in the
+  `[Unreleased]` section.
+
 ## [2.1.0] - 2023-01-15
 
 ### Added
 
 - Add support for optionally keeping an 'Unreleased' section in the output changelog after bumping.
-
-### Added
 
 - Add GitHub Action branding
 
