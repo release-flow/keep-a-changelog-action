@@ -8,6 +8,7 @@ import semver from 'semver';
 const { SemVer } = semver;
 
 import { BoneheadedError, ChangelogError, ReleaseHeading } from '../types.js';
+import { BumpOptions } from '../options.js';
 
 function getReleaseNotes(heading: ReleaseHeading, tree: Root): Root {
   const root: Root = { type: 'root', children: [] };
@@ -40,8 +41,9 @@ function findReleaseHeading(target: semver.SemVer | 'unreleased', headings: Rele
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const attacher: Plugin<[semver.SemVer | 'unreleased'], Root, Root> = function extractUnreleasedContents(
-  target: semver.SemVer | 'unreleased'
+const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root, Root> = function extractReleaseNotes(
+  target: semver.SemVer | 'unreleased',
+  options: BumpOptions
 ) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
@@ -63,7 +65,19 @@ const attacher: Plugin<[semver.SemVer | 'unreleased'], Root, Root> = function ex
       throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
     }
 
-    return getReleaseNotes(heading, tree);
+    const releaseNotes = getReleaseNotes(heading, tree);
+
+    if (options.failOnEmptyReleaseNotes) {
+      const hasEmptyReleaseNotes = releaseNotes.children.length === 0;
+
+      if (hasEmptyReleaseNotes) {
+        throw new ChangelogError(
+          'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.'
+        );
+      }
+    }
+
+    return releaseNotes;
   };
 };
 

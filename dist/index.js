@@ -50041,7 +50041,7 @@ function findReleaseHeading(target, headings) {
     return null;
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const extract_release_notes_attacher = function extractUnreleasedContents(target) {
+const extract_release_notes_attacher = function extractReleaseNotes(target, options) {
     // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return (tree, file) => {
@@ -50057,7 +50057,14 @@ const extract_release_notes_attacher = function extractUnreleasedContents(target
             const releaseText = target === 'unreleased' ? 'unreleased' : target.format();
             throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
         }
-        return getReleaseNotes(heading, tree);
+        const releaseNotes = getReleaseNotes(heading, tree);
+        if (options.failOnEmptyReleaseNotes) {
+            const hasEmptyReleaseNotes = releaseNotes.children.length === 0;
+            if (hasEmptyReleaseNotes) {
+                throw new ChangelogError('The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.');
+            }
+        }
+        return releaseNotes;
     };
 };
 /* harmony default export */ const extract_release_notes = (extract_release_notes_attacher);
@@ -50403,7 +50410,7 @@ function getRepoOptions() {
  *
  * @returns {(BumpOptions | undefined)}
  */
-function getPrepareReleaseOptions() {
+function getBumpOptions() {
     let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
     if (!external_path_.isAbsolute(changelogPath)) {
         const root = external_process_namespaceObject.env.GITHUB_WORKSPACE ?? external_process_namespaceObject.cwd();
@@ -50434,6 +50441,7 @@ function getPrepareReleaseOptions() {
         return;
     }
     const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
+    const failOnEmptyReleaseNotes = core.getBooleanInput('fail-on-empty-release-notes');
     const options = {
         changelogPath,
         releaseDate,
@@ -50443,6 +50451,7 @@ function getPrepareReleaseOptions() {
         repo: repoOptions,
         outputFile,
         keepUnreleasedSection,
+        failOnEmptyReleaseNotes,
     };
     return options;
 }
@@ -50454,7 +50463,7 @@ async function processChangelog(file, options) {
         .use(preprocessor)
         .use(check_unreleased_section_exists)
         .use(assert)
-        .use(bridge, 'releaseNotes', unified().use(extract_release_notes, 'unreleased').use(remark_stringify, { listItemIndent: 'one', bullet: '-' }))
+        .use(bridge, 'releaseNotes', unified().use(extract_release_notes, 'unreleased', options).use(remark_stringify, { listItemIndent: 'one', bullet: '-' }))
         .use(calculate_next_release, options)
         .use(increment_release, options);
     if (options.keepUnreleasedSection) {
@@ -50467,7 +50476,7 @@ async function processChangelog(file, options) {
     return updated;
 }
 async function bump() {
-    const options = getPrepareReleaseOptions();
+    const options = getBumpOptions();
     if (!options) {
         // Input error - core.setFailed() should already have been called
         return;

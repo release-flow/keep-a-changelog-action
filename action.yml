@@ -46,6 +46,12 @@ inputs:
       'Unreleased' section.
     required: false
     default: 'false'
+  fail-on-empty-release-notes:
+    description: >-
+      When bumping, if this input is true then the action will report an error if it detects an empty 'Unreleased'
+      section in the input changelog.
+    required: false
+    default: 'false'
 outputs:
   version:
     description: >-

@@ -63,7 +63,7 @@ function getRepoOptions(): RepoSpec | undefined {
  *
  * @returns {(BumpOptions | undefined)}
  */
-function getPrepareReleaseOptions(): BumpOptions | undefined {
+function getBumpOptions(): BumpOptions | undefined {
   let changelogPath: string = core.getInput('changelog') ?? 'CHANGELOG.md';
   if (!path.isAbsolute(changelogPath)) {
     const root = process.env['GITHUB_WORKSPACE'] ?? process.cwd();
@@ -107,6 +107,7 @@ function getPrepareReleaseOptions(): BumpOptions | undefined {
   }
 
   const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
+  const failOnEmptyReleaseNotes = core.getBooleanInput('fail-on-empty-release-notes');
 
   const options: BumpOptions = {
     changelogPath,
@@ -117,6 +118,7 @@ function getPrepareReleaseOptions(): BumpOptions | undefined {
     repo: repoOptions,
     outputFile,
     keepUnreleasedSection,
+    failOnEmptyReleaseNotes,
   };
 
   return options;
@@ -134,7 +136,7 @@ async function processChangelog(file: VFile, options: BumpOptions): Promise<VFil
     .use(
       bridge,
       'releaseNotes',
-      unified().use(extractReleaseNotes, 'unreleased').use(stringify, { listItemIndent: 'one', bullet: '-' })
+      unified().use(extractReleaseNotes, 'unreleased', options).use(stringify, { listItemIndent: 'one', bullet: '-' })
     )
     .use(calculateNextRelease, options)
     .use(incrementRelease, options);
@@ -152,7 +154,7 @@ async function processChangelog(file: VFile, options: BumpOptions): Promise<VFil
 }
 
 export default async function bump(): Promise<void> {
-  const options = getPrepareReleaseOptions();
+  const options = getBumpOptions();
 
   if (!options) {
     // Input error - core.setFailed() should already have been called

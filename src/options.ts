@@ -16,6 +16,7 @@ export interface BumpOptions {
   repo: RepoSpec;
   outputFile: string | undefined;
   keepUnreleasedSection: boolean;
+  failOnEmptyReleaseNotes: boolean;
 }
 
 export type QuerySpecialVersionOption = 'unreleased' | 'latest' | 'latest-or-unreleased';
