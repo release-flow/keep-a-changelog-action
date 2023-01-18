@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## Added
+### Added
 
 - Add the `fail-on-empty-release-notes` input to enable reporting an error if there are no release notes in the
   `[Unreleased]` section.
