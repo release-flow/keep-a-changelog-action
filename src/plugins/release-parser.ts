@@ -31,7 +31,7 @@ function parseReleaseHeadingTextOnly(node: Heading, file: VFile): void {
     const version = semver.parse(m[1]);
 
     if (!version) {
-      const msg = file.message('Unable to parse semantic version', textNode.position);
+      const msg = file.message('Unable to parse semantic version from level 2 heading', textNode.position);
       msg.fatal = true;
       msg.actual = m[1];
       return;
@@ -59,7 +59,7 @@ function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
   const version = semver.parse(linkNode.label);
 
   if (!version) {
-    const msg = file.message('Unable to parse semantic version', linkNode.position);
+    const msg = file.message('Unable to parse semantic version from level 2 heading', linkNode.position);
     msg.fatal = true;
     msg.actual = linkNode.label ?? null;
     return;
