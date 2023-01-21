@@ -59,13 +59,6 @@ export interface ReleaseHeading {
   release: ReleaseSpec;
 }
 
-export class ChangelogError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = this.constructor.name;
-  }
-}
-
 export class BoneheadedError extends Error {
   constructor(message: string) {
     super(message);

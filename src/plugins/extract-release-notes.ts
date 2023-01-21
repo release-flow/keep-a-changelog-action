@@ -7,7 +7,7 @@ import { Data, Node } from 'unist';
 import semver from 'semver';
 const { SemVer } = semver;
 
-import { BoneheadedError, ChangelogError, ReleaseHeading } from '../types.js';
+import { BoneheadedError, ReleaseHeading } from '../types.js';
 import { BumpOptions } from '../options.js';
 
 function getReleaseNotes(heading: ReleaseHeading, tree: Root): Root {
@@ -62,7 +62,7 @@ const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root, Root> 
     const heading = findReleaseHeading(target, releaseHeadings);
     if (!heading) {
       const releaseText = target === 'unreleased' ? 'unreleased' : target.format();
-      throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
+      file.fail(`The specified release, '${releaseText}', was not found in the changelog`);
     }
 
     const releaseNotes = getReleaseNotes(heading, tree);
@@ -71,8 +71,9 @@ const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root, Root> 
       const hasEmptyReleaseNotes = releaseNotes.children.length === 0;
 
       if (hasEmptyReleaseNotes) {
-        throw new ChangelogError(
-          'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.'
+        file.fail(
+          'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.',
+          heading.node.position
         );
       }
     }
