@@ -3,13 +3,14 @@ import path from 'path';
 
 import { default as semver } from 'semver';
 import { VFile } from 'vfile';
+import { VFileMessage } from 'vfile-message';
 import { read } from 'to-vfile';
 import { remark } from 'remark';
 import { reporter } from 'vfile-reporter';
 import stringify from 'remark-stringify';
 import * as core from '@actions/core';
 
-import { ChangelogError, ReleaseHeading } from './types.js';
+import { ReleaseHeading } from './types.js';
 import { QueryOptions, QueryVersionOptionSpec } from './options.js';
 
 import releaseParser from './plugins/release-parser.js';
@@ -104,9 +105,9 @@ export default async function query(): Promise<void> {
       core.endGroup();
     }
   } catch (error) {
-    if (error instanceof ChangelogError) {
+    if (error instanceof VFileMessage) {
       core.setFailed(error.message);
-      if (changelog.messages.length !== 0) {
+      if (changelog.messages.length > 0) {
         core.startGroup('Changelog error report');
         core.error(reporter(changelog));
         core.endGroup();
@@ -114,10 +115,11 @@ export default async function query(): Promise<void> {
     } else if (error instanceof Error) {
       core.setFailed(error.message);
       core.startGroup('Error details');
-      console.error(error);
+      core.error(error);
       core.endGroup();
     } else {
-      console.log(error);
+      core.setFailed('An unexpected error occurred');
+      console.error(error);
     }
   }
 }

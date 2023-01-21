@@ -49678,6 +49678,23 @@ function size(value) {
   return stringWidth(match ? value.slice(0, match.index) : value)
 }
 
+;// CONCATENATED MODULE: ./lib/plugins/bridge.js
+const attacher = function (field, processor) {
+    // Copy the processor data from the input pipeline to the new pipeline
+    const data = this.data();
+    processor.data(data);
+    return transformer;
+    function transformer(tree, file, next) {
+        processor.run(tree, file, function done(err, node) {
+            if (node) {
+                file.data[field] = processor.stringify(node);
+            }
+            next(err);
+        });
+    }
+};
+/* harmony default export */ const bridge = (attacher);
+//# sourceMappingURL=bridge.js.map
 // EXTERNAL MODULE: ./node_modules/semver/index.js
 var semver = __nccwpck_require__(1383);
 ;// CONCATENATED MODULE: ./lib/types.js
@@ -49694,12 +49711,6 @@ function isReleaseProps(maybe) {
         'date' in maybe &&
         maybe.date instanceof Date);
 }
-class ChangelogError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = this.constructor.name;
-    }
-}
 class BoneheadedError extends Error {
     constructor(message) {
         super(message);
@@ -49707,23 +49718,6 @@ class BoneheadedError extends Error {
     }
 }
 //# sourceMappingURL=types.js.map
-;// CONCATENATED MODULE: ./lib/plugins/bridge.js
-const attacher = function (field, processor) {
-    // Copy the processor data from the input pipeline to the new pipeline
-    const data = this.data();
-    processor.data(data);
-    return transformer;
-    function transformer(tree, file, next) {
-        processor.run(tree, function done(err, node) {
-            if (node) {
-                file.data[field] = processor.stringify(node);
-            }
-            next(err);
-        });
-    }
-};
-/* harmony default export */ const bridge = (attacher);
-//# sourceMappingURL=bridge.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/release-parser.js
 
 
@@ -49751,7 +49745,7 @@ function parseReleaseHeadingTextOnly(node, file) {
     else {
         const version = semver.parse(m[1]);
         if (!version) {
-            const msg = file.message('Unable to parse semantic version from level 2 heading', textNode.position);
+            const msg = file.message(`Unable to parse semantic version from level 2 heading: '${m[1]}' is not a valid version`, textNode.position);
             msg.fatal = true;
             msg.actual = m[1];
             return;
@@ -49773,7 +49767,7 @@ function parseReleaseHeadingWithLink(node, file) {
     }
     const version = semver.parse(linkNode.label);
     if (!version) {
-        const msg = file.message('Unable to parse semantic version from level 2 heading', linkNode.position);
+        const msg = file.message(`Unable to parse semantic version from level 2 heading: '${linkNode.label || ''}' is not a valid version`, linkNode.position);
         msg.fatal = true;
         msg.actual = linkNode.label ?? null;
         return;
@@ -49914,11 +49908,10 @@ const preprocessor_attacher = function () {
 /* harmony default export */ const preprocessor = (preprocessor_attacher);
 //# sourceMappingURL=preprocessor.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/assert.js
-
 const assert_attacher = function () {
     return (_tree, file) => {
-        if (file.messages.find((m) => m.fatal === true)) {
-            throw new ChangelogError('Fatal errors were encountered');
+        if (file.messages.some((m) => m.fatal === true)) {
+            file.fail('Invalid changelog: fatal errors were detected');
         }
     };
 };
@@ -50055,13 +50048,13 @@ const extract_release_notes_attacher = function extractReleaseNotes(target, opti
         const heading = findReleaseHeading(target, releaseHeadings);
         if (!heading) {
             const releaseText = target === 'unreleased' ? 'unreleased' : target.format();
-            throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
+            file.fail(`The specified release, '${releaseText}', was not found in the changelog`);
         }
         const releaseNotes = getReleaseNotes(heading, tree);
         if (options.failOnEmptyReleaseNotes) {
             const hasEmptyReleaseNotes = releaseNotes.children.length === 0;
             if (hasEmptyReleaseNotes) {
-                throw new ChangelogError('The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.');
+                file.fail('The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.', heading.node.position);
             }
         }
         return releaseNotes;
@@ -50493,23 +50486,27 @@ async function bump() {
         if (updated.messages.length > 0) {
             core.warning('Changelog: warnings were encountered');
             core.startGroup('Changelog warning report');
-            console.log(reporter(updated));
+            core.info(reporter(updated));
             core.endGroup();
         }
     }
     catch (error) {
-        if (error instanceof ChangelogError) {
-            if (changelog.messages.length === 0) {
-                core.setFailed(error.message);
-            }
-            else {
-                core.setFailed('Changelog contains errors');
+        if (error instanceof VFileMessage) {
+            core.setFailed(error.message);
+            if (changelog.messages.length > 0) {
                 core.startGroup('Changelog error report');
-                console.log(reporter(changelog));
+                core.error(reporter(changelog));
                 core.endGroup();
             }
         }
+        else if (error instanceof Error) {
+            core.setFailed(error.message);
+            core.startGroup('Error details');
+            core.error(error);
+            core.endGroup();
+        }
         else {
+            core.setFailed('An unexpected error occurred');
             console.error(error);
         }
     }
@@ -50571,7 +50568,7 @@ const extract_release_info_attacher = function extractUnreleasedContents(target)
         const heading = extract_release_info_findReleaseHeading(target, releaseHeadings);
         if (!heading) {
             const releaseText = isQuerySpecialVersionOption(target) ? target : target.format();
-            throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
+            file.fail(`The specified release, '${releaseText}', was not found in the changelog`);
         }
         if (isReleaseProps(heading.release)) {
             file.data['matchedReleaseVersion'] = heading.release.version.format();
@@ -50676,9 +50673,9 @@ async function query() {
         }
     }
     catch (error) {
-        if (error instanceof ChangelogError) {
+        if (error instanceof VFileMessage) {
             core.setFailed(error.message);
-            if (changelog.messages.length !== 0) {
+            if (changelog.messages.length > 0) {
                 core.startGroup('Changelog error report');
                 core.error(reporter(changelog));
                 core.endGroup();
@@ -50687,11 +50684,12 @@ async function query() {
         else if (error instanceof Error) {
             core.setFailed(error.message);
             core.startGroup('Error details');
-            console.error(error);
+            core.error(error);
             core.endGroup();
         }
         else {
-            console.log(error);
+            core.setFailed('An unexpected error occurred');
+            console.error(error);
         }
     }
 }

@@ -9,7 +9,7 @@ const attacher: Plugin<[string, Processor<void, Node>]> = function (field: strin
   return transformer;
 
   function transformer(tree: Node, file: VFile, next: TransformCallback<Node>) {
-    processor.run(tree, function done(err: Error | null | undefined, node: Node | undefined) {
+    processor.run(tree, file, function done(err: Error | null | undefined, node: Node | undefined) {
       if (node) {
         file.data[field] = processor.stringify(node);
       }

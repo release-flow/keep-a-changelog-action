@@ -4,6 +4,7 @@ import { isValid, parseISO } from 'date-fns';
 
 import { unified } from 'unified';
 import { VFile } from 'vfile';
+import { VFileMessage } from 'vfile-message';
 import { read, write } from 'to-vfile';
 import { remark } from 'remark';
 import { reporter } from 'vfile-reporter';
@@ -11,7 +12,7 @@ import stringify from 'remark-stringify';
 import * as core from '@actions/core';
 import { ReleaseType } from 'semver';
 
-import { ChangelogError, ReleaseHeading } from './types.js';
+import { ReleaseHeading } from './types.js';
 import { BumpOptions, RepoSpec } from './options.js';
 
 import bridge from './plugins/bridge.js';
@@ -178,20 +179,24 @@ export default async function bump(): Promise<void> {
     if (updated.messages.length > 0) {
       core.warning('Changelog: warnings were encountered');
       core.startGroup('Changelog warning report');
-      console.log(reporter(updated));
+      core.info(reporter(updated));
       core.endGroup();
     }
   } catch (error) {
-    if (error instanceof ChangelogError) {
-      if (changelog.messages.length === 0) {
-        core.setFailed(error.message);
-      } else {
-        core.setFailed('Changelog contains errors');
+    if (error instanceof VFileMessage) {
+      core.setFailed(error.message);
+      if (changelog.messages.length > 0) {
         core.startGroup('Changelog error report');
-        console.log(reporter(changelog));
+        core.error(reporter(changelog));
         core.endGroup();
       }
+    } else if (error instanceof Error) {
+      core.setFailed(error.message);
+      core.startGroup('Error details');
+      core.error(error);
+      core.endGroup();
     } else {
+      core.setFailed('An unexpected error occurred');
       console.error(error);
     }
   }

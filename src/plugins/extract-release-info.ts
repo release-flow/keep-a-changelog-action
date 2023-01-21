@@ -7,7 +7,7 @@ import { Data, Node } from 'unist';
 import semver from 'semver';
 const { SemVer } = semver;
 
-import { BoneheadedError, ChangelogError, isReleaseProps, ReleaseHeading } from '../types.js';
+import { BoneheadedError, isReleaseProps, ReleaseHeading } from '../types.js';
 import { QueryVersionOptionSpec, isQuerySpecialVersionOption } from '../options.js';
 
 function getReleaseNotes(heading: ReleaseHeading, tree: Root): Root {
@@ -65,7 +65,7 @@ const attacher: Plugin<[QueryVersionOptionSpec], Root, Root> = function extractU
     const heading = findReleaseHeading(target, releaseHeadings);
     if (!heading) {
       const releaseText = isQuerySpecialVersionOption(target) ? target : target.format();
-      throw new ChangelogError(`The specified release, '${releaseText}', was not found in the changelog`);
+      file.fail(`The specified release, '${releaseText}', was not found in the changelog`);
     }
 
     if (isReleaseProps(heading.release)) {
