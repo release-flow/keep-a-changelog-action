@@ -171,7 +171,7 @@ export default async function bump(): Promise<void> {
       updated.basename = options.outputFile;
     }
 
-    await write(updated, { encoding: 'utf-8', mode: null });
+    await write(updated, 'utf-8');
 
     core.setOutput('version', updated.data['nextReleaseVersion']);
     core.setOutput('release-notes', updated.data['releaseNotes']);

@@ -3,7 +3,7 @@ import { VFile } from 'vfile';
 import type { Root, LinkReference, Heading } from 'mdast';
 
 import { ReleaseHeading } from '../types.js';
-import { Parent } from 'unist-util-is';
+import { Parent } from 'unist';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const attacher: Plugin<any, Root, Root> = function () {

@@ -34339,32 +34339,40 @@ function index(value) {
   return value && typeof value === 'number' ? value : 1
 }
 
-;// CONCATENATED MODULE: ./node_modules/vfile-message/index.js
+;// CONCATENATED MODULE: ./node_modules/vfile-message/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Position} Position
  * @typedef {import('unist').Point} Point
- * @typedef {object & {type: string, position?: Position|undefined}} NodeLike
+ * @typedef {object & {type: string, position?: Position | undefined}} NodeLike
  */
 
 
 
+/**
+ * Message.
+ */
 class VFileMessage extends Error {
   /**
    * Create a message for `reason` at `place` from `origin`.
    *
    * When an error is passed in as `reason`, the `stack` is copied.
    *
-   * @param {string|Error|VFileMessage} reason
-   *   Reason for message.
-   *   Uses the stack and message of the error if given.
-   * @param {Node|NodeLike|Position|Point} [place]
-   *   Place at which the message occurred in a file.
-   * @param {string} [origin]
-   *   Place in code the message originates from (example `'my-package:my-rule-name'`)
+   * @param {string | Error | VFileMessage} reason
+   *   Reason for message, uses the stack and message of the error if given.
+   *
+   *   > 👉 **Note**: you should use markdown.
+   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
+   *   Place in file where the message occurred.
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns
+   *   Instance of `VFileMessage`.
    */
+  // To do: next major: expose `undefined` everywhere instead of `null`.
   constructor(reason, place, origin) {
-    /** @type {[string|null, string|null]} */
+    /** @type {[string | null, string | null]} */
     const parts = [null, null]
     /** @type {Position} */
     let position = {
@@ -34396,6 +34404,7 @@ class VFileMessage extends Error {
       // Node.
       if ('type' in place || 'position' in place) {
         if (place.position) {
+          // To do: next major: deep clone.
           // @ts-expect-error: looks like a position.
           position = place.position
         }
@@ -34403,19 +34412,40 @@ class VFileMessage extends Error {
       // Position.
       else if ('start' in place || 'end' in place) {
         // @ts-expect-error: looks like a position.
+        // To do: next major: deep clone.
         position = place
       }
       // Point.
       else if ('line' in place || 'column' in place) {
+        // To do: next major: deep clone.
         position.start = place
       }
     }
 
-    // Fields from `Error`
+    // Fields from `Error`.
+    /**
+     * Serialized positional info of error.
+     *
+     * On normal errors, this would be something like `ParseError`, buit in
+     * `VFile` messages we use this space to show where an error happened.
+     */
     this.name = stringifyPosition(place) || '1:1'
-    /** @type {string} */
+
+    /**
+     * Reason for message.
+     *
+     * @type {string}
+     */
     this.message = typeof reason === 'object' ? reason.message : reason
-    /** @type {string} */
+
+    /**
+     * Stack of message.
+     *
+     * This is used by normal errors to show where something happened in
+     * programming code, irrelevant for `VFile` messages,
+     *
+     * @type {string}
+     */
     this.stack = ''
 
     if (typeof reason === 'object' && reason.stack) {
@@ -34425,64 +34455,63 @@ class VFileMessage extends Error {
     /**
      * Reason for message.
      *
+     * > 👉 **Note**: you should use markdown.
+     *
      * @type {string}
      */
     this.reason = this.message
 
     /* eslint-disable no-unused-expressions */
     /**
-     * Whether this is a fatal problem that marks an associated file as no
-     * longer processable.
-     * If `true`, marks associated file as no longer processable.
-     * If `false`, necessitates a (potential) change.
-     * The value can also be `null` or `undefined`, for things that might not
-     * need changing.
+     * State of problem.
      *
-     * @type {boolean?}
+     * * `true` — marks associated file as no longer processable (error)
+     * * `false` — necessitates a (potential) change (warning)
+     * * `null | undefined` — for things that might not need changing (info)
+     *
+     * @type {boolean | null | undefined}
      */
     this.fatal
 
     /**
      * Starting line of error.
      *
-     * @type {number?}
+     * @type {number | null}
      */
     this.line = position.start.line
 
     /**
      * Starting column of error.
      *
-     * @type {number?}
+     * @type {number | null}
      */
     this.column = position.start.column
 
     /**
-     * Full range information, when available.
-     * Has `start` and `end` fields, both set to an object with `line` and
-     * `column`, set to `number?`.
+     * Full unist position.
      *
-     * @type {Position?}
+     * @type {Position | null}
      */
     this.position = position
 
     /**
-     * Namespace of warning (example: `'my-package'`).
+     * Namespace of message (example: `'my-package'`).
      *
-     * @type {string?}
+     * @type {string | null}
      */
     this.source = parts[0]
 
     /**
-     * Category of message (example: `'my-rule-name'`).
+     * Category of message (example: `'my-rule'`).
      *
-     * @type {string?}
+     * @type {string | null}
      */
     this.ruleId = parts[1]
 
     /**
-     * Path of a file (used throughout the VFile ecosystem).
+     * Path of a file (used throughout the `VFile` ecosystem).
      *
-     * @type {string?}
+     * @type {string | null}
      */
     this.file
 
@@ -34494,29 +34523,31 @@ class VFileMessage extends Error {
      * Specify the source value that’s being reported, which is deemed
      * incorrect.
      *
-     * @type {string?}
+     * @type {string | null}
      */
     this.actual
 
     /**
-     * Suggest values that should be used instead of `actual`, one or more
-     * values that are deemed as acceptable.
+     * Suggest acceptable values that can be used instead of `actual`.
      *
-     * @type {Array<string>?}
+     * @type {Array<string> | null}
      */
     this.expected
 
     /**
-     * Link to documentation for the message.
+     * Link to docs for the message.
      *
-     * @type {string?}
+     * > 👉 **Note**: this must be an absolute URL that can be passed as `x`
+     * > to `new URL(x)`.
+     *
+     * @type {string | null}
      */
     this.url
 
     /**
-     * Long form description of the message (supported by `vfile-reporter`).
+     * Long form description of the message (you should use markdown).
      *
-     * @type {string?}
+     * @type {string | null}
      */
     this.note
     /* eslint-enable no-unused-expressions */
@@ -34555,18 +34586,22 @@ VFileMessage.prototype.position = null
  */
 
 /**
- * @param {unknown} fileURLOrPath
- * @returns {fileURLOrPath is URL}
+ * Check if `fileUrlOrPath` looks like a URL.
+ *
+ * @param {unknown} fileUrlOrPath
+ *   File path or URL.
+ * @returns {fileUrlOrPath is URL}
+ *   Whether it’s a URL.
  */
 // From: <https://github.com/nodejs/node/blob/fcf8ba4/lib/internal/url.js#L1501>
-function isUrl(fileURLOrPath) {
+function isUrl(fileUrlOrPath) {
   return (
-    fileURLOrPath !== null &&
-    typeof fileURLOrPath === 'object' &&
+    fileUrlOrPath !== null &&
+    typeof fileUrlOrPath === 'object' &&
     // @ts-expect-error: indexable.
-    fileURLOrPath.href &&
+    fileUrlOrPath.href &&
     // @ts-expect-error: indexable.
-    fileURLOrPath.origin
+    fileUrlOrPath.origin
   )
 }
 
@@ -34577,48 +34612,85 @@ const external_url_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.met
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Position} Position
  * @typedef {import('unist').Point} Point
- * @typedef {Record<string, unknown> & {type: string, position?: Position|undefined}} NodeLike
  * @typedef {import('./minurl.shared.js').URL} URL
  * @typedef {import('../index.js').Data} Data
  * @typedef {import('../index.js').Value} Value
+ */
+
+/**
+ * @typedef {Record<string, unknown> & {type: string, position?: Position | undefined}} NodeLike
  *
- * @typedef {'ascii'|'utf8'|'utf-8'|'utf16le'|'ucs2'|'ucs-2'|'base64'|'base64url'|'latin1'|'binary'|'hex'} BufferEncoding
+ * @typedef {'ascii' | 'utf8' | 'utf-8' | 'utf16le' | 'ucs2' | 'ucs-2' | 'base64' | 'base64url' | 'latin1' | 'binary' | 'hex'} BufferEncoding
  *   Encodings supported by the buffer class.
- *   This is a copy of the typing from Node, copied to prevent Node globals from
+ *
+ *   This is a copy of the types from Node, copied to prevent Node globals from
  *   being needed.
  *   Copied from: <https://github.com/DefinitelyTyped/DefinitelyTyped/blob/90a4ec8/types/node/buffer.d.ts#L170>
  *
- * @typedef {Value|Options|VFile|URL} Compatible
+ * @typedef {Options | URL | Value | VFile} Compatible
  *   Things that can be passed to the constructor.
  *
  * @typedef VFileCoreOptions
- * @property {Value} [value]
- * @property {string} [cwd]
- * @property {Array<string>} [history]
- * @property {string|URL} [path]
- * @property {string} [basename]
- * @property {string} [stem]
- * @property {string} [extname]
- * @property {string} [dirname]
- * @property {Data} [data]
+ *   Set multiple values.
+ * @property {Value | null | undefined} [value]
+ *   Set `value`.
+ * @property {string | null | undefined} [cwd]
+ *   Set `cwd`.
+ * @property {Array<string> | null | undefined} [history]
+ *   Set `history`.
+ * @property {URL | string | null | undefined} [path]
+ *   Set `path`.
+ * @property {string | null | undefined} [basename]
+ *   Set `basename`.
+ * @property {string | null | undefined} [stem]
+ *   Set `stem`.
+ * @property {string | null | undefined} [extname]
+ *   Set `extname`.
+ * @property {string | null | undefined} [dirname]
+ *   Set `dirname`.
+ * @property {Data | null | undefined} [data]
+ *   Set `data`.
  *
  * @typedef Map
- *   Raw source map, see:
+ *   Raw source map.
+ *
+ *   See:
  *   <https://github.com/mozilla/source-map/blob/58819f0/source-map.d.ts#L15-L23>.
  * @property {number} version
+ *   Which version of the source map spec this map is following.
  * @property {Array<string>} sources
+ *   An array of URLs to the original source files.
  * @property {Array<string>} names
- * @property {string|undefined} [sourceRoot]
- * @property {Array<string>|undefined} [sourcesContent]
+ *   An array of identifiers which can be referenced by individual mappings.
+ * @property {string | undefined} [sourceRoot]
+ *   The URL root from which all sources are relative.
+ * @property {Array<string> | undefined} [sourcesContent]
+ *   An array of contents of the original source files.
  * @property {string} mappings
+ *   A string of base64 VLQs which contain the actual mappings.
  * @property {string} file
+ *   The generated file this source map is associated with.
  *
  * @typedef {{[key: string]: unknown} & VFileCoreOptions} Options
- *   Configuration: a bunch of keys that will be shallow copied over to the new
- *   file.
+ *   Configuration.
+ *
+ *   A bunch of keys that will be shallow copied over to the new file.
  *
  * @typedef {Record<string, unknown>} ReporterSettings
- * @typedef {<T = ReporterSettings>(files: Array<VFile>, options: T) => string} Reporter
+ *   Configuration for reporters.
+ */
+
+/**
+ * @template {ReporterSettings} Settings
+ *   Options type.
+ * @callback Reporter
+ *   Type for a reporter.
+ * @param {Array<VFile>} files
+ *   Files to report.
+ * @param {Settings} options
+ *   Configuration.
+ * @returns {string}
+ *   Report.
  */
 
 
@@ -34627,68 +34699,81 @@ const external_url_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.met
 
 
 
-// Order of setting (least specific to most), we need this because otherwise
-// `{stem: 'a', path: '~/b.js'}` would throw, as a path is needed before a
-// stem can be set.
+/**
+ * Order of setting (least specific to most), we need this because otherwise
+ * `{stem: 'a', path: '~/b.js'}` would throw, as a path is needed before a
+ * stem can be set.
+ *
+ * @type {Array<'basename' | 'dirname' | 'extname' | 'history' | 'path' | 'stem'>}
+ */
 const order = ['history', 'path', 'basename', 'stem', 'extname', 'dirname']
 
 class VFile {
   /**
    * Create a new virtual file.
    *
-   * If `options` is `string` or `Buffer`, it’s treated as `{value: options}`.
-   * If `options` is a `URL`, it’s treated as `{path: options}`.
-   * If `options` is a `VFile`, shallow copies its data over to the new file.
-   * All fields in `options` are set on the newly created `VFile`.
+   * `options` is treated as:
+   *
+   * *   `string` or `Buffer` — `{value: options}`
+   * *   `URL` — `{path: options}`
+   * *   `VFile` — shallow copies its data over to the new file
+   * *   `object` — all fields are shallow copied over to the new file
    *
    * Path related fields are set in the following order (least specific to
    * most specific): `history`, `path`, `basename`, `stem`, `extname`,
    * `dirname`.
    *
-   * It’s not possible to set either `dirname` or `extname` without setting
-   * either `history`, `path`, `basename`, or `stem` as well.
+   * You cannot set `dirname` or `extname` without setting either `history`,
+   * `path`, `basename`, or `stem` too.
    *
-   * @param {Compatible} [value]
+   * @param {Compatible | null | undefined} [value]
+   *   File value.
+   * @returns
+   *   New instance.
    */
   constructor(value) {
-    /** @type {Options} */
+    /** @type {Options | VFile} */
     let options
 
     if (!value) {
       options = {}
-    } else if (typeof value === 'string' || is_buffer(value)) {
-      // @ts-expect-error Looks like a buffer.
+    } else if (typeof value === 'string' || buffer(value)) {
       options = {value}
     } else if (isUrl(value)) {
       options = {path: value}
     } else {
-      // @ts-expect-error Looks like file or options.
       options = value
     }
 
     /**
      * Place to store custom information (default: `{}`).
+     *
      * It’s OK to store custom data directly on the file but moving it to
      * `data` is recommended.
+     *
      * @type {Data}
      */
     this.data = {}
 
     /**
      * List of messages associated with the file.
+     *
      * @type {Array<VFileMessage>}
      */
     this.messages = []
 
     /**
      * List of filepaths the file moved between.
+     *
      * The first is the original path and the last is the current path.
+     *
      * @type {Array<string>}
      */
     this.history = []
 
     /**
      * Base of `path` (default: `process.cwd()` or `'/'` in browsers).
+     *
      * @type {string}
      */
     this.cwd = external_process_namespaceObject.cwd()
@@ -34696,6 +34781,7 @@ class VFile {
     /* eslint-disable no-unused-expressions */
     /**
      * Raw value.
+     *
      * @type {Value}
      */
     this.value
@@ -34705,26 +34791,30 @@ class VFile {
 
     /**
      * Whether a file was saved to disk.
+     *
      * This is used by vfile reporters.
+     *
      * @type {boolean}
      */
     this.stored
 
     /**
-     * Sometimes files have a non-string, compiled, representation.
-     * This can be stored in the `result` field.
-     * One example is when turning markdown into React nodes.
+     * Custom, non-string, compiled, representation.
+     *
      * This is used by unified to store non-string results.
+     * One example is when turning markdown into React nodes.
+     *
      * @type {unknown}
      */
     this.result
 
     /**
-     * Sometimes files have a source map associated with them.
-     * This can be stored in the `map` field.
-     * This should be a `Map` type, which is equivalent to the `RawSourceMap`
-     * type from the `source-map` module.
-     * @type {Map|undefined}
+     * Source map.
+     *
+     * This type is equivalent to the `RawSourceMap` type from the `source-map`
+     * module.
+     *
+     * @type {Map | null | undefined}
      */
     this.map
     /* eslint-enable no-unused-expressions */
@@ -34737,8 +34827,12 @@ class VFile {
 
       // Note: we specifically use `in` instead of `hasOwnProperty` to accept
       // `vfile`s too.
-      if (prop in options && options[prop] !== undefined) {
-        // @ts-expect-error: TS is confused by the different types for `history`.
+      if (
+        prop in options &&
+        options[prop] !== undefined &&
+        options[prop] !== null
+      ) {
+        // @ts-expect-error: TS doesn’t understand basic reality.
         this[prop] = prop === 'history' ? [...options[prop]] : options[prop]
       }
     }
@@ -34749,12 +34843,16 @@ class VFile {
     // Set non-path related properties.
     for (prop in options) {
       // @ts-expect-error: fine to set other things.
-      if (!order.includes(prop)) this[prop] = options[prop]
+      if (!order.includes(prop)) {
+        // @ts-expect-error: fine to set other things.
+        this[prop] = options[prop]
+      }
     }
   }
 
   /**
    * Get the full path (example: `'~/index.min.js'`).
+   *
    * @returns {string}
    */
   get path() {
@@ -34763,10 +34861,12 @@ class VFile {
 
   /**
    * Set the full path (example: `'~/index.min.js'`).
+   *
    * Cannot be nullified.
    * You can set a file URL (a `URL` object with a `file:` protocol) which will
    * be turned into a path with `url.fileURLToPath`.
-   * @param {string|URL} path
+   *
+   * @param {string | URL} path
    */
   set path(path) {
     if (isUrl(path)) {
@@ -34789,6 +34889,7 @@ class VFile {
 
   /**
    * Set the parent path (example: `'~'`).
+   *
    * Cannot be set if there’s no `path` yet.
    */
   set dirname(dirname) {
@@ -34805,6 +34906,7 @@ class VFile {
 
   /**
    * Set basename (including extname) (`'index.min.js'`).
+   *
    * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
    * on windows).
    * Cannot be nullified (use `file.path = file.dirname` instead).
@@ -34824,6 +34926,7 @@ class VFile {
 
   /**
    * Set the extname (including dot) (example: `'.js'`).
+   *
    * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
    * on windows).
    * Cannot be set if there’s no `path` yet.
@@ -34856,6 +34959,7 @@ class VFile {
 
   /**
    * Set the stem (basename w/o extname) (example: `'index.min'`).
+   *
    * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
    * on windows).
    * Cannot be nullified (use `file.path = file.dirname` instead).
@@ -34869,27 +34973,29 @@ class VFile {
   /**
    * Serialize the file.
    *
-   * @param {BufferEncoding} [encoding='utf8']
-   *   When `value` is a `Buffer`, `encoding` is a character encoding to
-   *   understand it as (default: `'utf8'`).
+   * @param {BufferEncoding | null | undefined} [encoding='utf8']
+   *   Character encoding to understand `value` as when it’s a `Buffer`
+   *   (default: `'utf8'`).
    * @returns {string}
    *   Serialized file.
    */
   toString(encoding) {
-    return (this.value || '').toString(encoding)
+    return (this.value || '').toString(encoding || undefined)
   }
 
   /**
-   * Constructs a new `VFileMessage`, where `fatal` is set to `false`, and
-   * associates it with the file by adding it to `vfile.messages` and setting
-   * `message.file` to the current filepath.
+   * Create a warning message associated with the file.
    *
-   * @param {string|Error|VFileMessage} reason
-   *   Human readable reason for the message, uses the stack and message of the error if given.
-   * @param {Node|NodeLike|Position|Point} [place]
-   *   Place where the message occurred in the file.
-   * @param {string} [origin]
-   *   Computer readable reason for the message
+   * Its `fatal` is set to `false` and `file` is set to the current file path.
+   * Its added to `file.messages`.
+   *
+   * @param {string | Error | VFileMessage} reason
+   *   Reason for message, uses the stack and message of the error if given.
+   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
+   *   Place in file where the message occurred.
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
    * @returns {VFileMessage}
    *   Message.
    */
@@ -34909,15 +35015,18 @@ class VFile {
   }
 
   /**
-   * Like `VFile#message()`, but associates an informational message where
-   * `fatal` is set to `null`.
+   * Create an info message associated with the file.
    *
-   * @param {string|Error|VFileMessage} reason
-   *   Human readable reason for the message, uses the stack and message of the error if given.
-   * @param {Node|NodeLike|Position|Point} [place]
-   *   Place where the message occurred in the file.
-   * @param {string} [origin]
-   *   Computer readable reason for the message
+   * Its `fatal` is set to `null` and `file` is set to the current file path.
+   * Its added to `file.messages`.
+   *
+   * @param {string | Error | VFileMessage} reason
+   *   Reason for message, uses the stack and message of the error if given.
+   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
+   *   Place in file where the message occurred.
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
    * @returns {VFileMessage}
    *   Message.
    */
@@ -34930,18 +35039,23 @@ class VFile {
   }
 
   /**
-   * Like `VFile#message()`, but associates a fatal message where `fatal` is
-   * set to `true`, and then immediately throws it.
+   * Create a fatal error associated with the file.
+   *
+   * Its `fatal` is set to `true` and `file` is set to the current file path.
+   * Its added to `file.messages`.
    *
    * > 👉 **Note**: a fatal error means that a file is no longer processable.
    *
-   * @param {string|Error|VFileMessage} reason
-   *   Human readable reason for the message, uses the stack and message of the error if given.
-   * @param {Node|NodeLike|Position|Point} [place]
-   *   Place where the message occurred in the file.
-   * @param {string} [origin]
-   *   Computer readable reason for the message
+   * @param {string | Error | VFileMessage} reason
+   *   Reason for message, uses the stack and message of the error if given.
+   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
+   *   Place in file where the message occurred.
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
    * @returns {never}
+   *   Message.
+   * @throws {VFileMessage}
    *   Message.
    */
   fail(reason, place, origin) {
@@ -34956,9 +35070,12 @@ class VFile {
 /**
  * Assert that `part` is not a path (as in, does not contain `path.sep`).
  *
- * @param {string|undefined} part
+ * @param {string | null | undefined} part
+ *   File path part.
  * @param {string} name
+ *   Part name.
  * @returns {void}
+ *   Nothing.
  */
 function assertPart(part, name) {
   if (part && part.includes(external_path_.sep)) {
@@ -34971,9 +35088,12 @@ function assertPart(part, name) {
 /**
  * Assert that `part` is not empty.
  *
- * @param {string|undefined} part
+ * @param {string | undefined} part
+ *   Thing.
  * @param {string} name
+ *   Part name.
  * @returns {asserts part is string}
+ *   Nothing.
  */
 function assertNonEmpty(part, name) {
   if (!part) {
@@ -34984,14 +35104,29 @@ function assertNonEmpty(part, name) {
 /**
  * Assert `path` exists.
  *
- * @param {string|undefined} path
+ * @param {string | undefined} path
+ *   Path.
  * @param {string} name
+ *   Dependency name.
  * @returns {asserts path is string}
+ *   Nothing.
  */
 function assertPath(path, name) {
   if (!path) {
     throw new Error('Setting `' + name + '` requires `path` to be set too')
   }
+}
+
+/**
+ * Assert `value` is a buffer.
+ *
+ * @param {unknown} value
+ *   thing.
+ * @returns {value is Buffer}
+ *   Whether `value` is a Node.js buffer.
+ */
+function buffer(value) {
+  return is_buffer(value)
 }
 
 ;// CONCATENATED MODULE: ./node_modules/unified/lib/index.js
@@ -35602,21 +35737,41 @@ var external_fs_ = __nccwpck_require__(7147);
  * @typedef {import('vfile').VFileValue} Value
  * @typedef {import('vfile').VFileOptions} Options
  * @typedef {import('vfile').BufferEncoding} BufferEncoding
+ *   Encodings supported by the buffer class.
  *
- * @typedef {number|string} Mode
- * @typedef {BufferEncoding|{encoding?: null|BufferEncoding, flag?: string}} ReadOptions
- * @typedef {BufferEncoding|{encoding?: null|BufferEncoding, mode: Mode?, flag?: string}} WriteOptions
+ *   This is a copy of the types from Node and `VFile`.
  *
- * @typedef {URL|Value} Path Path of the file.
- *   Note: `Value` is used here because it’s a smarter `Buffer`
- * @typedef {Path|Options|VFile} Compatible Things that can be
- *   passed to the function.
+ * @typedef ReadOptions
+ *   Configuration for `fs.readFile`.
+ * @property {BufferEncoding | null | undefined} [encoding]
+ *   Encoding to read file as, will turn `file.value` into a string if passed.
+ * @property {string | undefined} [flag]
+ *   File system flags to use.
+ *
+ * @typedef WriteOptions
+ *   Configuration for `fs.writeFile`.
+ * @property {BufferEncoding | null | undefined} [encoding]
+ *   Encoding to write file as.
+ * @property {number | string | undefined} [mode]
+ *   File mode (permission and sticky bits) if the file was newly created.
+ * @property {string | undefined} [flag]
+ *   File system flags to use.
+ *
+ * @typedef {URL | Value} Path
+ *   URL to file or path to file.
+ *
+ *   > 👉 **Note**: `Value` is used here because it’s a smarter `Buffer`
+ * @typedef {Path | Options | VFile} Compatible
+ *   URL to file, path to file, options for file, or actual file.
  */
 
 /**
  * @callback Callback
- * @param {NodeJS.ErrnoException|null} error
- * @param {VFile|null} file
+ *   Callback called after reading or writing a file.
+ * @param {NodeJS.ErrnoException | null} error
+ *   Error when reading or writing was not successful.
+ * @param {VFile | null | undefined} file
+ *   File when reading or writing was successful.
  */
 
 
@@ -35624,32 +35779,47 @@ var external_fs_ = __nccwpck_require__(7147);
 
 
 
+
+// To do: next major: use `node:` prefix.
+// To do: next major: use `URL` from global.
+// To do: next major: Only pass `undefined`.
 
 /**
  * Create a virtual file from a description.
- * If `options` is a string or a buffer, it’s used as the path.
- * If it’s a VFile itself, it’s returned instead.
- * In all other cases, the options are passed through to `vfile()`.
  *
- * @param {Compatible} [options]
+ * This is like `VFile`, but it accepts a file path instead of file cotnents.
+ *
+ * If `options` is a string, URL, or buffer, it’s used as the path.
+ * Otherwise, if it’s a file, that’s returned instead.
+ * Otherwise, the options are passed through to `new VFile()`.
+ *
+ * @param {Compatible | null | undefined} [description]
+ *   Path to file, file options, or file itself.
  * @returns {VFile}
+ *   Given file or new file.
  */
-function toVFile(options) {
-  if (typeof options === 'string' || options instanceof external_url_namespaceObject.URL) {
-    options = {path: options}
-  } else if (is_buffer(options)) {
-    options = {path: String(options)}
+function toVFile(description) {
+  if (typeof description === 'string' || description instanceof external_url_namespaceObject.URL) {
+    description = {path: description}
+  } else if (is_buffer(description)) {
+    description = {path: String(description)}
   }
 
-  return lib_looksLikeAVFile(options) ? options : new VFile(options)
+  return lib_looksLikeAVFile(description)
+    ? description
+    : // To do: remove when `VFile` allows explicit `null`.
+      new VFile(description || undefined)
 }
 
 /**
  * Create a virtual file and read it in, synchronously.
  *
  * @param {Compatible} description
- * @param {ReadOptions} [options]
+ *   Path to file, file options, or file itself.
+ * @param {BufferEncoding | ReadOptions | null | undefined} [options]
+ *   Encoding to use or Node.JS read options.
  * @returns {VFile}
+ *   Given file or new file.
  */
 function readSync(description, options) {
   const file = toVFile(description)
@@ -35658,11 +35828,14 @@ function readSync(description, options) {
 }
 
 /**
- * Create a virtual file and write it in, synchronously.
+ * Create a virtual file and write it, synchronously.
  *
  * @param {Compatible} description
- * @param {WriteOptions} [options]
+ *   Path to file, file options, or file itself.
+ * @param {BufferEncoding | WriteOptions | null | undefined} [options]
+ *   Encoding to use or Node.JS write options.
  * @returns {VFile}
+ *   Given file or new file.
  */
 function writeSync(description, options) {
   const file = toVFile(description)
@@ -35670,21 +35843,32 @@ function writeSync(description, options) {
   return file
 }
 
+/**
+ * Create a virtual file and read it in, async.
+ *
+ * @param description
+ *   Path to file, file options, or file itself.
+ * @param options
+ *   Encoding to use or Node.JS read options.
+ * @param callback
+ *   Callback called when done.
+ * @returns
+ *   Nothing when a callback is given, otherwise promise that resolves to given
+ *   file or new file.
+ */
 const read =
   /**
    * @type {{
-   *   (description: Compatible, options: ReadOptions, callback: Callback): void
+   *   (description: Compatible, options: BufferEncoding | ReadOptions | null | undefined, callback: Callback): void
    *   (description: Compatible, callback: Callback): void
-   *   (description: Compatible, options?: ReadOptions): Promise<VFile>
+   *   (description: Compatible, options?: BufferEncoding | ReadOptions | null | undefined): Promise<VFile>
    * }}
    */
   (
     /**
-     * Create a virtual file and read it in, asynchronously.
-     *
      * @param {Compatible} description
-     * @param {ReadOptions} [options]
-     * @param {Callback} [callback]
+     * @param {BufferEncoding | ReadOptions | null | undefined} [options]
+     * @param {Callback | null | undefined} [callback]
      */
     function (description, options, callback) {
       const file = toVFile(description)
@@ -35704,12 +35888,13 @@ const read =
        * @param {VFile} result
        */
       function resolve(result) {
+        // @ts-expect-error: `callback` always defined.
         callback(null, result)
       }
 
       /**
-       * @param {(x: VFile) => void} resolve
-       * @param {(x: Error, y?: VFile) => void} reject
+       * @param {(error: VFile) => void} resolve
+       * @param {(error: NodeJS.ErrnoException, file?: VFile | undefined) => void} reject
        */
       function executor(resolve, reject) {
         /** @type {string} */
@@ -35718,13 +35903,14 @@ const read =
         try {
           fp = external_path_.resolve(file.cwd, file.path)
         } catch (error) {
-          return reject(error)
+          const exception = /** @type {NodeJS.ErrnoException} */ (error)
+          return reject(exception)
         }
 
         external_fs_.readFile(fp, options, done)
 
         /**
-         * @param {Error} error
+         * @param {NodeJS.ErrnoException | null} error
          * @param {Value} result
          */
         function done(error, result) {
@@ -35739,21 +35925,32 @@ const read =
     }
   )
 
+/**
+ * Create a virtual file and write it, async.
+ *
+ * @param description
+ *   Path to file, file options, or file itself.
+ * @param options
+ *   Encoding to use or Node.JS write options.
+ * @param callback
+ *   Callback called when done.
+ * @returns
+ *   Nothing when a callback is given, otherwise promise that resolves to given
+ *   file or new file.
+ */
 const write =
   /**
    * @type {{
-   *   (description: Compatible, options: WriteOptions, callback: Callback): void
+   *   (description: Compatible, options: BufferEncoding | WriteOptions | null | undefined, callback: Callback): void
    *   (description: Compatible, callback: Callback): void
-   *   (description: Compatible, options?: WriteOptions): Promise<VFile>
+   *   (description: Compatible, options?: BufferEncoding | WriteOptions | null | undefined): Promise<VFile>
    * }}
    */
   (
     /**
-     * Create a virtual file and write it in, asynchronously.
-     *
      * @param {Compatible} description
-     * @param {WriteOptions} [options]
-     * @param {Callback} [callback]
+     * @param {BufferEncoding | WriteOptions | null | undefined} [options]
+     * @param {Callback | null | undefined} [callback]
      */
     function (description, options, callback) {
       const file = toVFile(description)
@@ -35774,12 +35971,13 @@ const write =
        * @param {VFile} result
        */
       function resolve(result) {
+        // @ts-expect-error: `callback` always defined.
         callback(null, result)
       }
 
       /**
-       * @param {(x: VFile) => void} resolve
-       * @param {(x: Error, y?: VFile) => void} reject
+       * @param {(error: VFile) => void} resolve
+       * @param {(error: NodeJS.ErrnoException, file: VFile | null) => void} reject
        */
       function executor(resolve, reject) {
         /** @type {string} */
@@ -35788,17 +35986,18 @@ const write =
         try {
           fp = external_path_.resolve(file.cwd, file.path)
         } catch (error) {
-          return reject(error)
+          const exception = /** @type {NodeJS.ErrnoException} */ (error)
+          return reject(exception, null)
         }
 
-        external_fs_.writeFile(fp, file.value || '', options, done)
+        external_fs_.writeFile(fp, file.value || '', options || null, done)
 
         /**
-         * @param {Error} error
+         * @param {NodeJS.ErrnoException | null} error
          */
         function done(error) {
           if (error) {
-            reject(error)
+            reject(error, null)
           } else {
             resolve(file)
           }
@@ -35808,18 +36007,23 @@ const write =
   )
 
 /**
- * @param {Compatible} value
+ * Check if something looks like a vfile.
+ *
+ * @param {Compatible | null | undefined} value
+ *   Value.
  * @returns {value is VFile}
+ *   Whether `value` looks like a `VFile`.
  */
 function lib_looksLikeAVFile(value) {
-  return (
+  return Boolean(
     value &&
-    typeof value === 'object' &&
-    'message' in value &&
-    'messages' in value
+      typeof value === 'object' &&
+      'message' in value &&
+      'messages' in value
   )
 }
 
+// To do: next major: remove?
 toVFile.readSync = readSync
 toVFile.writeSync = writeSync
 toVFile.read = read
@@ -47004,83 +47208,117 @@ function emphasisPeek(_, _1, context) {
   return context.options.emphasis || '*'
 }
 
-;// CONCATENATED MODULE: ./node_modules/unist-util-is/index.js
+;// CONCATENATED MODULE: ./node_modules/unist-util-is/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
- *
- * @typedef {string} Type
- * @typedef {Object<string, unknown>} Props
- *
- * @typedef {null|undefined|Type|Props|TestFunctionAnything|Array.<Type|Props|TestFunctionAnything>} Test
  */
 
 /**
- * Check if a node passes a test
+ * @typedef {Record<string, unknown>} Props
+ * @typedef {null | undefined | string | Props | TestFunctionAnything | Array<string | Props | TestFunctionAnything>} Test
+ *   Check for an arbitrary node, unaware of TypeScript inferral.
  *
  * @callback TestFunctionAnything
+ *   Check if a node passes a test, unaware of TypeScript inferral.
+ * @param {unknown} this
+ *   The given context.
  * @param {Node} node
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {boolean|void}
+ *   A node.
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
+ * @returns {boolean | void}
+ *   Whether this node passes the test.
  */
 
 /**
- * Check if a node passes a certain node test
+ * @template {Node} Kind
+ *   Node type.
+ * @typedef {Kind['type'] | Partial<Kind> | TestFunctionPredicate<Kind> | Array<Kind['type'] | Partial<Kind> | TestFunctionPredicate<Kind>>} PredicateTest
+ *   Check for a node that can be inferred by TypeScript.
+ */
+
+/**
+ * Check if a node passes a certain test.
  *
- * @template {Node} X
+ * @template {Node} Kind
+ *   Node type.
  * @callback TestFunctionPredicate
+ *   Complex test function for a node that can be inferred by TypeScript.
  * @param {Node} node
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {node is X}
+ *   A node.
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
+ * @returns {node is Kind}
+ *   Whether this node passes the test.
  */
 
 /**
  * @callback AssertAnything
+ *   Check that an arbitrary value is a node, unaware of TypeScript inferral.
  * @param {unknown} [node]
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
+ *   Anything (typically a node).
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
  * @returns {boolean}
+ *   Whether this is a node and passes a test.
  */
 
 /**
- * Check if a node passes a certain node test
+ * Check if a node is a node and passes a certain node test.
  *
- * @template {Node} Y
+ * @template {Node} Kind
+ *   Node type.
  * @callback AssertPredicate
+ *   Check that an arbitrary value is a specific node, aware of TypeScript.
  * @param {unknown} [node]
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {node is Y}
+ *   Anything (typically a node).
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
+ * @returns {node is Kind}
+ *   Whether this is a node and passes a test.
  */
 
+/**
+ * Check if `node` is a `Node` and whether it passes the given test.
+ *
+ * @param node
+ *   Thing to check, typically `Node`.
+ * @param test
+ *   A check for a specific node.
+ * @param index
+ *   The node’s position in its parent.
+ * @param parent
+ *   The node’s parent.
+ * @returns
+ *   Whether `node` is a node and passes a test.
+ */
 const is =
   /**
-   * Check if a node passes a test.
-   * When a `parent` node is known the `index` of node should also be given.
-   *
    * @type {(
-   *   (<T extends Node>(node: unknown, test: T['type']|Partial<T>|TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|TestFunctionPredicate<T>>, index?: number|null|undefined, parent?: Parent|null|undefined, context?: unknown) => node is T) &
-   *   ((node?: unknown, test?: Test, index?: number|null|undefined, parent?: Parent|null|undefined, context?: unknown) => boolean)
+   *   (() => false) &
+   *   (<Kind extends Node = Node>(node: unknown, test: PredicateTest<Kind>, index: number, parent: Parent, context?: unknown) => node is Kind) &
+   *   (<Kind extends Node = Node>(node: unknown, test: PredicateTest<Kind>, index?: null | undefined, parent?: null | undefined, context?: unknown) => node is Kind) &
+   *   ((node: unknown, test: Test, index: number, parent: Parent, context?: unknown) => boolean) &
+   *   ((node: unknown, test?: Test, index?: null | undefined, parent?: null | undefined, context?: unknown) => boolean)
    * )}
    */
   (
     /**
-     * Check if a node passes a test.
-     * When a `parent` node is known the `index` of node should also be given.
-     *
-     * @param {unknown} [node] Node to check
+     * @param {unknown} [node]
      * @param {Test} [test]
-     * When nullish, checks if `node` is a `Node`.
-     * When `string`, works like passing `function (node) {return node.type === test}`.
-     * When `function` checks if function passed the node is true.
-     * When `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
-     * When `array`, checks any one of the subtests pass.
-     * @param {number|null|undefined} [index] Position of `node` in `parent`
-     * @param {Parent|null|undefined} [parent] Parent of `node`
-     * @param {unknown} [context] Context object to invoke `test` with
-     * @returns {boolean} Whether test passed and `node` is a `Node` (object with `type` set to non-empty `string`).
+     * @param {number | null | undefined} [index]
+     * @param {Parent | null | undefined} [parent]
+     * @param {unknown} [context]
+     * @returns {boolean}
      */
     // eslint-disable-next-line max-params
     function is(node, test, index, parent, context) {
@@ -47118,22 +47356,34 @@ const is =
     }
   )
 
+/**
+ * Generate an assertion from a test.
+ *
+ * Useful if you’re going to test many nodes, for example when creating a
+ * utility where something else passes a compatible test.
+ *
+ * The created function is a bit faster because it expects valid input only:
+ * a `node`, `index`, and `parent`.
+ *
+ * @param test
+ *   *   when nullish, checks if `node` is a `Node`.
+ *   *   when `string`, works like passing `(node) => node.type === test`.
+ *   *   when `function` checks if function passed the node is true.
+ *   *   when `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
+ *   *   when `array`, checks if any one of the subtests pass.
+ * @returns
+ *   An assertion.
+ */
 const convert =
   /**
    * @type {(
-   *   (<T extends Node>(test: T['type']|Partial<T>|TestFunctionPredicate<T>) => AssertPredicate<T>) &
+   *   (<Kind extends Node>(test: PredicateTest<Kind>) => AssertPredicate<Kind>) &
    *   ((test?: Test) => AssertAnything)
    * )}
    */
   (
     /**
-     * Generate an assertion from a check.
      * @param {Test} [test]
-     * When nullish, checks if `node` is a `Node`.
-     * When `string`, works like passing `function (node) {return node.type === test}`.
-     * When `function` checks if function passed the node is true.
-     * When `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
-     * When `array`, checks any one of the subtests pass.
      * @returns {AssertAnything}
      */
     function (test) {
@@ -47156,12 +47406,13 @@ const convert =
       throw new Error('Expected function, string, or object as test')
     }
   )
+
 /**
- * @param {Array.<Type|Props|TestFunctionAnything>} tests
+ * @param {Array<string | Props | TestFunctionAnything>} tests
  * @returns {AssertAnything}
  */
 function anyFactory(tests) {
-  /** @type {Array.<AssertAnything>} */
+  /** @type {Array<AssertAnything>} */
   const checks = []
   let index = -1
 
@@ -47173,7 +47424,7 @@ function anyFactory(tests) {
 
   /**
    * @this {unknown}
-   * @param {unknown[]} parameters
+   * @param {Array<unknown>} parameters
    * @returns {boolean}
    */
   function any(...parameters) {
@@ -47188,8 +47439,7 @@ function anyFactory(tests) {
 }
 
 /**
- * Utility to assert each property in `test` is represented in `node`, and each
- * values are strictly equal.
+ * Turn an object into a test for a node with a certain fields.
  *
  * @param {Props} check
  * @returns {AssertAnything}
@@ -47215,10 +47465,9 @@ function propsFactory(check) {
 }
 
 /**
- * Utility to convert a string into a function which checks a given node’s type
- * for said string.
+ * Turn a string into a test for a node with a certain type.
  *
- * @param {Type} check
+ * @param {string} check
  * @returns {AssertAnything}
  */
 function typeFactory(check) {
@@ -47233,8 +47482,8 @@ function typeFactory(check) {
 }
 
 /**
- * Utility to convert a string into a function which checks a given node’s type
- * for said string.
+ * Turn a custom test into a test for a node that passes that test.
+ *
  * @param {TestFunctionAnything} check
  * @returns {AssertAnything}
  */
@@ -47243,16 +47492,21 @@ function castFactory(check) {
 
   /**
    * @this {unknown}
-   * @param {Array.<unknown>} parameters
+   * @param {unknown} node
+   * @param {Array<unknown>} parameters
    * @returns {boolean}
    */
-  function assertion(...parameters) {
-    // @ts-expect-error: spreading is fine.
-    return Boolean(check.call(this, ...parameters))
+  function assertion(node, ...parameters) {
+    return Boolean(
+      node &&
+        typeof node === 'object' &&
+        'type' in node &&
+        // @ts-expect-error: fine.
+        Boolean(check.call(this, node, ...parameters))
+    )
   }
 }
 
-// Utility to return true.
 function ok() {
   return true
 }
@@ -47424,42 +47678,163 @@ function toResult(value) {
   return [value]
 }
 
-;// CONCATENATED MODULE: ./node_modules/unist-util-visit/index.js
+;// CONCATENATED MODULE: ./node_modules/unist-util-visit/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
  * @typedef {import('unist-util-is').Test} Test
  * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types.js').Visitor} Visitor
+ */
+
+/**
+ * Check if `Child` can be a child of `Ancestor`.
+ *
+ * Returns the ancestor when `Child` can be a child of `Ancestor`, or returns
+ * `never`.
+ *
+ * @template {Node} Ancestor
+ *   Node type.
+ * @template {Node} Child
+ *   Node type.
+ * @typedef {(
+ *   Ancestor extends Parent
+ *     ? Child extends Ancestor['children'][number]
+ *       ? Ancestor
+ *       : never
+ *     : never
+ * )} ParentsOf
+ */
+
+/**
+ * @template {Node} [Visited=Node]
+ *   Visited node type.
+ * @template {Parent} [Ancestor=Parent]
+ *   Ancestor type.
+ * @callback Visitor
+ *   Handle a node (matching `test`, if given).
+ *
+ *   Visitors are free to transform `node`.
+ *   They can also transform `parent`.
+ *
+ *   Replacing `node` itself, if `SKIP` is not returned, still causes its
+ *   descendants to be walked (which is a bug).
+ *
+ *   When adding or removing previous siblings of `node` (or next siblings, in
+ *   case of reverse), the `Visitor` should return a new `Index` to specify the
+ *   sibling to traverse after `node` is traversed.
+ *   Adding or removing next siblings of `node` (or previous siblings, in case
+ *   of reverse) is handled as expected without needing to return a new `Index`.
+ *
+ *   Removing the children property of `parent` still results in them being
+ *   traversed.
+ * @param {Visited} node
+ *   Found node.
+ * @param {Visited extends Node ? number | null : never} index
+ *   Index of `node` in `parent`.
+ * @param {Ancestor extends Node ? Ancestor | null : never} parent
+ *   Parent of `node`.
+ * @returns {VisitorResult}
+ *   What to do next.
+ *
+ *   An `Index` is treated as a tuple of `[CONTINUE, Index]`.
+ *   An `Action` is treated as a tuple of `[Action]`.
+ *
+ *   Passing a tuple back only makes sense if the `Action` is `SKIP`.
+ *   When the `Action` is `EXIT`, that action can be returned.
+ *   When the `Action` is `CONTINUE`, `Index` can be returned.
+ */
+
+/**
+ * Build a typed `Visitor` function from a node and all possible parents.
+ *
+ * It will infer which values are passed as `node` and which as `parent`.
+ *
+ * @template {Node} Visited
+ *   Node type.
+ * @template {Parent} Ancestor
+ *   Parent type.
+ * @typedef {Visitor<Visited, ParentsOf<Ancestor, Visited>>} BuildVisitorFromMatch
+ */
+
+/**
+ * Build a typed `Visitor` function from a list of descendants and a test.
+ *
+ * It will infer which values are passed as `node` and which as `parent`.
+ *
+ * @template {Node} Descendant
+ *   Node type.
+ * @template {Test} Check
+ *   Test type.
+ * @typedef {(
+ *   BuildVisitorFromMatch<
+ *     import('unist-util-visit-parents/complex-types.js').Matches<Descendant, Check>,
+ *     Extract<Descendant, Parent>
+ *   >
+ * )} BuildVisitorFromDescendants
+ */
+
+/**
+ * Build a typed `Visitor` function from a tree and a test.
+ *
+ * It will infer which values are passed as `node` and which as `parent`.
+ *
+ * @template {Node} [Tree=Node]
+ *   Node type.
+ * @template {Test} [Check=string]
+ *   Test type.
+ * @typedef {(
+ *   BuildVisitorFromDescendants<
+ *     import('unist-util-visit-parents/complex-types.js').InclusiveDescendant<Tree>,
+ *     Check
+ *   >
+ * )} BuildVisitor
  */
 
 
 
 /**
- * Visit children of tree which pass test.
+ * Visit nodes.
+ *
+ * This algorithm performs *depth-first* *tree traversal* in *preorder*
+ * (**NLR**) or if `reverse` is given, in *reverse preorder* (**NRL**).
+ *
+ * You can choose for which nodes `visitor` is called by passing a `test`.
+ * For complex tests, you should test yourself in `visitor`, as it will be
+ * faster and will have improved type information.
+ *
+ * Walking the tree is an intensive task.
+ * Make use of the return values of the visitor when possible.
+ * Instead of walking a tree multiple times, walk it once, use `unist-util-is`
+ * to check if a node matches, and then perform different operations.
+ *
+ * You can change the tree.
+ * See `Visitor` for more info.
  *
  * @param tree
- *   Tree to walk
- * @param [test]
+ *   Tree to traverse.
+ * @param test
  *   `unist-util-is`-compatible test
  * @param visitor
- *   Function called for nodes that pass `test`.
+ *   Handle each node.
  * @param reverse
- *   Traverse in reverse preorder (NRL) instead of preorder (NLR) (default).
+ *   Traverse in reverse preorder (NRL) instead of the default preorder (NLR).
+ * @returns
+ *   Nothing.
  */
 const visit =
   /**
    * @type {(
-   *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types.js').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
-   *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types.js').BuildVisitor<Tree>, reverse?: boolean) => void)
+   *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: BuildVisitor<Tree, Check>, reverse?: boolean | null | undefined) => void) &
+   *   (<Tree extends Node>(tree: Tree, visitor: BuildVisitor<Tree>, reverse?: boolean | null | undefined) => void)
    * )}
    */
   (
     /**
      * @param {Node} tree
      * @param {Test} test
-     * @param {import('./complex-types.js').Visitor} visitor
-     * @param {boolean} [reverse]
+     * @param {Visitor} visitor
+     * @param {boolean | null | undefined} [reverse]
+     * @returns {void}
      */
     function (tree, test, visitor, reverse) {
       if (typeof test === 'function' && typeof visitor !== 'function') {
@@ -49386,32 +49761,64 @@ const platform = external_node_process_namespaceObject.platform
  * @typedef {import('vfile').VFile} VFile
  * @typedef {import('vfile-message').VFileMessage} VFileMessage
  * @typedef {import('vfile-statistics').Statistics} Statistics
- *
+ */
+
+/**
  * @typedef Options
- * @property {boolean} [color]
- * @property {boolean} [silent=false]
- * @property {boolean} [quiet=false]
- * @property {boolean} [verbose=false]
- * @property {string} [defaultName='<stdin>']
- *
- * @typedef Row
+ *   Configuration (optional).
+ * @property {boolean | null | undefined} [color]
+ *   Use ANSI colors in report.
+ *   The default behavior in Node.js is the check if color is supported.
+ * @property {boolean | null | undefined} [verbose=false]
+ *   Show message `note`s.
+ *   Notes are optional, additional, long descriptions.
+ * @property {boolean | null | undefined} [quiet=false]
+ *   Do not show files without messages.
+ * @property {boolean | null | undefined} [silent=false]
+ *   Show errors only, this hides info and warning messages, and sets
+ *   `quiet: true`.
+ * @property {string | null | undefined} [defaultName='<stdin>']
+ *   Label to use for files without file path.
+ *   If one file and no `defaultName` is given, no name will show up in the
+ *   report.
+ */
+
+/**
+ * @typedef MessageRow
+ *   Message.
  * @property {string} place
+ *   Serialized positional info.
  * @property {string} label
+ *   Kind of message.
  * @property {string} reason
+ *   Reason.
  * @property {string} ruleId
+ *   Rule.
  * @property {string} source
+ *   Source.
+ *
+ * @typedef {keyof MessageRow} MessageColumn
  *
  * @typedef FileRow
+ *   File header row.
  * @property {'file'} type
+ *   Kind.
  * @property {VFile} file
+ *   Virtual file.
  * @property {Statistics} stats
+ *   Statistics.
  *
- * @typedef {Record<string, number>} Sizes
+ * @typedef {Record<MessageColumn, number>} Sizes
+ *   Sizes for message columns.
  *
  * @typedef Info
- * @property {Array<FileRow|Row>} rows
+ *   Result.
+ * @property {Array<FileRow | MessageRow>} rows
+ *   Rows.
  * @property {Statistics} stats
+ *   Total statistics.
  * @property {Sizes} sizes
+ *   Sizes for message columns.
  */
 
 
@@ -49436,16 +49843,16 @@ const labels = {
 }
 
 /**
- * Report a file’s messages.
+ * Create a report from an error, one file, or multiple files.
  *
- * @param {Error|VFile|Array<VFile>} [files]
- * @param {Options} [options]
+ * @param {Error | VFile | Array<VFile> | null | undefined} [files]
+ *   Files or error to report.
+ * @param {Options | null | undefined} [options]
+ *   Configuration.
  * @returns {string}
+ *   Report.
  */
-function reporter(files, options = {}) {
-  /** @type {boolean|undefined} */
-  let one
-
+function reporter(files, options) {
   if (!files) {
     return ''
   }
@@ -49455,33 +49862,39 @@ function reporter(files, options = {}) {
     return String(files.stack || files)
   }
 
+  const options_ = options || {}
+
   // One file.
-  if (!Array.isArray(files)) {
-    one = true
-    files = [files]
+  if (Array.isArray(files)) {
+    return format(transform(files, options_), false, options_)
   }
 
-  return format(transform(files, options), one, options)
+  return format(transform([files], options_), true, options_)
 }
 
 /**
+ * Parse a list of messages.
+ *
  * @param {Array<VFile>} files
+ *   List of files.
  * @param {Options} options
+ *   Options.
  * @returns {Info}
+ *   Rows.
  */
 function transform(files, options) {
-  /** @type {Array<FileRow|Row>} */
+  /** @type {Array<FileRow | MessageRow>} */
   const rows = []
   /** @type {Array<VFileMessage>} */
   const all = []
   /** @type {Sizes} */
-  const sizes = {}
+  const sizes = {place: 0, label: 0, reason: 0, ruleId: 0, source: 0}
   let index = -1
 
   while (++index < files.length) {
     // @ts-expect-error it works fine.
     const messages = sort({messages: [...files[index].messages]}).messages
-    /** @type {Array<Row>} */
+    /** @type {Array<MessageRow>} */
     const messageRows = []
     let offset = -1
 
@@ -49507,7 +49920,7 @@ function transform(files, options) {
           source: message.source || ''
         }
 
-        /** @type {keyof row} */
+        /** @type {MessageColumn} */
         let key
 
         for (key in row) {
@@ -49534,8 +49947,13 @@ function transform(files, options) {
 
 /**
  * @param {Info} map
- * @param {boolean|undefined} one
+ *   Rows.
+ * @param {boolean} one
+ *   Whether the input was explicitly one file (not an array).
  * @param {Options} options
+ *   Configuration.
+ * @returns {string}
+ *   Report.
  */
 // eslint-disable-next-line complexity
 function format(map, one, options) {
@@ -49668,10 +50086,12 @@ function format(map, one, options) {
 }
 
 /**
- * Get the length of `value`, ignoring ANSI sequences.
+ * Get the length of the first line of `value`, ignoring ANSI sequences.
  *
  * @param {string} value
+ *   Message.
  * @returns {number}
+ *   Width.
  */
 function size(value) {
   const match = /\r?\n|\r/.exec(value)
@@ -49944,38 +50364,45 @@ const check_unreleased_section_exists_attacher = function checkUnreleasedSection
 //# sourceMappingURL=check-unreleased-section-exists.js.map
 // EXTERNAL MODULE: ./node_modules/unist-util-find-all-between/index.js
 var unist_util_find_all_between = __nccwpck_require__(4399);
-;// CONCATENATED MODULE: ./node_modules/unist-util-find-all-after/index.js
+;// CONCATENATED MODULE: ./node_modules/unist-util-find-all-after/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
- *
- * @typedef {import('unist-util-is').Type} Type
- * @typedef {import('unist-util-is').Props} Props
- * @typedef {import('unist-util-is').TestFunctionAnything} TestFunctionAnything
+ * @typedef {import('unist-util-is').Test} Test
  */
 
 
 
+/**
+ * Find nodes in `parent` after a `child` or after an index, that pass `test`.
+ *
+ * @param parent
+ *   Parent node.
+ * @param index
+ *   Child of `parent` or it’s index.
+ * @param test
+ *   `unist-util-is`-compatible test.
+ * @returns
+ *   Children of `parent` that pass `test`.
+ */
 const findAllAfter =
   /**
    * @type {(
-   *  (<T extends Node>(node: Parent, index: Node|number, test: T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>>) => Array.<T>) &
-   *  ((node: Parent, index: Node|number, test?: null|undefined|Type|Props|TestFunctionAnything|Array<Type|Props|TestFunctionAnything>) => Array.<Node>)
+   *  (<T extends Node>(node: Parent, index: Node | number, test: import('unist-util-is').PredicateTest<T>) => Array<T>) &
+   *  ((node: Parent, index: Node | number, test?: Test) => Array<Node>)
    * )}
    */
   (
     /**
-     * Utility to get all children of a parent after a node or index
-     *
-     * @param {Parent} parent Parent node
-     * @param {Node|number} index Child of `parent`, or it’s index
-     * @param {null|undefined|Type|Props|TestFunctionAnything|Array<Type|Props|TestFunctionAnything>} [test] is-compatible test (such as a type)
-     * @returns {Array.<Node>}
+     * @param {Parent} parent
+     * @param {Node | number} index
+     * @param {Test} [test]
+     * @returns {Array<Node>}
      */
     function (parent, index, test) {
-      var is = convert(test)
-      /** @type {Array.<Node>} */
-      var results = []
+      const is = convert(test)
+      /** @type {Array<Node>} */
+      const results = []
 
       if (!parent || !parent.type || !parent.children) {
         throw new Error('Expected parent node')
@@ -50125,57 +50552,61 @@ const calculate_next_release_attacher = function (options) {
 };
 /* harmony default export */ const calculate_next_release = (calculate_next_release_attacher);
 //# sourceMappingURL=calculate-next-release.js.map
-;// CONCATENATED MODULE: ./node_modules/unist-util-remove/index.js
+;// CONCATENATED MODULE: ./node_modules/unist-util-remove/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
+ * @typedef {import('unist-util-is').Test} Test
  *
- * @typedef {import('unist-util-is').Type} Type
- * @typedef {import('unist-util-is').Props} Props
- */
-
-/**
- * Check if a node passes a test
- *
- * @template {Node} Tree Node type that is checked.
- * @callback TestFunction
- * @param {Tree} node
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {boolean|void}
- */
-
-/**
- * @typedef {Object} RemoveOptions
- * @property {boolean} [cascade] Whether to drop parent nodes if they had children, but all their children were filtered out test
+ * @typedef Options
+ *   Configuration.
+ * @property {boolean | null | undefined} [cascade=true]
+ *   Whether to drop parent nodes if they had children, but all their children
+ *   were filtered out.
  */
 
 
 
-/** @type {Array.<Node>} */
+/** @type {Array<unknown>} */
 const empty = []
 
+/**
+ * Change the given `tree` by removing all nodes that pass `test`.
+ *
+ * The tree is walked in preorder (NLR), visiting the node itself, then its
+ * head, etc.
+ *
+ * @param tree
+ *   Tree to change.
+ * @param options
+ *   Configuration (optional).
+ * @param test
+ *   `unist-util-is` compatible test.
+ * @returns
+ *   The given `tree` without nodes that pass `test`.
+ *
+ *   `null` is returned if `tree` itself didn’t pass the test or is cascaded
+ *   away.
+ */
+// To do: next major: don’t return `tree`.
 const remove =
   /**
    * @type {(
-   *  (<Tree extends Node>(node: Tree, options: RemoveOptions, test: Type|Props|TestFunction<import('unist-util-visit-parents/complex-types').InclusiveDescendant<Tree>>|Array<Type|Props|TestFunction<import('unist-util-visit-parents/complex-types').InclusiveDescendant<Tree>>>) => Tree|null) &
-   *  (<Tree extends Node>(node: Tree, test: Type|Props|TestFunction<import('unist-util-visit-parents/complex-types').InclusiveDescendant<Tree>>|Array<Type|Props|TestFunction<import('unist-util-visit-parents/complex-types').InclusiveDescendant<Tree>>>) => Tree|null)
+   *  (<Tree extends Node>(node: Tree, options: Options, test: Test) => Tree | null) &
+   *  (<Tree extends Node>(node: Tree, test: Test) => Tree | null)
    * )}
    */
   (
     /**
-     * Mutate the given tree by removing all nodes that pass `test`.
-     * The tree is walked in preorder (NLR), visiting the node itself, then its head, etc.
-     *
-     * @param {Node} tree Tree to filter
-     * @param {RemoveOptions} options Whether to drop parent nodes if they had children, but all their children were filtered out. Default is `{cascade: true}`
-     * @param {Type|Props|TestFunction<Node>|Array<Type|Props|TestFunction<Node>>} test is-compatible test (such as a type)
-     * @returns {Node|null}
+     * @param {Node} tree
+     * @param {Options | null | undefined} [options]
+     * @param {Test | null | undefined} [test]
+     * @returns {Node | null}
      */
     function (tree, options, test) {
       const is = convert(test || options)
       const cascade =
-        options.cascade === undefined || options.cascade === null
+        !options || options.cascade === undefined || options.cascade === null
           ? true
           : options.cascade
 
@@ -50186,12 +50617,12 @@ const remove =
        * For each composite node, modify its children array in-place.
        *
        * @param {Node} node
-       * @param {number|undefined} [index]
-       * @param {Parent|undefined} [parent]
-       * @returns {Node|null}
+       * @param {number | null | undefined} [index]
+       * @param {Parent | null | undefined} [parent]
+       * @returns {Node | null}
        */
       function preorder(node, index, parent) {
-        /** @type {Array.<Node>} */
+        /** @type {Array<Node>} */
         // @ts-expect-error looks like a parent.
         const children = node.children || empty
         let childIndex = -1
@@ -50480,7 +50911,7 @@ async function bump() {
         if (options.outputFile) {
             updated.basename = options.outputFile;
         }
-        await write(updated, { encoding: 'utf-8', mode: null });
+        await write(updated, 'utf-8');
         core.setOutput('version', updated.data['nextReleaseVersion']);
         core.setOutput('release-notes', updated.data['releaseNotes']);
         if (updated.messages.length > 0) {
