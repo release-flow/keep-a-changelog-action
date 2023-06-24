@@ -7,7 +7,8 @@
   "scripts": {
     "clean": "shx rm -rf lib",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "build-and-test": "tsc --incremental && cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "build-and-test": "tsc --incremental && npm test",
+    "rebuild-and-test": "npm run clean && npm run build && npm test",
     "build": "tsc",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
@@ -22,7 +23,7 @@
     "@jest/globals": "^29.3.1",
     "@types/jest": "^29.2.3",
     "@types/mdast": "^3.0.10",
-    "@types/node": "^18.11.9",
+    "@types/node": "^20.3.1",
     "@types/semver": "^7.3.9",
     "@types/unist": "^2.0.6",
     "@types/uuid": "^9.0.1",
