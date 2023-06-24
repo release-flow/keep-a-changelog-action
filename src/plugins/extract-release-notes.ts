@@ -1,27 +1,12 @@
 import { Plugin } from 'unified';
 import { VFile } from 'vfile';
-import type { Content, Root } from 'mdast';
-import between from 'unist-util-find-all-between';
-import { findAllAfter as after } from 'unist-util-find-all-after';
-import { Data, Node } from 'unist';
+import type { Root } from 'mdast';
 import semver from 'semver';
 const { SemVer } = semver;
 
 import { BoneheadedError, ReleaseHeading } from '../types.js';
 import { BumpOptions } from '../options.js';
-
-function getReleaseNotes(heading: ReleaseHeading, tree: Root): Root {
-  const root: Root = { type: 'root', children: [] };
-
-  // The terminator node can be undefined, e.g. if the section is the last section in the file
-  // and there are no definitions at the end
-  const terminatorNode = heading.node.data?.['nextSection'] as Node<Data> | undefined;
-  const result = terminatorNode ? between(tree, heading.node, terminatorNode) : after(tree, heading.node);
-
-  root.children.push(...(result as Content[]));
-
-  return root;
-}
+import { getReleaseNotes } from '../utils.js';
 
 function findReleaseHeading(target: semver.SemVer | 'unreleased', headings: ReleaseHeading[]): ReleaseHeading | null {
   for (let i = 0; i < headings.length; i++) {
@@ -41,10 +26,7 @@ function findReleaseHeading(target: semver.SemVer | 'unreleased', headings: Rele
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root, Root> = function extractReleaseNotes(
-  target: semver.SemVer | 'unreleased',
-  options: BumpOptions
-) {
+const attacher: Plugin<[BumpOptions], Root, Root> = function extractReleaseNotes(options: BumpOptions) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
 
@@ -57,6 +39,19 @@ const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root, Root> 
 
     if (releaseHeadings.length === 0) {
       file.fail('No releases in changelog');
+    }
+    const nextReleaseVersion = file.data['nextReleaseVersion'] as string;
+
+    if (!nextReleaseVersion) {
+      throw new BoneheadedError(
+        'No value found for nextReleaseVersion in file data. Did you forget to call the increment-release plugin before this one?'
+      );
+    }
+
+    const target = nextReleaseVersion === 'unreleased' ? 'unreleased' : semver.parse(nextReleaseVersion);
+
+    if (!target) {
+      throw new BoneheadedError('Invalid nextReleaseVersion in file data');
     }
 
     const heading = findReleaseHeading(target, releaseHeadings);

@@ -24,6 +24,7 @@ interface ActionParams {
   githubRepo: string | null;
   keepUnreleasedSection: boolean;
   failOnEmptyReleaseNotes: boolean;
+  collapsePrereleaseSections: boolean;
 }
 
 const DefaultParams: ActionParams = {
@@ -36,6 +37,7 @@ const DefaultParams: ActionParams = {
   githubRepo: 'test/dummy',
   keepUnreleasedSection: false,
   failOnEmptyReleaseNotes: false,
+  collapsePrereleaseSections: false,
 };
 
 describe('bump subcommand', () => {
@@ -180,6 +182,38 @@ describe('bump subcommand', () => {
     expect(result.outputs).toHaveProperty('version', '1.1.0-beta.0');
     expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
   });
+
+  it('can collapse prerelease sections when file starts with prerelease sections', () => {
+    const params = { ...DefaultParams };
+    params.collapsePrereleaseSections = false; // Force test fail
+    params.releaseType = 'premajor';
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+  });
+
+  it('errors when collapse-prerelease-sections and file does not start with prerelease sections', () => {
+    const params = { ...DefaultParams };
+    params.collapsePrereleaseSections = true;
+    params.changelog = 'changelog_no_unreleased.md';
+    params.releaseType = 'major';
+    params.outputFile = 'dummy.md';
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(getAllErrors(result)).toContain(
+      'The changelog must start with at least one prerelease version when collapse-prerelease-sections is set.'
+    );
+  });
+
+  it('errors when collapse-prerelease-sections and version are incompatible', () => {
+    const params = { ...DefaultParams };
+    params.collapsePrereleaseSections = true;
+    params.releaseType = 'premajor';
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+  });
 });
 
 function runAction(params: ActionParams): ActionResult {
@@ -215,6 +249,7 @@ function runAction(params: ActionParams): ActionResult {
 
   env['INPUT_KEEP-UNRELEASED-SECTION'] = params.keepUnreleasedSection.toString();
   env['INPUT_FAIL-ON-EMPTY-RELEASE-NOTES'] = params.failOnEmptyReleaseNotes.toString();
+  env['INPUT_COLLAPSE-PRERELEASE-SECTIONS'] = params.collapsePrereleaseSections.toString();
 
   if (params.githubRepo !== null) {
     env['GITHUB_REPOSITORY'] = params.githubRepo;

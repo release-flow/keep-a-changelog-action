@@ -1,3 +1,6 @@
+/**
+ * A Unified plugin that updates the 'Unreleased' section to have the next release version number.
+ */
 import { Plugin } from 'unified';
 import { VFile } from 'vfile';
 import type { Root, LinkReference, Text } from 'mdast';

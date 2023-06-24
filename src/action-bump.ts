@@ -21,7 +21,8 @@ import preprocess from './plugins/preprocessor.js';
 import assert from './plugins/assert.js';
 import checkUnreleasedSectionExists from './plugins/check-unreleased-section-exists.js';
 import extractReleaseNotes from './plugins/extract-release-notes.js';
-import incrementRelease from './plugins/increment-release.js';
+import incrementUnreleasedSection from './plugins/increment-unreleased-section.js';
+import mergePrereleaseNotes from './plugins/merge-prerelease-sections.js';
 import calculateNextRelease from './plugins/calculate-next-release.js';
 import updateLinkDefinitions from './plugins/update-link-definitions.js';
 import addEmptyUnreleasedSection from './plugins/add-unreleased-section.js';
@@ -41,8 +42,14 @@ const validReleaseTypes: Record<ReleaseType, unknown> = {
   prerelease: true,
 };
 
+const nonPrerelease = ['major', 'minor', 'patch'] as const;
+
 function isValidReleaseType(maybe: string): maybe is ReleaseType {
   return validReleaseTypes.hasOwnProperty(maybe);
+}
+
+function isFullRelease(releaseType: ReleaseType): boolean {
+  return nonPrerelease.find((r) => r === releaseType) !== undefined;
 }
 
 function getRepoOptions(): RepoSpec | undefined {
@@ -109,6 +116,14 @@ function getBumpOptions(): BumpOptions | undefined {
 
   const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
   const failOnEmptyReleaseNotes = core.getBooleanInput('fail-on-empty-release-notes');
+  const collapsePrereleaseSections = core.getBooleanInput('collapse-prerelease-sections');
+
+  if (collapsePrereleaseSections && !isFullRelease(releaseType)) {
+    core.setFailed(
+      `Input 'collapse-prerelease-sections' can only be 'true' when input 'version' specifies a non-prerelease version.`
+    );
+    return;
+  }
 
   const options: BumpOptions = {
     changelogPath,
@@ -120,6 +135,7 @@ function getBumpOptions(): BumpOptions | undefined {
     outputFile,
     keepUnreleasedSection,
     failOnEmptyReleaseNotes,
+    collapsePrereleaseSections,
   };
 
   return options;
@@ -134,13 +150,19 @@ async function processChangelog(file: VFile, options: BumpOptions): Promise<VFil
     .use(preprocess)
     .use(checkUnreleasedSectionExists)
     .use(assert)
-    .use(
-      bridge,
-      'releaseNotes',
-      unified().use(extractReleaseNotes, 'unreleased', options).use(stringify, { listItemIndent: 'one', bullet: '-' })
-    )
-    .use(calculateNextRelease, options)
-    .use(incrementRelease, options);
+    .use(calculateNextRelease, options);
+
+  if (options.collapsePrereleaseSections) {
+    processor = processor.use(mergePrereleaseNotes, options);
+  } else {
+    processor = processor.use(incrementUnreleasedSection, options);
+  }
+
+  processor = processor.use(
+    bridge,
+    'releaseNotes',
+    unified().use(extractReleaseNotes, options).use(stringify, { listItemIndent: 'one', bullet: '-' })
+  );
 
   if (options.keepUnreleasedSection) {
     processor = processor.use(addEmptyUnreleasedSection);
