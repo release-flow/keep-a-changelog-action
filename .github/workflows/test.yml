@@ -14,7 +14,7 @@ jobs:
         uses: release-flow/.github/actions/test@v1
         with:
           body: "body text"
-          github-token: "1234"
+          github_token: "1234"
           draft: true
           release_name: "Release xx"
           tag_name: "v-xx"
