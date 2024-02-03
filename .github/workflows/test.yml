@@ -18,3 +18,5 @@ jobs:
           draft: true
           release_name: "Release xx"
           tag_name: "v-xx"
+      - run: echo random-number ${{ steps.foo.outputs.html_url }}
+        shell: bash
