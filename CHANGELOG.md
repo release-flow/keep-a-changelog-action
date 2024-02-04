@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [3.0.0] - 2024-02-04
 
 ### Changed
 
@@ -101,6 +101,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Initial content including change log
+
+[3.0.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v2.2.1...v3.0.0
 
 [2.2.1]: https://github.com/release-flow/keep-a-changelog-action/compare/v2.2.0...v2.2.1
 
