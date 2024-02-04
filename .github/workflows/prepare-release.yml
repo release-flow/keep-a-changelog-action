@@ -23,13 +23,14 @@ name: '[autorelease] Prepare release PR'
 permissions:
   contents: read
   issues: write
+  pull-requests: write
 
 jobs:
   changelog:
     name: Update changelog and create PR
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         ref: ${{ github.head_ref }}
 

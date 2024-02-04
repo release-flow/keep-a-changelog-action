@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
-- Update this action to use Node 20.
+- **BREAKING** Update runtime to use Node 20. The action now requires a minimum version of v2.308.0 for the Actions runner.
+  Update self-hosted runners to v2.308.0 or later to ensure compatibility.
 
 - Update all workflows to latest version of GH actions.
 
