@@ -63,14 +63,14 @@ jobs:
       id: create_release
       uses: release-flow/.github/actions/release/create@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        tag_name: 'v${{ steps.get-release-version.outputs.release-version }}'
-        release_name: 'Release ${{ steps.get-release-version.outputs.release-version }}'
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        tag-name: 'v${{ steps.get-release-version.outputs.release-version }}'
+        release-name: 'Release ${{ steps.get-release-version.outputs.release-version }}'
         draft: true
         prerelease: ${{ steps.get-release-version.outputs.is-prerelease}}
         body: ${{ steps.get-release-notes.outputs.release-notes }}
 
     - name: Display Instructions
       run: |
-        echo "::notice title=Draft Release Prepared::A draft release has been prepared for you to approve: ${{ steps.create_release.outputs.html_url }}"
+        echo "::notice title=Draft Release Prepared::A draft release has been prepared for you to approve: ${{ steps.create_release.outputs.html-url }}"
   
