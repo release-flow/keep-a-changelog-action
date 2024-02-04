@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- Update this action to use Node 20.
+
+- Update all workflows to latest version of GH actions.
+
 ## [2.2.1] - 2023-03-11
 
 ### Changed

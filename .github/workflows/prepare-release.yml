@@ -20,6 +20,10 @@ on:
 
 name: '[autorelease] Prepare release PR'
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   changelog:
     name: Update changelog and create PR
@@ -57,7 +61,7 @@ jobs:
 
     - name: Create Pull Request
       id: create-release-pr
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@v6
       with:
         commit-message: 'chore: Update changelog for release ${{ steps.update-changelog.outputs.version }}'
         committer: 'releasebot <noreply@github.com>'
