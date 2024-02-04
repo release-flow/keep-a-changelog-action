@@ -5,6 +5,9 @@ on:
 
 name: '[autorelease] Release published'
 
+permissions:
+  contents: write
+
 jobs:
   update-ref:
     runs-on: ubuntu-latest
