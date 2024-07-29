@@ -30,7 +30,7 @@
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0-alpha.58",
     "@typescript-eslint/parser": "^8.0.0-alpha.58",
-    "@vercel/ncc": "^0.36.1",
+    "@vercel/ncc": "^0.38.1",
     "chalk": "^5.1.2",
     "cross-env": "^7.0.3",
     "eslint": "^9.8.0",
