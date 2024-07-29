@@ -40,7 +40,6 @@ function findReleaseHeading(target: semver.SemVer | 'unreleased', headings: Rele
   return null;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root, Root> = function extractReleaseNotes(
   target: semver.SemVer | 'unreleased',
   options: BumpOptions

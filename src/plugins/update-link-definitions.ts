@@ -7,7 +7,6 @@ import { format } from 'date-fns';
 import { BumpOptions } from '../options.js';
 import { BoneheadedError, isReleaseProps, ReleaseHeading } from '../types.js';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptions) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
@@ -20,7 +19,6 @@ const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptio
       throw new BoneheadedError('File should have been preprocessed before calling this plugin');
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     remove(tree, 'definition');
 
     for (let i = 0; i < releaseHeadings.length; i++) {

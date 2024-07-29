@@ -18,7 +18,7 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version-file: '.nvmrc'
-    - run: npm ci
+    - run: npm ci --legacy-peer-deps
     - run: npm run all
     - name: Ensure dist/ directory is up to date
       id: diff
