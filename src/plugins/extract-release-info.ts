@@ -44,7 +44,6 @@ function findReleaseHeading(target: QueryVersionOptionSpec, headings: ReleaseHea
   return target === 'latest-or-unreleased' ? unreleasedHeading : null;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const attacher: Plugin<[QueryVersionOptionSpec], Root, Root> = function extractUnreleasedContents(
   target: QueryVersionOptionSpec
 ) {
