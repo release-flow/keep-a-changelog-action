@@ -2,48 +2,15 @@ import process from 'process';
 import path from 'path';
 import { isValid, parseISO } from 'date-fns';
 
-import { unified } from 'unified';
-import { VFile } from 'vfile';
 import { VFileMessage } from 'vfile-message';
-import { read, write } from 'to-vfile';
-import { remark } from 'remark';
+import { read } from 'to-vfile';
 import { reporter } from 'vfile-reporter';
-import stringify from 'remark-stringify';
 import * as core from '@actions/core';
-import { ReleaseType } from 'semver';
+import { isValidReleaseType } from './types.js';
 
-import { ReleaseHeading } from './types.js';
 import { BumpOptions, RepoSpec } from './options.js';
-
-import bridge from './plugins/bridge.js';
-import releaseParser from './plugins/release-parser.js';
-import preprocess from './plugins/preprocessor.js';
-import assert from './plugins/assert.js';
-import checkUnreleasedSectionExists from './plugins/check-unreleased-section-exists.js';
-import extractReleaseNotes from './plugins/extract-release-notes.js';
-import incrementRelease from './plugins/increment-release.js';
-import calculateNextRelease from './plugins/calculate-next-release.js';
-import updateLinkDefinitions from './plugins/update-link-definitions.js';
-import addEmptyUnreleasedSection from './plugins/add-unreleased-section.js';
-
-// This is a compiler-safe mechanism to ensure that all possible ReleaseType
-// values are defined. If the ReleaseType type definition changes (not under our
-// control, it's part of the node-semver library) then this definition will
-// cause a compile-time error. See https://stackoverflow.com/a/66820587/260213
-// for the inspiration.
-const validReleaseTypes: Record<ReleaseType, unknown> = {
-  major: true,
-  premajor: true,
-  minor: true,
-  preminor: true,
-  patch: true,
-  prepatch: true,
-  prerelease: true,
-};
-
-function isValidReleaseType(maybe: string): maybe is ReleaseType {
-  return validReleaseTypes.hasOwnProperty(maybe);
-}
+import { bump } from './commands.js';
+import { GitHubReleaseLinkGenerator } from './release-link-generator.js';
 
 function getRepoOptions(): RepoSpec | undefined {
   const githubRepository = process.env['GITHUB_REPOSITORY'] ?? '';
@@ -107,6 +74,8 @@ function getBumpOptions(): BumpOptions | undefined {
     return;
   }
 
+  const linkGenerator = new GitHubReleaseLinkGenerator(repoOptions, tagPrefix);
+
   const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
   const failOnEmptyReleaseNotes = core.getBooleanInput('fail-on-empty-release-notes');
 
@@ -116,45 +85,16 @@ function getBumpOptions(): BumpOptions | undefined {
     version: releaseType,
     tagPrefix,
     preid: preid,
-    repo: repoOptions,
     outputFile,
     keepUnreleasedSection,
     failOnEmptyReleaseNotes,
+    linkGenerator: linkGenerator,
   };
 
   return options;
 }
 
-async function processChangelog(file: VFile, options: BumpOptions): Promise<VFile> {
-  const releaseHeadings: ReleaseHeading[] = [];
-
-  let processor = remark()
-    .data('releaseHeadings', releaseHeadings)
-    .use(releaseParser)
-    .use(preprocess)
-    .use(checkUnreleasedSectionExists)
-    .use(assert)
-    .use(
-      bridge,
-      'releaseNotes',
-      unified().use(extractReleaseNotes, 'unreleased', options).use(stringify, { listItemIndent: 'one', bullet: '-' })
-    )
-    .use(calculateNextRelease, options)
-    .use(incrementRelease, options);
-
-  if (options.keepUnreleasedSection) {
-    processor = processor.use(addEmptyUnreleasedSection);
-  }
-
-  const updated = await processor
-    .use(updateLinkDefinitions, options)
-    .use(stringify, { listItemIndent: 'one', bullet: '-' })
-    .process(file);
-
-  return updated;
-}
-
-export default async function bump(): Promise<void> {
+export default async function bumpAction(): Promise<void> {
   const options = getBumpOptions();
 
   if (!options) {
@@ -165,13 +105,7 @@ export default async function bump(): Promise<void> {
   const changelog = await read(options.changelogPath, { encoding: 'utf-8' });
 
   try {
-    const updated = await processChangelog(changelog, options);
-
-    if (options.outputFile) {
-      updated.basename = options.outputFile;
-    }
-
-    await write(updated, 'utf-8');
+    const updated = await bump(changelog, options);
 
     core.setOutput('version', updated.data['nextReleaseVersion']);
     core.setOutput('release-notes', updated.data['releaseNotes']);

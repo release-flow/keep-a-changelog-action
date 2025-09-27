@@ -1,0 +1,4 @@
+root = true
+
+[*.js, *.ts]
+tab_width = 2

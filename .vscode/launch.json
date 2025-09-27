@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-node",
+            "type": "node",
             "request": "launch",
             "name": "Debug current file",
             "skipFiles": [
@@ -17,7 +17,23 @@
             ]
         },
         {
-            "type": "pwa-node",
+            "type": "node",
+            "request": "launch",
+            "name": "Debug CLI",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/cli.ts",
+            "preLaunchTask": "npm: build",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ],
+            "args":[
+                "bump", "--version", "patch", "-o", "./tmp/CHANGELOG.md"
+            ]
+        },
+        {
+            "type": "node",
             "request": "launch",
             "name": "Debug tests",
             "skipFiles": [

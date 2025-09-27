@@ -1,6 +1,11 @@
 import { ReleaseType } from 'semver';
 
 import semver from 'semver';
+import { ReleaseSpec } from './types.js';
+
+export interface ReleaseLinkGenerator {
+  createLinkUrl(current: ReleaseSpec, previous?: ReleaseSpec): string;
+}
 
 export interface RepoSpec {
   owner: string;
@@ -13,7 +18,7 @@ export interface BumpOptions {
   preid?: string;
   releaseDate: Date;
   tagPrefix: string;
-  repo: RepoSpec;
+  linkGenerator: ReleaseLinkGenerator | undefined;
   outputFile: string | undefined;
   keepUnreleasedSection: boolean;
   failOnEmptyReleaseNotes: boolean;

@@ -60,29 +60,33 @@ const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptio
 
       // Regenerate the link definition node. If we are processing the last release in the changelog,
       // the link is in a different format from the others
+      let definition: Definition | undefined;
       if (i === releaseHeadings.length - 1) {
-        const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/releases/tag/${gitRef}`;
-        const definition: Definition = {
-          type: 'definition',
-          url,
-          identifier: gitRef,
-          label: versionText,
-        };
-        tree.children.push(definition);
+        const url = options.linkGenerator?.createLinkUrl(props);
+        if (url) {
+          definition = {
+            type: 'definition',
+            url,
+            identifier: gitRef,
+            label: versionText,
+          };
+        }
       } else {
         const nextRelease = releaseHeadings[i + 1].release;
         if (nextRelease === 'unreleased') {
           throw new BoneheadedError('Unreleased section should be the first level 2 heading in the changelog');
         }
-        const nextVersionText = nextRelease.version.format();
-        const nextTagText = `${options.tagPrefix}${nextVersionText}`;
-        const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/compare/${nextTagText}...${gitRef}`;
-        const definition: Definition = {
-          type: 'definition',
-          url,
-          identifier: gitRef,
-          label: versionText,
-        };
+        const url = options.linkGenerator?.createLinkUrl(props, nextRelease);
+        if (url) {
+          definition = {
+            type: 'definition',
+            url,
+            identifier: gitRef,
+            label: versionText,
+          };
+        }
+      }
+      if (definition) {
         tree.children.push(definition);
       }
     }

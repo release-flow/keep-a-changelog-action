@@ -106,3 +106,5 @@ lib/
 
 # Ignore any files generated as part of testing
 src/__tests__/**/*_changed.md
+
+/tmp

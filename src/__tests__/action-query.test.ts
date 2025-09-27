@@ -5,7 +5,7 @@ import { globby } from 'globby';
 
 import './jest-file-diff.js';
 
-import { invokeActionScript, getAllErrors, ActionResult } from './test-utils.js';
+import { invokeActionScript, getActionErrors, ActionResult } from './test-utils.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -52,7 +52,7 @@ describe('gh start action', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getAllErrors(result)).toContain(
+    expect(getActionErrors(result)).toContain(
       "Input 'version' contains invalid value 'burble'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')"
     );
   });
@@ -64,7 +64,7 @@ describe('gh start action', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getAllErrors(result)).toContain("The specified release, 'unreleased', was not found in the changelog");
+    expect(getActionErrors(result)).toContain("The specified release, 'unreleased', was not found in the changelog");
   });
 
   it('errors when the changelog does not have the specified version', () => {
@@ -73,7 +73,7 @@ describe('gh start action', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getAllErrors(result)).toContain("The specified release, '17.18.19', was not found in the changelog");
+    expect(getActionErrors(result)).toContain("The specified release, '17.18.19', was not found in the changelog");
   });
 
   it('errors when latest requested but the changelog does not have any versions', () => {
@@ -83,7 +83,7 @@ describe('gh start action', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getAllErrors(result)).toContain("The specified release, 'latest', was not found in the changelog");
+    expect(getActionErrors(result)).toContain("The specified release, 'latest', was not found in the changelog");
   });
 
   it('sets the output variables for the latest version, new mechanism', () => {
@@ -166,7 +166,7 @@ it('errors when latest-or-unreleased requested but the changelog does not have a
   const result = runAction(params);
 
   expect(result.isError).toBeTruthy();
-  expect(getAllErrors(result)).toContain('No release headings in changelog');
+  expect(getActionErrors(result)).toContain('No release headings in changelog');
 });
 
 function runAction(params: ActionParams): ActionResult {

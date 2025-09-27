@@ -9788,196 +9788,6 @@ function isValid(date) {
 // Fallback for modularized imports:
 /* harmony default export */ const date_fns_isValid = ((/* unused pure expression or super */ null && (isValid)));
 
-;// CONCATENATED MODULE: ./node_modules/bail/index.js
-/**
- * Throw a given error.
- *
- * @param {Error|null|undefined} [error]
- *   Maybe error.
- * @returns {asserts error is null|undefined}
- */
-function bail(error) {
-  if (error) {
-    throw error
-  }
-}
-
-// EXTERNAL MODULE: ./node_modules/is-buffer/index.js
-var is_buffer = __nccwpck_require__(5625);
-// EXTERNAL MODULE: ./node_modules/extend/index.js
-var extend = __nccwpck_require__(8171);
-;// CONCATENATED MODULE: ./node_modules/is-plain-obj/index.js
-function isPlainObject(value) {
-	if (Object.prototype.toString.call(value) !== '[object Object]') {
-		return false;
-	}
-
-	const prototype = Object.getPrototypeOf(value);
-	return prototype === null || prototype === Object.prototype;
-}
-
-;// CONCATENATED MODULE: ./node_modules/trough/index.js
-/**
- * @typedef {(error?: Error|null|undefined, ...output: Array<any>) => void} Callback
- * @typedef {(...input: Array<any>) => any} Middleware
- *
- * @typedef {(...input: Array<any>) => void} Run
- *   Call all middleware.
- * @typedef {(fn: Middleware) => Pipeline} Use
- *   Add `fn` (middleware) to the list.
- * @typedef {{run: Run, use: Use}} Pipeline
- *   Middleware.
- */
-
-/**
- * Create new middleware.
- *
- * @returns {Pipeline}
- */
-function trough() {
-  /** @type {Array<Middleware>} */
-  const fns = []
-  /** @type {Pipeline} */
-  const pipeline = {run, use}
-
-  return pipeline
-
-  /** @type {Run} */
-  function run(...values) {
-    let middlewareIndex = -1
-    /** @type {Callback} */
-    const callback = values.pop()
-
-    if (typeof callback !== 'function') {
-      throw new TypeError('Expected function as last argument, not ' + callback)
-    }
-
-    next(null, ...values)
-
-    /**
-     * Run the next `fn`, or we’re done.
-     *
-     * @param {Error|null|undefined} error
-     * @param {Array<any>} output
-     */
-    function next(error, ...output) {
-      const fn = fns[++middlewareIndex]
-      let index = -1
-
-      if (error) {
-        callback(error)
-        return
-      }
-
-      // Copy non-nullish input into values.
-      while (++index < values.length) {
-        if (output[index] === null || output[index] === undefined) {
-          output[index] = values[index]
-        }
-      }
-
-      // Save the newly created `output` for the next call.
-      values = output
-
-      // Next or done.
-      if (fn) {
-        wrap(fn, next)(...output)
-      } else {
-        callback(null, ...output)
-      }
-    }
-  }
-
-  /** @type {Use} */
-  function use(middelware) {
-    if (typeof middelware !== 'function') {
-      throw new TypeError(
-        'Expected `middelware` to be a function, not ' + middelware
-      )
-    }
-
-    fns.push(middelware)
-    return pipeline
-  }
-}
-
-/**
- * Wrap `middleware`.
- * Can be sync or async; return a promise, receive a callback, or return new
- * values and errors.
- *
- * @param {Middleware} middleware
- * @param {Callback} callback
- */
-function wrap(middleware, callback) {
-  /** @type {boolean} */
-  let called
-
-  return wrapped
-
-  /**
-   * Call `middleware`.
-   * @this {any}
-   * @param {Array<any>} parameters
-   * @returns {void}
-   */
-  function wrapped(...parameters) {
-    const fnExpectsCallback = middleware.length > parameters.length
-    /** @type {any} */
-    let result
-
-    if (fnExpectsCallback) {
-      parameters.push(done)
-    }
-
-    try {
-      result = middleware.apply(this, parameters)
-    } catch (error) {
-      const exception = /** @type {Error} */ (error)
-
-      // Well, this is quite the pickle.
-      // `middleware` received a callback and called it synchronously, but that
-      // threw an error.
-      // The only thing left to do is to throw the thing instead.
-      if (fnExpectsCallback && called) {
-        throw exception
-      }
-
-      return done(exception)
-    }
-
-    if (!fnExpectsCallback) {
-      if (result instanceof Promise) {
-        result.then(then, done)
-      } else if (result instanceof Error) {
-        done(result)
-      } else {
-        then(result)
-      }
-    }
-  }
-
-  /**
-   * Call `callback`, only once.
-   * @type {Callback}
-   */
-  function done(error, ...output) {
-    if (!called) {
-      called = true
-      callback(error, ...output)
-    }
-  }
-
-  /**
-   * Call `done` with one value.
-   *
-   * @param {any} [value]
-   */
-  function then(value) {
-    done(null, value)
-  }
-}
-
 ;// CONCATENATED MODULE: ./node_modules/unist-util-stringify-position/index.js
 /**
  * @typedef {import('unist').Point} Point
@@ -10268,6 +10078,12 @@ VFileMessage.prototype.source = null
 VFileMessage.prototype.ruleId = null
 VFileMessage.prototype.position = null
 
+// EXTERNAL MODULE: external "fs"
+var external_fs_ = __nccwpck_require__(7147);
+;// CONCATENATED MODULE: external "url"
+const external_url_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
+// EXTERNAL MODULE: ./node_modules/is-buffer/index.js
+var is_buffer = __nccwpck_require__(5625);
 ;// CONCATENATED MODULE: ./node_modules/vfile/lib/minurl.shared.js
 /**
  * @typedef URL
@@ -10307,8 +10123,6 @@ function isUrl(fileUrlOrPath) {
   )
 }
 
-;// CONCATENATED MODULE: external "url"
-const external_url_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
 ;// CONCATENATED MODULE: ./node_modules/vfile/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
@@ -10831,6 +10645,1265 @@ function buffer(value) {
   return is_buffer(value)
 }
 
+;// CONCATENATED MODULE: ./node_modules/to-vfile/lib/index.js
+/**
+ * @typedef {import('vfile').VFileValue} Value
+ * @typedef {import('vfile').VFileOptions} Options
+ * @typedef {import('vfile').BufferEncoding} BufferEncoding
+ *   Encodings supported by the buffer class.
+ *
+ *   This is a copy of the types from Node and `VFile`.
+ *
+ * @typedef ReadOptions
+ *   Configuration for `fs.readFile`.
+ * @property {BufferEncoding | null | undefined} [encoding]
+ *   Encoding to read file as, will turn `file.value` into a string if passed.
+ * @property {string | undefined} [flag]
+ *   File system flags to use.
+ *
+ * @typedef WriteOptions
+ *   Configuration for `fs.writeFile`.
+ * @property {BufferEncoding | null | undefined} [encoding]
+ *   Encoding to write file as.
+ * @property {number | string | undefined} [mode]
+ *   File mode (permission and sticky bits) if the file was newly created.
+ * @property {string | undefined} [flag]
+ *   File system flags to use.
+ *
+ * @typedef {URL | Value} Path
+ *   URL to file or path to file.
+ *
+ *   > 👉 **Note**: `Value` is used here because it’s a smarter `Buffer`
+ * @typedef {Path | Options | VFile} Compatible
+ *   URL to file, path to file, options for file, or actual file.
+ */
+
+/**
+ * @callback Callback
+ *   Callback called after reading or writing a file.
+ * @param {NodeJS.ErrnoException | null} error
+ *   Error when reading or writing was not successful.
+ * @param {VFile | null | undefined} file
+ *   File when reading or writing was successful.
+ */
+
+
+
+
+
+
+
+// To do: next major: use `node:` prefix.
+// To do: next major: use `URL` from global.
+// To do: next major: Only pass `undefined`.
+
+/**
+ * Create a virtual file from a description.
+ *
+ * This is like `VFile`, but it accepts a file path instead of file cotnents.
+ *
+ * If `options` is a string, URL, or buffer, it’s used as the path.
+ * Otherwise, if it’s a file, that’s returned instead.
+ * Otherwise, the options are passed through to `new VFile()`.
+ *
+ * @param {Compatible | null | undefined} [description]
+ *   Path to file, file options, or file itself.
+ * @returns {VFile}
+ *   Given file or new file.
+ */
+function toVFile(description) {
+  if (typeof description === 'string' || description instanceof external_url_namespaceObject.URL) {
+    description = {path: description}
+  } else if (is_buffer(description)) {
+    description = {path: String(description)}
+  }
+
+  return looksLikeAVFile(description)
+    ? description
+    : // To do: remove when `VFile` allows explicit `null`.
+      new VFile(description || undefined)
+}
+
+/**
+ * Create a virtual file and read it in, synchronously.
+ *
+ * @param {Compatible} description
+ *   Path to file, file options, or file itself.
+ * @param {BufferEncoding | ReadOptions | null | undefined} [options]
+ *   Encoding to use or Node.JS read options.
+ * @returns {VFile}
+ *   Given file or new file.
+ */
+function readSync(description, options) {
+  const file = toVFile(description)
+  file.value = external_fs_.readFileSync(external_path_.resolve(file.cwd, file.path), options)
+  return file
+}
+
+/**
+ * Create a virtual file and write it, synchronously.
+ *
+ * @param {Compatible} description
+ *   Path to file, file options, or file itself.
+ * @param {BufferEncoding | WriteOptions | null | undefined} [options]
+ *   Encoding to use or Node.JS write options.
+ * @returns {VFile}
+ *   Given file or new file.
+ */
+function writeSync(description, options) {
+  const file = toVFile(description)
+  external_fs_.writeFileSync(external_path_.resolve(file.cwd, file.path), file.value || '', options)
+  return file
+}
+
+/**
+ * Create a virtual file and read it in, async.
+ *
+ * @param description
+ *   Path to file, file options, or file itself.
+ * @param options
+ *   Encoding to use or Node.JS read options.
+ * @param callback
+ *   Callback called when done.
+ * @returns
+ *   Nothing when a callback is given, otherwise promise that resolves to given
+ *   file or new file.
+ */
+const read =
+  /**
+   * @type {{
+   *   (description: Compatible, options: BufferEncoding | ReadOptions | null | undefined, callback: Callback): void
+   *   (description: Compatible, callback: Callback): void
+   *   (description: Compatible, options?: BufferEncoding | ReadOptions | null | undefined): Promise<VFile>
+   * }}
+   */
+  (
+    /**
+     * @param {Compatible} description
+     * @param {BufferEncoding | ReadOptions | null | undefined} [options]
+     * @param {Callback | null | undefined} [callback]
+     */
+    function (description, options, callback) {
+      const file = toVFile(description)
+
+      if (!callback && typeof options === 'function') {
+        callback = options
+        options = null
+      }
+
+      if (!callback) {
+        return new Promise(executor)
+      }
+
+      executor(resolve, callback)
+
+      /**
+       * @param {VFile} result
+       */
+      function resolve(result) {
+        // @ts-expect-error: `callback` always defined.
+        callback(null, result)
+      }
+
+      /**
+       * @param {(error: VFile) => void} resolve
+       * @param {(error: NodeJS.ErrnoException, file?: VFile | undefined) => void} reject
+       */
+      function executor(resolve, reject) {
+        /** @type {string} */
+        let fp
+
+        try {
+          fp = external_path_.resolve(file.cwd, file.path)
+        } catch (error) {
+          const exception = /** @type {NodeJS.ErrnoException} */ (error)
+          return reject(exception)
+        }
+
+        external_fs_.readFile(fp, options, done)
+
+        /**
+         * @param {NodeJS.ErrnoException | null} error
+         * @param {Value} result
+         */
+        function done(error, result) {
+          if (error) {
+            reject(error)
+          } else {
+            file.value = result
+            resolve(file)
+          }
+        }
+      }
+    }
+  )
+
+/**
+ * Create a virtual file and write it, async.
+ *
+ * @param description
+ *   Path to file, file options, or file itself.
+ * @param options
+ *   Encoding to use or Node.JS write options.
+ * @param callback
+ *   Callback called when done.
+ * @returns
+ *   Nothing when a callback is given, otherwise promise that resolves to given
+ *   file or new file.
+ */
+const write =
+  /**
+   * @type {{
+   *   (description: Compatible, options: BufferEncoding | WriteOptions | null | undefined, callback: Callback): void
+   *   (description: Compatible, callback: Callback): void
+   *   (description: Compatible, options?: BufferEncoding | WriteOptions | null | undefined): Promise<VFile>
+   * }}
+   */
+  (
+    /**
+     * @param {Compatible} description
+     * @param {BufferEncoding | WriteOptions | null | undefined} [options]
+     * @param {Callback | null | undefined} [callback]
+     */
+    function (description, options, callback) {
+      const file = toVFile(description)
+
+      // Weird, right? Otherwise `fs` doesn’t accept it.
+      if (!callback && typeof options === 'function') {
+        callback = options
+        options = undefined
+      }
+
+      if (!callback) {
+        return new Promise(executor)
+      }
+
+      executor(resolve, callback)
+
+      /**
+       * @param {VFile} result
+       */
+      function resolve(result) {
+        // @ts-expect-error: `callback` always defined.
+        callback(null, result)
+      }
+
+      /**
+       * @param {(error: VFile) => void} resolve
+       * @param {(error: NodeJS.ErrnoException, file: VFile | null) => void} reject
+       */
+      function executor(resolve, reject) {
+        /** @type {string} */
+        let fp
+
+        try {
+          fp = external_path_.resolve(file.cwd, file.path)
+        } catch (error) {
+          const exception = /** @type {NodeJS.ErrnoException} */ (error)
+          return reject(exception, null)
+        }
+
+        external_fs_.writeFile(fp, file.value || '', options || null, done)
+
+        /**
+         * @param {NodeJS.ErrnoException | null} error
+         */
+        function done(error) {
+          if (error) {
+            reject(error, null)
+          } else {
+            resolve(file)
+          }
+        }
+      }
+    }
+  )
+
+/**
+ * Check if something looks like a vfile.
+ *
+ * @param {Compatible | null | undefined} value
+ *   Value.
+ * @returns {value is VFile}
+ *   Whether `value` looks like a `VFile`.
+ */
+function looksLikeAVFile(value) {
+  return Boolean(
+    value &&
+      typeof value === 'object' &&
+      'message' in value &&
+      'messages' in value
+  )
+}
+
+// To do: next major: remove?
+toVFile.readSync = readSync
+toVFile.writeSync = writeSync
+toVFile.read = read
+toVFile.write = write
+
+;// CONCATENATED MODULE: ./node_modules/ansi-regex/index.js
+function ansiRegex({onlyFirst = false} = {}) {
+	const pattern = [
+	    '[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)',
+		'(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))'
+	].join('|');
+
+	return new RegExp(pattern, onlyFirst ? undefined : 'g');
+}
+
+;// CONCATENATED MODULE: ./node_modules/strip-ansi/index.js
+
+
+function stripAnsi(string) {
+	if (typeof string !== 'string') {
+		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
+	}
+
+	return string.replace(ansiRegex(), '');
+}
+
+// EXTERNAL MODULE: ./node_modules/eastasianwidth/eastasianwidth.js
+var eastasianwidth = __nccwpck_require__(7061);
+// EXTERNAL MODULE: ./node_modules/emoji-regex/index.js
+var emoji_regex = __nccwpck_require__(8212);
+;// CONCATENATED MODULE: ./node_modules/string-width/index.js
+
+
+
+
+function stringWidth(string, options = {}) {
+	if (typeof string !== 'string' || string.length === 0) {
+		return 0;
+	}
+
+	options = {
+		ambiguousIsNarrow: true,
+		...options
+	};
+
+	string = stripAnsi(string);
+
+	if (string.length === 0) {
+		return 0;
+	}
+
+	string = string.replace(emoji_regex(), '  ');
+
+	const ambiguousCharacterWidth = options.ambiguousIsNarrow ? 1 : 2;
+	let width = 0;
+
+	for (const character of string) {
+		const codePoint = character.codePointAt(0);
+
+		// Ignore control characters
+		if (codePoint <= 0x1F || (codePoint >= 0x7F && codePoint <= 0x9F)) {
+			continue;
+		}
+
+		// Ignore combining characters
+		if (codePoint >= 0x300 && codePoint <= 0x36F) {
+			continue;
+		}
+
+		const code = eastasianwidth.eastAsianWidth(character);
+		switch (code) {
+			case 'F':
+			case 'W':
+				width += 2;
+				break;
+			case 'A':
+				width += ambiguousCharacterWidth;
+				break;
+			default:
+				width += 1;
+		}
+	}
+
+	return width;
+}
+
+;// CONCATENATED MODULE: ./node_modules/vfile-statistics/index.js
+/**
+ * @typedef {import('vfile').VFile} VFile
+ * @typedef {import('vfile-message').VFileMessage} VFileMessage
+ *
+ * @typedef Statistics
+ * @property {number} fatal Fatal errors (`fatal: true`)
+ * @property {number} warn warning errors (`fatal: false`)
+ * @property {number} info informational messages (`fatal: null|undefined`)
+ * @property {number} nonfatal warning + info
+ * @property {number} total nonfatal + fatal
+ */
+
+/**
+ * Get stats for a file, list of files, or list of messages.
+ *
+ * @param {Array.<VFile|VFileMessage>|VFile|VFileMessage} [value]
+ * @returns {Statistics}
+ */
+function statistics(value) {
+  var result = {true: 0, false: 0, null: 0}
+
+  if (value) {
+    if (Array.isArray(value)) {
+      list(value)
+    } else {
+      one(value)
+    }
+  }
+
+  return {
+    fatal: result.true,
+    nonfatal: result.false + result.null,
+    warn: result.false,
+    info: result.null,
+    total: result.true + result.false + result.null
+  }
+
+  /**
+   * @param {Array.<VFile|VFileMessage>} value
+   * @returns {void}
+   */
+  function list(value) {
+    var index = -1
+
+    while (++index < value.length) {
+      one(value[index])
+    }
+  }
+
+  /**
+   * @param {VFile|VFileMessage} value
+   * @returns {void}
+   */
+  function one(value) {
+    if ('messages' in value) return list(value.messages)
+
+    result[
+      value.fatal === undefined || value.fatal === null
+        ? null
+        : Boolean(value.fatal)
+    ]++
+  }
+}
+
+;// CONCATENATED MODULE: ./node_modules/vfile-sort/index.js
+/**
+ * @typedef {import('vfile').VFile} VFile
+ * @typedef {import('vfile-message').VFileMessage} VFileMessage
+ */
+
+var severities = {true: 2, false: 1, null: 0, undefined: 0}
+
+/**
+ * @template {VFile} F
+ * @param {F} file
+ * @returns {F}
+ */
+function sort(file) {
+  file.messages.sort(comparator)
+  return file
+}
+
+/**
+ * @param {VFileMessage} a
+ * @param {VFileMessage} b
+ * @returns {number}
+ */
+function comparator(a, b) {
+  return (
+    check(a, b, 'line') ||
+    check(a, b, 'column') ||
+    severities[b.fatal] - severities[a.fatal] ||
+    compare(a, b, 'source') ||
+    compare(a, b, 'ruleId') ||
+    compare(a, b, 'reason') ||
+    0
+  )
+}
+
+/**
+ * @param {VFileMessage} a
+ * @param {VFileMessage} b
+ * @param {string} property
+ * @returns {number}
+ */
+function check(a, b, property) {
+  return (a[property] || 0) - (b[property] || 0)
+}
+
+/**
+ * @param {VFileMessage} a
+ * @param {VFileMessage} b
+ * @param {string} property
+ * @returns {number}
+ */
+function compare(a, b, property) {
+  return String(a[property] || '').localeCompare(b[property] || '')
+}
+
+;// CONCATENATED MODULE: external "node:process"
+const external_node_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:process");
+;// CONCATENATED MODULE: external "node:os"
+const external_node_os_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:os");
+;// CONCATENATED MODULE: external "node:tty"
+const external_node_tty_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:tty");
+;// CONCATENATED MODULE: ./node_modules/supports-color/index.js
+
+
+
+
+// From: https://github.com/sindresorhus/has-flag/blob/main/index.js
+function hasFlag(flag, argv = external_node_process_namespaceObject.argv) {
+	const prefix = flag.startsWith('-') ? '' : (flag.length === 1 ? '-' : '--');
+	const position = argv.indexOf(prefix + flag);
+	const terminatorPosition = argv.indexOf('--');
+	return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
+}
+
+const {env} = external_node_process_namespaceObject;
+
+let flagForceColor;
+if (
+	hasFlag('no-color')
+	|| hasFlag('no-colors')
+	|| hasFlag('color=false')
+	|| hasFlag('color=never')
+) {
+	flagForceColor = 0;
+} else if (
+	hasFlag('color')
+	|| hasFlag('colors')
+	|| hasFlag('color=true')
+	|| hasFlag('color=always')
+) {
+	flagForceColor = 1;
+}
+
+function envForceColor() {
+	if ('FORCE_COLOR' in env) {
+		if (env.FORCE_COLOR === 'true') {
+			return 1;
+		}
+
+		if (env.FORCE_COLOR === 'false') {
+			return 0;
+		}
+
+		return env.FORCE_COLOR.length === 0 ? 1 : Math.min(Number.parseInt(env.FORCE_COLOR, 10), 3);
+	}
+}
+
+function translateLevel(level) {
+	if (level === 0) {
+		return false;
+	}
+
+	return {
+		level,
+		hasBasic: true,
+		has256: level >= 2,
+		has16m: level >= 3,
+	};
+}
+
+function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
+	const noFlagForceColor = envForceColor();
+	if (noFlagForceColor !== undefined) {
+		flagForceColor = noFlagForceColor;
+	}
+
+	const forceColor = sniffFlags ? flagForceColor : noFlagForceColor;
+
+	if (forceColor === 0) {
+		return 0;
+	}
+
+	if (sniffFlags) {
+		if (hasFlag('color=16m')
+			|| hasFlag('color=full')
+			|| hasFlag('color=truecolor')) {
+			return 3;
+		}
+
+		if (hasFlag('color=256')) {
+			return 2;
+		}
+	}
+
+	if (haveStream && !streamIsTTY && forceColor === undefined) {
+		return 0;
+	}
+
+	const min = forceColor || 0;
+
+	if (env.TERM === 'dumb') {
+		return min;
+	}
+
+	if (external_node_process_namespaceObject.platform === 'win32') {
+		// Windows 10 build 10586 is the first Windows release that supports 256 colors.
+		// Windows 10 build 14931 is the first release that supports 16m/TrueColor.
+		const osRelease = external_node_os_namespaceObject.release().split('.');
+		if (
+			Number(osRelease[0]) >= 10
+			&& Number(osRelease[2]) >= 10_586
+		) {
+			return Number(osRelease[2]) >= 14_931 ? 3 : 2;
+		}
+
+		return 1;
+	}
+
+	if ('CI' in env) {
+		if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'GITHUB_ACTIONS', 'BUILDKITE', 'DRONE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
+			return 1;
+		}
+
+		return min;
+	}
+
+	if ('TEAMCITY_VERSION' in env) {
+		return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
+	}
+
+	// Check for Azure DevOps pipelines
+	if ('TF_BUILD' in env && 'AGENT_NAME' in env) {
+		return 1;
+	}
+
+	if (env.COLORTERM === 'truecolor') {
+		return 3;
+	}
+
+	if ('TERM_PROGRAM' in env) {
+		const version = Number.parseInt((env.TERM_PROGRAM_VERSION || '').split('.')[0], 10);
+
+		switch (env.TERM_PROGRAM) {
+			case 'iTerm.app':
+				return version >= 3 ? 3 : 2;
+			case 'Apple_Terminal':
+				return 2;
+			// No default
+		}
+	}
+
+	if (/-256(color)?$/i.test(env.TERM)) {
+		return 2;
+	}
+
+	if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
+		return 1;
+	}
+
+	if ('COLORTERM' in env) {
+		return 1;
+	}
+
+	return min;
+}
+
+function createSupportsColor(stream, options = {}) {
+	const level = _supportsColor(stream, {
+		streamIsTTY: stream && stream.isTTY,
+		...options,
+	});
+
+	return translateLevel(level);
+}
+
+const supportsColor = {
+	stdout: createSupportsColor({isTTY: external_node_tty_namespaceObject.isatty(1)}),
+	stderr: createSupportsColor({isTTY: external_node_tty_namespaceObject.isatty(2)}),
+};
+
+/* harmony default export */ const supports_color = (supportsColor);
+
+;// CONCATENATED MODULE: ./node_modules/vfile-reporter/lib/color.js
+
+
+/** @type {boolean} */
+// @ts-expect-error Types are incorrect.
+const color = supports_color.stderr.hasBasic
+
+
+
+;// CONCATENATED MODULE: ./node_modules/vfile-reporter/lib/platform.js
+
+
+const platform = external_node_process_namespaceObject.platform
+
+;// CONCATENATED MODULE: ./node_modules/vfile-reporter/lib/index.js
+/**
+ * @typedef {import('vfile').VFile} VFile
+ * @typedef {import('vfile-message').VFileMessage} VFileMessage
+ * @typedef {import('vfile-statistics').Statistics} Statistics
+ */
+
+/**
+ * @typedef Options
+ *   Configuration (optional).
+ * @property {boolean | null | undefined} [color]
+ *   Use ANSI colors in report.
+ *   The default behavior in Node.js is the check if color is supported.
+ * @property {boolean | null | undefined} [verbose=false]
+ *   Show message `note`s.
+ *   Notes are optional, additional, long descriptions.
+ * @property {boolean | null | undefined} [quiet=false]
+ *   Do not show files without messages.
+ * @property {boolean | null | undefined} [silent=false]
+ *   Show errors only, this hides info and warning messages, and sets
+ *   `quiet: true`.
+ * @property {string | null | undefined} [defaultName='<stdin>']
+ *   Label to use for files without file path.
+ *   If one file and no `defaultName` is given, no name will show up in the
+ *   report.
+ */
+
+/**
+ * @typedef MessageRow
+ *   Message.
+ * @property {string} place
+ *   Serialized positional info.
+ * @property {string} label
+ *   Kind of message.
+ * @property {string} reason
+ *   Reason.
+ * @property {string} ruleId
+ *   Rule.
+ * @property {string} source
+ *   Source.
+ *
+ * @typedef {keyof MessageRow} MessageColumn
+ *
+ * @typedef FileRow
+ *   File header row.
+ * @property {'file'} type
+ *   Kind.
+ * @property {VFile} file
+ *   Virtual file.
+ * @property {Statistics} stats
+ *   Statistics.
+ *
+ * @typedef {Record<MessageColumn, number>} Sizes
+ *   Sizes for message columns.
+ *
+ * @typedef Info
+ *   Result.
+ * @property {Array<FileRow | MessageRow>} rows
+ *   Rows.
+ * @property {Statistics} stats
+ *   Total statistics.
+ * @property {Sizes} sizes
+ *   Sizes for message columns.
+ */
+
+
+
+
+
+
+
+
+const own = {}.hasOwnProperty
+
+// `log-symbols` without chalk, ignored for Windows:
+/* c8 ignore next 4 */
+const chars =
+  platform === 'win32' ? {error: '×', warning: '‼'} : {error: '✖', warning: '⚠'}
+
+const labels = {
+  true: 'error',
+  false: 'warning',
+  null: 'info',
+  undefined: 'info'
+}
+
+/**
+ * Create a report from an error, one file, or multiple files.
+ *
+ * @param {Error | VFile | Array<VFile> | null | undefined} [files]
+ *   Files or error to report.
+ * @param {Options | null | undefined} [options]
+ *   Configuration.
+ * @returns {string}
+ *   Report.
+ */
+function reporter(files, options) {
+  if (!files) {
+    return ''
+  }
+
+  // Error.
+  if ('name' in files && 'message' in files) {
+    return String(files.stack || files)
+  }
+
+  const options_ = options || {}
+
+  // One file.
+  if (Array.isArray(files)) {
+    return format(transform(files, options_), false, options_)
+  }
+
+  return format(transform([files], options_), true, options_)
+}
+
+/**
+ * Parse a list of messages.
+ *
+ * @param {Array<VFile>} files
+ *   List of files.
+ * @param {Options} options
+ *   Options.
+ * @returns {Info}
+ *   Rows.
+ */
+function transform(files, options) {
+  /** @type {Array<FileRow | MessageRow>} */
+  const rows = []
+  /** @type {Array<VFileMessage>} */
+  const all = []
+  /** @type {Sizes} */
+  const sizes = {place: 0, label: 0, reason: 0, ruleId: 0, source: 0}
+  let index = -1
+
+  while (++index < files.length) {
+    // @ts-expect-error it works fine.
+    const messages = sort({messages: [...files[index].messages]}).messages
+    /** @type {Array<MessageRow>} */
+    const messageRows = []
+    let offset = -1
+
+    while (++offset < messages.length) {
+      const message = messages[offset]
+
+      if (!options.silent || message.fatal) {
+        all.push(message)
+
+        const row = {
+          place: stringifyPosition(
+            message.position
+              ? message.position.end.line && message.position.end.column
+                ? message.position
+                : message.position.start
+              : undefined
+          ),
+          label: labels[/** @type {keyof labels} */ (String(message.fatal))],
+          reason:
+            (message.stack || message.message) +
+            (options.verbose && message.note ? '\n' + message.note : ''),
+          ruleId: message.ruleId || '',
+          source: message.source || ''
+        }
+
+        /** @type {MessageColumn} */
+        let key
+
+        for (key in row) {
+          // eslint-disable-next-line max-depth
+          if (own.call(row, key)) {
+            sizes[key] = Math.max(size(row[key]), sizes[key] || 0)
+          }
+        }
+
+        messageRows.push(row)
+      }
+    }
+
+    if ((!options.quiet && !options.silent) || messageRows.length > 0) {
+      rows.push(
+        {type: 'file', file: files[index], stats: statistics(messages)},
+        ...messageRows
+      )
+    }
+  }
+
+  return {rows, stats: statistics(all), sizes}
+}
+
+/**
+ * @param {Info} map
+ *   Rows.
+ * @param {boolean} one
+ *   Whether the input was explicitly one file (not an array).
+ * @param {Options} options
+ *   Configuration.
+ * @returns {string}
+ *   Report.
+ */
+// eslint-disable-next-line complexity
+function format(map, one, options) {
+  /** @type {boolean} */
+  const enabled =
+    options.color === undefined || options.color === null
+      ? color
+      : options.color
+  /** @type {Array<string>} */
+  const lines = []
+  let index = -1
+
+  while (++index < map.rows.length) {
+    const row = map.rows[index]
+
+    if ('type' in row) {
+      const stats = row.stats
+      let line = row.file.history[0] || options.defaultName || '<stdin>'
+
+      line =
+        one && !options.defaultName && !row.file.history[0]
+          ? ''
+          : (enabled
+              ? '\u001B[4m' /* Underline. */ +
+                (stats.fatal
+                  ? '\u001B[31m' /* Red. */
+                  : stats.total
+                  ? '\u001B[33m' /* Yellow. */
+                  : '\u001B[32m') /* Green. */ +
+                line +
+                '\u001B[39m\u001B[24m'
+              : line) +
+            (row.file.stored && row.file.path !== row.file.history[0]
+              ? ' > ' + row.file.path
+              : '')
+
+      if (!stats.total) {
+        line =
+          (line ? line + ': ' : '') +
+          (row.file.stored
+            ? enabled
+              ? '\u001B[33mwritten\u001B[39m' /* Yellow. */
+              : 'written'
+            : 'no issues found')
+      }
+
+      if (line) {
+        if (index && !('type' in map.rows[index - 1])) {
+          lines.push('')
+        }
+
+        lines.push(line)
+      }
+    } else {
+      let reason = row.reason
+      const match = /\r?\n|\r/.exec(reason)
+      /** @type {string} */
+      let rest
+
+      if (match) {
+        rest = reason.slice(match.index)
+        reason = reason.slice(0, match.index)
+      } else {
+        rest = ''
+      }
+
+      lines.push(
+        (
+          '  ' +
+          ' '.repeat(map.sizes.place - size(row.place)) +
+          row.place +
+          '  ' +
+          (enabled
+            ? (row.label === 'error'
+                ? '\u001B[31m' /* Red. */
+                : '\u001B[33m') /* Yellow. */ +
+              row.label +
+              '\u001B[39m'
+            : row.label) +
+          ' '.repeat(map.sizes.label - size(row.label)) +
+          '  ' +
+          reason +
+          ' '.repeat(map.sizes.reason - size(reason)) +
+          '  ' +
+          row.ruleId +
+          ' '.repeat(map.sizes.ruleId - size(row.ruleId)) +
+          '  ' +
+          (row.source || '')
+        ).replace(/ +$/, '') + rest
+      )
+    }
+  }
+
+  const stats = map.stats
+
+  if (stats.fatal || stats.warn) {
+    let line = ''
+
+    if (stats.fatal) {
+      line =
+        (enabled
+          ? '\u001B[31m' /* Red. */ + chars.error + '\u001B[39m'
+          : chars.error) +
+        ' ' +
+        stats.fatal +
+        ' ' +
+        (labels.true + (stats.fatal === 1 ? '' : 's'))
+    }
+
+    if (stats.warn) {
+      line =
+        (line ? line + ', ' : '') +
+        (enabled
+          ? '\u001B[33m' /* Yellow. */ + chars.warning + '\u001B[39m'
+          : chars.warning) +
+        ' ' +
+        stats.warn +
+        ' ' +
+        (labels.false + (stats.warn === 1 ? '' : 's'))
+    }
+
+    if (stats.total !== stats.fatal && stats.total !== stats.warn) {
+      line = stats.total + ' messages (' + line + ')'
+    }
+
+    lines.push('', line)
+  }
+
+  return lines.join('\n')
+}
+
+/**
+ * Get the length of the first line of `value`, ignoring ANSI sequences.
+ *
+ * @param {string} value
+ *   Message.
+ * @returns {number}
+ *   Width.
+ */
+function size(value) {
+  const match = /\r?\n|\r/.exec(value)
+  return stringWidth(match ? value.slice(0, match.index) : value)
+}
+
+// EXTERNAL MODULE: ./node_modules/semver/index.js
+var semver = __nccwpck_require__(1383);
+;// CONCATENATED MODULE: ./lib/types.js
+
+function isReleaseSpec(maybe) {
+    return maybe === 'unreleased' || isReleaseProps(maybe);
+}
+function isReleaseProps(maybe) {
+    return (maybe !== null &&
+        maybe !== undefined &&
+        typeof maybe === 'object' &&
+        'version' in maybe &&
+        maybe.version instanceof semver.SemVer &&
+        'date' in maybe &&
+        maybe.date instanceof Date);
+}
+class BoneheadedError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+    }
+}
+// This is a compiler-safe mechanism to ensure that all possible ReleaseType
+// values are defined. If the ReleaseType type definition changes (not under our
+// control, it's part of the node-semver library) then this definition will
+// cause a compile-time error. See https://stackoverflow.com/a/66820587/260213
+// for the inspiration.
+const validReleaseTypes = {
+    major: true,
+    premajor: true,
+    minor: true,
+    preminor: true,
+    patch: true,
+    prepatch: true,
+    prerelease: true,
+};
+function isValidReleaseType(maybe) {
+    return validReleaseTypes.hasOwnProperty(maybe);
+}
+//# sourceMappingURL=types.js.map
+;// CONCATENATED MODULE: ./node_modules/bail/index.js
+/**
+ * Throw a given error.
+ *
+ * @param {Error|null|undefined} [error]
+ *   Maybe error.
+ * @returns {asserts error is null|undefined}
+ */
+function bail(error) {
+  if (error) {
+    throw error
+  }
+}
+
+// EXTERNAL MODULE: ./node_modules/extend/index.js
+var extend = __nccwpck_require__(8171);
+;// CONCATENATED MODULE: ./node_modules/is-plain-obj/index.js
+function isPlainObject(value) {
+	if (Object.prototype.toString.call(value) !== '[object Object]') {
+		return false;
+	}
+
+	const prototype = Object.getPrototypeOf(value);
+	return prototype === null || prototype === Object.prototype;
+}
+
+;// CONCATENATED MODULE: ./node_modules/trough/index.js
+/**
+ * @typedef {(error?: Error|null|undefined, ...output: Array<any>) => void} Callback
+ * @typedef {(...input: Array<any>) => any} Middleware
+ *
+ * @typedef {(...input: Array<any>) => void} Run
+ *   Call all middleware.
+ * @typedef {(fn: Middleware) => Pipeline} Use
+ *   Add `fn` (middleware) to the list.
+ * @typedef {{run: Run, use: Use}} Pipeline
+ *   Middleware.
+ */
+
+/**
+ * Create new middleware.
+ *
+ * @returns {Pipeline}
+ */
+function trough() {
+  /** @type {Array<Middleware>} */
+  const fns = []
+  /** @type {Pipeline} */
+  const pipeline = {run, use}
+
+  return pipeline
+
+  /** @type {Run} */
+  function run(...values) {
+    let middlewareIndex = -1
+    /** @type {Callback} */
+    const callback = values.pop()
+
+    if (typeof callback !== 'function') {
+      throw new TypeError('Expected function as last argument, not ' + callback)
+    }
+
+    next(null, ...values)
+
+    /**
+     * Run the next `fn`, or we’re done.
+     *
+     * @param {Error|null|undefined} error
+     * @param {Array<any>} output
+     */
+    function next(error, ...output) {
+      const fn = fns[++middlewareIndex]
+      let index = -1
+
+      if (error) {
+        callback(error)
+        return
+      }
+
+      // Copy non-nullish input into values.
+      while (++index < values.length) {
+        if (output[index] === null || output[index] === undefined) {
+          output[index] = values[index]
+        }
+      }
+
+      // Save the newly created `output` for the next call.
+      values = output
+
+      // Next or done.
+      if (fn) {
+        wrap(fn, next)(...output)
+      } else {
+        callback(null, ...output)
+      }
+    }
+  }
+
+  /** @type {Use} */
+  function use(middelware) {
+    if (typeof middelware !== 'function') {
+      throw new TypeError(
+        'Expected `middelware` to be a function, not ' + middelware
+      )
+    }
+
+    fns.push(middelware)
+    return pipeline
+  }
+}
+
+/**
+ * Wrap `middleware`.
+ * Can be sync or async; return a promise, receive a callback, or return new
+ * values and errors.
+ *
+ * @param {Middleware} middleware
+ * @param {Callback} callback
+ */
+function wrap(middleware, callback) {
+  /** @type {boolean} */
+  let called
+
+  return wrapped
+
+  /**
+   * Call `middleware`.
+   * @this {any}
+   * @param {Array<any>} parameters
+   * @returns {void}
+   */
+  function wrapped(...parameters) {
+    const fnExpectsCallback = middleware.length > parameters.length
+    /** @type {any} */
+    let result
+
+    if (fnExpectsCallback) {
+      parameters.push(done)
+    }
+
+    try {
+      result = middleware.apply(this, parameters)
+    } catch (error) {
+      const exception = /** @type {Error} */ (error)
+
+      // Well, this is quite the pickle.
+      // `middleware` received a callback and called it synchronously, but that
+      // threw an error.
+      // The only thing left to do is to throw the thing instead.
+      if (fnExpectsCallback && called) {
+        throw exception
+      }
+
+      return done(exception)
+    }
+
+    if (!fnExpectsCallback) {
+      if (result instanceof Promise) {
+        result.then(then, done)
+      } else if (result instanceof Error) {
+        done(result)
+      } else {
+        then(result)
+      }
+    }
+  }
+
+  /**
+   * Call `callback`, only once.
+   * @type {Callback}
+   */
+  function done(error, ...output) {
+    if (!called) {
+      called = true
+      callback(error, ...output)
+    }
+  }
+
+  /**
+   * Call `done` with one value.
+   *
+   * @param {any} [value]
+   */
+  function then(value) {
+    done(null, value)
+  }
+}
+
 ;// CONCATENATED MODULE: ./node_modules/unified/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
@@ -10862,7 +11935,7 @@ function buffer(value) {
 // Expose a frozen processor.
 const unified = base().freeze()
 
-const own = {}.hasOwnProperty
+const lib_own = {}.hasOwnProperty
 
 // Function to create the first processor.
 /**
@@ -10935,7 +12008,7 @@ function base() {
       }
 
       // Get `key`.
-      return (own.call(namespace, key) && namespace[key]) || null
+      return (lib_own.call(namespace, key) && namespace[key]) || null
     }
 
     // Set space.
@@ -11321,7 +12394,7 @@ function keys(value) {
   let key
 
   for (key in value) {
-    if (own.call(value, key)) {
+    if (lib_own.call(value, key)) {
       return true
     }
   }
@@ -11408,14 +12481,14 @@ function assertDone(name, asyncName, complete) {
  * @returns {VFile}
  */
 function vfile(value) {
-  return looksLikeAVFile(value) ? value : new VFile(value)
+  return lib_looksLikeAVFile(value) ? value : new VFile(value)
 }
 
 /**
  * @param {VFileCompatible} [value]
  * @returns {value is VFile}
  */
-function looksLikeAVFile(value) {
+function lib_looksLikeAVFile(value) {
   return Boolean(
     value &&
       typeof value === 'object' &&
@@ -11431,305 +12504,6 @@ function looksLikeAVFile(value) {
 function looksLikeAVFileValue(value) {
   return typeof value === 'string' || is_buffer(value)
 }
-
-// EXTERNAL MODULE: external "fs"
-var external_fs_ = __nccwpck_require__(7147);
-;// CONCATENATED MODULE: ./node_modules/to-vfile/lib/index.js
-/**
- * @typedef {import('vfile').VFileValue} Value
- * @typedef {import('vfile').VFileOptions} Options
- * @typedef {import('vfile').BufferEncoding} BufferEncoding
- *   Encodings supported by the buffer class.
- *
- *   This is a copy of the types from Node and `VFile`.
- *
- * @typedef ReadOptions
- *   Configuration for `fs.readFile`.
- * @property {BufferEncoding | null | undefined} [encoding]
- *   Encoding to read file as, will turn `file.value` into a string if passed.
- * @property {string | undefined} [flag]
- *   File system flags to use.
- *
- * @typedef WriteOptions
- *   Configuration for `fs.writeFile`.
- * @property {BufferEncoding | null | undefined} [encoding]
- *   Encoding to write file as.
- * @property {number | string | undefined} [mode]
- *   File mode (permission and sticky bits) if the file was newly created.
- * @property {string | undefined} [flag]
- *   File system flags to use.
- *
- * @typedef {URL | Value} Path
- *   URL to file or path to file.
- *
- *   > 👉 **Note**: `Value` is used here because it’s a smarter `Buffer`
- * @typedef {Path | Options | VFile} Compatible
- *   URL to file, path to file, options for file, or actual file.
- */
-
-/**
- * @callback Callback
- *   Callback called after reading or writing a file.
- * @param {NodeJS.ErrnoException | null} error
- *   Error when reading or writing was not successful.
- * @param {VFile | null | undefined} file
- *   File when reading or writing was successful.
- */
-
-
-
-
-
-
-
-// To do: next major: use `node:` prefix.
-// To do: next major: use `URL` from global.
-// To do: next major: Only pass `undefined`.
-
-/**
- * Create a virtual file from a description.
- *
- * This is like `VFile`, but it accepts a file path instead of file cotnents.
- *
- * If `options` is a string, URL, or buffer, it’s used as the path.
- * Otherwise, if it’s a file, that’s returned instead.
- * Otherwise, the options are passed through to `new VFile()`.
- *
- * @param {Compatible | null | undefined} [description]
- *   Path to file, file options, or file itself.
- * @returns {VFile}
- *   Given file or new file.
- */
-function toVFile(description) {
-  if (typeof description === 'string' || description instanceof external_url_namespaceObject.URL) {
-    description = {path: description}
-  } else if (is_buffer(description)) {
-    description = {path: String(description)}
-  }
-
-  return lib_looksLikeAVFile(description)
-    ? description
-    : // To do: remove when `VFile` allows explicit `null`.
-      new VFile(description || undefined)
-}
-
-/**
- * Create a virtual file and read it in, synchronously.
- *
- * @param {Compatible} description
- *   Path to file, file options, or file itself.
- * @param {BufferEncoding | ReadOptions | null | undefined} [options]
- *   Encoding to use or Node.JS read options.
- * @returns {VFile}
- *   Given file or new file.
- */
-function readSync(description, options) {
-  const file = toVFile(description)
-  file.value = external_fs_.readFileSync(external_path_.resolve(file.cwd, file.path), options)
-  return file
-}
-
-/**
- * Create a virtual file and write it, synchronously.
- *
- * @param {Compatible} description
- *   Path to file, file options, or file itself.
- * @param {BufferEncoding | WriteOptions | null | undefined} [options]
- *   Encoding to use or Node.JS write options.
- * @returns {VFile}
- *   Given file or new file.
- */
-function writeSync(description, options) {
-  const file = toVFile(description)
-  external_fs_.writeFileSync(external_path_.resolve(file.cwd, file.path), file.value || '', options)
-  return file
-}
-
-/**
- * Create a virtual file and read it in, async.
- *
- * @param description
- *   Path to file, file options, or file itself.
- * @param options
- *   Encoding to use or Node.JS read options.
- * @param callback
- *   Callback called when done.
- * @returns
- *   Nothing when a callback is given, otherwise promise that resolves to given
- *   file or new file.
- */
-const read =
-  /**
-   * @type {{
-   *   (description: Compatible, options: BufferEncoding | ReadOptions | null | undefined, callback: Callback): void
-   *   (description: Compatible, callback: Callback): void
-   *   (description: Compatible, options?: BufferEncoding | ReadOptions | null | undefined): Promise<VFile>
-   * }}
-   */
-  (
-    /**
-     * @param {Compatible} description
-     * @param {BufferEncoding | ReadOptions | null | undefined} [options]
-     * @param {Callback | null | undefined} [callback]
-     */
-    function (description, options, callback) {
-      const file = toVFile(description)
-
-      if (!callback && typeof options === 'function') {
-        callback = options
-        options = null
-      }
-
-      if (!callback) {
-        return new Promise(executor)
-      }
-
-      executor(resolve, callback)
-
-      /**
-       * @param {VFile} result
-       */
-      function resolve(result) {
-        // @ts-expect-error: `callback` always defined.
-        callback(null, result)
-      }
-
-      /**
-       * @param {(error: VFile) => void} resolve
-       * @param {(error: NodeJS.ErrnoException, file?: VFile | undefined) => void} reject
-       */
-      function executor(resolve, reject) {
-        /** @type {string} */
-        let fp
-
-        try {
-          fp = external_path_.resolve(file.cwd, file.path)
-        } catch (error) {
-          const exception = /** @type {NodeJS.ErrnoException} */ (error)
-          return reject(exception)
-        }
-
-        external_fs_.readFile(fp, options, done)
-
-        /**
-         * @param {NodeJS.ErrnoException | null} error
-         * @param {Value} result
-         */
-        function done(error, result) {
-          if (error) {
-            reject(error)
-          } else {
-            file.value = result
-            resolve(file)
-          }
-        }
-      }
-    }
-  )
-
-/**
- * Create a virtual file and write it, async.
- *
- * @param description
- *   Path to file, file options, or file itself.
- * @param options
- *   Encoding to use or Node.JS write options.
- * @param callback
- *   Callback called when done.
- * @returns
- *   Nothing when a callback is given, otherwise promise that resolves to given
- *   file or new file.
- */
-const write =
-  /**
-   * @type {{
-   *   (description: Compatible, options: BufferEncoding | WriteOptions | null | undefined, callback: Callback): void
-   *   (description: Compatible, callback: Callback): void
-   *   (description: Compatible, options?: BufferEncoding | WriteOptions | null | undefined): Promise<VFile>
-   * }}
-   */
-  (
-    /**
-     * @param {Compatible} description
-     * @param {BufferEncoding | WriteOptions | null | undefined} [options]
-     * @param {Callback | null | undefined} [callback]
-     */
-    function (description, options, callback) {
-      const file = toVFile(description)
-
-      // Weird, right? Otherwise `fs` doesn’t accept it.
-      if (!callback && typeof options === 'function') {
-        callback = options
-        options = undefined
-      }
-
-      if (!callback) {
-        return new Promise(executor)
-      }
-
-      executor(resolve, callback)
-
-      /**
-       * @param {VFile} result
-       */
-      function resolve(result) {
-        // @ts-expect-error: `callback` always defined.
-        callback(null, result)
-      }
-
-      /**
-       * @param {(error: VFile) => void} resolve
-       * @param {(error: NodeJS.ErrnoException, file: VFile | null) => void} reject
-       */
-      function executor(resolve, reject) {
-        /** @type {string} */
-        let fp
-
-        try {
-          fp = external_path_.resolve(file.cwd, file.path)
-        } catch (error) {
-          const exception = /** @type {NodeJS.ErrnoException} */ (error)
-          return reject(exception, null)
-        }
-
-        external_fs_.writeFile(fp, file.value || '', options || null, done)
-
-        /**
-         * @param {NodeJS.ErrnoException | null} error
-         */
-        function done(error) {
-          if (error) {
-            reject(error, null)
-          } else {
-            resolve(file)
-          }
-        }
-      }
-    }
-  )
-
-/**
- * Check if something looks like a vfile.
- *
- * @param {Compatible | null | undefined} value
- *   Value.
- * @returns {value is VFile}
- *   Whether `value` looks like a `VFile`.
- */
-function lib_looksLikeAVFile(value) {
-  return Boolean(
-    value &&
-      typeof value === 'object' &&
-      'message' in value &&
-      'messages' in value
-  )
-}
-
-// To do: next major: remove?
-toVFile.readSync = readSync
-toVFile.writeSync = writeSync
-toVFile.read = read
-toVFile.write = write
 
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-string/index.js
 /**
@@ -20687,7 +21461,7 @@ function decode($0, $1, $2) {
 
 
 
-const lib_own = {}.hasOwnProperty
+const mdast_util_from_markdown_lib_own = {}.hasOwnProperty
 /**
  * @param value Markdown to parse (`string` or `Buffer`).
  * @param [encoding] Character encoding to understand `value` as when it’s a `Buffer` (`string`, default: `'utf8'`).
@@ -20895,7 +21669,7 @@ function compiler(options = {}) {
     while (++index < events.length) {
       const handler = config[events[index][0]]
 
-      if (lib_own.call(handler, events[index][1].type)) {
+      if (mdast_util_from_markdown_lib_own.call(handler, events[index][1].type)) {
         handler[events[index][1].type].call(
           Object.assign(
             {
@@ -21785,9 +22559,9 @@ function extension(combined, extension) {
   let key
 
   for (key in extension) {
-    if (lib_own.call(extension, key)) {
+    if (mdast_util_from_markdown_lib_own.call(extension, key)) {
       const list = key === 'canContainEols' || key === 'transforms'
-      const maybe = lib_own.call(combined, key) ? combined[key] : undefined
+      const maybe = mdast_util_from_markdown_lib_own.call(combined, key) ? combined[key] : undefined
       /* c8 ignore next */
 
       const left = maybe || (combined[key] = list ? [] : {})
@@ -23218,7 +23992,7 @@ function ok() {
  * @param {string} d
  * @returns {string}
  */
-function color(d) {
+function color_color(d) {
   return '\u001B[33m' + d + '\u001B[39m'
 }
 
@@ -23312,7 +24086,7 @@ const visitParents =
           Object.defineProperty(visit, 'name', {
             value:
               'node (' +
-              color(value.type + (name ? '<' + name + '>' : '')) +
+              color_color(value.type + (name ? '<' + name + '>' : '')) +
               ')'
           })
         }
@@ -25064,740 +25838,6 @@ function remarkStringify(options) {
 
 const remark = unified().use(remark_parse).use(remarkStringify).freeze()
 
-;// CONCATENATED MODULE: ./node_modules/ansi-regex/index.js
-function ansiRegex({onlyFirst = false} = {}) {
-	const pattern = [
-	    '[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)',
-		'(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))'
-	].join('|');
-
-	return new RegExp(pattern, onlyFirst ? undefined : 'g');
-}
-
-;// CONCATENATED MODULE: ./node_modules/strip-ansi/index.js
-
-
-function stripAnsi(string) {
-	if (typeof string !== 'string') {
-		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
-	}
-
-	return string.replace(ansiRegex(), '');
-}
-
-// EXTERNAL MODULE: ./node_modules/eastasianwidth/eastasianwidth.js
-var eastasianwidth = __nccwpck_require__(7061);
-// EXTERNAL MODULE: ./node_modules/emoji-regex/index.js
-var emoji_regex = __nccwpck_require__(8212);
-;// CONCATENATED MODULE: ./node_modules/string-width/index.js
-
-
-
-
-function stringWidth(string, options = {}) {
-	if (typeof string !== 'string' || string.length === 0) {
-		return 0;
-	}
-
-	options = {
-		ambiguousIsNarrow: true,
-		...options
-	};
-
-	string = stripAnsi(string);
-
-	if (string.length === 0) {
-		return 0;
-	}
-
-	string = string.replace(emoji_regex(), '  ');
-
-	const ambiguousCharacterWidth = options.ambiguousIsNarrow ? 1 : 2;
-	let width = 0;
-
-	for (const character of string) {
-		const codePoint = character.codePointAt(0);
-
-		// Ignore control characters
-		if (codePoint <= 0x1F || (codePoint >= 0x7F && codePoint <= 0x9F)) {
-			continue;
-		}
-
-		// Ignore combining characters
-		if (codePoint >= 0x300 && codePoint <= 0x36F) {
-			continue;
-		}
-
-		const code = eastasianwidth.eastAsianWidth(character);
-		switch (code) {
-			case 'F':
-			case 'W':
-				width += 2;
-				break;
-			case 'A':
-				width += ambiguousCharacterWidth;
-				break;
-			default:
-				width += 1;
-		}
-	}
-
-	return width;
-}
-
-;// CONCATENATED MODULE: ./node_modules/vfile-statistics/index.js
-/**
- * @typedef {import('vfile').VFile} VFile
- * @typedef {import('vfile-message').VFileMessage} VFileMessage
- *
- * @typedef Statistics
- * @property {number} fatal Fatal errors (`fatal: true`)
- * @property {number} warn warning errors (`fatal: false`)
- * @property {number} info informational messages (`fatal: null|undefined`)
- * @property {number} nonfatal warning + info
- * @property {number} total nonfatal + fatal
- */
-
-/**
- * Get stats for a file, list of files, or list of messages.
- *
- * @param {Array.<VFile|VFileMessage>|VFile|VFileMessage} [value]
- * @returns {Statistics}
- */
-function statistics(value) {
-  var result = {true: 0, false: 0, null: 0}
-
-  if (value) {
-    if (Array.isArray(value)) {
-      list(value)
-    } else {
-      one(value)
-    }
-  }
-
-  return {
-    fatal: result.true,
-    nonfatal: result.false + result.null,
-    warn: result.false,
-    info: result.null,
-    total: result.true + result.false + result.null
-  }
-
-  /**
-   * @param {Array.<VFile|VFileMessage>} value
-   * @returns {void}
-   */
-  function list(value) {
-    var index = -1
-
-    while (++index < value.length) {
-      one(value[index])
-    }
-  }
-
-  /**
-   * @param {VFile|VFileMessage} value
-   * @returns {void}
-   */
-  function one(value) {
-    if ('messages' in value) return list(value.messages)
-
-    result[
-      value.fatal === undefined || value.fatal === null
-        ? null
-        : Boolean(value.fatal)
-    ]++
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/vfile-sort/index.js
-/**
- * @typedef {import('vfile').VFile} VFile
- * @typedef {import('vfile-message').VFileMessage} VFileMessage
- */
-
-var severities = {true: 2, false: 1, null: 0, undefined: 0}
-
-/**
- * @template {VFile} F
- * @param {F} file
- * @returns {F}
- */
-function sort(file) {
-  file.messages.sort(comparator)
-  return file
-}
-
-/**
- * @param {VFileMessage} a
- * @param {VFileMessage} b
- * @returns {number}
- */
-function comparator(a, b) {
-  return (
-    check(a, b, 'line') ||
-    check(a, b, 'column') ||
-    severities[b.fatal] - severities[a.fatal] ||
-    compare(a, b, 'source') ||
-    compare(a, b, 'ruleId') ||
-    compare(a, b, 'reason') ||
-    0
-  )
-}
-
-/**
- * @param {VFileMessage} a
- * @param {VFileMessage} b
- * @param {string} property
- * @returns {number}
- */
-function check(a, b, property) {
-  return (a[property] || 0) - (b[property] || 0)
-}
-
-/**
- * @param {VFileMessage} a
- * @param {VFileMessage} b
- * @param {string} property
- * @returns {number}
- */
-function compare(a, b, property) {
-  return String(a[property] || '').localeCompare(b[property] || '')
-}
-
-;// CONCATENATED MODULE: external "node:process"
-const external_node_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:process");
-;// CONCATENATED MODULE: external "node:os"
-const external_node_os_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:os");
-;// CONCATENATED MODULE: external "node:tty"
-const external_node_tty_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:tty");
-;// CONCATENATED MODULE: ./node_modules/supports-color/index.js
-
-
-
-
-// From: https://github.com/sindresorhus/has-flag/blob/main/index.js
-function hasFlag(flag, argv = external_node_process_namespaceObject.argv) {
-	const prefix = flag.startsWith('-') ? '' : (flag.length === 1 ? '-' : '--');
-	const position = argv.indexOf(prefix + flag);
-	const terminatorPosition = argv.indexOf('--');
-	return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
-}
-
-const {env} = external_node_process_namespaceObject;
-
-let flagForceColor;
-if (
-	hasFlag('no-color')
-	|| hasFlag('no-colors')
-	|| hasFlag('color=false')
-	|| hasFlag('color=never')
-) {
-	flagForceColor = 0;
-} else if (
-	hasFlag('color')
-	|| hasFlag('colors')
-	|| hasFlag('color=true')
-	|| hasFlag('color=always')
-) {
-	flagForceColor = 1;
-}
-
-function envForceColor() {
-	if ('FORCE_COLOR' in env) {
-		if (env.FORCE_COLOR === 'true') {
-			return 1;
-		}
-
-		if (env.FORCE_COLOR === 'false') {
-			return 0;
-		}
-
-		return env.FORCE_COLOR.length === 0 ? 1 : Math.min(Number.parseInt(env.FORCE_COLOR, 10), 3);
-	}
-}
-
-function translateLevel(level) {
-	if (level === 0) {
-		return false;
-	}
-
-	return {
-		level,
-		hasBasic: true,
-		has256: level >= 2,
-		has16m: level >= 3,
-	};
-}
-
-function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
-	const noFlagForceColor = envForceColor();
-	if (noFlagForceColor !== undefined) {
-		flagForceColor = noFlagForceColor;
-	}
-
-	const forceColor = sniffFlags ? flagForceColor : noFlagForceColor;
-
-	if (forceColor === 0) {
-		return 0;
-	}
-
-	if (sniffFlags) {
-		if (hasFlag('color=16m')
-			|| hasFlag('color=full')
-			|| hasFlag('color=truecolor')) {
-			return 3;
-		}
-
-		if (hasFlag('color=256')) {
-			return 2;
-		}
-	}
-
-	if (haveStream && !streamIsTTY && forceColor === undefined) {
-		return 0;
-	}
-
-	const min = forceColor || 0;
-
-	if (env.TERM === 'dumb') {
-		return min;
-	}
-
-	if (external_node_process_namespaceObject.platform === 'win32') {
-		// Windows 10 build 10586 is the first Windows release that supports 256 colors.
-		// Windows 10 build 14931 is the first release that supports 16m/TrueColor.
-		const osRelease = external_node_os_namespaceObject.release().split('.');
-		if (
-			Number(osRelease[0]) >= 10
-			&& Number(osRelease[2]) >= 10_586
-		) {
-			return Number(osRelease[2]) >= 14_931 ? 3 : 2;
-		}
-
-		return 1;
-	}
-
-	if ('CI' in env) {
-		if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'GITHUB_ACTIONS', 'BUILDKITE', 'DRONE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
-			return 1;
-		}
-
-		return min;
-	}
-
-	if ('TEAMCITY_VERSION' in env) {
-		return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
-	}
-
-	// Check for Azure DevOps pipelines
-	if ('TF_BUILD' in env && 'AGENT_NAME' in env) {
-		return 1;
-	}
-
-	if (env.COLORTERM === 'truecolor') {
-		return 3;
-	}
-
-	if ('TERM_PROGRAM' in env) {
-		const version = Number.parseInt((env.TERM_PROGRAM_VERSION || '').split('.')[0], 10);
-
-		switch (env.TERM_PROGRAM) {
-			case 'iTerm.app':
-				return version >= 3 ? 3 : 2;
-			case 'Apple_Terminal':
-				return 2;
-			// No default
-		}
-	}
-
-	if (/-256(color)?$/i.test(env.TERM)) {
-		return 2;
-	}
-
-	if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
-		return 1;
-	}
-
-	if ('COLORTERM' in env) {
-		return 1;
-	}
-
-	return min;
-}
-
-function createSupportsColor(stream, options = {}) {
-	const level = _supportsColor(stream, {
-		streamIsTTY: stream && stream.isTTY,
-		...options,
-	});
-
-	return translateLevel(level);
-}
-
-const supportsColor = {
-	stdout: createSupportsColor({isTTY: external_node_tty_namespaceObject.isatty(1)}),
-	stderr: createSupportsColor({isTTY: external_node_tty_namespaceObject.isatty(2)}),
-};
-
-/* harmony default export */ const supports_color = (supportsColor);
-
-;// CONCATENATED MODULE: ./node_modules/vfile-reporter/lib/color.js
-
-
-/** @type {boolean} */
-// @ts-expect-error Types are incorrect.
-const color_color = supports_color.stderr.hasBasic
-
-
-
-;// CONCATENATED MODULE: ./node_modules/vfile-reporter/lib/platform.js
-
-
-const platform = external_node_process_namespaceObject.platform
-
-;// CONCATENATED MODULE: ./node_modules/vfile-reporter/lib/index.js
-/**
- * @typedef {import('vfile').VFile} VFile
- * @typedef {import('vfile-message').VFileMessage} VFileMessage
- * @typedef {import('vfile-statistics').Statistics} Statistics
- */
-
-/**
- * @typedef Options
- *   Configuration (optional).
- * @property {boolean | null | undefined} [color]
- *   Use ANSI colors in report.
- *   The default behavior in Node.js is the check if color is supported.
- * @property {boolean | null | undefined} [verbose=false]
- *   Show message `note`s.
- *   Notes are optional, additional, long descriptions.
- * @property {boolean | null | undefined} [quiet=false]
- *   Do not show files without messages.
- * @property {boolean | null | undefined} [silent=false]
- *   Show errors only, this hides info and warning messages, and sets
- *   `quiet: true`.
- * @property {string | null | undefined} [defaultName='<stdin>']
- *   Label to use for files without file path.
- *   If one file and no `defaultName` is given, no name will show up in the
- *   report.
- */
-
-/**
- * @typedef MessageRow
- *   Message.
- * @property {string} place
- *   Serialized positional info.
- * @property {string} label
- *   Kind of message.
- * @property {string} reason
- *   Reason.
- * @property {string} ruleId
- *   Rule.
- * @property {string} source
- *   Source.
- *
- * @typedef {keyof MessageRow} MessageColumn
- *
- * @typedef FileRow
- *   File header row.
- * @property {'file'} type
- *   Kind.
- * @property {VFile} file
- *   Virtual file.
- * @property {Statistics} stats
- *   Statistics.
- *
- * @typedef {Record<MessageColumn, number>} Sizes
- *   Sizes for message columns.
- *
- * @typedef Info
- *   Result.
- * @property {Array<FileRow | MessageRow>} rows
- *   Rows.
- * @property {Statistics} stats
- *   Total statistics.
- * @property {Sizes} sizes
- *   Sizes for message columns.
- */
-
-
-
-
-
-
-
-
-const vfile_reporter_lib_own = {}.hasOwnProperty
-
-// `log-symbols` without chalk, ignored for Windows:
-/* c8 ignore next 4 */
-const chars =
-  platform === 'win32' ? {error: '×', warning: '‼'} : {error: '✖', warning: '⚠'}
-
-const labels = {
-  true: 'error',
-  false: 'warning',
-  null: 'info',
-  undefined: 'info'
-}
-
-/**
- * Create a report from an error, one file, or multiple files.
- *
- * @param {Error | VFile | Array<VFile> | null | undefined} [files]
- *   Files or error to report.
- * @param {Options | null | undefined} [options]
- *   Configuration.
- * @returns {string}
- *   Report.
- */
-function reporter(files, options) {
-  if (!files) {
-    return ''
-  }
-
-  // Error.
-  if ('name' in files && 'message' in files) {
-    return String(files.stack || files)
-  }
-
-  const options_ = options || {}
-
-  // One file.
-  if (Array.isArray(files)) {
-    return format(transform(files, options_), false, options_)
-  }
-
-  return format(transform([files], options_), true, options_)
-}
-
-/**
- * Parse a list of messages.
- *
- * @param {Array<VFile>} files
- *   List of files.
- * @param {Options} options
- *   Options.
- * @returns {Info}
- *   Rows.
- */
-function transform(files, options) {
-  /** @type {Array<FileRow | MessageRow>} */
-  const rows = []
-  /** @type {Array<VFileMessage>} */
-  const all = []
-  /** @type {Sizes} */
-  const sizes = {place: 0, label: 0, reason: 0, ruleId: 0, source: 0}
-  let index = -1
-
-  while (++index < files.length) {
-    // @ts-expect-error it works fine.
-    const messages = sort({messages: [...files[index].messages]}).messages
-    /** @type {Array<MessageRow>} */
-    const messageRows = []
-    let offset = -1
-
-    while (++offset < messages.length) {
-      const message = messages[offset]
-
-      if (!options.silent || message.fatal) {
-        all.push(message)
-
-        const row = {
-          place: stringifyPosition(
-            message.position
-              ? message.position.end.line && message.position.end.column
-                ? message.position
-                : message.position.start
-              : undefined
-          ),
-          label: labels[/** @type {keyof labels} */ (String(message.fatal))],
-          reason:
-            (message.stack || message.message) +
-            (options.verbose && message.note ? '\n' + message.note : ''),
-          ruleId: message.ruleId || '',
-          source: message.source || ''
-        }
-
-        /** @type {MessageColumn} */
-        let key
-
-        for (key in row) {
-          // eslint-disable-next-line max-depth
-          if (vfile_reporter_lib_own.call(row, key)) {
-            sizes[key] = Math.max(size(row[key]), sizes[key] || 0)
-          }
-        }
-
-        messageRows.push(row)
-      }
-    }
-
-    if ((!options.quiet && !options.silent) || messageRows.length > 0) {
-      rows.push(
-        {type: 'file', file: files[index], stats: statistics(messages)},
-        ...messageRows
-      )
-    }
-  }
-
-  return {rows, stats: statistics(all), sizes}
-}
-
-/**
- * @param {Info} map
- *   Rows.
- * @param {boolean} one
- *   Whether the input was explicitly one file (not an array).
- * @param {Options} options
- *   Configuration.
- * @returns {string}
- *   Report.
- */
-// eslint-disable-next-line complexity
-function format(map, one, options) {
-  /** @type {boolean} */
-  const enabled =
-    options.color === undefined || options.color === null
-      ? color_color
-      : options.color
-  /** @type {Array<string>} */
-  const lines = []
-  let index = -1
-
-  while (++index < map.rows.length) {
-    const row = map.rows[index]
-
-    if ('type' in row) {
-      const stats = row.stats
-      let line = row.file.history[0] || options.defaultName || '<stdin>'
-
-      line =
-        one && !options.defaultName && !row.file.history[0]
-          ? ''
-          : (enabled
-              ? '\u001B[4m' /* Underline. */ +
-                (stats.fatal
-                  ? '\u001B[31m' /* Red. */
-                  : stats.total
-                  ? '\u001B[33m' /* Yellow. */
-                  : '\u001B[32m') /* Green. */ +
-                line +
-                '\u001B[39m\u001B[24m'
-              : line) +
-            (row.file.stored && row.file.path !== row.file.history[0]
-              ? ' > ' + row.file.path
-              : '')
-
-      if (!stats.total) {
-        line =
-          (line ? line + ': ' : '') +
-          (row.file.stored
-            ? enabled
-              ? '\u001B[33mwritten\u001B[39m' /* Yellow. */
-              : 'written'
-            : 'no issues found')
-      }
-
-      if (line) {
-        if (index && !('type' in map.rows[index - 1])) {
-          lines.push('')
-        }
-
-        lines.push(line)
-      }
-    } else {
-      let reason = row.reason
-      const match = /\r?\n|\r/.exec(reason)
-      /** @type {string} */
-      let rest
-
-      if (match) {
-        rest = reason.slice(match.index)
-        reason = reason.slice(0, match.index)
-      } else {
-        rest = ''
-      }
-
-      lines.push(
-        (
-          '  ' +
-          ' '.repeat(map.sizes.place - size(row.place)) +
-          row.place +
-          '  ' +
-          (enabled
-            ? (row.label === 'error'
-                ? '\u001B[31m' /* Red. */
-                : '\u001B[33m') /* Yellow. */ +
-              row.label +
-              '\u001B[39m'
-            : row.label) +
-          ' '.repeat(map.sizes.label - size(row.label)) +
-          '  ' +
-          reason +
-          ' '.repeat(map.sizes.reason - size(reason)) +
-          '  ' +
-          row.ruleId +
-          ' '.repeat(map.sizes.ruleId - size(row.ruleId)) +
-          '  ' +
-          (row.source || '')
-        ).replace(/ +$/, '') + rest
-      )
-    }
-  }
-
-  const stats = map.stats
-
-  if (stats.fatal || stats.warn) {
-    let line = ''
-
-    if (stats.fatal) {
-      line =
-        (enabled
-          ? '\u001B[31m' /* Red. */ + chars.error + '\u001B[39m'
-          : chars.error) +
-        ' ' +
-        stats.fatal +
-        ' ' +
-        (labels.true + (stats.fatal === 1 ? '' : 's'))
-    }
-
-    if (stats.warn) {
-      line =
-        (line ? line + ', ' : '') +
-        (enabled
-          ? '\u001B[33m' /* Yellow. */ + chars.warning + '\u001B[39m'
-          : chars.warning) +
-        ' ' +
-        stats.warn +
-        ' ' +
-        (labels.false + (stats.warn === 1 ? '' : 's'))
-    }
-
-    if (stats.total !== stats.fatal && stats.total !== stats.warn) {
-      line = stats.total + ' messages (' + line + ')'
-    }
-
-    lines.push('', line)
-  }
-
-  return lines.join('\n')
-}
-
-/**
- * Get the length of the first line of `value`, ignoring ANSI sequences.
- *
- * @param {string} value
- *   Message.
- * @returns {number}
- *   Width.
- */
-function size(value) {
-  const match = /\r?\n|\r/.exec(value)
-  return stringWidth(match ? value.slice(0, match.index) : value)
-}
-
 ;// CONCATENATED MODULE: ./lib/plugins/bridge.js
 const attacher = function (field, processor) {
     // Copy the processor data from the input pipeline to the new pipeline
@@ -25815,29 +25855,6 @@ const attacher = function (field, processor) {
 };
 /* harmony default export */ const bridge = (attacher);
 //# sourceMappingURL=bridge.js.map
-// EXTERNAL MODULE: ./node_modules/semver/index.js
-var semver = __nccwpck_require__(1383);
-;// CONCATENATED MODULE: ./lib/types.js
-
-function isReleaseSpec(maybe) {
-    return maybe === 'unreleased' || isReleaseProps(maybe);
-}
-function isReleaseProps(maybe) {
-    return (maybe !== null &&
-        maybe !== undefined &&
-        typeof maybe === 'object' &&
-        'version' in maybe &&
-        maybe.version instanceof semver.SemVer &&
-        'date' in maybe &&
-        maybe.date instanceof Date);
-}
-class BoneheadedError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = this.constructor.name;
-    }
-}
-//# sourceMappingURL=types.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/release-parser.js
 
 
@@ -29136,30 +29153,34 @@ const update_link_definitions_attacher = function (options) {
             node.children = newHeadingContents;
             // Regenerate the link definition node. If we are processing the last release in the changelog,
             // the link is in a different format from the others
+            let definition;
             if (i === releaseHeadings.length - 1) {
-                const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/releases/tag/${gitRef}`;
-                const definition = {
-                    type: 'definition',
-                    url,
-                    identifier: gitRef,
-                    label: versionText,
-                };
-                tree.children.push(definition);
+                const url = options.linkGenerator?.createLinkUrl(props);
+                if (url) {
+                    definition = {
+                        type: 'definition',
+                        url,
+                        identifier: gitRef,
+                        label: versionText,
+                    };
+                }
             }
             else {
                 const nextRelease = releaseHeadings[i + 1].release;
                 if (nextRelease === 'unreleased') {
                     throw new BoneheadedError('Unreleased section should be the first level 2 heading in the changelog');
                 }
-                const nextVersionText = nextRelease.version.format();
-                const nextTagText = `${options.tagPrefix}${nextVersionText}`;
-                const url = `https://github.com/${options.repo.owner}/${options.repo.repo}/compare/${nextTagText}...${gitRef}`;
-                const definition = {
-                    type: 'definition',
-                    url,
-                    identifier: gitRef,
-                    label: versionText,
-                };
+                const url = options.linkGenerator?.createLinkUrl(props, nextRelease);
+                if (url) {
+                    definition = {
+                        type: 'definition',
+                        url,
+                        identifier: gitRef,
+                        label: versionText,
+                    };
+                }
+            }
+            if (definition) {
                 tree.children.push(definition);
             }
         }
@@ -29216,167 +29237,6 @@ const add_unreleased_section_attacher = function () {
 };
 /* harmony default export */ const add_unreleased_section = (add_unreleased_section_attacher);
 //# sourceMappingURL=add-unreleased-section.js.map
-;// CONCATENATED MODULE: ./lib/action-bump.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// This is a compiler-safe mechanism to ensure that all possible ReleaseType
-// values are defined. If the ReleaseType type definition changes (not under our
-// control, it's part of the node-semver library) then this definition will
-// cause a compile-time error. See https://stackoverflow.com/a/66820587/260213
-// for the inspiration.
-const validReleaseTypes = {
-    major: true,
-    premajor: true,
-    minor: true,
-    preminor: true,
-    patch: true,
-    prepatch: true,
-    prerelease: true,
-};
-function isValidReleaseType(maybe) {
-    return validReleaseTypes.hasOwnProperty(maybe);
-}
-function getRepoOptions() {
-    const githubRepository = external_process_namespaceObject.env.GITHUB_REPOSITORY ?? '';
-    const [owner, repo] = githubRepository.split('/');
-    if (!owner || !repo) {
-        core.setFailed('Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set');
-        return;
-    }
-    return { owner, repo };
-}
-/**
- * Gets a BumpOptions instance with values derived from the action inputs.
- *
- * @returns {(BumpOptions | undefined)}
- */
-function getBumpOptions() {
-    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
-    if (!external_path_.isAbsolute(changelogPath)) {
-        const root = external_process_namespaceObject.env.GITHUB_WORKSPACE ?? external_process_namespaceObject.cwd();
-        changelogPath = external_path_.join(root, changelogPath);
-    }
-    const releaseType = core.getInput('version') ?? 'patch';
-    if (!isValidReleaseType(releaseType)) {
-        core.setFailed(`Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`);
-        return;
-    }
-    let releaseDate = new Date();
-    const releaseDateText = core.getInput('release-date');
-    if (releaseDateText) {
-        releaseDate = parseISO(releaseDateText);
-        if (!isValid(releaseDate)) {
-            core.setFailed(`Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`);
-            return;
-        }
-    }
-    const preid = core.getInput('preid');
-    let tagPrefix = core.getInput('tag-prefix');
-    if (tagPrefix === null || tagPrefix === undefined) {
-        tagPrefix = 'v';
-    }
-    const outputFile = core.getInput('output-file');
-    const repoOptions = getRepoOptions();
-    if (!repoOptions) {
-        return;
-    }
-    const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
-    const failOnEmptyReleaseNotes = core.getBooleanInput('fail-on-empty-release-notes');
-    const options = {
-        changelogPath,
-        releaseDate,
-        version: releaseType,
-        tagPrefix,
-        preid: preid,
-        repo: repoOptions,
-        outputFile,
-        keepUnreleasedSection,
-        failOnEmptyReleaseNotes,
-    };
-    return options;
-}
-async function processChangelog(file, options) {
-    const releaseHeadings = [];
-    let processor = remark()
-        .data('releaseHeadings', releaseHeadings)
-        .use(releaseParser)
-        .use(preprocessor)
-        .use(check_unreleased_section_exists)
-        .use(assert)
-        .use(bridge, 'releaseNotes', unified().use(extract_release_notes, 'unreleased', options).use(remarkStringify, { listItemIndent: 'one', bullet: '-' }))
-        .use(calculate_next_release, options)
-        .use(increment_release, options);
-    if (options.keepUnreleasedSection) {
-        processor = processor.use(add_unreleased_section);
-    }
-    const updated = await processor
-        .use(update_link_definitions, options)
-        .use(remarkStringify, { listItemIndent: 'one', bullet: '-' })
-        .process(file);
-    return updated;
-}
-async function bump() {
-    const options = getBumpOptions();
-    if (!options) {
-        // Input error - core.setFailed() should already have been called
-        return;
-    }
-    const changelog = await read(options.changelogPath, { encoding: 'utf-8' });
-    try {
-        const updated = await processChangelog(changelog, options);
-        if (options.outputFile) {
-            updated.basename = options.outputFile;
-        }
-        await write(updated, 'utf-8');
-        core.setOutput('version', updated.data['nextReleaseVersion']);
-        core.setOutput('release-notes', updated.data['releaseNotes']);
-        if (updated.messages.length > 0) {
-            core.warning('Changelog: warnings were encountered');
-            core.startGroup('Changelog warning report');
-            core.info(reporter(updated));
-            core.endGroup();
-        }
-    }
-    catch (error) {
-        if (error instanceof VFileMessage) {
-            core.setFailed(error.message);
-            if (changelog.messages.length > 0) {
-                core.startGroup('Changelog error report');
-                core.error(reporter(changelog));
-                core.endGroup();
-            }
-        }
-        else if (error instanceof Error) {
-            core.setFailed(error.message);
-            core.startGroup('Error details');
-            core.error(error);
-            core.endGroup();
-        }
-        else {
-            core.setFailed('An unexpected error occurred');
-            console.error(error);
-        }
-    }
-}
-//# sourceMappingURL=action-bump.js.map
 ;// CONCATENATED MODULE: ./lib/options.js
 function isQuerySpecialVersionOption(maybe) {
     return maybe === 'latest' || maybe === 'unreleased' || maybe === 'latest-or-unreleased';
@@ -29449,12 +29309,208 @@ const extract_release_info_attacher = function extractUnreleasedContents(target)
 };
 /* harmony default export */ const extract_release_info = (extract_release_info_attacher);
 //# sourceMappingURL=extract-release-info.js.map
+;// CONCATENATED MODULE: ./lib/commands.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function processBumpChangelog(file, options) {
+    const releaseHeadings = [];
+    let processor = remark()
+        .data('releaseHeadings', releaseHeadings)
+        .use(releaseParser)
+        .use(preprocessor)
+        .use(check_unreleased_section_exists)
+        .use(assert)
+        .use(bridge, 'releaseNotes', unified().use(extract_release_notes, 'unreleased', options).use(remarkStringify, { listItemIndent: 'one', bullet: '-' }))
+        .use(calculate_next_release, options)
+        .use(increment_release, options);
+    if (options.keepUnreleasedSection) {
+        processor = processor.use(add_unreleased_section);
+    }
+    const updated = await processor
+        .use(update_link_definitions, options)
+        .use(remarkStringify, { listItemIndent: 'one', bullet: '-' })
+        .process(file);
+    return updated;
+}
+async function bump(changelog, options) {
+    const updated = await processBumpChangelog(changelog, options);
+    if (options.outputFile) {
+        const output = external_path_.parse(options.outputFile);
+        if (output.dir !== '.' && output.dir !== '') {
+            updated.dirname = external_path_.join(updated.dirname ?? updated.cwd, output.dir);
+        }
+        if (output.base !== updated.basename) {
+            updated.basename = output.base;
+        }
+    }
+    await write(updated, 'utf-8');
+    return updated;
+}
+async function query(file, options) {
+    const releaseHeadings = [];
+    const updated = await remark()
+        .data('releaseHeadings', releaseHeadings)
+        .use(releaseParser)
+        .use(preprocessor)
+        .use(assert)
+        .use(extract_release_info, options.version)
+        .use(remarkStringify, { listItemIndent: 'one', bullet: '-' })
+        .process(file);
+    return updated;
+}
+//# sourceMappingURL=commands.js.map
+;// CONCATENATED MODULE: ./lib/release-link-generator.js
+
+class GitHubReleaseLinkGenerator {
+    constructor(repoSpec, tagPrefix) {
+        this.repoSpec = repoSpec;
+        this.tagPrefix = tagPrefix;
+    }
+    createLinkUrl(current, previous) {
+        const versionText = isReleaseProps(current) ? current.version.format() : 'Unreleased';
+        const gitRef = isReleaseProps(current) ? `${this.tagPrefix}${versionText}` : 'HEAD';
+        if (previous) {
+            if (previous === 'unreleased') {
+                throw new BoneheadedError('Previous release must not be an [Unreleased] release');
+            }
+            const prevVersionText = previous.version.format();
+            const prevTagText = `${this.tagPrefix}${prevVersionText}`;
+            const url = `https://github.com/${this.repoSpec.owner}/${this.repoSpec.repo}/compare/${prevTagText}...${gitRef}`;
+            return url;
+        }
+        else {
+            const url = `https://github.com/${this.repoSpec.owner}/${this.repoSpec.repo}/releases/tag/${gitRef}`;
+            return url;
+        }
+    }
+}
+//# sourceMappingURL=release-link-generator.js.map
+;// CONCATENATED MODULE: ./lib/action-bump.js
+
+
+
+
+
+
+
+
+
+
+function getRepoOptions() {
+    const githubRepository = external_process_namespaceObject.env.GITHUB_REPOSITORY ?? '';
+    const [owner, repo] = githubRepository.split('/');
+    if (!owner || !repo) {
+        core.setFailed('Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set');
+        return;
+    }
+    return { owner, repo };
+}
+/**
+ * Gets a BumpOptions instance with values derived from the action inputs.
+ *
+ * @returns {(BumpOptions | undefined)}
+ */
+function getBumpOptions() {
+    let changelogPath = core.getInput('changelog') ?? 'CHANGELOG.md';
+    if (!external_path_.isAbsolute(changelogPath)) {
+        const root = external_process_namespaceObject.env.GITHUB_WORKSPACE ?? external_process_namespaceObject.cwd();
+        changelogPath = external_path_.join(root, changelogPath);
+    }
+    const releaseType = core.getInput('version') ?? 'patch';
+    if (!isValidReleaseType(releaseType)) {
+        core.setFailed(`Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`);
+        return;
+    }
+    let releaseDate = new Date();
+    const releaseDateText = core.getInput('release-date');
+    if (releaseDateText) {
+        releaseDate = parseISO(releaseDateText);
+        if (!isValid(releaseDate)) {
+            core.setFailed(`Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`);
+            return;
+        }
+    }
+    const preid = core.getInput('preid');
+    let tagPrefix = core.getInput('tag-prefix');
+    if (tagPrefix === null || tagPrefix === undefined) {
+        tagPrefix = 'v';
+    }
+    const outputFile = core.getInput('output-file');
+    const repoOptions = getRepoOptions();
+    if (!repoOptions) {
+        return;
+    }
+    const linkGenerator = new GitHubReleaseLinkGenerator(repoOptions, tagPrefix);
+    const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
+    const failOnEmptyReleaseNotes = core.getBooleanInput('fail-on-empty-release-notes');
+    const options = {
+        changelogPath,
+        releaseDate,
+        version: releaseType,
+        tagPrefix,
+        preid: preid,
+        outputFile,
+        keepUnreleasedSection,
+        failOnEmptyReleaseNotes,
+        linkGenerator: linkGenerator,
+    };
+    return options;
+}
+async function bumpAction() {
+    const options = getBumpOptions();
+    if (!options) {
+        // Input error - core.setFailed() should already have been called
+        return;
+    }
+    const changelog = await read(options.changelogPath, { encoding: 'utf-8' });
+    try {
+        const updated = await bump(changelog, options);
+        core.setOutput('version', updated.data['nextReleaseVersion']);
+        core.setOutput('release-notes', updated.data['releaseNotes']);
+        if (updated.messages.length > 0) {
+            core.warning('Changelog: warnings were encountered');
+            core.startGroup('Changelog warning report');
+            core.info(reporter(updated));
+            core.endGroup();
+        }
+    }
+    catch (error) {
+        if (error instanceof VFileMessage) {
+            core.setFailed(error.message);
+            if (changelog.messages.length > 0) {
+                core.startGroup('Changelog error report');
+                core.error(reporter(changelog));
+                core.endGroup();
+            }
+        }
+        else if (error instanceof Error) {
+            core.setFailed(error.message);
+            core.startGroup('Error details');
+            core.error(error);
+            core.endGroup();
+        }
+        else {
+            core.setFailed('An unexpected error occurred');
+            console.error(error);
+        }
+    }
+}
+//# sourceMappingURL=action-bump.js.map
 ;// CONCATENATED MODULE: ./lib/action-query.js
-
-
-
-
-
 
 
 
@@ -29497,19 +29553,7 @@ function getQueryOptions() {
         version: target,
     };
 }
-async function action_query_processChangelog(file, options) {
-    const releaseHeadings = [];
-    const updated = await remark()
-        .data('releaseHeadings', releaseHeadings)
-        .use(releaseParser)
-        .use(preprocessor)
-        .use(assert)
-        .use(extract_release_info, options.version)
-        .use(remarkStringify, { listItemIndent: 'one', bullet: '-' })
-        .process(file);
-    return updated;
-}
-async function query() {
+async function queryAction() {
     const options = getQueryOptions();
     if (!options) {
         // Input error - core.setFailed() should already have been called
@@ -29517,7 +29561,7 @@ async function query() {
     }
     const changelog = await read(options.changelogPath, { encoding: 'utf-8' });
     try {
-        const updated = await action_query_processChangelog(changelog, options);
+        const updated = await query(changelog, options);
         const result = updated.toString();
         core.setOutput('release-notes', result);
         core.setOutput('version', updated.data['matchedReleaseVersion']);
@@ -29566,10 +29610,10 @@ async function run() {
     const command = core.getInput('command');
     switch (command) {
         case 'query':
-            await query();
+            await queryAction();
             break;
         case 'bump':
-            await bump();
+            await bumpAction();
             break;
         default:
             core.error(`'Invalid value for input 'command': '${command}'`);
