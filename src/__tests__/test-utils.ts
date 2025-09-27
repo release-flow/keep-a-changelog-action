@@ -5,8 +5,10 @@ import * as cp from 'child_process';
 import { v4 as uuidv4 } from 'uuid';
 import os from 'os';
 import fs from 'fs';
+
 export interface ExecError {
   message: string;
+  status: number;
   stdout: Buffer | string;
   stderr: Buffer | string;
 }
@@ -22,7 +24,14 @@ export interface OutputVariables {
   [key: string]: string;
 }
 
-export function getAllErrors(result: ActionResult): string[] {
+export interface CliResult {
+  isError: boolean;
+  exitCode: number;
+  stdout: string;
+  stderr: string;
+}
+
+export function getActionErrors(result: ActionResult): string[] {
   const errors = result.stdout.match(/^::error::.*$/m)?.map((e) => {
     return e.replace(/^::error::/, '');
   });
@@ -30,9 +39,25 @@ export function getAllErrors(result: ActionResult): string[] {
   return errors ?? [];
 }
 
-export function getAllWarnings(result: ActionResult): string[] {
+export function getActionWarnings(result: ActionResult): string[] {
   const warnings = result.stdout.match(/^::warning::.*$/m)?.map((e) => {
     return e.replace(/^::warning::/, '');
+  });
+
+  return warnings ?? [];
+}
+
+export function getCliErrors(result: CliResult): string[] {
+  const errors = result.stderr.match(/^ERROR: .*$/m)?.map((e) => {
+    return e.replace(/^ERROR: /, '');
+  });
+
+  return errors ?? [];
+}
+
+export function getCliWarnings(result: CliResult): string[] {
+  const warnings = result.stderr.match(/^WARNING: .*$/m)?.map((e) => {
+    return e.replace(/^WARNING: /, '');
   });
 
   return warnings ?? [];
@@ -122,7 +147,11 @@ function getOutputVariablesV2(stdout: string): OutputVariables {
  *               https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
  * @returns {ActionResult}
  */
-export function invokeActionScript(filePath: string, env: NodeJS.ProcessEnv, newOutputMechanism = false): ActionResult {
+export function invokeActionScript(
+  filePath: string,
+  env: NodeJS.ProcessEnv,
+  newOutputMechanism: boolean = false
+): ActionResult {
   const np = process.execPath;
   const ip = path.join(filePath);
   const fileId = uuidv4();
@@ -177,6 +206,41 @@ function isExecError(maybe: unknown): maybe is ExecError {
   return maybe !== null && maybe !== undefined && typeof maybe === 'object' && 'stdout' in maybe && 'stderr' in maybe;
 }
 
-// function parseWarnings(filepath: string): string[] {
-//   throw new Error('Function not implemented.');
-// }
+export function invokeCommandLine(
+  filePath: string,
+  testDir: string,
+  argv: string[],
+  env: NodeJS.ProcessEnv
+): CliResult {
+  const np = process.execPath;
+  const ip = path.join(filePath);
+
+  const innerEnv = { ...process.env, ...env };
+
+  const options: cp.ExecFileSyncOptions = {
+    env: innerEnv,
+    cwd: testDir,
+  };
+
+  try {
+    const stdout = cp.execFileSync(np, [ip, ...argv], options).toString();
+
+    return {
+      isError: false,
+      exitCode: 0,
+      stdout,
+      stderr: '',
+    };
+  } catch (error) {
+    if (isExecError(error)) {
+      return {
+        isError: true,
+        exitCode: error.status,
+        stdout: error.stdout.toString(),
+        stderr: error.stderr.toString(),
+      };
+    }
+
+    throw error;
+  }
+}

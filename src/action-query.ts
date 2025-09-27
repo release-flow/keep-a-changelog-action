@@ -2,22 +2,15 @@ import process from 'process';
 import path from 'path';
 
 import { default as semver } from 'semver';
-import { VFile } from 'vfile';
 import { VFileMessage } from 'vfile-message';
 import { read } from 'to-vfile';
-import { remark } from 'remark';
 import { reporter } from 'vfile-reporter';
-import stringify from 'remark-stringify';
 import * as core from '@actions/core';
+import { format } from 'date-fns';
 
-import { ReleaseHeading } from './types.js';
 import { QueryOptions, QueryVersionOptionSpec } from './options.js';
 
-import releaseParser from './plugins/release-parser.js';
-import preprocess from './plugins/preprocessor.js';
-import assert from './plugins/assert.js';
-import extractReleaseInfo from './plugins/extract-release-info.js';
-import { format } from 'date-fns';
+import { query } from './commands.js';
 
 /**
  * Gets a QueryOptions instance with values derived from the action inputs.
@@ -59,22 +52,7 @@ function getQueryOptions(): QueryOptions | undefined {
   };
 }
 
-async function processChangelog(file: VFile, options: QueryOptions): Promise<VFile> {
-  const releaseHeadings: ReleaseHeading[] = [];
-
-  const updated = await remark()
-    .data('releaseHeadings', releaseHeadings)
-    .use(releaseParser)
-    .use(preprocess)
-    .use(assert)
-    .use(extractReleaseInfo, options.version)
-    .use(stringify, { listItemIndent: 'one', bullet: '-' })
-    .process(file);
-
-  return updated;
-}
-
-export default async function query(): Promise<void> {
+export default async function queryAction(): Promise<void> {
   const options = getQueryOptions();
 
   if (!options) {
@@ -85,7 +63,7 @@ export default async function query(): Promise<void> {
   const changelog = await read(options.changelogPath, { encoding: 'utf-8' });
 
   try {
-    const updated = await processChangelog(changelog, options);
+    const updated = await query(changelog, options);
 
     const result = updated.toString();
     core.setOutput('release-notes', result);

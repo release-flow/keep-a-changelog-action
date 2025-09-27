@@ -1,6 +1,7 @@
 import type { Parent } from 'unist';
 import { Heading } from 'mdast';
 import semver from 'semver';
+import { ReleaseType } from 'semver';
 
 /**
  * The properties of a release (extracted from the heading).
@@ -64,4 +65,23 @@ export class BoneheadedError extends Error {
     super(message);
     this.name = this.constructor.name;
   }
+}
+
+// This is a compiler-safe mechanism to ensure that all possible ReleaseType
+// values are defined. If the ReleaseType type definition changes (not under our
+// control, it's part of the node-semver library) then this definition will
+// cause a compile-time error. See https://stackoverflow.com/a/66820587/260213
+// for the inspiration.
+const validReleaseTypes: Record<ReleaseType, unknown> = {
+  major: true,
+  premajor: true,
+  minor: true,
+  preminor: true,
+  patch: true,
+  prepatch: true,
+  prerelease: true,
+};
+
+export function isValidReleaseType(maybe: string): maybe is ReleaseType {
+  return validReleaseTypes.hasOwnProperty(maybe);
 }
