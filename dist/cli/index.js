@@ -6319,7 +6319,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
 
 /***/ }),
 
-/***/ 9401:
+/***/ 3584:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -6643,7 +6643,34 @@ var to_vfile_lib = __nccwpck_require__(8185);
 var types = __nccwpck_require__(4379);
 // EXTERNAL MODULE: ./lib/commands.js + 125 modules
 var commands = __nccwpck_require__(9234);
+;// CONCATENATED MODULE: ./lib/release-link-generator.js
+
+class GitHubReleaseLinkGenerator {
+    constructor(repoSpec, tagPrefix) {
+        this.repoSpec = repoSpec;
+        this.tagPrefix = tagPrefix;
+    }
+    createLinkUrl(current, previous) {
+        const versionText = (0,types/* isReleaseProps */.PX)(current) ? current.version.format() : 'Unreleased';
+        const gitRef = (0,types/* isReleaseProps */.PX)(current) ? `${this.tagPrefix}${versionText}` : 'HEAD';
+        if (previous) {
+            if (previous === 'unreleased') {
+                throw new types/* BoneheadedError */.al('Previous release must not be an [Unreleased] release');
+            }
+            const prevVersionText = previous.version.format();
+            const prevTagText = `${this.tagPrefix}${prevVersionText}`;
+            const url = `https://github.com/${this.repoSpec.owner}/${this.repoSpec.repo}/compare/${prevTagText}...${gitRef}`;
+            return url;
+        }
+        else {
+            const url = `https://github.com/${this.repoSpec.owner}/${this.repoSpec.repo}/releases/tag/${gitRef}`;
+            return url;
+        }
+    }
+}
+//# sourceMappingURL=release-link-generator.js.map
 ;// CONCATENATED MODULE: ./lib/cli-bump.js
+
 
 
 
@@ -6674,11 +6701,26 @@ function getBumpOptions(argv) {
             return `Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`;
         }
     }
-    const preid = argv.preid;
+    let githubRepo = argv.githubRepo;
+    if (argv.githubRepo === null || (argv.githubRepo !== undefined && argv.githubRepo.trim() === '')) {
+        githubRepo = undefined;
+    }
     let tagPrefix = argv.tagPrefix;
     if (tagPrefix === null || tagPrefix === undefined) {
         tagPrefix = 'v';
     }
+    let linkGenerator;
+    if (githubRepo) {
+        const repoOptions = getRepoOptions(githubRepo);
+        if (typeof repoOptions === 'string') {
+            return `Input 'github-repo' has an invalid value '${githubRepo}'. The value must be in the format 'owner/repo'`;
+        }
+        linkGenerator = new GitHubReleaseLinkGenerator(repoOptions, tagPrefix);
+    }
+    else {
+        linkGenerator = undefined;
+    }
+    const preid = argv.preid;
     const outputFile = argv.outputFile;
     const keepUnreleasedSection = argv.keepUnreleasedSection;
     const failOnEmptyReleaseNotes = argv.failOnEmptyReleaseNotes;
@@ -6691,7 +6733,7 @@ function getBumpOptions(argv) {
         outputFile,
         keepUnreleasedSection,
         failOnEmptyReleaseNotes,
-        linkGenerator: undefined,
+        linkGenerator,
     };
     return options;
 }
@@ -6717,6 +6759,13 @@ async function bump(argv) {
         console.error(error);
         return -2;
     }
+}
+function getRepoOptions(githubRepo) {
+    const [owner, repo] = githubRepo.split('/');
+    if (!owner || !repo) {
+        return 'Invalid repository name';
+    }
+    return { owner, repo };
 }
 //# sourceMappingURL=cli-bump.js.map
 
@@ -6821,7 +6870,7 @@ __nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependen
 /* harmony import */ var yargs__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(7369);
 /* harmony import */ var yargs_helpers__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(4694);
 /* harmony import */ var vfile_message__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(3770);
-/* harmony import */ var _cli_bump_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(9401);
+/* harmony import */ var _cli_bump_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(3584);
 /* harmony import */ var _cli_query_js__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(7886);
 
 
@@ -6884,6 +6933,13 @@ try {
             describe: 'If this input is true then the action will report an error if it detects an' +
                 " empty 'Unreleased' section in the input changelog.",
             default: false,
+        },
+        'github-repo': {
+            type: 'string',
+            alias: 'g',
+            describe: 'The GitHub repository in the format "owner/repo". Used to generate links to releases in the changelog.' +
+                ' If not specified or empty, only the version numbers will be included in the changelog.',
+            default: '',
         },
     }, async (argv) => {
         const rc = await (0,_cli_bump_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(argv);
