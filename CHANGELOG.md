@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Add a CLI invocation option.
 
+### Changed
+
+- Remove ESLint and replace with oxlint
+
 ## [3.0.1] - 2024-07-30
 
 ### Changed
