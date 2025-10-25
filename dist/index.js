@@ -161,6 +161,7 @@ var ExitCode;
  * @param name the name of the variable to set
  * @param val the value of the variable. Non-string values will be converted to a string via JSON.stringify
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function exportVariable(name, val) {
     const convertedVal = utils_1.toCommandValue(val);
     process.env[name] = convertedVal;
@@ -260,6 +261,7 @@ exports.getBooleanInput = getBooleanInput;
  * @param     name     name of the output to set
  * @param     value    value to store. Non-string values will be converted to a string via JSON.stringify
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
     const filePath = process.env['GITHUB_OUTPUT'] || '';
     if (filePath) {
@@ -10953,12 +10955,17 @@ function ansiRegex({onlyFirst = false} = {}) {
 ;// CONCATENATED MODULE: ./node_modules/strip-ansi/index.js
 
 
+const regex = ansiRegex();
+
 function stripAnsi(string) {
 	if (typeof string !== 'string') {
 		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
 	}
 
-	return string.replace(ansiRegex(), '');
+	// Even though the regex is global, we don't need to reset the `.lastIndex`
+	// because unlike `.exec()` and `.test()`, `.replace()` does it automatically
+	// and doing it manually has a performance penalty.
+	return string.replace(regex, '');
 }
 
 // EXTERNAL MODULE: ./node_modules/eastasianwidth/eastasianwidth.js

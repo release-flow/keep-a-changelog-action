@@ -25792,12 +25792,17 @@ function ansiRegex({onlyFirst = false} = {}) {
 ;// CONCATENATED MODULE: ./node_modules/strip-ansi/index.js
 
 
+const regex = ansiRegex();
+
 function stripAnsi(string) {
 	if (typeof string !== 'string') {
 		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
 	}
 
-	return string.replace(ansiRegex(), '');
+	// Even though the regex is global, we don't need to reset the `.lastIndex`
+	// because unlike `.exec()` and `.test()`, `.replace()` does it automatically
+	// and doing it manually has a performance penalty.
+	return string.replace(regex, '');
 }
 
 // EXTERNAL MODULE: ./node_modules/eastasianwidth/eastasianwidth.js
