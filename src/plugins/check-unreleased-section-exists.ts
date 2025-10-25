@@ -4,9 +4,7 @@ import type { Root } from 'mdast';
 
 import { BoneheadedError, ReleaseHeading } from '../types.js';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const attacher: Plugin<any, Root, Root> = function checkUnreleasedSectionExists() {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
 
   return (_tree: Root, file: VFile) => {

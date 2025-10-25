@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-namespace */
 import fs from 'fs';
 import { diffLinesUnified, DiffOptions } from 'jest-diff';
 

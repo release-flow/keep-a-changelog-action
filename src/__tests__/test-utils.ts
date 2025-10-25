@@ -140,10 +140,9 @@ function getOutputVariablesV2(stdout: string): OutputVariables {
 /**
  * Invokes a GH action script.
  *
- * @export
  * @param {string} filePath
  * @param {NodeJS.ProcessEnv} env
- * @param {boolean} [newOutputMechanism=false] Whether to use the new GH output mechanism, see
+ * @param {boolean} [newOutputMechanism] Whether to use the new GH output mechanism, see
  *               https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
  * @returns {ActionResult}
  */

@@ -9,7 +9,6 @@ import { is } from 'unist-util-is';
 import { isReleaseSpec, ReleaseHeading } from '../types.js';
 
 const attacher: Plugin<[], Root, Root> = function () {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
 
   return (tree: Root, file: VFile) => {

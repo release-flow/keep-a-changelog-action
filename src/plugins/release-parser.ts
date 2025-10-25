@@ -43,7 +43,7 @@ function parseReleaseHeadingTextOnly(node: Heading, file: VFile): void {
     release = { version, date: new Date(m[3]), suffix: m[4] };
   }
 
-  node.data = { ...node.data, ...{ release } };
+  node.data = { ...node.data,  release };
 }
 
 function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
@@ -55,7 +55,7 @@ function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
 
   if (linkNode.label?.toLowerCase() === 'unreleased') {
     // If it's unreleased, we don't care about the date
-    node.data = { ...node.data, ...{ release: 'unreleased' } };
+    node.data = { ...node.data,  release: 'unreleased' };
     return;
   }
 
@@ -94,7 +94,7 @@ function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
 
   const release: ReleaseSpec = { version, date: new Date(m[1]), suffix: m[2] };
 
-  node.data = { ...node.data, ...{ release } };
+  node.data = { ...node.data,  release };
 }
 
 function parseReleaseHeading(node: Heading, file: VFile): void {

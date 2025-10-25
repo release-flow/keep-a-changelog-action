@@ -161,7 +161,6 @@ var ExitCode;
  * @param name the name of the variable to set
  * @param val the value of the variable. Non-string values will be converted to a string via JSON.stringify
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function exportVariable(name, val) {
     const convertedVal = utils_1.toCommandValue(val);
     process.env[name] = convertedVal;
@@ -261,7 +260,6 @@ exports.getBooleanInput = getBooleanInput;
  * @param     name     name of the output to set
  * @param     value    value to store. Non-string values will be converted to a string via JSON.stringify
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
     const filePath = process.env['GITHUB_OUTPUT'] || '';
     if (filePath) {

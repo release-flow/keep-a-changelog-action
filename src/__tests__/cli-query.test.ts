@@ -7,9 +7,7 @@ import './jest-file-diff.js';
 
 import { getCliErrors, invokeCommandLine, CliResult } from './test-utils.js';
 
-// eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
-// eslint-disable-next-line no-underscore-dangle
 const __dirname = path.dirname(__filename);
 
 const root = path.join(__dirname, '../..');
@@ -26,7 +24,6 @@ const DefaultParams: CliParams = {
 
 interface ParsedResult {
   cli: CliResult;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   output: any;
 }
 
@@ -176,7 +173,6 @@ function runCommand(params: CliParams): ParsedResult {
   };
 
   if (!cliResult.isError) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     result.output = JSON.parse(cliResult.stdout);
   }
   return result;

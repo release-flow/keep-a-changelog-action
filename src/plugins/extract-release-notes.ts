@@ -44,7 +44,6 @@ const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root, Root> 
   target: semver.SemVer | 'unreleased',
   options: BumpOptions
 ) {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
 
   return (tree: Root, file: VFile) => {

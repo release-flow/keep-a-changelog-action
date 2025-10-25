@@ -5,9 +5,7 @@ import type { Root, LinkReference, Heading } from 'mdast';
 import { ReleaseHeading } from '../types.js';
 import { Parent } from 'unist';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const attacher: Plugin<any, Root, Root> = function () {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
 
   return (tree: Root, _file: VFile) => {

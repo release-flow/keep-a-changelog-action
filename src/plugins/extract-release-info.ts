@@ -47,7 +47,6 @@ function findReleaseHeading(target: QueryVersionOptionSpec, headings: ReleaseHea
 const attacher: Plugin<[QueryVersionOptionSpec], Root, Root> = function extractUnreleasedContents(
   target: QueryVersionOptionSpec
 ) {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
 
   return (tree: Root, file: VFile) => {
