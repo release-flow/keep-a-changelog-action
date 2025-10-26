@@ -20,7 +20,6 @@ import path from 'path';
 import extractReleaseInfo from './plugins/extract-release-info.js';
 
 async function processBumpChangelog(file: VFile, options: BumpOptions): Promise<VFile> {
-
   let processor = remark()
     .use(releaseParser)
     .use(preprocess)
@@ -67,7 +66,6 @@ export async function bump(changelog: VFile, options: BumpOptions): Promise<VFil
 }
 
 export async function query(file: VFile, options: QueryOptions): Promise<VFile> {
-
   const updated = await remark()
     .use(releaseParser)
     .use(preprocess)
