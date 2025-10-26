@@ -68,5 +68,5 @@ outputs:
       The final part of the release heading, after the version and date have been parsed. For example, if the release
       heading  is '## [0.0.5] - 2014-12-13 [YANKED]', this output would contain '[YANKED]'.
 runs:
-    using: 'node20'
+    using: 'node24'
     main: dist/index.js

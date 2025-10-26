@@ -80,6 +80,7 @@ const validReleaseTypes: Record<ReleaseType, unknown> = {
   patch: true,
   prepatch: true,
   prerelease: true,
+  release: true,
 };
 
 export function isValidReleaseType(maybe: string): maybe is ReleaseType {
