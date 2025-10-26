@@ -6820,6 +6820,8 @@ var lib = __nccwpck_require__(375);
 var vfile_message_lib = __nccwpck_require__(3092);
 // EXTERNAL MODULE: ./node_modules/to-vfile/lib/index.js
 var to_vfile_lib = __nccwpck_require__(5143);
+// EXTERNAL MODULE: ./node_modules/semver/index.js
+var semver = __nccwpck_require__(2088);
 // EXTERNAL MODULE: ./lib/types.js
 var types = __nccwpck_require__(4170);
 // EXTERNAL MODULE: ./lib/commands.js + 128 modules
@@ -6859,6 +6861,7 @@ class GitHubReleaseLinkGenerator {
 
 
 
+
 /**
  * Gets a BumpOptions instance with values derived from the action inputs.
  *
@@ -6870,9 +6873,15 @@ function getBumpOptions(argv) {
     if (!external_path_.isAbsolute(changelogPath)) {
         changelogPath = external_path_.join(root, changelogPath);
     }
-    const releaseType = argv.version ?? 'patch';
+    let releaseType = argv.version ?? 'patch';
     if (!(0,types/* isValidReleaseType */.CF)(releaseType)) {
-        return `Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`;
+        if (semver.valid(releaseType)) {
+            // It's a valid semver, so use that
+            releaseType = new semver.SemVer(releaseType);
+        }
+        else {
+            return `Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number.`;
+        }
     }
     let releaseDate = new Date();
     const releaseDateText = argv.releaseDate;
@@ -7072,7 +7081,6 @@ try {
         version: {
             alias: 'v',
             type: 'string',
-            choices: ['major', 'premajor', 'minor', 'preminor', 'patch', 'prepatch', 'prerelease'],
             describe: 'Specifies how to calculate the next version number. See readme for a full' +
                 ' description and a list of special values.',
             default: 'patch',
@@ -25388,7 +25396,15 @@ const calculate_next_release_attacher = function (options) {
             return (0,types/* isReleaseProps */.KK)(h.release);
         });
         const latestVersion = latestRelease ? latestRelease.release.version : new calculate_next_release_SemVer('0.0.0');
-        file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid);
+        if (options.version instanceof calculate_next_release_SemVer) {
+            if (options.version.compare(latestVersion) <= 0) {
+                file.fail(`Specified version ${options.version.format()} must be greater than latest version ${latestVersion.format()}`);
+            }
+            file.data['nextReleaseVersion'] = options.version.format();
+        }
+        else {
+            file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid) ?? undefined;
+        }
     }
 };
 /* harmony default export */ const calculate_next_release = (calculate_next_release_attacher);

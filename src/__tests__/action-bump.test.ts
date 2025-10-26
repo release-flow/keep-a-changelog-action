@@ -14,7 +14,7 @@ const root = path.join(__dirname, '../..');
 
 interface ActionParams {
   changelog: string | null;
-  releaseType: string | null;
+  version: string | null;
   preid: string | null;
   releaseDate: string | null;
   tagPrefix: string | null;
@@ -26,7 +26,7 @@ interface ActionParams {
 
 const DefaultParams: ActionParams = {
   changelog: 'good_changelog.md',
-  releaseType: 'minor',
+  version: 'minor',
   preid: null,
   releaseDate: '2022-03-31',
   tagPrefix: 'v',
@@ -51,12 +51,23 @@ describe('bump subcommand', () => {
 
   it('errors when version is invalid', () => {
     const params = { ...DefaultParams };
-    params.releaseType = 'invalid';
+    params.version = 'invalid';
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
     expect(getActionErrors(result)).toContain(
-      "Input 'version' has an invalid value 'invalid'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease"
+      "Input 'version' has an invalid value 'invalid'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number."
+    );
+  });
+
+  it('errors when version is an invalid semver', () => {
+    const params = { ...DefaultParams };
+    params.version = '1.0.invalid';
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(getActionErrors(result)).toContain(
+      "Input 'version' has an invalid value '1.0.invalid'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number."
     );
   });
 
@@ -154,6 +165,31 @@ describe('bump subcommand', () => {
     expect(actualFile).toMatchFileSnapshot(expectedFile);
   });
 
+  it('uses the specfied semantic version', () => {
+    const params = { ...DefaultParams };
+    params.version = '1.0.1';
+    params.outputFile = 'changelog_1_output.md';
+    const result = runAction(params);
+
+    expect(result.isError).toBeFalsy();
+
+    const expectedFile = path.join(__dirname, 'changelog_1_expected_semver.md');
+    const actualFile = path.join(__dirname, 'changelog_1_output.md');
+    expect(actualFile).toMatchFileSnapshot(expectedFile);
+  });
+
+  it('errors when the changelog version is greater than the specified version', () => {
+    const params = { ...DefaultParams };
+    params.version = '0.1.1';
+    params.outputFile = 'dummy.md';
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(getActionErrors(result)).toContain(
+      'Specified version 0.1.1 must be greater than latest version 1.0.0'
+    );
+  });
+
   it('keeps the unreleased section', () => {
     const params = { ...DefaultParams };
     params.outputFile = 'changelog_1_keep_unreleased_output.md';
@@ -169,7 +205,7 @@ describe('bump subcommand', () => {
 
   it('sets the output variables', () => {
     const params = { ...DefaultParams };
-    params.releaseType = 'preminor';
+    params.version = 'preminor';
     params.preid = 'beta';
     const result = runAction(params);
 
@@ -191,8 +227,8 @@ function runAction(params: ActionParams): ActionResult {
     env['INPUT_CHANGELOG'] = params.changelog;
   }
 
-  if (params.releaseType !== null) {
-    env['INPUT_VERSION'] = params.releaseType;
+  if (params.version !== null) {
+    env['INPUT_VERSION'] = params.version;
   }
 
   if (params.preid !== null) {

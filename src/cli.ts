@@ -23,7 +23,6 @@ try {
         version: {
           alias: 'v',
           type: 'string',
-          choices: ['major', 'premajor', 'minor', 'preminor', 'patch', 'prepatch', 'prerelease'],
           describe:
             'Specifies how to calculate the next version number. See readme for a full' +
             ' description and a list of special values.',

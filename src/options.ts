@@ -14,7 +14,7 @@ export interface RepoSpec {
 
 export interface BumpOptions {
   changelogPath: string;
-  version: ReleaseType;
+  version: ReleaseType | semver.SemVer;
   preid?: string;
   releaseDate: Date;
   tagPrefix: string;

@@ -34143,7 +34143,15 @@ const calculate_next_release_attacher = function (options) {
             return isReleaseProps(h.release);
         });
         const latestVersion = latestRelease ? latestRelease.release.version : new calculate_next_release_SemVer('0.0.0');
-        file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid);
+        if (options.version instanceof calculate_next_release_SemVer) {
+            if (options.version.compare(latestVersion) <= 0) {
+                file.fail(`Specified version ${options.version.format()} must be greater than latest version ${latestVersion.format()}`);
+            }
+            file.data['nextReleaseVersion'] = options.version.format();
+        }
+        else {
+            file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid) ?? undefined;
+        }
     }
 };
 /* harmony default export */ const calculate_next_release = (calculate_next_release_attacher);
@@ -34545,6 +34553,7 @@ class GitHubReleaseLinkGenerator {
 
 
 
+
 function getRepoOptions() {
     const githubRepository = external_process_namespaceObject.env['GITHUB_REPOSITORY'] ?? '';
     const [owner, repo] = githubRepository.split('/');
@@ -34565,10 +34574,16 @@ function getBumpOptions() {
         const root = external_process_namespaceObject.env['GITHUB_WORKSPACE'] ?? external_process_namespaceObject.cwd();
         changelogPath = external_path_.join(root, changelogPath);
     }
-    const releaseType = core.getInput('version') ?? 'patch';
+    let releaseType = core.getInput('version') ?? 'patch';
     if (!isValidReleaseType(releaseType)) {
-        core.setFailed(`Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`);
-        return;
+        if (semver.valid(releaseType)) {
+            // It's a valid semver, so use that
+            releaseType = new semver.SemVer(releaseType);
+        }
+        else {
+            core.setFailed(`Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number.`);
+            return;
+        }
     }
     let releaseDate = new Date();
     const releaseDateText = core.getInput('release-date');
