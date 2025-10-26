@@ -1,5 +1,5 @@
 import { VFile } from 'vfile';
-import type { Root, Heading, LinkReference, Text } from 'mdast';
+import type { Root, Heading } from 'mdast';
 import semver from 'semver';
 
 import { visit } from 'unist-util-visit';
@@ -8,7 +8,7 @@ import { BoneheadedError, ReleaseSpec } from '../types.js';
 
 function parseReleaseHeadingTextOnly(node: Heading, file: VFile): void {
   const textNode = node.children[0];
-  if (!is<Text>(textNode, 'text')) {
+  if (!is(textNode, 'text')) {
     // Should have been checked by caller
     throw new BoneheadedError('Should have been a text node, was ' + node.type);
   }
@@ -48,7 +48,7 @@ function parseReleaseHeadingTextOnly(node: Heading, file: VFile): void {
 
 function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
   const linkNode = node.children[0];
-  if (!is<LinkReference>(linkNode, 'linkReference')) {
+  if (!is(linkNode, 'linkReference')) {
     // Should have been checked by caller
     throw new BoneheadedError('Node should have been a linkReference, was ' + node.type);
   }
@@ -67,7 +67,7 @@ function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
       linkNode.position
     );
     msg.fatal = true;
-    msg.actual = linkNode.label ?? null;
+    msg.actual = linkNode.label ?? undefined;
     return;
   }
 
@@ -79,7 +79,7 @@ function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
 
   const textNode = node.children[1];
 
-  if (!is<Text>(textNode, 'text')) {
+  if (!is(textNode, 'text')) {
     file.message('Expected release date text to follow version link', textNode.position).fatal = true;
     return;
   }
@@ -111,9 +111,9 @@ function parseReleaseHeading(node: Heading, file: VFile): void {
     return;
   }
 
-  if (is<LinkReference>(node.children[0], 'linkReference')) {
+  if (is(node.children[0], 'linkReference')) {
     parseReleaseHeadingWithLink(node, file);
-  } else if (is<Text>(node.children[0], 'text')) {
+  } else if (is(node.children[0], 'text')) {
     parseReleaseHeadingTextOnly(node, file);
   } else {
     const msg = file.message('Level 2 heading must define a release version', node.position);

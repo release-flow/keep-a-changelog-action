@@ -6,10 +6,18 @@ import semver from 'semver';
 import { visit } from 'unist-util-visit';
 import { is } from 'unist-util-is';
 
-import { isReleaseSpec, ReleaseHeading } from '../types.js';
+import { isReleaseSpec, ReleaseHeading, ReleaseSpec } from '../types.js';
+
+
+// Augment the unified.Data interface to include our processor data
+declare module 'mdast' {
+  interface HeadingData {
+    nextSection?: Node | undefined;
+    release?: ReleaseSpec | undefined;
+  }
+}
 
 const attacher: Plugin<[], Root, Root> = function () {
-  const processorData = this.data;
 
   return (tree: Root, file: VFile) => {
     let previousReleaseHeading: Heading | null = null;
@@ -19,7 +27,7 @@ const attacher: Plugin<[], Root, Root> = function () {
     // First pass - add the 'nextSection' data property to each release heading node to indicate the
     // node that starts the next section
     visit(tree, [{ type: 'heading', depth: 2 }, 'definition'], (node, _index, parent) => {
-      if (is<Heading>(node, 'heading')) {
+      if (is(node, 'heading')) {
         const currentRelease = node.data?.release;
 
         if (!isReleaseSpec(currentRelease)) {
@@ -45,7 +53,7 @@ const attacher: Plugin<[], Root, Root> = function () {
         releaseHeadings.push({ node, parent: parent || tree, release: currentRelease });
       }
 
-      if (is<Definition>(node, 'definition') && previousReleaseHeading) {
+      if (is(node, 'definition') && previousReleaseHeading) {
         previousReleaseHeading.data!['nextSection'] = node;
         previousDefinition = node;
       }
@@ -85,11 +93,7 @@ const attacher: Plugin<[], Root, Root> = function () {
 
     // Save the release headings into the processor data so we can use it later instead of re-processing
     // all the headings
-    const t = processorData('releaseHeadings') as ReleaseHeading[];
-
-    // There shouldn't be anything in the array at this point, but clear it just in case
-    t.length = 0;
-    t.push(...releaseHeadings);
+    file.data['releaseHeadings'] = releaseHeadings;
   };
 };
 

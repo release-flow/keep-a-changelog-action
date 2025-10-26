@@ -86,3 +86,10 @@ const validReleaseTypes: Record<ReleaseType, unknown> = {
 export function isValidReleaseType(maybe: string): maybe is ReleaseType {
   return validReleaseTypes.hasOwnProperty(maybe);
 }
+
+// Augment the vfile.Data interface to include our processor data
+declare module 'vfile' {
+  interface DataMap {
+    releaseHeadings: ReleaseHeading[];
+  }
+}

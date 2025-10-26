@@ -4,7 +4,6 @@ import { write } from 'to-vfile';
 import { remark } from 'remark';
 import stringify from 'remark-stringify';
 
-import { ReleaseHeading } from './types.js';
 import { BumpOptions, QueryOptions } from './options.js';
 
 import bridge from './plugins/bridge.js';
@@ -21,10 +20,8 @@ import path from 'path';
 import extractReleaseInfo from './plugins/extract-release-info.js';
 
 async function processBumpChangelog(file: VFile, options: BumpOptions): Promise<VFile> {
-  const releaseHeadings: ReleaseHeading[] = [];
 
   let processor = remark()
-    .data('releaseHeadings', releaseHeadings)
     .use(releaseParser)
     .use(preprocess)
     .use(checkUnreleasedSectionExists)
@@ -41,6 +38,7 @@ async function processBumpChangelog(file: VFile, options: BumpOptions): Promise<
     processor = processor.use(addEmptyUnreleasedSection);
   }
 
+  // Process the changelog to update link definitions
   const updated = await processor
     .use(updateLinkDefinitions, options)
     .use(stringify, { listItemIndent: 'one', bullet: '-' })
@@ -69,10 +67,8 @@ export async function bump(changelog: VFile, options: BumpOptions): Promise<VFil
 }
 
 export async function query(file: VFile, options: QueryOptions): Promise<VFile> {
-  const releaseHeadings: ReleaseHeading[] = [];
 
   const updated = await remark()
-    .data('releaseHeadings', releaseHeadings)
     .use(releaseParser)
     .use(preprocess)
     .use(assert)
