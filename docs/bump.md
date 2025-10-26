@@ -30,7 +30,7 @@ number is automatically incremented according to the action parameters. The comm
 | Name | Description | Default |
 | --- | --- | --- |
 | `command` | Must contain the value `bump`  | n/a |
-| `version` | Specifies how the release number is incremented. Must be one of: `major`, `premajor`, `minor`, `preminor`, `patch`, `prepatch`, or `prerelease`. See the documentation of the [`semver.inc`](https://github.com/npm/node-semver#functions) function for more details. | **Required parameter** |
+| `version` | Specifies how the release number is incremented. Must be one of: `major`, `premajor`, `minor`, `preminor`, `patch`, `prepatch`, `prerelease`, or `release`. See the documentation of the [`semver.inc`](https://github.com/npm/node-semver#functions) function for more details. | **Required parameter** |
 | `preid` | The "prerelease identifier" to use as a prefix for the "prerelease" part of a semver. For example, it would specify the 'beta' in '1.0.0-beta.1'. | Empty string |
 | `release-date` | The release date that is written into the changelog for the new release, in ISO 8601 format, e.g. `2022-03-03`. | Current date |
 | `tag-prefix` | The prefix that is applied to the release number to generate the release tag. | `v` |

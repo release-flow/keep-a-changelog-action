@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Add a CLI invocation option.
+- Add support for `release` option (new in SemVer).
 
 ### Changed
 
@@ -66,7 +67,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Get the automated checks to run on an autorelease PR (see
-  [here](https://github.com/release-flow/keep-a-changelog-action/pull/31)).
+  [this PR](https://github.com/release-flow/keep-a-changelog-action/pull/31)).
 
 ## [1.4.0] - 2022-11-28
 
