@@ -2,13 +2,12 @@ import { Plugin } from 'unified';
 import { VFile } from 'vfile';
 import type { Root } from 'mdast';
 
-import { BoneheadedError, ReleaseHeading } from '../types.js';
+import { BoneheadedError } from '../types.js';
 
 const attacher: Plugin<any, Root, Root> = function checkUnreleasedSectionExists() {
-  const processorData = this.data;
-
+  
   return (_tree: Root, file: VFile) => {
-    const releaseHeadings = processorData('releaseHeadings') as ReleaseHeading[];
+    const releaseHeadings = file.data.releaseHeadings;
 
     if (!releaseHeadings) {
       throw new BoneheadedError('File should have been preprocessed before calling this plugin');

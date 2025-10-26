@@ -4,15 +4,15 @@ import { VFile } from 'vfile';
 import semver from 'semver';
 const { SemVer } = semver;
 
-import { BoneheadedError, isReleaseProps, ReleaseHeading, ReleaseProps } from '../types.js';
+import { BoneheadedError, isReleaseProps, ReleaseProps } from '../types.js';
 import { BumpOptions } from '../options.js';
+import { Root } from 'mdast';
 
-const attacher: Plugin = function (options: BumpOptions) {
-  const processorData = this.data;
+const attacher: Plugin<any, Root, Root> = function (options: BumpOptions) {
   return transformer;
 
   function transformer(_tree: Node, file: VFile) {
-    const releaseHeadings = processorData('releaseHeadings') as ReleaseHeading[];
+    const releaseHeadings = file.data.releaseHeadings;
 
     if (!releaseHeadings) {
       throw new BoneheadedError('File should have been preprocessed before calling this plugin');

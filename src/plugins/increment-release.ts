@@ -3,19 +3,22 @@ import { VFile } from 'vfile';
 import type { Root, LinkReference, Text } from 'mdast';
 import { format } from 'date-fns';
 
-import { ReleaseHeading } from '../types.js';
 import { BumpOptions } from '../options.js';
 import semver from 'semver';
+import { BoneheadedError } from '../types.js';
 
 const { SemVer } = semver;
 
 const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptions) {
-  const processorData = this.data;
 
   return (tree: Root, file: VFile) => {
-    const releaseHeadings = processorData('releaseHeadings') as ReleaseHeading[];
+    const releaseHeadings = file.data.releaseHeadings;
     const nextReleaseVersion = file.data['nextReleaseVersion'] as string;
 
+    if (!releaseHeadings) {
+      throw new BoneheadedError('File should have been preprocessed before calling this plugin');
+    }
+    
     if (releaseHeadings.length === 0 || releaseHeadings[0].release !== 'unreleased') {
       file.fail("The 'Unreleased' section must be present");
     }

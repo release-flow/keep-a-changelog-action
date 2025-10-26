@@ -5,14 +5,13 @@ import { remove } from 'unist-util-remove';
 import { format } from 'date-fns';
 
 import { BumpOptions } from '../options.js';
-import { BoneheadedError, isReleaseProps, ReleaseHeading } from '../types.js';
+import { BoneheadedError, isReleaseProps } from '../types.js';
 
 const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptions) {
-  const processorData = this.data;
   return transformer;
 
-  function transformer(tree: Root, _file: VFile) {
-    const releaseHeadings = processorData('releaseHeadings') as ReleaseHeading[];
+  function transformer(tree: Root, file: VFile) {
+    const releaseHeadings = file.data.releaseHeadings;
 
     if (!releaseHeadings) {
       throw new BoneheadedError('File should have been preprocessed before calling this plugin');
