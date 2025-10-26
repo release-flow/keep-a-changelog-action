@@ -23,15 +23,15 @@ jobs:
     - name: Ensure dist/ directory is up to date
       id: diff
       run: |
-        git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map'
+        git diff --ignore-space-at-eol --ignore-cr-at-eol --text -- dist/ ':(exclude)*.js.map'
         echo '======='
-        if [[ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]]; then
+        if [[ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol --text -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]]; then
           echo "Detected uncommitted changes after build.  See status below:"
           git diff
           exit 1
         fi
 
-    # If index.js was different than expected, upload the expected version as an artifact
+    # If index.js was different than expected, upload the generated version as an artifact so we can compare
     - uses: actions/upload-artifact@v4
       if: ${{ failure() && steps.diff.conclusion == 'failure' }}
       with:
