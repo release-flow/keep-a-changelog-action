@@ -25894,7 +25894,7 @@ function parseReleaseHeadingTextOnly(node, file) {
         }
         release = { version, date: new Date(m[3]), suffix: m[4] };
     }
-    node.data = { ...node.data, ...{ release } };
+    node.data = { ...node.data, release };
 }
 function parseReleaseHeadingWithLink(node, file) {
     const linkNode = node.children[0];
@@ -25904,7 +25904,7 @@ function parseReleaseHeadingWithLink(node, file) {
     }
     if (linkNode.label?.toLowerCase() === 'unreleased') {
         // If it's unreleased, we don't care about the date
-        node.data = { ...node.data, ...{ release: 'unreleased' } };
+        node.data = { ...node.data, release: 'unreleased' };
         return;
     }
     const version = semver.parse(linkNode.label);
@@ -25932,7 +25932,7 @@ function parseReleaseHeadingWithLink(node, file) {
         return;
     }
     const release = { version, date: new Date(m[1]), suffix: m[2] };
-    node.data = { ...node.data, ...{ release } };
+    node.data = { ...node.data, release };
 }
 function parseReleaseHeading(node, file) {
     // Release titles are level 2 headings in the following format:
@@ -25983,7 +25983,6 @@ function releaseParser() {
 
 
 const preprocessor_attacher = function () {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return (tree, file) => {
         let previousReleaseHeading = null;
@@ -26061,9 +26060,7 @@ const assert_attacher = function () {
 //# sourceMappingURL=assert.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/check-unreleased-section-exists.js
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const check_unreleased_section_exists_attacher = function checkUnreleasedSectionExists() {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return (_tree, file) => {
         const releaseHeadings = processorData('releaseHeadings');
@@ -26183,7 +26180,6 @@ function findReleaseHeading(target, headings) {
     return null;
 }
 const extract_release_notes_attacher = function extractReleaseNotes(target, options) {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return (tree, file) => {
         const releaseHeadings = processorData('releaseHeadings');
@@ -28952,7 +28948,6 @@ function cleanEscapedString(input) {
 
 const { SemVer: increment_release_SemVer } = semver;
 const increment_release_attacher = function (options) {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return (tree, file) => {
         const releaseHeadings = processorData('releaseHeadings');
@@ -28993,7 +28988,6 @@ const increment_release_attacher = function (options) {
 const { SemVer: calculate_next_release_SemVer } = semver;
 
 const calculate_next_release_attacher = function (options) {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return transformer;
     function transformer(_tree, file) {
@@ -29118,7 +29112,6 @@ const remove =
 
 
 const update_link_definitions_attacher = function (options) {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return transformer;
     function transformer(tree, _file) {
@@ -29194,9 +29187,7 @@ const update_link_definitions_attacher = function (options) {
 /* harmony default export */ const update_link_definitions = (update_link_definitions_attacher);
 //# sourceMappingURL=update-link-definitions.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/add-unreleased-section.js
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const add_unreleased_section_attacher = function () {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return (tree, _file) => {
         const releaseHeadings = processorData('releaseHeadings');
@@ -29284,7 +29275,6 @@ function extract_release_info_findReleaseHeading(target, headings) {
     return target === 'latest-or-unreleased' ? unreleasedHeading : null;
 }
 const extract_release_info_attacher = function extractUnreleasedContents(target) {
-    // eslint-disable-next-line @typescript-eslint/unbound-method
     const processorData = this.data;
     return (tree, file) => {
         const releaseHeadings = processorData('releaseHeadings');
