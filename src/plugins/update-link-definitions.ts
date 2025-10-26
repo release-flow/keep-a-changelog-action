@@ -8,7 +8,6 @@ import { BumpOptions } from '../options.js';
 import { BoneheadedError, isReleaseProps, ReleaseHeading } from '../types.js';
 
 const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptions) {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
   return transformer;
 

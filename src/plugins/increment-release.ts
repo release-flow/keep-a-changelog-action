@@ -10,7 +10,6 @@ import semver from 'semver';
 const { SemVer } = semver;
 
 const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptions) {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const processorData = this.data;
 
   return (tree: Root, file: VFile) => {

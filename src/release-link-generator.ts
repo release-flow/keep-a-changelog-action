@@ -1,4 +1,4 @@
-import { ReleaseLinkGenerator as ReleaseLinkGenerator, RepoSpec } from './options.js';
+import { ReleaseLinkGenerator, RepoSpec } from './options.js';
 import { BoneheadedError, isReleaseProps, ReleaseSpec } from './types.js';
 
 export class GitHubReleaseLinkGenerator implements ReleaseLinkGenerator {

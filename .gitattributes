@@ -17,6 +17,7 @@
 .gitignore          text
 .prettierignore     text
 .prettierrc         text
+.lintstagedrc       text
 
 *.editorconfig      text
 *.eslintignore      text

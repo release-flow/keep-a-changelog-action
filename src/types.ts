@@ -6,7 +6,7 @@ import { ReleaseType } from 'semver';
 /**
  * The properties of a release (extracted from the heading).
  *
- * @export
+ * @exports ReleaseProps
  * @interface ReleaseProps
  */
 export interface ReleaseProps {
