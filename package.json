@@ -15,7 +15,7 @@
     "lint": "npx oxlint src/**/*.ts",
     "package": "ncc build lib/index.js --source-map --license licenses.txt -o dist && ncc build lib/cli.js --source-map --license licenses.txt -o dist/cli",
     "all": "npm run build && npm run format-check && npm run lint && npm test && npm run package",
-    "prepare": "npx husky init && husky install"
+    "prepare": "husky"
   },
   "author": "Release Flow <info@releaseflow.io>",
   "license": "MIT",
