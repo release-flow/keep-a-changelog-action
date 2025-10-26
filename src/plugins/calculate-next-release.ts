@@ -24,7 +24,17 @@ const attacher: Plugin<any, Root, Root> = function (options: BumpOptions) {
 
     const latestVersion = latestRelease ? (<ReleaseProps>latestRelease.release).version : new SemVer('0.0.0');
 
-    file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid);
+    if (options.version instanceof SemVer) {
+      if (options.version.compare(latestVersion) <= 0) {
+        file.fail(
+          `Specified version ${options.version.format()} must be greater than latest version ${latestVersion.format()}`
+        );
+      }
+
+      file.data['nextReleaseVersion'] = options.version.format();
+    } else {
+      file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid) ?? undefined;
+    }
   }
 };
 

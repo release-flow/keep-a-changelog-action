@@ -4,6 +4,7 @@ import { reporter } from 'vfile-reporter';
 import { VFileMessage } from 'vfile-message';
 import { read } from 'to-vfile';
 
+import semver from 'semver';
 import { isValidReleaseType } from './types.js';
 import { BumpOptions, RepoSpec } from './options.js';
 import { CliBumpArguments } from './cli-types.js';
@@ -23,9 +24,14 @@ function getBumpOptions(argv: CliBumpArguments): BumpOptions | string {
     changelogPath = path.join(root, changelogPath);
   }
 
-  const releaseType = argv.version ?? 'patch';
+  let releaseType: string | semver.SemVer = argv.version ?? 'patch';
   if (!isValidReleaseType(releaseType)) {
-    return `Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`;
+    if (semver.valid(releaseType)) {
+      // It's a valid semver, so use that
+      releaseType = new semver.SemVer(releaseType);
+    } else {
+      return `Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number.`;
+    }
   }
 
   let releaseDate = new Date();

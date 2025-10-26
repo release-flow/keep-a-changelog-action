@@ -8,6 +8,7 @@ import { reporter } from 'vfile-reporter';
 import * as core from '@actions/core';
 import { isValidReleaseType } from './types.js';
 
+import semver from 'semver';
 import { BumpOptions, RepoSpec } from './options.js';
 import { bump } from './commands.js';
 import { GitHubReleaseLinkGenerator } from './release-link-generator.js';
@@ -38,12 +39,17 @@ function getBumpOptions(): BumpOptions | undefined {
     changelogPath = path.join(root, changelogPath);
   }
 
-  const releaseType: string = core.getInput('version') ?? 'patch';
+  let releaseType: string | semver.SemVer = core.getInput('version') ?? 'patch';
   if (!isValidReleaseType(releaseType)) {
-    core.setFailed(
-      `Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, or prerelease`
-    );
-    return;
+    if (semver.valid(releaseType)) {
+      // It's a valid semver, so use that
+      releaseType = new semver.SemVer(releaseType);
+    } else {
+      core.setFailed(
+        `Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number.`
+      );
+      return;
+    }
   }
 
   let releaseDate = new Date();

@@ -91,5 +91,6 @@ export function isValidReleaseType(maybe: string): maybe is ReleaseType {
 declare module 'vfile' {
   interface DataMap {
     releaseHeadings: ReleaseHeading[];
+    nextReleaseVersion: string;
   }
 }

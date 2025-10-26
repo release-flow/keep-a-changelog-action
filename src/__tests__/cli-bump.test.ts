@@ -56,9 +56,9 @@ describe('bump CLI subcommand', () => {
 
     expect(result.isError).toBeTruthy();
 
-    expect(result.stderr).toMatch(/Invalid values:/);
+    expect(result.stderr).toMatch(/Input 'version' has an invalid value 'invalid'./);
     expect(result.stderr).toMatch(
-      /Argument: version, Given: "invalid", Choices: "major", "premajor", "minor", "preminor", "patch", "prepatch", "prerelease"/
+      /The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number./
     );
   });
 
@@ -166,6 +166,19 @@ describe('bump CLI subcommand', () => {
 
     const expectedFile = path.join(__dirname, 'changelog_notagprefix_expected.md');
     const actualFile = path.join(__dirname, 'changelog_notagprefix_output_cli.md');
+    expect(actualFile).toMatchFileSnapshot(expectedFile);
+  });
+
+  it('uses the specfied semantic version', () => {
+    const params = { ...DefaultParams };
+    params.outputFile = 'changelog_1_output_cli.md';
+    params.version = '1.0.1';
+    const result = runCommand(params);
+
+    expect(result.isError).toBeFalsy();
+
+    const expectedFile = path.join(__dirname, 'changelog_1_expected_semver.md');
+    const actualFile = path.join(__dirname, 'changelog_1_output_cli.md');
     expect(actualFile).toMatchFileSnapshot(expectedFile);
   });
 
