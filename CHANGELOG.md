@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Remove ESLint and replace with oxlint
+- Update `@actions/core` to v3.0.1
 
 ## [3.0.1] - 2024-07-30
 
