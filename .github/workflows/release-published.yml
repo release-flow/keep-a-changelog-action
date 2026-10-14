@@ -11,6 +11,9 @@ permissions:
 jobs:
   update-ref:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-release-version.outputs.version }}
+      is-prerelease: ${{ steps.get-release-version.outputs.is-prerelease }}
     steps:
     - uses: actions/checkout@v4
       with:
@@ -34,9 +37,11 @@ jobs:
         if [[ "$PRERELEASE" ]]; then pre=true; else pre=false; fi
         if [[ -f $GITHUB_OUTPUT ]]; then
           echo "major-ref=v$MAJOR" >> $GITHUB_OUTPUT
+          echo "version=$MAJOR.$MINOR.$PATCH$PRERELEASE" >> $GITHUB_OUTPUT
           echo "is-prerelease=$pre" >> $GITHUB_OUTPUT
         else
           echo "::set-output name=major-ref::v$MAJOR"
+          echo "::set-output name=version::$MAJOR.$MINOR.$PATCH$PRERELEASE"
           echo "::set-output name=is-prerelease::$pre"
         fi
 
@@ -47,10 +52,34 @@ jobs:
 
     - name: Update release tag
       if: ${{ ! fromJSON(steps.get-release-version.outputs.is-prerelease) }}
-      run: |        
+      run: |
         git config user.name "${GITHUB_ACTOR}"
         git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
         git tag -fa ${{ steps.get-release-version.outputs.major-ref }} -m "Update ${{ steps.get-release-version.outputs.major-ref }} tag"
         git push origin ${{ steps.get-release-version.outputs.major-ref }} --force
         echo "::notice::Updated ref ${{ steps.get-release-version.outputs.major-ref }}"
+
+  publish-npm:
+    needs: update-ref
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+        registry-url: 'https://registry.npmjs.org'
+
+    - run: npm ci --legacy-peer-deps
+
+    - run: npm run build && npm run package
+
+    - name: Set package version to match release
+      run: npm pkg set version=${{ needs.update-ref.outputs.version }}
+
+    - name: Stage publish
+      run: npm stage publish --tag ${{ fromJSON(needs.update-ref.outputs.is-prerelease) && 'next' || 'latest' }} --provenance
