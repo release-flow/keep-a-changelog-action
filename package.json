@@ -1,9 +1,20 @@
 {
-  "name": "keep-a-changelog-actions",
-  "version": "1.1.0",
-  "description": "A set of GitHub Actions to work with a changelog that adheres to keep-a-changelog and Semantic Versioning conventions.",
+  "name": "@release-flow/keep-a-changelog",
+  "version": "3.0.1",
+  "description": "A CLI and set of GitHub Actions to work with a changelog that adheres to keep-a-changelog and Semantic Versioning conventions.",
   "type": "module",
-  "main": "index.js",
+  "bin": {
+    "kac": "dist/cli/index.js"
+  },
+  "files": [
+    "dist/cli"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "shx rm -rf lib",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
@@ -59,5 +70,9 @@
     "vfile-message": "^4.0.3",
     "vfile-reporter": "^8.1.1",
     "yargs": "^18.0.0"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.11.1": true
   }
 }

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Add a CLI invocation option.
 - Add support for `release` option (new in SemVer).
+- Add publish to NPM package (aids CLI consumers).
 
 ### Changed
 
