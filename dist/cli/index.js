@@ -2,17 +2,6 @@
 import './sourcemap-register.cjs';import { createRequire as __WEBPACK_EXTERNAL_createRequire } from "module";
 /******/ var __webpack_modules__ = ({
 
-/***/ 6976:
-/***/ ((module) => {
-
-module.exports = () => {
-	// https://mths.be/emoji
-	return /[#*0-9]\uFE0F?\u20E3|[\xA9\xAE\u203C\u2049\u2122\u2139\u2194-\u2199\u21A9\u21AA\u231A\u231B\u2328\u23CF\u23ED-\u23EF\u23F1\u23F2\u23F8-\u23FA\u24C2\u25AA\u25AB\u25B6\u25C0\u25FB\u25FC\u25FE\u2600-\u2604\u260E\u2611\u2614\u2615\u2618\u2620\u2622\u2623\u2626\u262A\u262E\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F\u2660\u2663\u2665\u2666\u2668\u267B\u267E\u267F\u2692\u2694-\u2697\u2699\u269B\u269C\u26A0\u26A7\u26AA\u26B0\u26B1\u26BD\u26BE\u26C4\u26C8\u26CF\u26D1\u26E9\u26F0-\u26F5\u26F7\u26F8\u26FA\u2702\u2708\u2709\u270F\u2712\u2714\u2716\u271D\u2721\u2733\u2734\u2744\u2747\u2757\u2763\u27A1\u2934\u2935\u2B05-\u2B07\u2B1B\u2B1C\u2B55\u3030\u303D\u3297\u3299]\uFE0F?|[\u261D\u270C\u270D](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\u270A\u270B](?:\uD83C[\uDFFB-\uDFFF])?|[\u23E9-\u23EC\u23F0\u23F3\u25FD\u2693\u26A1\u26AB\u26C5\u26CE\u26D4\u26EA\u26FD\u2705\u2728\u274C\u274E\u2753-\u2755\u2795-\u2797\u27B0\u27BF\u2B50]|\u26D3\uFE0F?(?:\u200D\uD83D\uDCA5)?|\u26F9(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\u2764\uFE0F?(?:\u200D(?:\uD83D\uDD25|\uD83E\uDE79))?|\uD83C(?:[\uDC04\uDD70\uDD71\uDD7E\uDD7F\uDE02\uDE37\uDF21\uDF24-\uDF2C\uDF36\uDF7D\uDF96\uDF97\uDF99-\uDF9B\uDF9E\uDF9F\uDFCD\uDFCE\uDFD4-\uDFDF\uDFF5\uDFF7]\uFE0F?|[\uDF85\uDFC2\uDFC7](?:\uD83C[\uDFFB-\uDFFF])?|[\uDFC4\uDFCA](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDFCB\uDFCC](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDCCF\uDD8E\uDD91-\uDD9A\uDE01\uDE1A\uDE2F\uDE32-\uDE36\uDE38-\uDE3A\uDE50\uDE51\uDF00-\uDF20\uDF2D-\uDF35\uDF37-\uDF43\uDF45-\uDF4A\uDF4C-\uDF7C\uDF7E-\uDF84\uDF86-\uDF93\uDFA0-\uDFC1\uDFC5\uDFC6\uDFC8\uDFC9\uDFCF-\uDFD3\uDFE0-\uDFF0\uDFF8-\uDFFF]|\uDDE6\uD83C[\uDDE8-\uDDEC\uDDEE\uDDF1\uDDF2\uDDF4\uDDF6-\uDDFA\uDDFC\uDDFD\uDDFF]|\uDDE7\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEF\uDDF1-\uDDF4\uDDF6-\uDDF9\uDDFB\uDDFC\uDDFE\uDDFF]|\uDDE8\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDEE\uDDF0-\uDDF7\uDDFA-\uDDFF]|\uDDE9\uD83C[\uDDEA\uDDEC\uDDEF\uDDF0\uDDF2\uDDF4\uDDFF]|\uDDEA\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDED\uDDF7-\uDDFA]|\uDDEB\uD83C[\uDDEE-\uDDF0\uDDF2\uDDF4\uDDF7]|\uDDEC\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEE\uDDF1-\uDDF3\uDDF5-\uDDFA\uDDFC\uDDFE]|\uDDED\uD83C[\uDDF0\uDDF2\uDDF3\uDDF7\uDDF9\uDDFA]|\uDDEE\uD83C[\uDDE8-\uDDEA\uDDF1-\uDDF4\uDDF6-\uDDF9]|\uDDEF\uD83C[\uDDEA\uDDF2\uDDF4\uDDF5]|\uDDF0\uD83C[\uDDEA\uDDEC-\uDDEE\uDDF2\uDDF3\uDDF5\uDDF7\uDDFC\uDDFE\uDDFF]|\uDDF1\uD83C[\uDDE6-\uDDE8\uDDEE\uDDF0\uDDF7-\uDDFB\uDDFE]|\uDDF2\uD83C[\uDDE6\uDDE8-\uDDED\uDDF0-\uDDFF]|\uDDF3\uD83C[\uDDE6\uDDE8\uDDEA-\uDDEC\uDDEE\uDDF1\uDDF4\uDDF5\uDDF7\uDDFA\uDDFF]|\uDDF4\uD83C\uDDF2|\uDDF5\uD83C[\uDDE6\uDDEA-\uDDED\uDDF0-\uDDF3\uDDF7-\uDDF9\uDDFC\uDDFE]|\uDDF6\uD83C\uDDE6|\uDDF7\uD83C[\uDDEA\uDDF4\uDDF8\uDDFA\uDDFC]|\uDDF8\uD83C[\uDDE6-\uDDEA\uDDEC-\uDDF4\uDDF7-\uDDF9\uDDFB\uDDFD-\uDDFF]|\uDDF9\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDED\uDDEF-\uDDF4\uDDF7\uDDF9\uDDFB\uDDFC\uDDFF]|\uDDFA\uD83C[\uDDE6\uDDEC\uDDF2\uDDF3\uDDF8\uDDFE\uDDFF]|\uDDFB\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDEE\uDDF3\uDDFA]|\uDDFC\uD83C[\uDDEB\uDDF8]|\uDDFD\uD83C\uDDF0|\uDDFE\uD83C[\uDDEA\uDDF9]|\uDDFF\uD83C[\uDDE6\uDDF2\uDDFC]|\uDF44(?:\u200D\uD83D\uDFEB)?|\uDF4B(?:\u200D\uD83D\uDFE9)?|\uDFC3(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDFF3\uFE0F?(?:\u200D(?:\u26A7\uFE0F?|\uD83C\uDF08))?|\uDFF4(?:\u200D\u2620\uFE0F?|\uDB40\uDC67\uDB40\uDC62\uDB40(?:\uDC65\uDB40\uDC6E\uDB40\uDC67|\uDC73\uDB40\uDC63\uDB40\uDC74|\uDC77\uDB40\uDC6C\uDB40\uDC73)\uDB40\uDC7F)?)|\uD83D(?:[\uDC3F\uDCFD\uDD49\uDD4A\uDD6F\uDD70\uDD73\uDD76-\uDD79\uDD87\uDD8A-\uDD8D\uDDA5\uDDA8\uDDB1\uDDB2\uDDBC\uDDC2-\uDDC4\uDDD1-\uDDD3\uDDDC-\uDDDE\uDDE1\uDDE3\uDDE8\uDDEF\uDDF3\uDDFA\uDECB\uDECD-\uDECF\uDEE0-\uDEE5\uDEE9\uDEF0\uDEF3]\uFE0F?|[\uDC42\uDC43\uDC46-\uDC50\uDC66\uDC67\uDC6B-\uDC6D\uDC72\uDC74-\uDC76\uDC78\uDC7C\uDC83\uDC85\uDC8F\uDC91\uDCAA\uDD7A\uDD95\uDD96\uDE4C\uDE4F\uDEC0\uDECC](?:\uD83C[\uDFFB-\uDFFF])?|[\uDC6E-\uDC71\uDC73\uDC77\uDC81\uDC82\uDC86\uDC87\uDE45-\uDE47\uDE4B\uDE4D\uDE4E\uDEA3\uDEB4\uDEB5](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD74\uDD90](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\uDC00-\uDC07\uDC09-\uDC14\uDC16-\uDC25\uDC27-\uDC3A\uDC3C-\uDC3E\uDC40\uDC44\uDC45\uDC51-\uDC65\uDC6A\uDC79-\uDC7B\uDC7D-\uDC80\uDC84\uDC88-\uDC8E\uDC90\uDC92-\uDCA9\uDCAB-\uDCFC\uDCFF-\uDD3D\uDD4B-\uDD4E\uDD50-\uDD67\uDDA4\uDDFB-\uDE2D\uDE2F-\uDE34\uDE37-\uDE41\uDE43\uDE44\uDE48-\uDE4A\uDE80-\uDEA2\uDEA4-\uDEB3\uDEB7-\uDEBF\uDEC1-\uDEC5\uDED0-\uDED2\uDED5-\uDED8\uDEDC-\uDEDF\uDEEB\uDEEC\uDEF4-\uDEFC\uDFE0-\uDFEB\uDFF0]|\uDC08(?:\u200D\u2B1B)?|\uDC15(?:\u200D\uD83E\uDDBA)?|\uDC26(?:\u200D(?:\u2B1B|\uD83D\uDD25))?|\uDC3B(?:\u200D\u2744\uFE0F?)?|\uDC41\uFE0F?(?:\u200D\uD83D\uDDE8\uFE0F?)?|\uDC68(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDC68\uDC69]\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?))?|\uDC69(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?[\uDC68\uDC69]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?|\uDC69\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?))|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFC-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFD-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFD\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFE]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])))?))?|\uDD75(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\uDE2E(?:\u200D\uD83D\uDCA8)?|\uDE35(?:\u200D\uD83D\uDCAB)?|\uDE36(?:\u200D\uD83C\uDF2B\uFE0F?)?|\uDE42(?:\u200D[\u2194\u2195]\uFE0F?)?|\uDEB6(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?)|\uD83E(?:[\uDD0C\uDD0F\uDD18-\uDD1F\uDD30-\uDD34\uDD36\uDD77\uDDB5\uDDB6\uDDBB\uDDD2\uDDD3\uDDD5\uDEC3-\uDEC5\uDEF0\uDEF2-\uDEF8](?:\uD83C[\uDFFB-\uDFFF])?|[\uDD26\uDD35\uDD37-\uDD39\uDD3C-\uDD3E\uDDB8\uDDB9\uDDCD\uDDCF\uDDD4\uDDD6-\uDDDD](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDDDE\uDDDF](?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD0D\uDD0E\uDD10-\uDD17\uDD20-\uDD25\uDD27-\uDD2F\uDD3A\uDD3F-\uDD45\uDD47-\uDD76\uDD78-\uDDB4\uDDB7\uDDBA\uDDBC-\uDDCC\uDDD0\uDDE0-\uDDFF\uDE70-\uDE7C\uDE80-\uDE8A\uDE8E-\uDEC2\uDEC6\uDEC8\uDECD-\uDEDC\uDEDF-\uDEEA\uDEEF]|\uDDCE(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDDD1(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1|\uDDD1\u200D\uD83E\uDDD2(?:\u200D\uD83E\uDDD2)?|\uDDD2(?:\u200D\uD83E\uDDD2)?))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])))?))?|\uDEF1(?:\uD83C(?:\uDFFB(?:\u200D\uD83E\uDEF2\uD83C[\uDFFC-\uDFFF])?|\uDFFC(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFD-\uDFFF])?|\uDFFD(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])?|\uDFFE(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFD\uDFFF])?|\uDFFF(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFE])?))?)/g;
-};
-
-
-/***/ }),
-
 /***/ 1428:
 /***/ ((module) => {
 
@@ -324,6 +313,17 @@ eaw.slice = function(text, start, end) {
     eawLen += charLen;
   }
   return result;
+};
+
+
+/***/ }),
+
+/***/ 872:
+/***/ ((module) => {
+
+module.exports = () => {
+	// https://mths.be/emoji
+	return /[#*0-9]\uFE0F?\u20E3|[\xA9\xAE\u203C\u2049\u2122\u2139\u2194-\u2199\u21A9\u21AA\u231A\u231B\u2328\u23CF\u23ED-\u23EF\u23F1\u23F2\u23F8-\u23FA\u24C2\u25AA\u25AB\u25B6\u25C0\u25FB\u25FC\u25FE\u2600-\u2604\u260E\u2611\u2614\u2615\u2618\u2620\u2622\u2623\u2626\u262A\u262E\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F\u2660\u2663\u2665\u2666\u2668\u267B\u267E\u267F\u2692\u2694-\u2697\u2699\u269B\u269C\u26A0\u26A7\u26AA\u26B0\u26B1\u26BD\u26BE\u26C4\u26C8\u26CF\u26D1\u26E9\u26F0-\u26F5\u26F7\u26F8\u26FA\u2702\u2708\u2709\u270F\u2712\u2714\u2716\u271D\u2721\u2733\u2734\u2744\u2747\u2757\u2763\u27A1\u2934\u2935\u2B05-\u2B07\u2B1B\u2B1C\u2B55\u3030\u303D\u3297\u3299]\uFE0F?|[\u261D\u270C\u270D](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\u270A\u270B](?:\uD83C[\uDFFB-\uDFFF])?|[\u23E9-\u23EC\u23F0\u23F3\u25FD\u2693\u26A1\u26AB\u26C5\u26CE\u26D4\u26EA\u26FD\u2705\u2728\u274C\u274E\u2753-\u2755\u2795-\u2797\u27B0\u27BF\u2B50]|\u26D3\uFE0F?(?:\u200D\uD83D\uDCA5)?|\u26F9(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\u2764\uFE0F?(?:\u200D(?:\uD83D\uDD25|\uD83E\uDE79))?|\uD83C(?:[\uDC04\uDD70\uDD71\uDD7E\uDD7F\uDE02\uDE37\uDF21\uDF24-\uDF2C\uDF36\uDF7D\uDF96\uDF97\uDF99-\uDF9B\uDF9E\uDF9F\uDFCD\uDFCE\uDFD4-\uDFDF\uDFF5\uDFF7]\uFE0F?|[\uDF85\uDFC2\uDFC7](?:\uD83C[\uDFFB-\uDFFF])?|[\uDFC4\uDFCA](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDFCB\uDFCC](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDCCF\uDD8E\uDD91-\uDD9A\uDE01\uDE1A\uDE2F\uDE32-\uDE36\uDE38-\uDE3A\uDE50\uDE51\uDF00-\uDF20\uDF2D-\uDF35\uDF37-\uDF43\uDF45-\uDF4A\uDF4C-\uDF7C\uDF7E-\uDF84\uDF86-\uDF93\uDFA0-\uDFC1\uDFC5\uDFC6\uDFC8\uDFC9\uDFCF-\uDFD3\uDFE0-\uDFF0\uDFF8-\uDFFF]|\uDDE6\uD83C[\uDDE8-\uDDEC\uDDEE\uDDF1\uDDF2\uDDF4\uDDF6-\uDDFA\uDDFC\uDDFD\uDDFF]|\uDDE7\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEF\uDDF1-\uDDF4\uDDF6-\uDDF9\uDDFB\uDDFC\uDDFE\uDDFF]|\uDDE8\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDEE\uDDF0-\uDDF7\uDDFA-\uDDFF]|\uDDE9\uD83C[\uDDEA\uDDEC\uDDEF\uDDF0\uDDF2\uDDF4\uDDFF]|\uDDEA\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDED\uDDF7-\uDDFA]|\uDDEB\uD83C[\uDDEE-\uDDF0\uDDF2\uDDF4\uDDF7]|\uDDEC\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEE\uDDF1-\uDDF3\uDDF5-\uDDFA\uDDFC\uDDFE]|\uDDED\uD83C[\uDDF0\uDDF2\uDDF3\uDDF7\uDDF9\uDDFA]|\uDDEE\uD83C[\uDDE8-\uDDEA\uDDF1-\uDDF4\uDDF6-\uDDF9]|\uDDEF\uD83C[\uDDEA\uDDF2\uDDF4\uDDF5]|\uDDF0\uD83C[\uDDEA\uDDEC-\uDDEE\uDDF2\uDDF3\uDDF5\uDDF7\uDDFC\uDDFE\uDDFF]|\uDDF1\uD83C[\uDDE6-\uDDE8\uDDEE\uDDF0\uDDF7-\uDDFB\uDDFE]|\uDDF2\uD83C[\uDDE6\uDDE8-\uDDED\uDDF0-\uDDFF]|\uDDF3\uD83C[\uDDE6\uDDE8\uDDEA-\uDDEC\uDDEE\uDDF1\uDDF4\uDDF5\uDDF7\uDDFA\uDDFF]|\uDDF4\uD83C\uDDF2|\uDDF5\uD83C[\uDDE6\uDDEA-\uDDED\uDDF0-\uDDF3\uDDF7-\uDDF9\uDDFC\uDDFE]|\uDDF6\uD83C\uDDE6|\uDDF7\uD83C[\uDDEA\uDDF4\uDDF8\uDDFA\uDDFC]|\uDDF8\uD83C[\uDDE6-\uDDEA\uDDEC-\uDDF4\uDDF7-\uDDF9\uDDFB\uDDFD-\uDDFF]|\uDDF9\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDED\uDDEF-\uDDF4\uDDF7\uDDF9\uDDFB\uDDFC\uDDFF]|\uDDFA\uD83C[\uDDE6\uDDEC\uDDF2\uDDF3\uDDF8\uDDFE\uDDFF]|\uDDFB\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDEE\uDDF3\uDDFA]|\uDDFC\uD83C[\uDDEB\uDDF8]|\uDDFD\uD83C\uDDF0|\uDDFE\uD83C[\uDDEA\uDDF9]|\uDDFF\uD83C[\uDDE6\uDDF2\uDDFC]|\uDF44(?:\u200D\uD83D\uDFEB)?|\uDF4B(?:\u200D\uD83D\uDFE9)?|\uDFC3(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDFF3\uFE0F?(?:\u200D(?:\u26A7\uFE0F?|\uD83C\uDF08))?|\uDFF4(?:\u200D\u2620\uFE0F?|\uDB40\uDC67\uDB40\uDC62\uDB40(?:\uDC65\uDB40\uDC6E\uDB40\uDC67|\uDC73\uDB40\uDC63\uDB40\uDC74|\uDC77\uDB40\uDC6C\uDB40\uDC73)\uDB40\uDC7F)?)|\uD83D(?:[\uDC3F\uDCFD\uDD49\uDD4A\uDD6F\uDD70\uDD73\uDD76-\uDD79\uDD87\uDD8A-\uDD8D\uDDA5\uDDA8\uDDB1\uDDB2\uDDBC\uDDC2-\uDDC4\uDDD1-\uDDD3\uDDDC-\uDDDE\uDDE1\uDDE3\uDDE8\uDDEF\uDDF3\uDDFA\uDECB\uDECD-\uDECF\uDEE0-\uDEE5\uDEE9\uDEF0\uDEF3]\uFE0F?|[\uDC42\uDC43\uDC46-\uDC50\uDC66\uDC67\uDC6B-\uDC6D\uDC72\uDC74-\uDC76\uDC78\uDC7C\uDC83\uDC85\uDC8F\uDC91\uDCAA\uDD7A\uDD95\uDD96\uDE4C\uDE4F\uDEC0\uDECC](?:\uD83C[\uDFFB-\uDFFF])?|[\uDC6E-\uDC71\uDC73\uDC77\uDC81\uDC82\uDC86\uDC87\uDE45-\uDE47\uDE4B\uDE4D\uDE4E\uDEA3\uDEB4\uDEB5](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD74\uDD90](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\uDC00-\uDC07\uDC09-\uDC14\uDC16-\uDC25\uDC27-\uDC3A\uDC3C-\uDC3E\uDC40\uDC44\uDC45\uDC51-\uDC65\uDC6A\uDC79-\uDC7B\uDC7D-\uDC80\uDC84\uDC88-\uDC8E\uDC90\uDC92-\uDCA9\uDCAB-\uDCFC\uDCFF-\uDD3D\uDD4B-\uDD4E\uDD50-\uDD67\uDDA4\uDDFB-\uDE2D\uDE2F-\uDE34\uDE37-\uDE41\uDE43\uDE44\uDE48-\uDE4A\uDE80-\uDEA2\uDEA4-\uDEB3\uDEB7-\uDEBF\uDEC1-\uDEC5\uDED0-\uDED2\uDED5-\uDED8\uDEDC-\uDEDF\uDEEB\uDEEC\uDEF4-\uDEFC\uDFE0-\uDFEB\uDFF0]|\uDC08(?:\u200D\u2B1B)?|\uDC15(?:\u200D\uD83E\uDDBA)?|\uDC26(?:\u200D(?:\u2B1B|\uD83D\uDD25))?|\uDC3B(?:\u200D\u2744\uFE0F?)?|\uDC41\uFE0F?(?:\u200D\uD83D\uDDE8\uFE0F?)?|\uDC68(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDC68\uDC69]\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?))?|\uDC69(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?[\uDC68\uDC69]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?|\uDC69\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?))|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFC-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFD-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFD\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFE]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])))?))?|\uDD75(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\uDE2E(?:\u200D\uD83D\uDCA8)?|\uDE35(?:\u200D\uD83D\uDCAB)?|\uDE36(?:\u200D\uD83C\uDF2B\uFE0F?)?|\uDE42(?:\u200D[\u2194\u2195]\uFE0F?)?|\uDEB6(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?)|\uD83E(?:[\uDD0C\uDD0F\uDD18-\uDD1F\uDD30-\uDD34\uDD36\uDD77\uDDB5\uDDB6\uDDBB\uDDD2\uDDD3\uDDD5\uDEC3-\uDEC5\uDEF0\uDEF2-\uDEF8](?:\uD83C[\uDFFB-\uDFFF])?|[\uDD26\uDD35\uDD37-\uDD39\uDD3C-\uDD3E\uDDB8\uDDB9\uDDCD\uDDCF\uDDD4\uDDD6-\uDDDD](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDDDE\uDDDF](?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD0D\uDD0E\uDD10-\uDD17\uDD20-\uDD25\uDD27-\uDD2F\uDD3A\uDD3F-\uDD45\uDD47-\uDD76\uDD78-\uDDB4\uDDB7\uDDBA\uDDBC-\uDDCC\uDDD0\uDDE0-\uDDFF\uDE70-\uDE7C\uDE80-\uDE8A\uDE8E-\uDEC2\uDEC6\uDEC8\uDECD-\uDEDC\uDEDF-\uDEEA\uDEEF]|\uDDCE(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDDD1(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1|\uDDD1\u200D\uD83E\uDDD2(?:\u200D\uD83E\uDDD2)?|\uDDD2(?:\u200D\uD83E\uDDD2)?))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])))?))?|\uDEF1(?:\uD83C(?:\uDFFB(?:\u200D\uD83E\uDEF2\uD83C[\uDFFC-\uDFFF])?|\uDFFC(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFD-\uDFFF])?|\uDFFD(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])?|\uDFFE(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFD\uDFFF])?|\uDFFF(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFE])?))?)/g;
 };
 
 
@@ -3558,6 +3558,9 @@ class Range {
   }
 
   parseRange (range) {
+    // strip build metadata so it can't bleed into the version
+    range = range.replace(BUILDSTRIPRE, '')
+
     // memoize range parsing for performance.
     // this is a very hot path, and fully deterministic.
     const memoOpts =
@@ -3683,12 +3686,16 @@ const debug = __nccwpck_require__(1159)
 const SemVer = __nccwpck_require__(7163)
 const {
   safeRe: re,
+  src,
   t,
   comparatorTrimReplace,
   tildeTrimReplace,
   caretTrimReplace,
 } = __nccwpck_require__(5471)
 const { FLAG_INCLUDE_PRERELEASE, FLAG_LOOSE } = __nccwpck_require__(5101)
+
+// unbounded global build-metadata stripper used by parseRange
+const BUILDSTRIPRE = new RegExp(src[t.BUILD], 'g')
 
 const isNullSet = c => c.value === '<0.0.0-0'
 const isAny = c => c.value === ''
@@ -3730,6 +3737,11 @@ const parseComparator = (comp, options) => {
 
 const isX = id => !id || id.toLowerCase() === 'x' || id === '*'
 
+const invalidXRangeOrder = (M, m, p) => (
+  (isX(M) && !isX(m)) ||
+  (isX(m) && p && !isX(p))
+)
+
 // ~, ~> --> * (any, kinda silly)
 // ~2, ~2.x, ~2.x.x, ~>2, ~>2.x ~>2.x.x --> >=2.0.0 <3.0.0-0
 // ~2.0, ~2.0.x, ~>2.0, ~>2.0.x --> >=2.0.0 <2.1.0-0
@@ -3747,6 +3759,10 @@ const replaceTildes = (comp, options) => {
 
 const replaceTilde = (comp, options) => {
   const r = options.loose ? re[t.TILDELOOSE] : re[t.TILDE]
+  // if we're including prereleases in the match, then the lower bound is
+  // -0, the lowest possible prerelease value, just like x-ranges and carets.
+  // this keeps `~1.2` equivalent to the `1.2.x` x-range it's documented as.
+  const z = options.includePrerelease ? '-0' : ''
   return comp.replace(r, (_, M, m, p, pr) => {
     debug('tilde', comp, _, M, m, p, pr)
     let ret
@@ -3754,10 +3770,10 @@ const replaceTilde = (comp, options) => {
     if (isX(M)) {
       ret = ''
     } else if (isX(m)) {
-      ret = `>=${M}.0.0 <${+M + 1}.0.0-0`
+      ret = `>=${M}.0.0${z} <${+M + 1}.0.0-0`
     } else if (isX(p)) {
       // ~1.2 == >=1.2.0 <1.3.0-0
-      ret = `>=${M}.${m}.0 <${M}.${+m + 1}.0-0`
+      ret = `>=${M}.${m}.0${z} <${M}.${+m + 1}.0-0`
     } else if (pr) {
       debug('replaceTilde pr', pr)
       ret = `>=${M}.${m}.${p}-${pr
@@ -3826,10 +3842,10 @@ const replaceCaret = (comp, options) => {
       if (M === '0') {
         if (m === '0') {
           ret = `>=${M}.${m}.${p
-          }${z} <${M}.${m}.${+p + 1}-0`
+          } <${M}.${m}.${+p + 1}-0`
         } else {
           ret = `>=${M}.${m}.${p
-          }${z} <${M}.${+m + 1}.0-0`
+          } <${M}.${+m + 1}.0-0`
         }
       } else {
         ret = `>=${M}.${m}.${p
@@ -3855,6 +3871,10 @@ const replaceXRange = (comp, options) => {
   const r = options.loose ? re[t.XRANGELOOSE] : re[t.XRANGE]
   return comp.replace(r, (ret, gtlt, M, m, p, pr) => {
     debug('xRange', comp, ret, gtlt, M, m, p, pr)
+    if (invalidXRangeOrder(M, m, p)) {
+      return comp
+    }
+
     const xM = isX(M)
     const xm = xM || isX(m)
     const xp = xm || isX(p)
@@ -4030,6 +4050,22 @@ const { safeRe: re, t } = __nccwpck_require__(5471)
 
 const parseOptions = __nccwpck_require__(356)
 const { compareIdentifiers } = __nccwpck_require__(3348)
+
+const isPrereleaseIdentifier = (prerelease, identifier) => {
+  const identifiers = identifier.split('.')
+  if (identifiers.length > prerelease.length) {
+    return false
+  }
+
+  for (let i = 0; i < identifiers.length; i++) {
+    if (compareIdentifiers(prerelease[i], identifiers[i]) !== 0) {
+      return false
+    }
+  }
+
+  return true
+}
+
 class SemVer {
   constructor (version, options) {
     options = parseOptions(options)
@@ -4333,8 +4369,9 @@ class SemVer {
           if (identifierBase === false) {
             prerelease = [identifier]
           }
-          if (compareIdentifiers(this.prerelease[0], identifier) === 0) {
-            if (isNaN(this.prerelease[1])) {
+          if (isPrereleaseIdentifier(this.prerelease, identifier)) {
+            const prereleaseBase = this.prerelease[identifier.split('.').length]
+            if (isNaN(prereleaseBase)) {
               this.prerelease = prerelease
             }
           } else {
@@ -4604,7 +4641,7 @@ const diff = (version1, version2) => {
     return prefix + 'patch'
   }
 
-  // high and low are preleases
+  // high and low are prereleases
   return 'prerelease'
 }
 
@@ -4844,6 +4881,61 @@ module.exports = sort
 
 /***/ }),
 
+/***/ 6114:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+
+
+const parse = __nccwpck_require__(6353)
+const constants = __nccwpck_require__(5101)
+const SemVer = __nccwpck_require__(7163)
+
+const truncate = (version, truncation, options) => {
+  if (!constants.RELEASE_TYPES.includes(truncation)) {
+    return null
+  }
+
+  const clonedVersion = cloneInputVersion(version, options)
+  return clonedVersion && doTruncation(clonedVersion, truncation)
+}
+
+const cloneInputVersion = (version, options) => {
+  const versionStringToParse = (
+    version instanceof SemVer ? version.version : version
+  )
+
+  return parse(versionStringToParse, options)
+}
+
+const doTruncation = (version, truncation) => {
+  if (isPrerelease(truncation)) {
+    return version.version
+  }
+
+  version.prerelease = []
+
+  switch (truncation) {
+    case 'major':
+      version.minor = 0
+      version.patch = 0
+      break
+    case 'minor':
+      version.patch = 0
+      break
+  }
+
+  return version.format()
+}
+
+const isPrerelease = (type) => {
+  return type.startsWith('pre')
+}
+
+module.exports = truncate
+
+
+/***/ }),
+
 /***/ 8780:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -4892,6 +4984,7 @@ const gte = __nccwpck_require__(1236)
 const lte = __nccwpck_require__(6717)
 const cmp = __nccwpck_require__(8646)
 const coerce = __nccwpck_require__(5385)
+const truncate = __nccwpck_require__(6114)
 const Comparator = __nccwpck_require__(9379)
 const Range = __nccwpck_require__(6782)
 const satisfies = __nccwpck_require__(8011)
@@ -4930,6 +5023,7 @@ module.exports = {
   lte,
   cmp,
   coerce,
+  truncate,
   Comparator,
   Range,
   satisfies,
@@ -5211,8 +5305,8 @@ createToken('MAINVERSIONLOOSE', `(${src[t.NUMERICIDENTIFIERLOOSE]})\\.` +
 
 // ## Pre-release Version Identifier
 // A numeric identifier, or a non-numeric identifier.
-// Non-numberic identifiers include numberic identifiers but can be longer.
-// Therefore non-numberic identifiers must go first.
+// Non-numeric identifiers include numeric identifiers but can be longer.
+// Therefore non-numeric identifiers must go first.
 
 createToken('PRERELEASEIDENTIFIER', `(?:${src[t.NONNUMERICIDENTIFIER]
 }|${src[t.NUMERICIDENTIFIER]})`)
@@ -5269,7 +5363,7 @@ createToken('LOOSE', `^${src[t.LOOSEPLAIN]}$`)
 createToken('GTLT', '((?:<|>)?=?)')
 
 // Something like "2.*" or "1.2.x".
-// Note that "x.x" is a valid xRange identifer, meaning "any version"
+// Note that "x.x" is a valid xRange identifier, meaning "any version"
 // Only the first item is strictly required.
 createToken('XRANGEIDENTIFIERLOOSE', `${src[t.NUMERICIDENTIFIERLOOSE]}|x|X|\\*`)
 createToken('XRANGEIDENTIFIER', `${src[t.NUMERICIDENTIFIER]}|x|X|\\*`)
@@ -5725,7 +5819,7 @@ const compare = __nccwpck_require__(8469)
 // - If LT
 //   - If LT.semver is greater than any < or <= comp in C, return false
 //   - If LT is <=, and LT.semver does not satisfy every C, return false
-//   - If GT.semver has a prerelease, and not in prerelease mode
+//   - If LT.semver has a prerelease, and not in prerelease mode
 //     - If no C has a prerelease and the LT.semver tuple, return false
 // - Else return true
 
@@ -5861,7 +5955,7 @@ const simpleSubset = (sub, dom, options) => {
         if (higher === c && higher !== gt) {
           return false
         }
-      } else if (gt.operator === '>=' && !satisfies(gt.semver, String(c), options)) {
+      } else if (gt.operator === '>=' && !c.test(gt.semver)) {
         return false
       }
     }
@@ -5879,7 +5973,7 @@ const simpleSubset = (sub, dom, options) => {
         if (lower === c && lower !== lt) {
           return false
         }
-      } else if (lt.operator === '<=' && !satisfies(lt.semver, String(c), options)) {
+      } else if (lt.operator === '<=' && !c.test(lt.semver)) {
         return false
       }
     }
@@ -5981,7 +6075,7 @@ module.exports = validRange
 
 
 const is = __nccwpck_require__(4554);
-const find = __nccwpck_require__(8760);
+const find = __nccwpck_require__(7983);
 
 function findAllBetween(parent, start, end, test) {
   if (!parent || !parent.type || !parent.children) {
@@ -6159,53 +6253,6 @@ function is(node, test, index, parent, context) {
 
 /***/ }),
 
-/***/ 8760:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-/**
- * @author Richard Smith-Unna
- * @copyright 2016 Richard Smith-Unnar
- * @license MIT
- * @module unist:find
- * @fileoverview Unist node finder
- */
-
-
-
-var visit = __nccwpck_require__(9330)
-var iteratee = __nccwpck_require__(3508)
-
-/**
- * Find
- *
- * @param {Node} tree - Root node
- * @param {string|object|function} [condition] - Condition to match node.
- */
-function find (tree, condition) {
-  if (!tree) throw new Error('unist-find requires a tree to search')
-  if (!condition) throw new Error('unist-find requires a condition')
-
-  var predicate = iteratee(condition)
-  var result
-
-  visit(tree, function (node) {
-    if (predicate(node)) {
-      result = node
-      return false
-    }
-  })
-
-  return result
-}
-
-/*
- * Expose.
- */
-module.exports = find
-
-
-/***/ }),
-
 /***/ 5308:
 /***/ ((module) => {
 
@@ -6214,16 +6261,16 @@ module.exports = find
 module.exports = convert
 
 function convert(test) {
+  if (test == null) {
+    return ok
+  }
+
   if (typeof test === 'string') {
     return typeFactory(test)
   }
 
-  if (test === null || test === undefined) {
-    return ok
-  }
-
   if (typeof test === 'object') {
-    return ('length' in test ? anyFactory : matchesFactory)(test)
+    return 'length' in test ? anyFactory(test) : allFactory(test)
   }
 
   if (typeof test === 'function') {
@@ -6233,30 +6280,16 @@ function convert(test) {
   throw new Error('Expected function, string, or object as test')
 }
 
-function convertAll(tests) {
-  var results = []
-  var length = tests.length
-  var index = -1
-
-  while (++index < length) {
-    results[index] = convert(tests[index])
-  }
-
-  return results
-}
-
 // Utility assert each property in `test` is represented in `node`, and each
 // values are strictly equal.
-function matchesFactory(test) {
-  return matches
+function allFactory(test) {
+  return all
 
-  function matches(node) {
+  function all(node) {
     var key
 
     for (key in test) {
-      if (node[key] !== test[key]) {
-        return false
-      }
+      if (node[key] !== test[key]) return false
     }
 
     return true
@@ -6264,15 +6297,19 @@ function matchesFactory(test) {
 }
 
 function anyFactory(tests) {
-  var checks = convertAll(tests)
-  var length = checks.length
+  var checks = []
+  var index = -1
 
-  return matches
+  while (++index < tests.length) {
+    checks[index] = convert(tests[index])
+  }
 
-  function matches() {
+  return any
+
+  function any() {
     var index = -1
 
-    while (++index < length) {
+    while (++index < checks.length) {
       if (checks[index].apply(this, arguments)) {
         return true
       }
@@ -6300,6 +6337,17 @@ function ok() {
 
 /***/ }),
 
+/***/ 8901:
+/***/ ((module) => {
+
+module.exports = color
+function color(d) {
+  return '\u001B[33m' + d + '\u001B[39m'
+}
+
+
+/***/ }),
+
 /***/ 8050:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -6308,6 +6356,7 @@ function ok() {
 module.exports = visitParents
 
 var convert = __nccwpck_require__(5308)
+var color = __nccwpck_require__(8901)
 
 var CONTINUE = true
 var SKIP = 'skip'
@@ -6318,6 +6367,7 @@ visitParents.SKIP = SKIP
 visitParents.EXIT = EXIT
 
 function visitParents(tree, test, visitor, reverse) {
+  var step
   var is
 
   if (typeof test === 'function' && typeof visitor !== 'function') {
@@ -6327,45 +6377,58 @@ function visitParents(tree, test, visitor, reverse) {
   }
 
   is = convert(test)
+  step = reverse ? -1 : 1
 
-  one(tree, null, [])
+  factory(tree, null, [])()
 
-  // Visit a single node.
-  function one(node, index, parents) {
-    var result = []
-    var subresult
+  function factory(node, index, parents) {
+    var value = typeof node === 'object' && node !== null ? node : {}
+    var name
 
-    if (!test || is(node, index, parents[parents.length - 1] || null)) {
-      result = toResult(visitor(node, parents))
+    if (typeof value.type === 'string') {
+      name =
+        typeof value.tagName === 'string'
+          ? value.tagName
+          : typeof value.name === 'string'
+          ? value.name
+          : undefined
 
-      if (result[0] === EXIT) {
-        return result
-      }
+      visit.displayName =
+        'node (' + color(value.type + (name ? '<' + name + '>' : '')) + ')'
     }
 
-    if (node.children && result[0] !== SKIP) {
-      subresult = toResult(all(node.children, parents.concat(node)))
-      return subresult[0] === EXIT ? subresult : result
-    }
+    return visit
 
-    return result
-  }
+    function visit() {
+      var grandparents = parents.concat(node)
+      var result = []
+      var subresult
+      var offset
 
-  // Visit children in `parent`.
-  function all(children, parents) {
-    var min = -1
-    var step = reverse ? -1 : 1
-    var index = (reverse ? children.length : min) + step
-    var result
+      if (!test || is(node, index, parents[parents.length - 1] || null)) {
+        result = toResult(visitor(node, parents))
 
-    while (index > min && index < children.length) {
-      result = one(children[index], index, parents)
-
-      if (result[0] === EXIT) {
-        return result
+        if (result[0] === EXIT) {
+          return result
+        }
       }
 
-      index = typeof result[1] === 'number' ? result[1] : index + step
+      if (node.children && result[0] !== SKIP) {
+        offset = (reverse ? node.children.length : -1) + step
+
+        while (offset > -1 && offset < node.children.length) {
+          subresult = factory(node.children[offset], offset, grandparents)()
+
+          if (subresult[0] === EXIT) {
+            return subresult
+          }
+
+          offset =
+            typeof subresult[1] === 'number' ? subresult[1] : offset + step
+        }
+      }
+
+      return result
     }
   }
 }
@@ -6421,39 +6484,6 @@ function visit(tree, test, visitor, reverse) {
 
 /***/ }),
 
-/***/ 2798:
-/***/ ((module) => {
-
-module.exports = () => {
-	// https://mths.be/emoji
-	return /[#*0-9]\uFE0F?\u20E3|[\xA9\xAE\u203C\u2049\u2122\u2139\u2194-\u2199\u21A9\u21AA\u231A\u231B\u2328\u23CF\u23ED-\u23EF\u23F1\u23F2\u23F8-\u23FA\u24C2\u25AA\u25AB\u25B6\u25C0\u25FB\u25FC\u25FE\u2600-\u2604\u260E\u2611\u2614\u2615\u2618\u2620\u2622\u2623\u2626\u262A\u262E\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F\u2660\u2663\u2665\u2666\u2668\u267B\u267E\u267F\u2692\u2694-\u2697\u2699\u269B\u269C\u26A0\u26A7\u26AA\u26B0\u26B1\u26BD\u26BE\u26C4\u26C8\u26CF\u26D1\u26E9\u26F0-\u26F5\u26F7\u26F8\u26FA\u2702\u2708\u2709\u270F\u2712\u2714\u2716\u271D\u2721\u2733\u2734\u2744\u2747\u2757\u2763\u27A1\u2934\u2935\u2B05-\u2B07\u2B1B\u2B1C\u2B55\u3030\u303D\u3297\u3299]\uFE0F?|[\u261D\u270C\u270D](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\u270A\u270B](?:\uD83C[\uDFFB-\uDFFF])?|[\u23E9-\u23EC\u23F0\u23F3\u25FD\u2693\u26A1\u26AB\u26C5\u26CE\u26D4\u26EA\u26FD\u2705\u2728\u274C\u274E\u2753-\u2755\u2795-\u2797\u27B0\u27BF\u2B50]|\u26D3\uFE0F?(?:\u200D\uD83D\uDCA5)?|\u26F9(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\u2764\uFE0F?(?:\u200D(?:\uD83D\uDD25|\uD83E\uDE79))?|\uD83C(?:[\uDC04\uDD70\uDD71\uDD7E\uDD7F\uDE02\uDE37\uDF21\uDF24-\uDF2C\uDF36\uDF7D\uDF96\uDF97\uDF99-\uDF9B\uDF9E\uDF9F\uDFCD\uDFCE\uDFD4-\uDFDF\uDFF5\uDFF7]\uFE0F?|[\uDF85\uDFC2\uDFC7](?:\uD83C[\uDFFB-\uDFFF])?|[\uDFC4\uDFCA](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDFCB\uDFCC](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDCCF\uDD8E\uDD91-\uDD9A\uDE01\uDE1A\uDE2F\uDE32-\uDE36\uDE38-\uDE3A\uDE50\uDE51\uDF00-\uDF20\uDF2D-\uDF35\uDF37-\uDF43\uDF45-\uDF4A\uDF4C-\uDF7C\uDF7E-\uDF84\uDF86-\uDF93\uDFA0-\uDFC1\uDFC5\uDFC6\uDFC8\uDFC9\uDFCF-\uDFD3\uDFE0-\uDFF0\uDFF8-\uDFFF]|\uDDE6\uD83C[\uDDE8-\uDDEC\uDDEE\uDDF1\uDDF2\uDDF4\uDDF6-\uDDFA\uDDFC\uDDFD\uDDFF]|\uDDE7\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEF\uDDF1-\uDDF4\uDDF6-\uDDF9\uDDFB\uDDFC\uDDFE\uDDFF]|\uDDE8\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDEE\uDDF0-\uDDF7\uDDFA-\uDDFF]|\uDDE9\uD83C[\uDDEA\uDDEC\uDDEF\uDDF0\uDDF2\uDDF4\uDDFF]|\uDDEA\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDED\uDDF7-\uDDFA]|\uDDEB\uD83C[\uDDEE-\uDDF0\uDDF2\uDDF4\uDDF7]|\uDDEC\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEE\uDDF1-\uDDF3\uDDF5-\uDDFA\uDDFC\uDDFE]|\uDDED\uD83C[\uDDF0\uDDF2\uDDF3\uDDF7\uDDF9\uDDFA]|\uDDEE\uD83C[\uDDE8-\uDDEA\uDDF1-\uDDF4\uDDF6-\uDDF9]|\uDDEF\uD83C[\uDDEA\uDDF2\uDDF4\uDDF5]|\uDDF0\uD83C[\uDDEA\uDDEC-\uDDEE\uDDF2\uDDF3\uDDF5\uDDF7\uDDFC\uDDFE\uDDFF]|\uDDF1\uD83C[\uDDE6-\uDDE8\uDDEE\uDDF0\uDDF7-\uDDFB\uDDFE]|\uDDF2\uD83C[\uDDE6\uDDE8-\uDDED\uDDF0-\uDDFF]|\uDDF3\uD83C[\uDDE6\uDDE8\uDDEA-\uDDEC\uDDEE\uDDF1\uDDF4\uDDF5\uDDF7\uDDFA\uDDFF]|\uDDF4\uD83C\uDDF2|\uDDF5\uD83C[\uDDE6\uDDEA-\uDDED\uDDF0-\uDDF3\uDDF7-\uDDF9\uDDFC\uDDFE]|\uDDF6\uD83C\uDDE6|\uDDF7\uD83C[\uDDEA\uDDF4\uDDF8\uDDFA\uDDFC]|\uDDF8\uD83C[\uDDE6-\uDDEA\uDDEC-\uDDF4\uDDF7-\uDDF9\uDDFB\uDDFD-\uDDFF]|\uDDF9\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDED\uDDEF-\uDDF4\uDDF7\uDDF9\uDDFB\uDDFC\uDDFF]|\uDDFA\uD83C[\uDDE6\uDDEC\uDDF2\uDDF3\uDDF8\uDDFE\uDDFF]|\uDDFB\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDEE\uDDF3\uDDFA]|\uDDFC\uD83C[\uDDEB\uDDF8]|\uDDFD\uD83C\uDDF0|\uDDFE\uD83C[\uDDEA\uDDF9]|\uDDFF\uD83C[\uDDE6\uDDF2\uDDFC]|\uDF44(?:\u200D\uD83D\uDFEB)?|\uDF4B(?:\u200D\uD83D\uDFE9)?|\uDFC3(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDFF3\uFE0F?(?:\u200D(?:\u26A7\uFE0F?|\uD83C\uDF08))?|\uDFF4(?:\u200D\u2620\uFE0F?|\uDB40\uDC67\uDB40\uDC62\uDB40(?:\uDC65\uDB40\uDC6E\uDB40\uDC67|\uDC73\uDB40\uDC63\uDB40\uDC74|\uDC77\uDB40\uDC6C\uDB40\uDC73)\uDB40\uDC7F)?)|\uD83D(?:[\uDC3F\uDCFD\uDD49\uDD4A\uDD6F\uDD70\uDD73\uDD76-\uDD79\uDD87\uDD8A-\uDD8D\uDDA5\uDDA8\uDDB1\uDDB2\uDDBC\uDDC2-\uDDC4\uDDD1-\uDDD3\uDDDC-\uDDDE\uDDE1\uDDE3\uDDE8\uDDEF\uDDF3\uDDFA\uDECB\uDECD-\uDECF\uDEE0-\uDEE5\uDEE9\uDEF0\uDEF3]\uFE0F?|[\uDC42\uDC43\uDC46-\uDC50\uDC66\uDC67\uDC6B-\uDC6D\uDC72\uDC74-\uDC76\uDC78\uDC7C\uDC83\uDC85\uDC8F\uDC91\uDCAA\uDD7A\uDD95\uDD96\uDE4C\uDE4F\uDEC0\uDECC](?:\uD83C[\uDFFB-\uDFFF])?|[\uDC6E-\uDC71\uDC73\uDC77\uDC81\uDC82\uDC86\uDC87\uDE45-\uDE47\uDE4B\uDE4D\uDE4E\uDEA3\uDEB4\uDEB5](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD74\uDD90](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\uDC00-\uDC07\uDC09-\uDC14\uDC16-\uDC25\uDC27-\uDC3A\uDC3C-\uDC3E\uDC40\uDC44\uDC45\uDC51-\uDC65\uDC6A\uDC79-\uDC7B\uDC7D-\uDC80\uDC84\uDC88-\uDC8E\uDC90\uDC92-\uDCA9\uDCAB-\uDCFC\uDCFF-\uDD3D\uDD4B-\uDD4E\uDD50-\uDD67\uDDA4\uDDFB-\uDE2D\uDE2F-\uDE34\uDE37-\uDE41\uDE43\uDE44\uDE48-\uDE4A\uDE80-\uDEA2\uDEA4-\uDEB3\uDEB7-\uDEBF\uDEC1-\uDEC5\uDED0-\uDED2\uDED5-\uDED8\uDEDC-\uDEDF\uDEEB\uDEEC\uDEF4-\uDEFC\uDFE0-\uDFEB\uDFF0]|\uDC08(?:\u200D\u2B1B)?|\uDC15(?:\u200D\uD83E\uDDBA)?|\uDC26(?:\u200D(?:\u2B1B|\uD83D\uDD25))?|\uDC3B(?:\u200D\u2744\uFE0F?)?|\uDC41\uFE0F?(?:\u200D\uD83D\uDDE8\uFE0F?)?|\uDC68(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDC68\uDC69]\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?))?|\uDC69(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?[\uDC68\uDC69]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?|\uDC69\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?))|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFC-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFD-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFD\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFE]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])))?))?|\uDD75(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\uDE2E(?:\u200D\uD83D\uDCA8)?|\uDE35(?:\u200D\uD83D\uDCAB)?|\uDE36(?:\u200D\uD83C\uDF2B\uFE0F?)?|\uDE42(?:\u200D[\u2194\u2195]\uFE0F?)?|\uDEB6(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?)|\uD83E(?:[\uDD0C\uDD0F\uDD18-\uDD1F\uDD30-\uDD34\uDD36\uDD77\uDDB5\uDDB6\uDDBB\uDDD2\uDDD3\uDDD5\uDEC3-\uDEC5\uDEF0\uDEF2-\uDEF8](?:\uD83C[\uDFFB-\uDFFF])?|[\uDD26\uDD35\uDD37-\uDD39\uDD3C-\uDD3E\uDDB8\uDDB9\uDDCD\uDDCF\uDDD4\uDDD6-\uDDDD](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDDDE\uDDDF](?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD0D\uDD0E\uDD10-\uDD17\uDD20-\uDD25\uDD27-\uDD2F\uDD3A\uDD3F-\uDD45\uDD47-\uDD76\uDD78-\uDDB4\uDDB7\uDDBA\uDDBC-\uDDCC\uDDD0\uDDE0-\uDDFF\uDE70-\uDE7C\uDE80-\uDE8A\uDE8E-\uDEC2\uDEC6\uDEC8\uDECD-\uDEDC\uDEDF-\uDEEA\uDEEF]|\uDDCE(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDDD1(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1|\uDDD1\u200D\uD83E\uDDD2(?:\u200D\uD83E\uDDD2)?|\uDDD2(?:\u200D\uD83E\uDDD2)?))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])))?))?|\uDEF1(?:\uD83C(?:\uDFFB(?:\u200D\uD83E\uDEF2\uD83C[\uDFFC-\uDFFF])?|\uDFFC(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFD-\uDFFF])?|\uDFFD(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])?|\uDFFE(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFD\uDFFF])?|\uDFFF(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFE])?))?)/g;
-};
-
-
-/***/ }),
-
-/***/ 3692:
-/***/ ((module) => {
-
-module.exports = () => {
-	// https://mths.be/emoji
-	return /[#*0-9]\uFE0F?\u20E3|[\xA9\xAE\u203C\u2049\u2122\u2139\u2194-\u2199\u21A9\u21AA\u231A\u231B\u2328\u23CF\u23ED-\u23EF\u23F1\u23F2\u23F8-\u23FA\u24C2\u25AA\u25AB\u25B6\u25C0\u25FB\u25FC\u25FE\u2600-\u2604\u260E\u2611\u2614\u2615\u2618\u2620\u2622\u2623\u2626\u262A\u262E\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F\u2660\u2663\u2665\u2666\u2668\u267B\u267E\u267F\u2692\u2694-\u2697\u2699\u269B\u269C\u26A0\u26A7\u26AA\u26B0\u26B1\u26BD\u26BE\u26C4\u26C8\u26CF\u26D1\u26E9\u26F0-\u26F5\u26F7\u26F8\u26FA\u2702\u2708\u2709\u270F\u2712\u2714\u2716\u271D\u2721\u2733\u2734\u2744\u2747\u2757\u2763\u27A1\u2934\u2935\u2B05-\u2B07\u2B1B\u2B1C\u2B55\u3030\u303D\u3297\u3299]\uFE0F?|[\u261D\u270C\u270D](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\u270A\u270B](?:\uD83C[\uDFFB-\uDFFF])?|[\u23E9-\u23EC\u23F0\u23F3\u25FD\u2693\u26A1\u26AB\u26C5\u26CE\u26D4\u26EA\u26FD\u2705\u2728\u274C\u274E\u2753-\u2755\u2795-\u2797\u27B0\u27BF\u2B50]|\u26D3\uFE0F?(?:\u200D\uD83D\uDCA5)?|\u26F9(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\u2764\uFE0F?(?:\u200D(?:\uD83D\uDD25|\uD83E\uDE79))?|\uD83C(?:[\uDC04\uDD70\uDD71\uDD7E\uDD7F\uDE02\uDE37\uDF21\uDF24-\uDF2C\uDF36\uDF7D\uDF96\uDF97\uDF99-\uDF9B\uDF9E\uDF9F\uDFCD\uDFCE\uDFD4-\uDFDF\uDFF5\uDFF7]\uFE0F?|[\uDF85\uDFC2\uDFC7](?:\uD83C[\uDFFB-\uDFFF])?|[\uDFC4\uDFCA](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDFCB\uDFCC](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDCCF\uDD8E\uDD91-\uDD9A\uDE01\uDE1A\uDE2F\uDE32-\uDE36\uDE38-\uDE3A\uDE50\uDE51\uDF00-\uDF20\uDF2D-\uDF35\uDF37-\uDF43\uDF45-\uDF4A\uDF4C-\uDF7C\uDF7E-\uDF84\uDF86-\uDF93\uDFA0-\uDFC1\uDFC5\uDFC6\uDFC8\uDFC9\uDFCF-\uDFD3\uDFE0-\uDFF0\uDFF8-\uDFFF]|\uDDE6\uD83C[\uDDE8-\uDDEC\uDDEE\uDDF1\uDDF2\uDDF4\uDDF6-\uDDFA\uDDFC\uDDFD\uDDFF]|\uDDE7\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEF\uDDF1-\uDDF4\uDDF6-\uDDF9\uDDFB\uDDFC\uDDFE\uDDFF]|\uDDE8\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDEE\uDDF0-\uDDF7\uDDFA-\uDDFF]|\uDDE9\uD83C[\uDDEA\uDDEC\uDDEF\uDDF0\uDDF2\uDDF4\uDDFF]|\uDDEA\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDED\uDDF7-\uDDFA]|\uDDEB\uD83C[\uDDEE-\uDDF0\uDDF2\uDDF4\uDDF7]|\uDDEC\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEE\uDDF1-\uDDF3\uDDF5-\uDDFA\uDDFC\uDDFE]|\uDDED\uD83C[\uDDF0\uDDF2\uDDF3\uDDF7\uDDF9\uDDFA]|\uDDEE\uD83C[\uDDE8-\uDDEA\uDDF1-\uDDF4\uDDF6-\uDDF9]|\uDDEF\uD83C[\uDDEA\uDDF2\uDDF4\uDDF5]|\uDDF0\uD83C[\uDDEA\uDDEC-\uDDEE\uDDF2\uDDF3\uDDF5\uDDF7\uDDFC\uDDFE\uDDFF]|\uDDF1\uD83C[\uDDE6-\uDDE8\uDDEE\uDDF0\uDDF7-\uDDFB\uDDFE]|\uDDF2\uD83C[\uDDE6\uDDE8-\uDDED\uDDF0-\uDDFF]|\uDDF3\uD83C[\uDDE6\uDDE8\uDDEA-\uDDEC\uDDEE\uDDF1\uDDF4\uDDF5\uDDF7\uDDFA\uDDFF]|\uDDF4\uD83C\uDDF2|\uDDF5\uD83C[\uDDE6\uDDEA-\uDDED\uDDF0-\uDDF3\uDDF7-\uDDF9\uDDFC\uDDFE]|\uDDF6\uD83C\uDDE6|\uDDF7\uD83C[\uDDEA\uDDF4\uDDF8\uDDFA\uDDFC]|\uDDF8\uD83C[\uDDE6-\uDDEA\uDDEC-\uDDF4\uDDF7-\uDDF9\uDDFB\uDDFD-\uDDFF]|\uDDF9\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDED\uDDEF-\uDDF4\uDDF7\uDDF9\uDDFB\uDDFC\uDDFF]|\uDDFA\uD83C[\uDDE6\uDDEC\uDDF2\uDDF3\uDDF8\uDDFE\uDDFF]|\uDDFB\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDEE\uDDF3\uDDFA]|\uDDFC\uD83C[\uDDEB\uDDF8]|\uDDFD\uD83C\uDDF0|\uDDFE\uD83C[\uDDEA\uDDF9]|\uDDFF\uD83C[\uDDE6\uDDF2\uDDFC]|\uDF44(?:\u200D\uD83D\uDFEB)?|\uDF4B(?:\u200D\uD83D\uDFE9)?|\uDFC3(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDFF3\uFE0F?(?:\u200D(?:\u26A7\uFE0F?|\uD83C\uDF08))?|\uDFF4(?:\u200D\u2620\uFE0F?|\uDB40\uDC67\uDB40\uDC62\uDB40(?:\uDC65\uDB40\uDC6E\uDB40\uDC67|\uDC73\uDB40\uDC63\uDB40\uDC74|\uDC77\uDB40\uDC6C\uDB40\uDC73)\uDB40\uDC7F)?)|\uD83D(?:[\uDC3F\uDCFD\uDD49\uDD4A\uDD6F\uDD70\uDD73\uDD76-\uDD79\uDD87\uDD8A-\uDD8D\uDDA5\uDDA8\uDDB1\uDDB2\uDDBC\uDDC2-\uDDC4\uDDD1-\uDDD3\uDDDC-\uDDDE\uDDE1\uDDE3\uDDE8\uDDEF\uDDF3\uDDFA\uDECB\uDECD-\uDECF\uDEE0-\uDEE5\uDEE9\uDEF0\uDEF3]\uFE0F?|[\uDC42\uDC43\uDC46-\uDC50\uDC66\uDC67\uDC6B-\uDC6D\uDC72\uDC74-\uDC76\uDC78\uDC7C\uDC83\uDC85\uDC8F\uDC91\uDCAA\uDD7A\uDD95\uDD96\uDE4C\uDE4F\uDEC0\uDECC](?:\uD83C[\uDFFB-\uDFFF])?|[\uDC6E-\uDC71\uDC73\uDC77\uDC81\uDC82\uDC86\uDC87\uDE45-\uDE47\uDE4B\uDE4D\uDE4E\uDEA3\uDEB4\uDEB5](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD74\uDD90](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\uDC00-\uDC07\uDC09-\uDC14\uDC16-\uDC25\uDC27-\uDC3A\uDC3C-\uDC3E\uDC40\uDC44\uDC45\uDC51-\uDC65\uDC6A\uDC79-\uDC7B\uDC7D-\uDC80\uDC84\uDC88-\uDC8E\uDC90\uDC92-\uDCA9\uDCAB-\uDCFC\uDCFF-\uDD3D\uDD4B-\uDD4E\uDD50-\uDD67\uDDA4\uDDFB-\uDE2D\uDE2F-\uDE34\uDE37-\uDE41\uDE43\uDE44\uDE48-\uDE4A\uDE80-\uDEA2\uDEA4-\uDEB3\uDEB7-\uDEBF\uDEC1-\uDEC5\uDED0-\uDED2\uDED5-\uDED8\uDEDC-\uDEDF\uDEEB\uDEEC\uDEF4-\uDEFC\uDFE0-\uDFEB\uDFF0]|\uDC08(?:\u200D\u2B1B)?|\uDC15(?:\u200D\uD83E\uDDBA)?|\uDC26(?:\u200D(?:\u2B1B|\uD83D\uDD25))?|\uDC3B(?:\u200D\u2744\uFE0F?)?|\uDC41\uFE0F?(?:\u200D\uD83D\uDDE8\uFE0F?)?|\uDC68(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDC68\uDC69]\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?))?|\uDC69(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?[\uDC68\uDC69]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?|\uDC69\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?))|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFC-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFD-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFD\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFE]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])))?))?|\uDD75(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\uDE2E(?:\u200D\uD83D\uDCA8)?|\uDE35(?:\u200D\uD83D\uDCAB)?|\uDE36(?:\u200D\uD83C\uDF2B\uFE0F?)?|\uDE42(?:\u200D[\u2194\u2195]\uFE0F?)?|\uDEB6(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?)|\uD83E(?:[\uDD0C\uDD0F\uDD18-\uDD1F\uDD30-\uDD34\uDD36\uDD77\uDDB5\uDDB6\uDDBB\uDDD2\uDDD3\uDDD5\uDEC3-\uDEC5\uDEF0\uDEF2-\uDEF8](?:\uD83C[\uDFFB-\uDFFF])?|[\uDD26\uDD35\uDD37-\uDD39\uDD3C-\uDD3E\uDDB8\uDDB9\uDDCD\uDDCF\uDDD4\uDDD6-\uDDDD](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDDDE\uDDDF](?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD0D\uDD0E\uDD10-\uDD17\uDD20-\uDD25\uDD27-\uDD2F\uDD3A\uDD3F-\uDD45\uDD47-\uDD76\uDD78-\uDDB4\uDDB7\uDDBA\uDDBC-\uDDCC\uDDD0\uDDE0-\uDDFF\uDE70-\uDE7C\uDE80-\uDE8A\uDE8E-\uDEC2\uDEC6\uDEC8\uDECD-\uDEDC\uDEDF-\uDEEA\uDEEF]|\uDDCE(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDDD1(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1|\uDDD1\u200D\uD83E\uDDD2(?:\u200D\uD83E\uDDD2)?|\uDDD2(?:\u200D\uD83E\uDDD2)?))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])))?))?|\uDEF1(?:\uD83C(?:\uDFFB(?:\u200D\uD83E\uDEF2\uD83C[\uDFFC-\uDFFF])?|\uDFFC(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFD-\uDFFF])?|\uDFFD(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])?|\uDFFE(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFD\uDFFF])?|\uDFFF(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFE])?))?)/g;
-};
-
-
-/***/ }),
-
-/***/ 6486:
-/***/ ((module) => {
-
-module.exports = () => {
-	// https://mths.be/emoji
-	return /[#*0-9]\uFE0F?\u20E3|[\xA9\xAE\u203C\u2049\u2122\u2139\u2194-\u2199\u21A9\u21AA\u231A\u231B\u2328\u23CF\u23ED-\u23EF\u23F1\u23F2\u23F8-\u23FA\u24C2\u25AA\u25AB\u25B6\u25C0\u25FB\u25FC\u25FE\u2600-\u2604\u260E\u2611\u2614\u2615\u2618\u2620\u2622\u2623\u2626\u262A\u262E\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F\u2660\u2663\u2665\u2666\u2668\u267B\u267E\u267F\u2692\u2694-\u2697\u2699\u269B\u269C\u26A0\u26A7\u26AA\u26B0\u26B1\u26BD\u26BE\u26C4\u26C8\u26CF\u26D1\u26E9\u26F0-\u26F5\u26F7\u26F8\u26FA\u2702\u2708\u2709\u270F\u2712\u2714\u2716\u271D\u2721\u2733\u2734\u2744\u2747\u2757\u2763\u27A1\u2934\u2935\u2B05-\u2B07\u2B1B\u2B1C\u2B55\u3030\u303D\u3297\u3299]\uFE0F?|[\u261D\u270C\u270D](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\u270A\u270B](?:\uD83C[\uDFFB-\uDFFF])?|[\u23E9-\u23EC\u23F0\u23F3\u25FD\u2693\u26A1\u26AB\u26C5\u26CE\u26D4\u26EA\u26FD\u2705\u2728\u274C\u274E\u2753-\u2755\u2795-\u2797\u27B0\u27BF\u2B50]|\u26D3\uFE0F?(?:\u200D\uD83D\uDCA5)?|\u26F9(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\u2764\uFE0F?(?:\u200D(?:\uD83D\uDD25|\uD83E\uDE79))?|\uD83C(?:[\uDC04\uDD70\uDD71\uDD7E\uDD7F\uDE02\uDE37\uDF21\uDF24-\uDF2C\uDF36\uDF7D\uDF96\uDF97\uDF99-\uDF9B\uDF9E\uDF9F\uDFCD\uDFCE\uDFD4-\uDFDF\uDFF5\uDFF7]\uFE0F?|[\uDF85\uDFC2\uDFC7](?:\uD83C[\uDFFB-\uDFFF])?|[\uDFC4\uDFCA](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDFCB\uDFCC](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDCCF\uDD8E\uDD91-\uDD9A\uDE01\uDE1A\uDE2F\uDE32-\uDE36\uDE38-\uDE3A\uDE50\uDE51\uDF00-\uDF20\uDF2D-\uDF35\uDF37-\uDF43\uDF45-\uDF4A\uDF4C-\uDF7C\uDF7E-\uDF84\uDF86-\uDF93\uDFA0-\uDFC1\uDFC5\uDFC6\uDFC8\uDFC9\uDFCF-\uDFD3\uDFE0-\uDFF0\uDFF8-\uDFFF]|\uDDE6\uD83C[\uDDE8-\uDDEC\uDDEE\uDDF1\uDDF2\uDDF4\uDDF6-\uDDFA\uDDFC\uDDFD\uDDFF]|\uDDE7\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEF\uDDF1-\uDDF4\uDDF6-\uDDF9\uDDFB\uDDFC\uDDFE\uDDFF]|\uDDE8\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDEE\uDDF0-\uDDF7\uDDFA-\uDDFF]|\uDDE9\uD83C[\uDDEA\uDDEC\uDDEF\uDDF0\uDDF2\uDDF4\uDDFF]|\uDDEA\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDED\uDDF7-\uDDFA]|\uDDEB\uD83C[\uDDEE-\uDDF0\uDDF2\uDDF4\uDDF7]|\uDDEC\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEE\uDDF1-\uDDF3\uDDF5-\uDDFA\uDDFC\uDDFE]|\uDDED\uD83C[\uDDF0\uDDF2\uDDF3\uDDF7\uDDF9\uDDFA]|\uDDEE\uD83C[\uDDE8-\uDDEA\uDDF1-\uDDF4\uDDF6-\uDDF9]|\uDDEF\uD83C[\uDDEA\uDDF2\uDDF4\uDDF5]|\uDDF0\uD83C[\uDDEA\uDDEC-\uDDEE\uDDF2\uDDF3\uDDF5\uDDF7\uDDFC\uDDFE\uDDFF]|\uDDF1\uD83C[\uDDE6-\uDDE8\uDDEE\uDDF0\uDDF7-\uDDFB\uDDFE]|\uDDF2\uD83C[\uDDE6\uDDE8-\uDDED\uDDF0-\uDDFF]|\uDDF3\uD83C[\uDDE6\uDDE8\uDDEA-\uDDEC\uDDEE\uDDF1\uDDF4\uDDF5\uDDF7\uDDFA\uDDFF]|\uDDF4\uD83C\uDDF2|\uDDF5\uD83C[\uDDE6\uDDEA-\uDDED\uDDF0-\uDDF3\uDDF7-\uDDF9\uDDFC\uDDFE]|\uDDF6\uD83C\uDDE6|\uDDF7\uD83C[\uDDEA\uDDF4\uDDF8\uDDFA\uDDFC]|\uDDF8\uD83C[\uDDE6-\uDDEA\uDDEC-\uDDF4\uDDF7-\uDDF9\uDDFB\uDDFD-\uDDFF]|\uDDF9\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDED\uDDEF-\uDDF4\uDDF7\uDDF9\uDDFB\uDDFC\uDDFF]|\uDDFA\uD83C[\uDDE6\uDDEC\uDDF2\uDDF3\uDDF8\uDDFE\uDDFF]|\uDDFB\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDEE\uDDF3\uDDFA]|\uDDFC\uD83C[\uDDEB\uDDF8]|\uDDFD\uD83C\uDDF0|\uDDFE\uD83C[\uDDEA\uDDF9]|\uDDFF\uD83C[\uDDE6\uDDF2\uDDFC]|\uDF44(?:\u200D\uD83D\uDFEB)?|\uDF4B(?:\u200D\uD83D\uDFE9)?|\uDFC3(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDFF3\uFE0F?(?:\u200D(?:\u26A7\uFE0F?|\uD83C\uDF08))?|\uDFF4(?:\u200D\u2620\uFE0F?|\uDB40\uDC67\uDB40\uDC62\uDB40(?:\uDC65\uDB40\uDC6E\uDB40\uDC67|\uDC73\uDB40\uDC63\uDB40\uDC74|\uDC77\uDB40\uDC6C\uDB40\uDC73)\uDB40\uDC7F)?)|\uD83D(?:[\uDC3F\uDCFD\uDD49\uDD4A\uDD6F\uDD70\uDD73\uDD76-\uDD79\uDD87\uDD8A-\uDD8D\uDDA5\uDDA8\uDDB1\uDDB2\uDDBC\uDDC2-\uDDC4\uDDD1-\uDDD3\uDDDC-\uDDDE\uDDE1\uDDE3\uDDE8\uDDEF\uDDF3\uDDFA\uDECB\uDECD-\uDECF\uDEE0-\uDEE5\uDEE9\uDEF0\uDEF3]\uFE0F?|[\uDC42\uDC43\uDC46-\uDC50\uDC66\uDC67\uDC6B-\uDC6D\uDC72\uDC74-\uDC76\uDC78\uDC7C\uDC83\uDC85\uDC8F\uDC91\uDCAA\uDD7A\uDD95\uDD96\uDE4C\uDE4F\uDEC0\uDECC](?:\uD83C[\uDFFB-\uDFFF])?|[\uDC6E-\uDC71\uDC73\uDC77\uDC81\uDC82\uDC86\uDC87\uDE45-\uDE47\uDE4B\uDE4D\uDE4E\uDEA3\uDEB4\uDEB5](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD74\uDD90](?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?|[\uDC00-\uDC07\uDC09-\uDC14\uDC16-\uDC25\uDC27-\uDC3A\uDC3C-\uDC3E\uDC40\uDC44\uDC45\uDC51-\uDC65\uDC6A\uDC79-\uDC7B\uDC7D-\uDC80\uDC84\uDC88-\uDC8E\uDC90\uDC92-\uDCA9\uDCAB-\uDCFC\uDCFF-\uDD3D\uDD4B-\uDD4E\uDD50-\uDD67\uDDA4\uDDFB-\uDE2D\uDE2F-\uDE34\uDE37-\uDE41\uDE43\uDE44\uDE48-\uDE4A\uDE80-\uDEA2\uDEA4-\uDEB3\uDEB7-\uDEBF\uDEC1-\uDEC5\uDED0-\uDED2\uDED5-\uDED8\uDEDC-\uDEDF\uDEEB\uDEEC\uDEF4-\uDEFC\uDFE0-\uDFEB\uDFF0]|\uDC08(?:\u200D\u2B1B)?|\uDC15(?:\u200D\uD83E\uDDBA)?|\uDC26(?:\u200D(?:\u2B1B|\uD83D\uDD25))?|\uDC3B(?:\u200D\u2744\uFE0F?)?|\uDC41\uFE0F?(?:\u200D\uD83D\uDDE8\uFE0F?)?|\uDC68(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDC68\uDC69]\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?\uDC68\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDD1D\uDEEF]\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE]|[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3])))?))?|\uDC69(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:\uDC8B\u200D\uD83D)?[\uDC68\uDC69]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?|\uDC69\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?))|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFC-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFD-\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFD\uDFFF]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D\uD83D(?:[\uDC68\uDC69]|\uDC8B\u200D\uD83D[\uDC68\uDC69])\uD83C[\uDFFB-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3]|\uDD1D\u200D\uD83D[\uDC68\uDC69]\uD83C[\uDFFB-\uDFFE]|\uDEEF\u200D\uD83D\uDC69\uD83C[\uDFFB-\uDFFE])))?))?|\uDD75(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F)?(?:\u200D[\u2640\u2642]\uFE0F?)?|\uDE2E(?:\u200D\uD83D\uDCA8)?|\uDE35(?:\u200D\uD83D\uDCAB)?|\uDE36(?:\u200D\uD83C\uDF2B\uFE0F?)?|\uDE42(?:\u200D[\u2194\u2195]\uFE0F?)?|\uDEB6(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?)|\uD83E(?:[\uDD0C\uDD0F\uDD18-\uDD1F\uDD30-\uDD34\uDD36\uDD77\uDDB5\uDDB6\uDDBB\uDDD2\uDDD3\uDDD5\uDEC3-\uDEC5\uDEF0\uDEF2-\uDEF8](?:\uD83C[\uDFFB-\uDFFF])?|[\uDD26\uDD35\uDD37-\uDD39\uDD3C-\uDD3E\uDDB8\uDDB9\uDDCD\uDDCF\uDDD4\uDDD6-\uDDDD](?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDDDE\uDDDF](?:\u200D[\u2640\u2642]\uFE0F?)?|[\uDD0D\uDD0E\uDD10-\uDD17\uDD20-\uDD25\uDD27-\uDD2F\uDD3A\uDD3F-\uDD45\uDD47-\uDD76\uDD78-\uDDB4\uDDB7\uDDBA\uDDBC-\uDDCC\uDDD0\uDDE0-\uDDFF\uDE70-\uDE7C\uDE80-\uDE8A\uDE8E-\uDEC2\uDEC6\uDEC8\uDECD-\uDEDC\uDEDF-\uDEEA\uDEEF]|\uDDCE(?:\uD83C[\uDFFB-\uDFFF])?(?:\u200D(?:[\u2640\u2642]\uFE0F?(?:\u200D\u27A1\uFE0F?)?|\u27A1\uFE0F?))?|\uDDD1(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1|\uDDD1\u200D\uD83E\uDDD2(?:\u200D\uD83E\uDDD2)?|\uDDD2(?:\u200D\uD83E\uDDD2)?))|\uD83C(?:\uDFFB(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFC-\uDFFF])))?|\uDFFC(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFD-\uDFFF])))?|\uDFFD(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])))?|\uDFFE(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFD\uDFFF])))?|\uDFFF(?:\u200D(?:[\u2695\u2696\u2708]\uFE0F?|\u2764\uFE0F?\u200D(?:\uD83D\uDC8B\u200D)?\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE]|\uD83C[\uDF3E\uDF73\uDF7C\uDF84\uDF93\uDFA4\uDFA8\uDFEB\uDFED]|\uD83D(?:[\uDCBB\uDCBC\uDD27\uDD2C\uDE80\uDE92]|\uDC30\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])|\uD83E(?:[\uDDAF\uDDBC\uDDBD](?:\u200D\u27A1\uFE0F?)?|[\uDDB0-\uDDB3\uDE70]|\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|\uDEEF\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFE])))?))?|\uDEF1(?:\uD83C(?:\uDFFB(?:\u200D\uD83E\uDEF2\uD83C[\uDFFC-\uDFFF])?|\uDFFC(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFD-\uDFFF])?|\uDFFD(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])?|\uDFFE(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFD\uDFFF])?|\uDFFF(?:\u200D\uD83E\uDEF2\uD83C[\uDFFB-\uDFFE])?))?)/g;
-};
-
-
-/***/ }),
-
 /***/ 9896:
 /***/ ((module) => {
 
@@ -6500,6 +6530,60 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
 /***/ ((module) => {
 
 module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
+
+/***/ }),
+
+/***/ 7983:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+/**
+ * @author Richard Smith-Unna
+ * @copyright 2016 Richard Smith-Unnar
+ * @license MIT
+ * @module unist:find
+ * @fileoverview Unist node finder
+ *
+ * @typedef {import('unist').Node} Node
+ *
+ * @typedef {string} TestStr
+ *   Finds first node with a truthy property matching string.
+ * @typedef {Object.<string, unknown>} TestObj
+ *   Finds first node that has matching values for all properties of object.
+ * @typedef {<V extends Node>(node: V) => boolean} TestFn
+ *   Finds first node for which function returns true when passed node as argument.
+ */
+
+var visit = __nccwpck_require__(9330)
+var iteratee = __nccwpck_require__(3508)
+
+/**
+ * Unist node finder utility.
+ *
+ * @param tree
+ *   Node to search.
+ * @param condition
+ *   Condition used to test each node.
+ * @returns
+ *   The first node that matches condition, or undefined if no node matches.
+ * @type {<V extends Node>(tree: Node, condition: TestStr | TestObj | TestFn) => V | undefined}
+ */
+module.exports = function find (tree, condition) {
+  if (!tree) throw new Error('unist-util-find requires a tree to search')
+  if (!condition) throw new Error('unist-util-find requires a condition')
+
+  const predicate = iteratee(condition)
+  let result
+
+  visit(tree, function (node) {
+    if (predicate(node)) {
+      result = node
+      return false
+    }
+  })
+
+  return result
+}
+
 
 /***/ }),
 
@@ -6815,8 +6899,8 @@ function validateTimezone(_hours, minutes) {
 
 // EXTERNAL MODULE: ./node_modules/date-fns/isValid.js + 1 modules
 var isValid = __nccwpck_require__(3518);
-// EXTERNAL MODULE: ./node_modules/vfile-reporter/lib/index.js + 7 modules
-var lib = __nccwpck_require__(375);
+// EXTERNAL MODULE: ./node_modules/vfile-reporter/lib/index.js + 9 modules
+var lib = __nccwpck_require__(3005);
 // EXTERNAL MODULE: ./node_modules/vfile-message/lib/index.js
 var vfile_message_lib = __nccwpck_require__(3092);
 // EXTERNAL MODULE: ./node_modules/to-vfile/lib/index.js
@@ -6825,8 +6909,8 @@ var to_vfile_lib = __nccwpck_require__(5143);
 var semver = __nccwpck_require__(2088);
 // EXTERNAL MODULE: ./lib/types.js
 var types = __nccwpck_require__(4170);
-// EXTERNAL MODULE: ./lib/commands.js + 128 modules
-var commands = __nccwpck_require__(9485);
+// EXTERNAL MODULE: ./lib/commands.js + 132 modules
+var commands = __nccwpck_require__(2009);
 ;// CONCATENATED MODULE: ./lib/release-link-generator.js
 
 class GitHubReleaseLinkGenerator {
@@ -6972,8 +7056,8 @@ function getRepoOptions(githubRepo) {
 /* harmony import */ var semver__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2088);
 /* harmony import */ var to_vfile__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(5143);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(3277);
-/* harmony import */ var _commands_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(9485);
-/* harmony import */ var vfile_reporter__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(375);
+/* harmony import */ var _commands_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(2009);
+/* harmony import */ var vfile_reporter__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(3005);
 /* harmony import */ var vfile_message__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(3092);
 
 
@@ -7177,7 +7261,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 9485:
+/***/ 2009:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -7231,31 +7315,52 @@ function unreachable() {}
 
 ;// CONCATENATED MODULE: ./node_modules/is-plain-obj/index.js
 function isPlainObject(value) {
-	if (Object.prototype.toString.call(value) !== '[object Object]') {
+	if (typeof value !== 'object' || value === null) {
 		return false;
 	}
 
 	const prototype = Object.getPrototypeOf(value);
-	return prototype === null || prototype === Object.prototype;
+	return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
 }
 
-;// CONCATENATED MODULE: ./node_modules/trough/index.js
+;// CONCATENATED MODULE: ./node_modules/trough/lib/index.js
+// To do: remove `void`s
+// To do: remove `null` from output of our APIs, allow it as user APIs.
+
 /**
- * @typedef {(error?: Error|null|undefined, ...output: Array<any>) => void} Callback
+ * @typedef {(error?: Error | null | undefined, ...output: Array<any>) => void} Callback
+ *   Callback.
+ *
  * @typedef {(...input: Array<any>) => any} Middleware
+ *   Ware.
+ *
+ * @typedef Pipeline
+ *   Pipeline.
+ * @property {Run} run
+ *   Run the pipeline.
+ * @property {Use} use
+ *   Add middleware.
  *
  * @typedef {(...input: Array<any>) => void} Run
  *   Call all middleware.
+ *
+ *   Calls `done` on completion with either an error or the output of the
+ *   last middleware.
+ *
+ *   > 👉 **Note**: as the length of input defines whether async functions get a
+ *   > `next` function,
+ *   > it’s recommended to keep `input` at one value normally.
+
+ *
  * @typedef {(fn: Middleware) => Pipeline} Use
- *   Add `fn` (middleware) to the list.
- * @typedef {{run: Run, use: Use}} Pipeline
- *   Middleware.
+ *   Add middleware.
  */
 
 /**
  * Create new middleware.
  *
  * @returns {Pipeline}
+ *   Pipeline.
  */
 function trough() {
   /** @type {Array<Middleware>} */
@@ -7280,7 +7385,7 @@ function trough() {
     /**
      * Run the next `fn`, or we’re done.
      *
-     * @param {Error|null|undefined} error
+     * @param {Error | null | undefined} error
      * @param {Array<any>} output
      */
     function next(error, ...output) {
@@ -7325,12 +7430,36 @@ function trough() {
 }
 
 /**
- * Wrap `middleware`.
- * Can be sync or async; return a promise, receive a callback, or return new
- * values and errors.
+ * Wrap `middleware` into a uniform interface.
+ *
+ * You can pass all input to the resulting function.
+ * `callback` is then called with the output of `middleware`.
+ *
+ * If `middleware` accepts more arguments than the later given in input,
+ * an extra `done` function is passed to it after that input,
+ * which must be called by `middleware`.
+ *
+ * The first value in `input` is the main input value.
+ * All other input values are the rest input values.
+ * The values given to `callback` are the input values,
+ * merged with every non-nullish output value.
+ *
+ * * if `middleware` throws an error,
+ *   returns a promise that is rejected,
+ *   or calls the given `done` function with an error,
+ *   `callback` is called with that error
+ * * if `middleware` returns a value or returns a promise that is resolved,
+ *   that value is the main output value
+ * * if `middleware` calls `done`,
+ *   all non-nullish values except for the first one (the error) overwrite the
+ *   output values
  *
  * @param {Middleware} middleware
+ *   Function to wrap.
  * @param {Callback} callback
+ *   Callback called with the output of `middleware`.
+ * @returns {Run}
+ *   Wrapped middleware.
  */
 function wrap(middleware, callback) {
   /** @type {boolean} */
@@ -7370,7 +7499,7 @@ function wrap(middleware, callback) {
     }
 
     if (!fnExpectsCallback) {
-      if (result instanceof Promise) {
+      if (result && result.then && typeof result.then === 'function') {
         result.then(then, done)
       } else if (result instanceof Error) {
         done(result)
@@ -7382,6 +7511,7 @@ function wrap(middleware, callback) {
 
   /**
    * Call `callback`, only once.
+   *
    * @type {Callback}
    */
   function done(error, ...output) {
@@ -9867,7 +9997,7 @@ function regexCheck(regex) {
 
 
 
-// To do: implement `spaceOrTab`, `spaceOrTabMinMax`, `spaceOrTabWithOptions`.
+// To do: implement `spaceOrTabWithOptions` (`connect`, `content`).
 
 /**
  * Parse spaces and tabs.
@@ -9895,14 +10025,14 @@ function regexCheck(regex) {
  * @param {State} ok
  *   State switched to when successful.
  * @param {TokenType} type
- *   Type (`' \t'`).
+ *   Type of the whole whitespace.
  * @param {number | undefined} [max=Infinity]
  *   Max (exclusive).
  * @returns {State}
  *   Start state.
  */
 function factorySpace(effects, ok, type, max) {
-  const limit = max ? max - 1 : Number.POSITIVE_INFINITY;
+  const limit = max ? max - 1 : Infinity;
   let size = 0;
   return start;
 
@@ -9923,6 +10053,58 @@ function factorySpace(effects, ok, type, max) {
     }
     effects.exit(type);
     return ok(code);
+  }
+}
+
+/**
+ * Parse spaces and tabs, with a required minimum and maximum, matching
+ * `markdown-rs`’s `space_or_tab_min_max`.
+ *
+ * Unlike `factorySpace`, this can fail: `nok` is used when fewer than
+ * `min` spaces or tabs are found.
+ *
+ * @param {Effects} effects
+ *   Context.
+ * @param {State} ok
+ *   State switched to when successful.
+ * @param {State} nok
+ *   State switched to when unsuccessful.
+ * @param {TokenType} type
+ *   Type of the whole whitespace.
+ * @param {number} min
+ *   Minimum allowed characters (inclusive).
+ * @param {number} max
+ *   Maximum allowed characters (inclusive).
+ * @returns {State}
+ *   Start state.
+ */
+function factorySpaceMinMax(effects, ok, nok, type, min, max) {
+  let size = 0;
+  return start;
+
+  /** @type {State} */
+  function start(code) {
+    if (max > 0 && markdownSpace(code)) {
+      effects.enter(type);
+      return prefix(code);
+    }
+    return after(code);
+  }
+
+  /** @type {State} */
+  function prefix(code) {
+    if (markdownSpace(code) && size < max) {
+      effects.consume(code);
+      size++;
+      return prefix;
+    }
+    effects.exit(type);
+    return after(code);
+  }
+
+  /** @type {State} */
+  function after(code) {
+    return size >= min ? ok(code) : nok(code);
   }
 }
 ;// CONCATENATED MODULE: ./node_modules/micromark/lib/initialize/content.js
@@ -10005,6 +10187,232 @@ function initializeContent(effects) {
     return data;
   }
 }
+;// CONCATENATED MODULE: ./node_modules/micromark-util-edit-map/index.js
+/**
+ * @import {Event} from 'micromark-util-types'
+ */
+
+/**
+ * @typedef {[number, number, Array<Event>]} Change
+ * @typedef {[number, number, number]} Jump
+ */
+
+/**
+ * Tracks a bunch of edits.
+ *
+ * Port of `edit_map.rs` from `markdown-rs`:
+ * <https://github.com/wooorm/markdown-rs/blob/1506572f/src/util/edit_map.rs>.
+ *
+ * Deal with several changes in events, batching them together.
+ *
+ * Preferably, changes should be kept to a minimum.
+ * Sometimes, it’s needed to change the list of events, because parsing can be
+ * messy, and it helps to expose a cleaner interface of events to the compiler
+ * and other users.
+ * It can also help to merge many adjacent similar events.
+ * And, in other cases, it’s needed to parse subcontent: pass some events
+ * through another tokenizer and inject the result.
+ */
+class EditMap {
+  /**
+   * Create a new edit map.
+   *
+   * @returns
+   *   New instance.
+   */
+  constructor() {
+    /**
+     * Changes by index, so `add` does not need to scan `map` (which is
+     * quadratic for documents with many edits at different places).
+     *
+     * @type {Map<number, Change>}
+     */
+    this.index = new Map();
+
+    /**
+     * Record of changes.
+     *
+     * @type {Array<Change>}
+     */
+    this.map = [];
+  }
+
+  /**
+   * Create an edit: a remove and/or add at a certain place.
+   *
+   * @param {number} index
+   *   Index at which to apply the edit.
+   * @param {number} remove
+   *   Count of items to remove at the index.
+   * @param {Array<Event>} add
+   *   Items to add at the index.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  add(index, remove, add) {
+    addImplementation(this, index, remove, add, false);
+  }
+
+  /**
+   * Create an edit: but insert `add` before existing additions, instead of
+   * after them.
+   *
+   * @param {number} index
+   *   Index at which to apply the edit.
+   * @param {number} remove
+   *   Count of items to remove at the index.
+   * @param {Array<Event>} add
+   *   Items to add at the index.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  addBefore(index, remove, add) {
+    addImplementation(this, index, remove, add, true);
+  }
+
+  /**
+   * Done, change the events.
+   *
+   * @param {Array<Event>} events
+   *   List of events to apply the edits to.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  consume(events) {
+    this.map.sort(function (a, b) {
+      return a[0] - b[0];
+    });
+    if (this.map.length === 0) {
+      return;
+    }
+
+    // To do: if links are added in events, like they are in `markdown-rs`,
+    // this is needed.
+    // // Calculate jumps: where items in the current list move to.
+    // /** @type {Array<Jump>} */
+    // const jumps = []
+    // let index = 0
+    // let addAcc = 0
+    // let removeAcc = 0
+    // while (index < this.map.length) {
+    //   const [at, remove, add] = this.map[index]
+    //   removeAcc += remove
+    //   addAcc += add.length
+    //   jumps.push([at, removeAcc, addAcc])
+    //   index += 1
+    // }
+    //
+    // shiftLinks(events, jumps)
+
+    let index = this.map.length;
+    /** @type {Array<Array<Event>>} */
+    const vecs = [];
+    while (index > 0) {
+      index -= 1;
+      vecs.push(events.slice(this.map[index][0] + this.map[index][1]), this.map[index][2]);
+
+      // Truncate rest.
+      events.length = this.map[index][0];
+    }
+    vecs.push(events.slice());
+    events.length = 0;
+    let slice = vecs.pop();
+    while (slice) {
+      for (const element of slice) {
+        events.push(element);
+      }
+      slice = vecs.pop();
+    }
+
+    // Truncate everything.
+    this.map.length = 0;
+    this.index.clear();
+  }
+}
+
+/**
+ * Create an edit.
+ *
+ * @param {EditMap} editMap
+ *   Edit map to apply to.
+ * @param {number} at
+ *   Index at which to apply the edit.
+ * @param {number} remove
+ *   Count of items to remove at the index.
+ * @param {Array<Event>} add
+ *   Items to add at the index.
+ * @param {boolean} before
+ *   Insert `add` before existing additions at `at`, instead of after them.
+ * @returns {undefined}
+ *   Nothing.
+ */
+function addImplementation(editMap, at, remove, add, before) {
+  if (remove === 0 && add.length === 0) {
+    return;
+  }
+  const existing = editMap.index.get(at);
+  if (existing) {
+    existing[1] += remove;
+    if (before) {
+      add.push(...existing[2]);
+      existing[2] = add;
+    } else {
+      existing[2].push(...add);
+    }
+    return;
+  }
+
+  /** @type {Change} */
+  const change = [at, remove, add];
+  editMap.map.push(change);
+  editMap.index.set(at, change);
+}
+
+// /**
+//  * Shift `previous` and `next` links according to `jumps`.
+//  *
+//  * This fixes links in case there are events removed or added between them.
+//  *
+//  * @param {Array<Event>} events
+//  * @param {Array<Jump>} jumps
+//  */
+// function shiftLinks(events, jumps) {
+//   let jumpIndex = 0
+//   let index = 0
+//   let add = 0
+//   let rm = 0
+
+//   while (index < events.length) {
+//     const rmCurr = rm
+
+//     while (jumpIndex < jumps.length && jumps[jumpIndex][0] <= index) {
+//       add = jumps[jumpIndex][2]
+//       rm = jumps[jumpIndex][1]
+//       jumpIndex += 1
+//     }
+
+//     // Ignore items that will be removed.
+//     if (rm > rmCurr) {
+//       index += rm - rmCurr
+//     } else {
+//       // ?
+//       // if let Some(link) = &events[index].link {
+//       //     if let Some(next) = link.next {
+//       //         events[next].link.as_mut().unwrap().previous = Some(index + add - rm);
+//       //         while jumpIndex < jumps.len() && jumps[jumpIndex].0 <= next {
+//       //             add = jumps[jumpIndex].2;
+//       //             rm = jumps[jumpIndex].1;
+//       //             jumpIndex += 1;
+//       //         }
+//       //         events[index].link.as_mut().unwrap().next = Some(next + add - rm);
+//       //         index = next;
+//       //         continue;
+//       //     }
+//       // }
+//       index += 1
+//     }
+//   }
+// }
 ;// CONCATENATED MODULE: ./node_modules/micromark/lib/initialize/document.js
 /**
  * @import {
@@ -10116,12 +10524,12 @@ function initializeDocument(effects) {
         };
         index++;
       }
-
+      const editMap = new EditMap();
       // Inject the exits earlier (they’re still also at the end).
-      splice(self.events, indexBeforeFlow + 1, 0, self.events.slice(indexBeforeExits));
-
+      editMap.add(indexBeforeFlow + 1, 0, self.events.slice(indexBeforeExits));
       // Discard the duplicate exits.
-      self.events.length = index;
+      editMap.add(indexBeforeExits, index - indexBeforeExits, []);
+      editMap.consume(self.events);
       return checkNewContainers(code);
     }
     return start(code);
@@ -10164,7 +10572,9 @@ function initializeDocument(effects) {
 
   /** @type {State} */
   function thereIsANewContainer(code) {
-    if (childFlow) closeFlow();
+    if (childFlow) {
+      closeFlow();
+    }
     exitContainers(continued);
     return documentContinued(code);
   }
@@ -10194,7 +10604,9 @@ function initializeDocument(effects) {
   /** @type {State} */
   function flowStart(code) {
     if (code === null) {
-      if (childFlow) closeFlow();
+      if (childFlow) {
+        closeFlow();
+      }
       exitContainers(0);
       effects.consume(code);
       return;
@@ -10238,9 +10650,13 @@ function initializeDocument(effects) {
    */
   function writeToChild(token, endOfFile) {
     const stream = self.sliceStream(token);
-    if (endOfFile) stream.push(null);
+    if (endOfFile) {
+      stream.push(null);
+    }
     token.previous = childToken;
-    if (childToken) childToken.next = token;
+    if (childToken) {
+      childToken.next = token;
+    }
     childToken = token;
     childFlow.defineSkip(token.start);
     childFlow.write(stream);
@@ -10323,12 +10739,12 @@ function initializeDocument(effects) {
         };
         index++;
       }
-
+      const editMap = new EditMap();
       // Inject the exits earlier (they’re still also at the end).
-      splice(self.events, indexBeforeFlow + 1, 0, self.events.slice(indexBeforeExits));
-
+      editMap.add(indexBeforeFlow + 1, 0, self.events.slice(indexBeforeExits));
       // Discard the duplicate exits.
-      self.events.length = index;
+      editMap.add(indexBeforeExits, index - indexBeforeExits, []);
+      editMap.consume(self.events);
     }
   }
 
@@ -10665,6 +11081,7 @@ function initializeFlow(effects) {
  * } from 'micromark-util-types'
  */
 
+
 const resolver = {
   resolveAll: createResolver()
 };
@@ -10798,6 +11215,7 @@ function createResolver(extraResolver) {
  * @type {Resolver}
  */
 function resolveAllLineSuffixes(events, context) {
+  const editMap = new EditMap();
   let eventIndex = 0; // Skip first.
 
   while (++eventIndex <= events.length) {
@@ -10817,7 +11235,9 @@ function resolveAllLineSuffixes(events, context) {
             size++;
             bufferIndex--;
           }
-          if (bufferIndex) break;
+          if (bufferIndex) {
+            break;
+          }
           bufferIndex = -1;
         }
         // Number
@@ -10857,13 +11277,13 @@ function resolveAllLineSuffixes(events, context) {
         if (data.start.offset === data.end.offset) {
           Object.assign(data, token);
         } else {
-          events.splice(eventIndex, 0, ['enter', token, context], ['exit', token, context]);
-          eventIndex += 2;
+          editMap.add(eventIndex, 0, [['enter', token, context], ['exit', token, context]]);
         }
       }
       eventIndex++;
     }
   }
+  editMap.consume(events);
   return events;
 }
 ;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/thematic-break.js
@@ -12206,7 +12626,6 @@ const furtherStart = {
  * @type {Tokenizer}
  */
 function tokenizeCodeIndented(effects, ok, nok) {
-  const self = this;
   return start;
 
   /**
@@ -12227,24 +12646,7 @@ function tokenizeCodeIndented(effects, ok, nok) {
     // To do: manually check if interrupting like `markdown-rs`.
 
     effects.enter("codeIndented");
-    // To do: use an improved `space_or_tab` function like `markdown-rs`,
-    // so that we can drop the next state.
-    return factorySpace(effects, afterPrefix, "linePrefix", 4 + 1)(code);
-  }
-
-  /**
-   * At start, after 1 or 4 spaces.
-   *
-   * ```markdown
-   * > |     aaa
-   *         ^
-   * ```
-   *
-   * @type {State}
-   */
-  function afterPrefix(code) {
-    const tail = self.events[self.events.length - 1];
-    return tail && tail[1].type === "linePrefix" && tail[2].sliceSerialize(tail[1], true).length >= 4 ? atBreak(code) : nok(code);
+    return factorySpaceMinMax(effects, atBreak, nok, "linePrefix", 4, 4)(code);
   }
 
   /**
@@ -12333,25 +12735,25 @@ function tokenizeFurtherStart(effects, ok, nok) {
     // To do: the code here in `micromark-js` is a bit different from
     // `markdown-rs` because there it can attempt spaces.
     // We can’t yet.
-    //
-    // To do: use an improved `space_or_tab` function like `markdown-rs`,
-    // so that we can drop the next state.
-    return factorySpace(effects, afterPrefix, "linePrefix", 4 + 1)(code);
+    return factorySpaceMinMax(effects, ok, onNotEnoughPrefix, "linePrefix", 4, 4)(code);
   }
 
   /**
-   * At start, after 1 or 4 spaces.
+   * After not enough of a prefix.
+   *
+   * A following line ending is another (potentially blank) line to try,
+   * anything else means this isn’t a continuation.
    *
    * ```markdown
    * > |     aaa
-   *         ^
+   *
+   *   |     bbb
    * ```
    *
    * @type {State}
    */
-  function afterPrefix(code) {
-    const tail = self.events[self.events.length - 1];
-    return tail && tail[1].type === "linePrefix" && tail[2].sliceSerialize(tail[1], true).length >= 4 ? ok(code) : markdownLineEnding(code) ? furtherStart(code) : nok(code);
+  function onNotEnoughPrefix(code) {
+    return markdownLineEnding(code) ? furtherStart(code) : nok(code);
   }
 }
 ;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/heading-atx.js
@@ -12380,10 +12782,6 @@ const headingAtx = {
 function resolveHeadingAtx(events, context) {
   let contentEnd = events.length - 2;
   let contentStart = 3;
-  /** @type {Token} */
-  let content;
-  /** @type {Token} */
-  let text;
 
   // Prefix whitespace, part of the opening.
   if (events[contentStart][1].type === "whitespace") {
@@ -12398,12 +12796,12 @@ function resolveHeadingAtx(events, context) {
     contentEnd -= contentStart + 1 === contentEnd ? 2 : 4;
   }
   if (contentEnd > contentStart) {
-    content = {
+    const content = {
       type: "atxHeadingText",
       start: events[contentStart][1].start,
       end: events[contentEnd][1].end
     };
-    text = {
+    const text = {
       type: "chunkText",
       start: events[contentStart][1].start,
       end: events[contentEnd][1].end,
@@ -12564,6 +12962,7 @@ function tokenizeHeadingAtx(effects, ok, nok) {
 
 
 
+
 /** @type {Construct} */
 const setextUnderline = {
   name: 'setextUnderline',
@@ -12573,7 +12972,7 @@ const setextUnderline = {
 
 /** @type {Resolver} */
 function resolveToSetextUnderline(events, context) {
-  // To do: resolve like `markdown-rs`.
+  const editMap = new EditMap();
   let index = events.length;
   /** @type {number | undefined} */
   let content;
@@ -12598,7 +12997,7 @@ function resolveToSetextUnderline(events, context) {
     else {
       if (events[index][1].type === "content") {
         // Remove the content end (if needed we’ll add it later)
-        events.splice(index, 1);
+        editMap.add(index, 1, []);
       }
       if (!definition && events[index][1].type === "definition") {
         definition = index;
@@ -12621,8 +13020,8 @@ function resolveToSetextUnderline(events, context) {
   // If we have definitions in the content, we’ll keep on having content,
   // but we need move it.
   if (definition) {
-    events.splice(text, 0, ['enter', heading, context]);
-    events.splice(definition + 1, 0, ['exit', events[content][1], context]);
+    editMap.add(text, 0, [['enter', heading, context]]);
+    editMap.add(definition + 1, 0, [['exit', events[content][1], context]]);
     events[content][1].end = {
       ...events[definition][1].end
     };
@@ -12631,7 +13030,8 @@ function resolveToSetextUnderline(events, context) {
   }
 
   // Add the heading exit at the end.
-  events.push(['exit', heading, context]);
+  editMap.add(events.length, 0, [['exit', heading, context]]);
+  editMap.consume(events);
   return events;
 }
 
@@ -12831,6 +13231,68 @@ const htmlBlockNames = [
  */
 const htmlRawNames = ['pre', 'script', 'style', 'textarea']
 
+;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js
+/**
+ * @import {
+ *   Construct,
+ *   State,
+ *   TokenizeContext,
+ *   Tokenizer
+ * } from 'micromark-util-types'
+ */
+
+
+/** @type {Construct} */
+const nonLazyContinuation = {
+  partial: true,
+  tokenize: tokenizeNonLazyContinuation
+};
+
+/**
+ * @this {TokenizeContext}
+ *   Context.
+ * @type {Tokenizer}
+ */
+function tokenizeNonLazyContinuation(effects, ok, nok) {
+  const self = this;
+  return start;
+
+  /**
+   * At eol, before continuation.
+   *
+   * ```markdown
+   * > | * ```js
+   *            ^
+   *   | b
+   * ```
+   *
+   * @type {State}
+   */
+  function start(code) {
+    if (code === null) {
+      return nok(code);
+    }
+    effects.enter("lineEnding");
+    effects.consume(code);
+    effects.exit("lineEnding");
+    return after;
+  }
+
+  /**
+   * A continuation.
+   *
+   * ```markdown
+   *   | * ```js
+   * > | b
+   *     ^
+   * ```
+   *
+   * @type {State}
+   */
+  function after(code) {
+    return self.parser.lazy[self.now().line] ? nok(code) : ok(code);
+  }
+}
 ;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/html-flow.js
 /**
  * @import {
@@ -12842,6 +13304,7 @@ const htmlRawNames = ['pre', 'script', 'style', 'textarea']
  *   Tokenizer
  * } from 'micromark-util-types'
  */
+
 
 
 
@@ -12859,10 +13322,6 @@ const htmlFlow = {
 const blankLineBefore = {
   partial: true,
   tokenize: tokenizeBlankLineBefore
-};
-const nonLazyContinuationStart = {
-  partial: true,
-  tokenize: tokenizeNonLazyContinuationStart
 };
 
 /** @type {Resolver} */
@@ -13442,7 +13901,7 @@ function tokenizeHtmlFlow(effects, ok, nok) {
    * @type {State}
    */
   function continuationStart(code) {
-    return effects.check(nonLazyContinuationStart, continuationStartNonLazy, continuationAfter)(code);
+    return effects.check(nonLazyContinuation, continuationStartNonLazy, continuationAfter)(code);
   }
 
   /**
@@ -13641,52 +14100,6 @@ function tokenizeHtmlFlow(effects, ok, nok) {
  *   Context.
  * @type {Tokenizer}
  */
-function tokenizeNonLazyContinuationStart(effects, ok, nok) {
-  const self = this;
-  return start;
-
-  /**
-   * At eol, before continuation.
-   *
-   * ```markdown
-   * > | * ```js
-   *            ^
-   *   | b
-   * ```
-   *
-   * @type {State}
-   */
-  function start(code) {
-    if (markdownLineEnding(code)) {
-      effects.enter("lineEnding");
-      effects.consume(code);
-      effects.exit("lineEnding");
-      return after;
-    }
-    return nok(code);
-  }
-
-  /**
-   * A continuation.
-   *
-   * ```markdown
-   *   | * ```js
-   * > | b
-   *     ^
-   * ```
-   *
-   * @type {State}
-   */
-  function after(code) {
-    return self.parser.lazy[self.now().line] ? nok(code) : ok(code);
-  }
-}
-
-/**
- * @this {TokenizeContext}
- *   Context.
- * @type {Tokenizer}
- */
 function tokenizeBlankLineBefore(effects, ok, nok) {
   return start;
 
@@ -13721,11 +14134,7 @@ function tokenizeBlankLineBefore(effects, ok, nok) {
 
 
 
-/** @type {Construct} */
-const nonLazyContinuation = {
-  partial: true,
-  tokenize: tokenizeNonLazyContinuation
-};
+
 
 /** @type {Construct} */
 const codeFenced = {
@@ -14133,40 +14542,6 @@ function tokenizeCodeFenced(effects, ok, nok) {
       }
       return nok(code);
     }
-  }
-}
-
-/**
- * @this {TokenizeContext}
- *   Context.
- * @type {Tokenizer}
- */
-function tokenizeNonLazyContinuation(effects, ok, nok) {
-  const self = this;
-  return start;
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function start(code) {
-    if (code === null) {
-      return nok(code);
-    }
-    effects.enter("lineEnding");
-    effects.consume(code);
-    effects.exit("lineEnding");
-    return lineStart;
-  }
-
-  /**
-   *
-   *
-   * @type {State}
-   */
-  function lineStart(code) {
-    return self.parser.lazy[self.now().line] ? nok(code) : ok(code);
   }
 }
 ;// CONCATENATED MODULE: ./node_modules/character-entities/index.js
@@ -16676,8 +17051,6 @@ function resolveAllLabelEnd(events) {
 function resolveToLabelEnd(events, context) {
   let index = events.length;
   let offset = 0;
-  /** @type {Token} */
-  let token;
   /** @type {number | undefined} */
   let open;
   /** @type {number | undefined} */
@@ -16687,7 +17060,7 @@ function resolveToLabelEnd(events, context) {
 
   // Find an opening.
   while (index--) {
-    token = events[index][1];
+    const token = events[index][1];
     if (open) {
       // If we see another link, or inactive link label, we’ve been here before.
       if (token.type === "link" || token.type === "labelLink" && token._inactive) {
@@ -16770,18 +17143,18 @@ function resolveToLabelEnd(events, context) {
  */
 function tokenizeLabelEnd(effects, ok, nok) {
   const self = this;
-  let index = self.events.length;
+  const labelStarts = self._labelStarts;
   /** @type {Token} */
   let labelStart;
   /** @type {boolean} */
   let defined;
-
-  // Find an opening.
-  while (index--) {
-    if ((self.events[index][1].type === "labelImage" || self.events[index][1].type === "labelLink") && !self.events[index][1]._balanced) {
-      labelStart = self.events[index][1];
-      break;
+  if (labelStarts) {
+    // Discard ones that failed to close,
+    // they’re not needed anymore.
+    while (labelStarts.length > 0 && labelStarts[labelStarts.length - 1]._balanced) {
+      labelStarts.pop();
     }
+    labelStart = labelStarts[labelStarts.length - 1];
   }
   return start;
 
@@ -16900,6 +17273,9 @@ function tokenizeLabelEnd(effects, ok, nok) {
    */
   function labelEndOk(code) {
     // Note: `markdown-rs` does a bunch of stuff here.
+    // This label start is now used up: discard it so it’s never found again.
+
+    labelStarts.pop();
     return ok(code);
   }
 
@@ -17173,6 +17549,7 @@ function tokenizeReferenceCollapsed(effects, ok, nok) {
  * @import {
  *   Construct,
  *   State,
+ *   Token,
  *   TokenizeContext,
  *   Tokenizer
  * } from 'micromark-util-types'
@@ -17194,6 +17571,8 @@ const labelStartImage = {
  */
 function tokenizeLabelStartImage(effects, ok, nok) {
   const self = this;
+  /** @type {Token} */
+  let labelImage;
   return start;
 
   /**
@@ -17229,7 +17608,7 @@ function tokenizeLabelStartImage(effects, ok, nok) {
       effects.enter("labelMarker");
       effects.consume(code);
       effects.exit("labelMarker");
-      effects.exit("labelImage");
+      labelImage = effects.exit("labelImage");
       return after;
     }
     return nok(code);
@@ -17267,8 +17646,13 @@ function tokenizeLabelStartImage(effects, ok, nok) {
     // `micromark-extension-gfm-footnote`, but the `label-start-link`
     // behavior isn’t.
     // Hidden footnotes hook.
-    /* c8 ignore next 3 */
-    return code === 94 && '_hiddenFootnoteSupport' in self.parser.constructs ? nok(code) : ok(code);
+    /* c8 ignore next 6 */
+    if (code === 94 && '_hiddenFootnoteSupport' in self.parser.constructs) {
+      return nok(code);
+    }
+    self._labelStarts = self._labelStarts || [];
+    self._labelStarts.push(labelImage);
+    return ok(code);
   }
 }
 ;// CONCATENATED MODULE: ./node_modules/micromark-util-classify-character/index.js
@@ -17332,22 +17716,8 @@ const attention = {
 // eslint-disable-next-line complexity
 function resolveAllAttention(events, context) {
   let index = -1;
-  /** @type {number} */
-  let open;
-  /** @type {Token} */
-  let group;
-  /** @type {Token} */
-  let text;
-  /** @type {Token} */
-  let openingSequence;
-  /** @type {Token} */
-  let closingSequence;
-  /** @type {number} */
-  let use;
   /** @type {Array<Event>} */
   let nextEvents;
-  /** @type {number} */
-  let offset;
 
   // Walk through all events.
   //
@@ -17356,7 +17726,7 @@ function resolveAllAttention(events, context) {
   while (++index < events.length) {
     // Find a token that can close.
     if (events[index][0] === 'enter' && events[index][1].type === 'attentionSequence' && events[index][1]._close) {
-      open = index;
+      let open = index;
 
       // Now walk back to find an opener.
       while (open--) {
@@ -17373,7 +17743,7 @@ function resolveAllAttention(events, context) {
           }
 
           // Number of markers to use from the sequence.
-          use = events[open][1].end.offset - events[open][1].start.offset > 1 && events[index][1].end.offset - events[index][1].start.offset > 1 ? 2 : 1;
+          const use = events[open][1].end.offset - events[open][1].start.offset > 1 && events[index][1].end.offset - events[index][1].start.offset > 1 ? 2 : 1;
           const start = {
             ...events[open][1].end
           };
@@ -17382,21 +17752,21 @@ function resolveAllAttention(events, context) {
           };
           movePoint(start, -use);
           movePoint(end, use);
-          openingSequence = {
+          const openingSequence = {
             type: use > 1 ? "strongSequence" : "emphasisSequence",
             start,
             end: {
               ...events[open][1].end
             }
           };
-          closingSequence = {
+          const closingSequence = {
             type: use > 1 ? "strongSequence" : "emphasisSequence",
             start: {
               ...events[index][1].start
             },
             end
           };
-          text = {
+          const text = {
             type: use > 1 ? "strongText" : "emphasisText",
             start: {
               ...events[open][1].end
@@ -17405,7 +17775,7 @@ function resolveAllAttention(events, context) {
               ...events[index][1].start
             }
           };
-          group = {
+          const group = {
             type: use > 1 ? "strong" : "emphasis",
             start: {
               ...openingSequence.start
@@ -17438,12 +17808,13 @@ function resolveAllAttention(events, context) {
           // Closing.
           nextEvents = push(nextEvents, [['exit', text, context], ['enter', closingSequence, context], ['exit', closingSequence, context], ['exit', group, context]]);
 
+          /** @type {number} */
+          let offset = 0;
+
           // If there are more markers in the closing, add them after.
           if (events[index][1].end.offset - events[index][1].start.offset) {
             offset = 2;
             nextEvents = push(nextEvents, [['enter', events[index][1], context], ['exit', events[index][1], context]]);
-          } else {
-            offset = 0;
           }
           splice(events, open - 1, index - open + 3, nextEvents);
           index = open + nextEvents.length - offset - 2;
@@ -17515,8 +17886,11 @@ function tokenizeAttention(effects, ok) {
 
     // Always populated by defaults.
 
-    const open = !after || after === 2 && before || attentionMarkers.includes(code);
-    const close = !before || before === 2 && after || attentionMarkers.includes(previous);
+    // Note: `*` and `_` are in `attentionMarkers` through core.
+    // They are excluded here as the loosening is meant for markers registered
+    // by *other* constructs (such as GFM strikethrough’s `~`).
+    const open = !after || after === 2 && before || attentionMarkers.includes(code) && code !== 42 && code !== 95;
+    const close = !before || before === 2 && after || attentionMarkers.includes(previous) && previous !== 42 && previous !== 95;
     token._open = Boolean(marker === 42 ? open : open && (before || !close));
     token._close = Boolean(marker === 42 ? close : close && (after || !open));
     return ok(code);
@@ -18459,6 +18833,7 @@ function tokenizeHtmlText(effects, ok, nok) {
  * @import {
  *   Construct,
  *   State,
+ *   Token,
  *   TokenizeContext,
  *   Tokenizer
  * } from 'micromark-util-types'
@@ -18480,6 +18855,8 @@ const labelStartLink = {
  */
 function tokenizeLabelStartLink(effects, ok, nok) {
   const self = this;
+  /** @type {Token} */
+  let labelLink;
   return start;
 
   /**
@@ -18497,7 +18874,7 @@ function tokenizeLabelStartLink(effects, ok, nok) {
     effects.enter("labelMarker");
     effects.consume(code);
     effects.exit("labelMarker");
-    effects.exit("labelLink");
+    labelLink = effects.exit("labelLink");
     return after;
   }
 
@@ -18506,8 +18883,13 @@ function tokenizeLabelStartLink(effects, ok, nok) {
     // To do: this isn’t needed in `micromark-extension-gfm-footnote`,
     // remove.
     // Hidden footnotes hook.
-    /* c8 ignore next 3 */
-    return code === 94 && '_hiddenFootnoteSupport' in self.parser.constructs ? nok(code) : ok(code);
+    /* c8 ignore next 6 */
+    if (code === 94 && '_hiddenFootnoteSupport' in self.parser.constructs) {
+      return nok(code);
+    }
+    self._labelStarts = self._labelStarts || [];
+    self._labelStarts.push(labelLink);
+    return ok(code);
   }
 }
 ;// CONCATENATED MODULE: ./node_modules/micromark-core-commonmark/lib/hard-break-escape.js
@@ -19087,14 +19469,12 @@ function createTokenizer(parser, initialize, from) {
    *   Nothing.
    */
   function main() {
-    /** @type {number} */
-    let chunkIndex;
     while (point._index < chunks.length) {
       const chunk = chunks[point._index];
 
       // If we’re in a buffer chunk, loop through it.
       if (typeof chunk === 'string') {
-        chunkIndex = point._index;
+        const chunkIndex = point._index;
         if (point._bufferIndex < 0) {
           point._bufferIndex = 0;
         }
@@ -19457,38 +19837,42 @@ function serializeChunks(chunks, expandTabs) {
     let value;
     if (typeof chunk === 'string') {
       value = chunk;
-    } else switch (chunk) {
-      case -5:
-        {
-          value = "\r";
-          break;
-        }
-      case -4:
-        {
-          value = "\n";
-          break;
-        }
-      case -3:
-        {
-          value = "\r" + "\n";
-          break;
-        }
-      case -2:
-        {
-          value = expandTabs ? " " : "\t";
-          break;
-        }
-      case -1:
-        {
-          if (!expandTabs && atTab) continue;
-          value = " ";
-          break;
-        }
-      default:
-        {
-          // Currently only replacement character.
-          value = String.fromCharCode(chunk);
-        }
+    } else {
+      switch (chunk) {
+        case -5:
+          {
+            value = "\r";
+            break;
+          }
+        case -4:
+          {
+            value = "\n";
+            break;
+          }
+        case -3:
+          {
+            value = "\r" + "\n";
+            break;
+          }
+        case -2:
+          {
+            value = expandTabs ? " " : "\t";
+            break;
+          }
+        case -1:
+          {
+            if (!expandTabs && atTab) {
+              continue;
+            }
+            value = " ";
+            break;
+          }
+        default:
+          {
+            // Currently only replacement character.
+            value = String.fromCharCode(chunk);
+          }
+      }
     }
     atTab = chunk === -2;
     result.push(value);
@@ -19588,20 +19972,11 @@ function preprocess() {
   /** @type {Preprocessor} */
   // eslint-disable-next-line complexity
   function preprocessor(value, encoding, end) {
+    value = buffer + (typeof value === 'string' ? value.toString() : new TextDecoder(encoding || undefined).decode(value));
+
     /** @type {Array<Chunk>} */
     const chunks = [];
-    /** @type {RegExpMatchArray | null} */
-    let match;
-    /** @type {number} */
-    let next;
-    /** @type {number} */
-    let startPosition;
-    /** @type {number} */
-    let endPosition;
-    /** @type {Code} */
-    let code;
-    value = buffer + (typeof value === 'string' ? value.toString() : new TextDecoder(encoding || undefined).decode(value));
-    startPosition = 0;
+    let startPosition = 0;
     buffer = '';
     if (start) {
       // To do: `markdown-rs` actually parses BOMs (byte order mark).
@@ -19612,9 +19987,9 @@ function preprocess() {
     }
     while (startPosition < value.length) {
       search.lastIndex = startPosition;
-      match = search.exec(value);
-      endPosition = match && match.index !== undefined ? match.index : value.length;
-      code = value.charCodeAt(endPosition);
+      const match = search.exec(value);
+      const endPosition = match && match.index !== undefined ? match.index : value.length;
+      const code = value.charCodeAt(endPosition);
       if (!match) {
         buffer = value.slice(startPosition);
         break;
@@ -19640,9 +20015,11 @@ function preprocess() {
             }
           case 9:
             {
-              next = Math.ceil(column / 4) * 4;
+              const next = Math.ceil(column / 4) * 4;
               chunks.push(-2);
-              while (column++ < next) chunks.push(-1);
+              while (column++ < next) {
+                chunks.push(-1);
+              }
               break;
             }
           case 10:
@@ -19661,8 +20038,12 @@ function preprocess() {
       startPosition = endPosition + 1;
     }
     if (end) {
-      if (atCarriageReturn) chunks.push(-5);
-      if (buffer) chunks.push(buffer);
+      if (atCarriageReturn) {
+        chunks.push(-5);
+      }
+      if (buffer) {
+        chunks.push(buffer);
+      }
       chunks.push(null);
     }
     return chunks;
@@ -19824,7 +20205,7 @@ const lib_own = {}.hasOwnProperty;
  *   mdast tree.
  */
 function fromMarkdown(value, encoding, options) {
-  if (typeof encoding !== 'string') {
+  if (encoding && typeof encoding === 'object') {
     options = encoding;
     encoding = undefined;
   }
@@ -19839,6 +20220,8 @@ function fromMarkdown(value, encoding, options) {
 function compiler(options) {
   /** @type {Config} */
   const config = {
+    afterExit: [],
+    beforeEnter: [],
     transforms: [],
     canContainEols: ['emphasis', 'fragment', 'heading', 'paragraph', 'strong'],
     enter: {
@@ -19954,7 +20337,8 @@ function compiler(options) {
     /** @type {Root} */
     let tree = {
       type: 'root',
-      children: []
+      children: [],
+      position: undefined
     };
     /** @type {Omit<CompileContext, 'sliceSerialize'>} */
     const context = {
@@ -19969,26 +20353,45 @@ function compiler(options) {
     };
     /** @type {Array<number>} */
     const listStack = [];
+    /** @type {Array<Event>} */
+    const prepared = [];
     let index = -1;
+
+    // Add `listItem` tokens and infer spread.
+    // Each list is prepared while it is last in `prepared`, so nothing shifts.
     while (++index < events.length) {
-      // We preprocess lists to add `listItem` tokens, and to infer whether
-      // items the list itself are spread out.
+      prepared.push(events[index]);
       if (events[index][1].type === "listOrdered" || events[index][1].type === "listUnordered") {
         if (events[index][0] === 'enter') {
-          listStack.push(index);
+          listStack.push(prepared.length - 1);
         } else {
           const tail = listStack.pop();
-          index = prepareList(events, tail, index);
+          prepareList(prepared, tail);
         }
       }
     }
+    events = prepared;
     index = -1;
     while (++index < events.length) {
       const handler = config[events[index][0]];
-      if (lib_own.call(handler, events[index][1].type)) {
-        handler[events[index][1].type].call(Object.assign({
+      if (events[index][0] === 'enter' && config.beforeEnter.length > 0) {
+        callListeners(config.beforeEnter, {
+          ...context,
           sliceSerialize: events[index][2].sliceSerialize
-        }, context), events[index][1]);
+        }, events[index][1]);
+      }
+      if (lib_own.call(handler, events[index][1].type)) {
+        // Note: spread first, V8 has optimizations for object shape cloning.
+        handler[events[index][1].type].call({
+          ...context,
+          sliceSerialize: events[index][2].sliceSerialize
+        }, events[index][1]);
+      }
+      if (events[index][0] === 'exit' && config.afterExit.length > 0) {
+        callListeners(config.afterExit, {
+          ...context,
+          sliceSerialize: events[index][2].sliceSerialize
+        }, events[index][1]);
       }
     }
 
@@ -20022,12 +20425,31 @@ function compiler(options) {
   }
 
   /**
-   * @param {Array<Event>} events
-   * @param {number} start
-   * @param {number} length
-   * @returns {number}
+   * @param {Array<Handle>} listeners
+   *   Listeners.
+   * @param {CompileContext} context
+   *   Context.
+   * @param {Token} token
+   *   Token.
+   * @returns {undefined}
+   *   Nothing.
    */
-  function prepareList(events, start, length) {
+  function callListeners(listeners, context, token) {
+    let index = -1;
+    while (++index < listeners.length) {
+      listeners[index].call(context, token);
+    }
+  }
+
+  /**
+   * @param {Array<Event>} events
+   *   Events, ending with the list to prepare.
+   * @param {number} start
+   *   Index of the list enter.
+   * @returns {undefined}
+   */
+  function prepareList(events, start) {
+    const end = events.length - 1;
     let index = start - 1;
     let containerBalance = -1;
     let listSpread = false;
@@ -20039,7 +20461,14 @@ function compiler(options) {
     let firstBlankLineIndex;
     /** @type {boolean | undefined} */
     let atMarker;
-    while (++index <= length) {
+    /**
+     * `listItem` events to insert before the event at `at`, in walk order.
+     * Merged in after the walk, as inserting while walking would shift the
+     * rest of the list once per item.
+     * @type {Array<{at: number, event: Event}>}
+     */
+    const insertions = [];
+    while (++index <= end) {
       const event = events[index];
       switch (event[1].type) {
         case "listUnordered":
@@ -20105,9 +20534,10 @@ function compiler(options) {
 
           // Fix position.
           listItem.end = Object.assign({}, lineIndex ? events[lineIndex][1].start : event[1].end);
-          events.splice(lineIndex || index, 0, ['exit', listItem, event[2]]);
-          index++;
-          length++;
+          insertions.push({
+            at: lineIndex || index,
+            event: ['exit', listItem, event[2]]
+          });
         }
 
         // Create a new list item.
@@ -20121,16 +20551,29 @@ function compiler(options) {
             end: undefined
           };
           listItem = item;
-          events.splice(index, 0, ['enter', item, event[2]]);
-          index++;
-          length++;
+          insertions.push({
+            at: index,
+            event: ['enter', item, event[2]]
+          });
           firstBlankLineIndex = undefined;
           atMarker = true;
         }
       }
     }
+
+    // The list is at the end of `events`: take it off, then push it back with
+    // the insertions merged in.
+    // Nothing follows the list, so nothing shifts.
+    const listEvents = events.splice(start);
+    let insertion = 0;
+    index = -1;
+    while (++index < listEvents.length) {
+      while (insertion < insertions.length && insertions[insertion].at === start + index) {
+        events.push(insertions[insertion++].event);
+      }
+      events.push(listEvents[index]);
+    }
     events[start][1]._spread = listSpread;
-    return length;
   }
 
   /**
@@ -20217,7 +20660,8 @@ function compiler(options) {
         start: token.start,
         end: token.end
       }) + '): it’s not open');
-    } else if (open[0].type !== token.type) {
+    }
+    if (open[0].type !== token.type) {
       if (onExitError) {
         onExitError.call(this, token, open[0]);
       } else {
@@ -20686,11 +21130,18 @@ function compiler(options) {
   // Creaters.
   //
 
+  // Each node factory pre-declares `position` as undefined as the trailing
+  // property. enter() patches it to a real value, but the property already
+  // exists, so V8 sees a single hidden class for each node type from
+  // construction through the rest of the pipeline. Without the pre-declare,
+  // each node took a hidden-class transition when enter() added position.
+
   /** @returns {Blockquote} */
   function blockQuote() {
     return {
       type: 'blockquote',
-      children: []
+      children: [],
+      position: undefined
     };
   }
 
@@ -20700,7 +21151,8 @@ function compiler(options) {
       type: 'code',
       lang: null,
       meta: null,
-      value: ''
+      value: '',
+      position: undefined
     };
   }
 
@@ -20708,7 +21160,8 @@ function compiler(options) {
   function codeText() {
     return {
       type: 'inlineCode',
-      value: ''
+      value: '',
+      position: undefined
     };
   }
 
@@ -20719,7 +21172,8 @@ function compiler(options) {
       identifier: '',
       label: null,
       title: null,
-      url: ''
+      url: '',
+      position: undefined
     };
   }
 
@@ -20727,7 +21181,8 @@ function compiler(options) {
   function emphasis() {
     return {
       type: 'emphasis',
-      children: []
+      children: [],
+      position: undefined
     };
   }
 
@@ -20737,14 +21192,16 @@ function compiler(options) {
       type: 'heading',
       // @ts-expect-error `depth` will be set later.
       depth: 0,
-      children: []
+      children: [],
+      position: undefined
     };
   }
 
   /** @returns {Break} */
   function hardBreak() {
     return {
-      type: 'break'
+      type: 'break',
+      position: undefined
     };
   }
 
@@ -20752,7 +21209,8 @@ function compiler(options) {
   function html() {
     return {
       type: 'html',
-      value: ''
+      value: '',
+      position: undefined
     };
   }
 
@@ -20762,7 +21220,8 @@ function compiler(options) {
       type: 'image',
       title: null,
       url: '',
-      alt: null
+      alt: null,
+      position: undefined
     };
   }
 
@@ -20772,7 +21231,8 @@ function compiler(options) {
       type: 'link',
       title: null,
       url: '',
-      children: []
+      children: [],
+      position: undefined
     };
   }
 
@@ -20786,7 +21246,8 @@ function compiler(options) {
       ordered: token.type === 'listOrdered',
       start: null,
       spread: token._spread,
-      children: []
+      children: [],
+      position: undefined
     };
   }
 
@@ -20799,7 +21260,8 @@ function compiler(options) {
       type: 'listItem',
       spread: token._spread,
       checked: null,
-      children: []
+      children: [],
+      position: undefined
     };
   }
 
@@ -20807,7 +21269,8 @@ function compiler(options) {
   function paragraph() {
     return {
       type: 'paragraph',
-      children: []
+      children: [],
+      position: undefined
     };
   }
 
@@ -20815,7 +21278,8 @@ function compiler(options) {
   function strong() {
     return {
       type: 'strong',
-      children: []
+      children: [],
+      position: undefined
     };
   }
 
@@ -20823,14 +21287,16 @@ function compiler(options) {
   function text() {
     return {
       type: 'text',
-      value: ''
+      value: '',
+      position: undefined
     };
   }
 
   /** @returns {ThematicBreak} */
   function thematicBreak() {
     return {
-      type: 'thematicBreak'
+      type: 'thematicBreak',
+      position: undefined
     };
   }
 }
@@ -20895,6 +21361,15 @@ function extension(combined, extension) {
             }
             break;
           }
+        case 'afterExit':
+        case 'beforeEnter':
+          {
+            const right = extension[key];
+            if (right) {
+              combined[key].push(right);
+            }
+            break;
+          }
         case 'enter':
         case 'exit':
           {
@@ -20920,12 +21395,11 @@ function defaultOnError(left, right) {
       start: right.start,
       end: right.end
     }) + ') is open');
-  } else {
-    throw new Error('Cannot close document, a token (`' + right.type + '`, ' + (0,unist_util_stringify_position_lib/* stringifyPosition */.L)({
-      start: right.start,
-      end: right.end
-    }) + ') is still open');
   }
+  throw new Error('Cannot close document, a token (`' + right.type + '`, ' + (0,unist_util_stringify_position_lib/* stringifyPosition */.L)({
+    start: right.start,
+    end: right.end
+  }) + ') is still open');
 }
 ;// CONCATENATED MODULE: ./node_modules/remark-parse/lib/index.js
 /**
@@ -20970,767 +21444,6 @@ function remarkParse(options) {
       mdastExtensions: self.data('fromMarkdownExtensions') || []
     })
   }
-}
-
-;// CONCATENATED MODULE: ./node_modules/zwitch/index.js
-/**
- * @callback Handler
- *   Handle a value, with a certain ID field set to a certain value.
- *   The ID field is passed to `zwitch`, and it’s value is this function’s
- *   place on the `handlers` record.
- * @param {...any} parameters
- *   Arbitrary parameters passed to the zwitch.
- *   The first will be an object with a certain ID field set to a certain value.
- * @returns {any}
- *   Anything!
- */
-
-/**
- * @callback UnknownHandler
- *   Handle values that do have a certain ID field, but it’s set to a value
- *   that is not listed in the `handlers` record.
- * @param {unknown} value
- *   An object with a certain ID field set to an unknown value.
- * @param {...any} rest
- *   Arbitrary parameters passed to the zwitch.
- * @returns {any}
- *   Anything!
- */
-
-/**
- * @callback InvalidHandler
- *   Handle values that do not have a certain ID field.
- * @param {unknown} value
- *   Any unknown value.
- * @param {...any} rest
- *   Arbitrary parameters passed to the zwitch.
- * @returns {void|null|undefined|never}
- *   This should crash or return nothing.
- */
-
-/**
- * @template {InvalidHandler} [Invalid=InvalidHandler]
- * @template {UnknownHandler} [Unknown=UnknownHandler]
- * @template {Record<string, Handler>} [Handlers=Record<string, Handler>]
- * @typedef Options
- *   Configuration (required).
- * @property {Invalid} [invalid]
- *   Handler to use for invalid values.
- * @property {Unknown} [unknown]
- *   Handler to use for unknown values.
- * @property {Handlers} [handlers]
- *   Handlers to use.
- */
-
-const zwitch_own = {}.hasOwnProperty
-
-/**
- * Handle values based on a field.
- *
- * @template {InvalidHandler} [Invalid=InvalidHandler]
- * @template {UnknownHandler} [Unknown=UnknownHandler]
- * @template {Record<string, Handler>} [Handlers=Record<string, Handler>]
- * @param {string} key
- *   Field to switch on.
- * @param {Options<Invalid, Unknown, Handlers>} [options]
- *   Configuration (required).
- * @returns {{unknown: Unknown, invalid: Invalid, handlers: Handlers, (...parameters: Parameters<Handlers[keyof Handlers]>): ReturnType<Handlers[keyof Handlers]>, (...parameters: Parameters<Unknown>): ReturnType<Unknown>}}
- */
-function zwitch(key, options) {
-  const settings = options || {}
-
-  /**
-   * Handle one value.
-   *
-   * Based on the bound `key`, a respective handler will be called.
-   * If `value` is not an object, or doesn’t have a `key` property, the special
-   * “invalid” handler will be called.
-   * If `value` has an unknown `key`, the special “unknown” handler will be
-   * called.
-   *
-   * All arguments, and the context object, are passed through to the handler,
-   * and it’s result is returned.
-   *
-   * @this {unknown}
-   *   Any context object.
-   * @param {unknown} [value]
-   *   Any value.
-   * @param {...unknown} parameters
-   *   Arbitrary parameters passed to the zwitch.
-   * @property {Handler} invalid
-   *   Handle for values that do not have a certain ID field.
-   * @property {Handler} unknown
-   *   Handle values that do have a certain ID field, but it’s set to a value
-   *   that is not listed in the `handlers` record.
-   * @property {Handlers} handlers
-   *   Record of handlers.
-   * @returns {unknown}
-   *   Anything.
-   */
-  function one(value, ...parameters) {
-    /** @type {Handler|undefined} */
-    let fn = one.invalid
-    const handlers = one.handlers
-
-    if (value && zwitch_own.call(value, key)) {
-      // @ts-expect-error Indexable.
-      const id = String(value[key])
-      // @ts-expect-error Indexable.
-      fn = zwitch_own.call(handlers, id) ? handlers[id] : one.unknown
-    }
-
-    if (fn) {
-      return fn.call(this, value, ...parameters)
-    }
-  }
-
-  one.handlers = settings.handlers || {}
-  one.invalid = settings.invalid
-  one.unknown = settings.unknown
-
-  // @ts-expect-error: matches!
-  return one
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/configure.js
-/**
- * @import {Options, State} from './types.js'
- */
-
-const configure_own = {}.hasOwnProperty
-
-/**
- * @param {State} base
- * @param {Options} extension
- * @returns {State}
- */
-function configure_configure(base, extension) {
-  let index = -1
-  /** @type {keyof Options} */
-  let key
-
-  // First do subextensions.
-  if (extension.extensions) {
-    while (++index < extension.extensions.length) {
-      configure_configure(base, extension.extensions[index])
-    }
-  }
-
-  for (key in extension) {
-    if (configure_own.call(extension, key)) {
-      switch (key) {
-        case 'extensions': {
-          // Empty.
-          break
-        }
-
-        /* c8 ignore next 4 */
-        case 'unsafe': {
-          configure_list(base[key], extension[key])
-          break
-        }
-
-        case 'join': {
-          configure_list(base[key], extension[key])
-          break
-        }
-
-        case 'handlers': {
-          map(base[key], extension[key])
-          break
-        }
-
-        default: {
-          // @ts-expect-error: matches.
-          base.options[key] = extension[key]
-        }
-      }
-    }
-  }
-
-  return base
-}
-
-/**
- * @template T
- * @param {Array<T>} left
- * @param {Array<T> | null | undefined} right
- */
-function configure_list(left, right) {
-  if (right) {
-    left.push(...right)
-  }
-}
-
-/**
- * @template T
- * @param {Record<string, T>} left
- * @param {Record<string, T> | null | undefined} right
- */
-function map(left, right) {
-  if (right) {
-    Object.assign(left, right)
-  }
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/blockquote.js
-/**
- * @import {Blockquote, Parents} from 'mdast'
- * @import {Info, Map, State} from 'mdast-util-to-markdown'
- */
-
-/**
- * @param {Blockquote} node
- * @param {Parents | undefined} _
- * @param {State} state
- * @param {Info} info
- * @returns {string}
- */
-function blockquote(node, _, state, info) {
-  const exit = state.enter('blockquote')
-  const tracker = state.createTracker(info)
-  tracker.move('> ')
-  tracker.shift(2)
-  const value = state.indentLines(
-    state.containerFlow(node, tracker.current()),
-    blockquote_map
-  )
-  exit()
-  return value
-}
-
-/** @type {Map} */
-function blockquote_map(line, _, blank) {
-  return '>' + (blank ? '' : ' ') + line
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
-/**
- * @import {ConstructName, Unsafe} from 'mdast-util-to-markdown'
- */
-
-/**
- * @param {Array<ConstructName>} stack
- * @param {Unsafe} pattern
- * @returns {boolean}
- */
-function patternInScope(stack, pattern) {
-  return (
-    listInScope(stack, pattern.inConstruct, true) &&
-    !listInScope(stack, pattern.notInConstruct, false)
-  )
-}
-
-/**
- * @param {Array<ConstructName>} stack
- * @param {Unsafe['inConstruct']} list
- * @param {boolean} none
- * @returns {boolean}
- */
-function listInScope(stack, list, none) {
-  if (typeof list === 'string') {
-    list = [list]
-  }
-
-  if (!list || list.length === 0) {
-    return none
-  }
-
-  let index = -1
-
-  while (++index < list.length) {
-    if (stack.includes(list[index])) {
-      return true
-    }
-  }
-
-  return false
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/break.js
-/**
- * @import {Break, Parents} from 'mdast'
- * @import {Info, State} from 'mdast-util-to-markdown'
- */
-
-
-
-/**
- * @param {Break} _
- * @param {Parents | undefined} _1
- * @param {State} state
- * @param {Info} info
- * @returns {string}
- */
-function hardBreak(_, _1, state, info) {
-  let index = -1
-
-  while (++index < state.unsafe.length) {
-    // If we can’t put eols in this construct (setext headings, tables), use a
-    // space instead.
-    if (
-      state.unsafe[index].character === '\n' &&
-      patternInScope(state.stack, state.unsafe[index])
-    ) {
-      return /[ \t]/.test(info.before) ? '' : ' '
-    }
-  }
-
-  return '\\\n'
-}
-
-;// CONCATENATED MODULE: ./node_modules/longest-streak/index.js
-/**
- * Get the count of the longest repeating streak of `substring` in `value`.
- *
- * @param {string} value
- *   Content to search in.
- * @param {string} substring
- *   Substring to look for, typically one character.
- * @returns {number}
- *   Count of most frequent adjacent `substring`s in `value`.
- */
-function longestStreak(value, substring) {
-  const source = String(value)
-  let index = source.indexOf(substring)
-  let expected = index
-  let count = 0
-  let max = 0
-
-  if (typeof substring !== 'string') {
-    throw new TypeError('Expected substring')
-  }
-
-  while (index !== -1) {
-    if (index === expected) {
-      if (++count > max) {
-        max = count
-      }
-    } else {
-      count = 1
-    }
-
-    expected = index + substring.length
-    index = source.indexOf(substring, expected)
-  }
-
-  return max
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js
-/**
- * @import {State} from 'mdast-util-to-markdown'
- * @import {Code} from 'mdast'
- */
-
-/**
- * @param {Code} node
- * @param {State} state
- * @returns {boolean}
- */
-function formatCodeAsIndented(node, state) {
-  return Boolean(
-    state.options.fences === false &&
-      node.value &&
-      // If there’s no info…
-      !node.lang &&
-      // And there’s a non-whitespace character…
-      /[^ \r\n]/.test(node.value) &&
-      // And the value doesn’t start or end in a blank…
-      !/^[\t ]*(?:[\r\n]|$)|(?:^|[\r\n])[\t ]*$/.test(node.value)
-  )
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/check-fence.js
-/**
- * @import {Options, State} from 'mdast-util-to-markdown'
- */
-
-/**
- * @param {State} state
- * @returns {Exclude<Options['fence'], null | undefined>}
- */
-function checkFence(state) {
-  const marker = state.options.fence || '`'
-
-  if (marker !== '`' && marker !== '~') {
-    throw new Error(
-      'Cannot serialize code with `' +
-        marker +
-        '` for `options.fence`, expected `` ` `` or `~`'
-    )
-  }
-
-  return marker
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/code.js
-/**
- * @import {Info, Map, State} from 'mdast-util-to-markdown'
- * @import {Code, Parents} from 'mdast'
- */
-
-
-
-
-
-/**
- * @param {Code} node
- * @param {Parents | undefined} _
- * @param {State} state
- * @param {Info} info
- * @returns {string}
- */
-function code(node, _, state, info) {
-  const marker = checkFence(state)
-  const raw = node.value || ''
-  const suffix = marker === '`' ? 'GraveAccent' : 'Tilde'
-
-  if (formatCodeAsIndented(node, state)) {
-    const exit = state.enter('codeIndented')
-    const value = state.indentLines(raw, code_map)
-    exit()
-    return value
-  }
-
-  const tracker = state.createTracker(info)
-  const sequence = marker.repeat(Math.max(longestStreak(raw, marker) + 1, 3))
-  const exit = state.enter('codeFenced')
-  let value = tracker.move(sequence)
-
-  if (node.lang) {
-    const subexit = state.enter(`codeFencedLang${suffix}`)
-    value += tracker.move(
-      state.safe(node.lang, {
-        before: value,
-        after: ' ',
-        encode: ['`'],
-        ...tracker.current()
-      })
-    )
-    subexit()
-  }
-
-  if (node.lang && node.meta) {
-    const subexit = state.enter(`codeFencedMeta${suffix}`)
-    value += tracker.move(' ')
-    value += tracker.move(
-      state.safe(node.meta, {
-        before: value,
-        after: '\n',
-        encode: ['`'],
-        ...tracker.current()
-      })
-    )
-    subexit()
-  }
-
-  value += tracker.move('\n')
-
-  if (raw) {
-    value += tracker.move(raw + '\n')
-  }
-
-  value += tracker.move(sequence)
-  exit()
-  return value
-}
-
-/** @type {Map} */
-function code_map(line, _, blank) {
-  return (blank ? '' : '    ') + line
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/check-quote.js
-/**
- * @import {Options, State} from 'mdast-util-to-markdown'
- */
-
-/**
- * @param {State} state
- * @returns {Exclude<Options['quote'], null | undefined>}
- */
-function checkQuote(state) {
-  const marker = state.options.quote || '"'
-
-  if (marker !== '"' && marker !== "'") {
-    throw new Error(
-      'Cannot serialize title with `' +
-        marker +
-        '` for `options.quote`, expected `"`, or `\'`'
-    )
-  }
-
-  return marker
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/definition.js
-/**
- * @import {Info, State} from 'mdast-util-to-markdown'
- * @import {Definition, Parents} from 'mdast'
- */
-
-
-
-/**
- * @param {Definition} node
- * @param {Parents | undefined} _
- * @param {State} state
- * @param {Info} info
- * @returns {string}
- */
-function definition_definition(node, _, state, info) {
-  const quote = checkQuote(state)
-  const suffix = quote === '"' ? 'Quote' : 'Apostrophe'
-  const exit = state.enter('definition')
-  let subexit = state.enter('label')
-  const tracker = state.createTracker(info)
-  let value = tracker.move('[')
-  value += tracker.move(
-    state.safe(state.associationId(node), {
-      before: value,
-      after: ']',
-      ...tracker.current()
-    })
-  )
-  value += tracker.move(']: ')
-
-  subexit()
-
-  if (
-    // If there’s no url, or…
-    !node.url ||
-    // If there are control characters or whitespace.
-    /[\0- \u007F]/.test(node.url)
-  ) {
-    subexit = state.enter('destinationLiteral')
-    value += tracker.move('<')
-    value += tracker.move(
-      state.safe(node.url, {before: value, after: '>', ...tracker.current()})
-    )
-    value += tracker.move('>')
-  } else {
-    // No whitespace, raw is prettier.
-    subexit = state.enter('destinationRaw')
-    value += tracker.move(
-      state.safe(node.url, {
-        before: value,
-        after: node.title ? ' ' : '\n',
-        ...tracker.current()
-      })
-    )
-  }
-
-  subexit()
-
-  if (node.title) {
-    subexit = state.enter(`title${suffix}`)
-    value += tracker.move(' ' + quote)
-    value += tracker.move(
-      state.safe(node.title, {
-        before: value,
-        after: quote,
-        ...tracker.current()
-      })
-    )
-    value += tracker.move(quote)
-    subexit()
-  }
-
-  exit()
-
-  return value
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js
-/**
- * @import {Options, State} from 'mdast-util-to-markdown'
- */
-
-/**
- * @param {State} state
- * @returns {Exclude<Options['emphasis'], null | undefined>}
- */
-function checkEmphasis(state) {
-  const marker = state.options.emphasis || '*'
-
-  if (marker !== '*' && marker !== '_') {
-    throw new Error(
-      'Cannot serialize emphasis with `' +
-        marker +
-        '` for `options.emphasis`, expected `*`, or `_`'
-    )
-  }
-
-  return marker
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js
-/**
- * Encode a code point as a character reference.
- *
- * @param {number} code
- *   Code point to encode.
- * @returns {string}
- *   Encoded character reference.
- */
-function encodeCharacterReference(code) {
-  return '&#x' + code.toString(16).toUpperCase() + ';'
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/encode-info.js
-/**
- * @import {EncodeSides} from '../types.js'
- */
-
-
-
-/**
- * Check whether to encode (as a character reference) the characters
- * surrounding an attention run.
- *
- * Which characters are around an attention run influence whether it works or
- * not.
- *
- * See <https://github.com/orgs/syntax-tree/discussions/60> for more info.
- * See this markdown in a particular renderer to see what works:
- *
- * ```markdown
- * |                         | A (letter inside) | B (punctuation inside) | C (whitespace inside) | D (nothing inside) |
- * | ----------------------- | ----------------- | ---------------------- | --------------------- | ------------------ |
- * | 1 (letter outside)      | x*y*z             | x*.*z                  | x* *z                 | x**z               |
- * | 2 (punctuation outside) | .*y*.             | .*.*.                  | .* *.                 | .**.               |
- * | 3 (whitespace outside)  | x *y* z           | x *.* z                | x * * z               | x ** z             |
- * | 4 (nothing outside)     | *x*               | *.*                    | * *                   | **                 |
- * ```
- *
- * @param {number} outside
- *   Code point on the outer side of the run.
- * @param {number} inside
- *   Code point on the inner side of the run.
- * @param {'*' | '_'} marker
- *   Marker of the run.
- *   Underscores are handled more strictly (they form less often) than
- *   asterisks.
- * @returns {EncodeSides}
- *   Whether to encode characters.
- */
-// Important: punctuation must never be encoded.
-// Punctuation is solely used by markdown constructs.
-// And by encoding itself.
-// Encoding them will break constructs or double encode things.
-function encodeInfo(outside, inside, marker) {
-  const outsideKind = classifyCharacter(outside)
-  const insideKind = classifyCharacter(inside)
-
-  // Letter outside:
-  if (outsideKind === undefined) {
-    return insideKind === undefined
-      ? // Letter inside:
-        // we have to encode *both* letters for `_` as it is looser.
-        // it already forms for `*` (and GFMs `~`).
-        marker === '_'
-        ? {inside: true, outside: true}
-        : {inside: false, outside: false}
-      : insideKind === 1
-        ? // Whitespace inside: encode both (letter, whitespace).
-          {inside: true, outside: true}
-        : // Punctuation inside: encode outer (letter)
-          {inside: false, outside: true}
-  }
-
-  // Whitespace outside:
-  if (outsideKind === 1) {
-    return insideKind === undefined
-      ? // Letter inside: already forms.
-        {inside: false, outside: false}
-      : insideKind === 1
-        ? // Whitespace inside: encode both (whitespace).
-          {inside: true, outside: true}
-        : // Punctuation inside: already forms.
-          {inside: false, outside: false}
-  }
-
-  // Punctuation outside:
-  return insideKind === undefined
-    ? // Letter inside: already forms.
-      {inside: false, outside: false}
-    : insideKind === 1
-      ? // Whitespace inside: encode inner (whitespace).
-        {inside: true, outside: false}
-      : // Punctuation inside: already forms.
-        {inside: false, outside: false}
-}
-
-;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/emphasis.js
-/**
- * @import {Info, State} from 'mdast-util-to-markdown'
- * @import {Emphasis, Parents} from 'mdast'
- */
-
-
-
-
-
-emphasis.peek = emphasisPeek
-
-/**
- * @param {Emphasis} node
- * @param {Parents | undefined} _
- * @param {State} state
- * @param {Info} info
- * @returns {string}
- */
-function emphasis(node, _, state, info) {
-  const marker = checkEmphasis(state)
-  const exit = state.enter('emphasis')
-  const tracker = state.createTracker(info)
-  const before = tracker.move(marker)
-
-  let between = tracker.move(
-    state.containerPhrasing(node, {
-      after: marker,
-      before,
-      ...tracker.current()
-    })
-  )
-  const betweenHead = between.charCodeAt(0)
-  const open = encodeInfo(
-    info.before.charCodeAt(info.before.length - 1),
-    betweenHead,
-    marker
-  )
-
-  if (open.inside) {
-    between = encodeCharacterReference(betweenHead) + between.slice(1)
-  }
-
-  const betweenTail = between.charCodeAt(between.length - 1)
-  const close = encodeInfo(info.after.charCodeAt(0), betweenTail, marker)
-
-  if (close.inside) {
-    between = between.slice(0, -1) + encodeCharacterReference(betweenTail)
-  }
-
-  const after = tracker.move(marker)
-
-  exit()
-
-  state.attentionEncodeSurroundingInfo = {
-    after: close.outside,
-    before: open.outside
-  }
-  return before + between + after
-}
-
-/**
- * @param {Emphasis} _
- * @param {Parents | undefined} _1
- * @param {State} state
- * @returns {string}
- */
-function emphasisPeek(_, _1, state) {
-  return state.options.emphasis || '*'
 }
 
 ;// CONCATENATED MODULE: ./node_modules/unist-util-is/lib/index.js
@@ -22029,6 +21742,815 @@ function lib_ok() {
  */
 function looksLikeANode(value) {
   return value !== null && typeof value === 'object' && 'type' in value
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-phrasing/lib/index.js
+/**
+ * @typedef {import('mdast').Html} Html
+ * @typedef {import('mdast').PhrasingContent} PhrasingContent
+ */
+
+
+
+/**
+ * Check if the given value is *phrasing content*.
+ *
+ * > 👉 **Note**: Excludes `html`, which can be both phrasing or flow.
+ *
+ * @param node
+ *   Thing to check, typically `Node`.
+ * @returns
+ *   Whether `value` is phrasing content.
+ */
+
+const phrasing =
+  /** @type {(node?: unknown) => node is Exclude<PhrasingContent, Html>} */
+  (
+    convert([
+      'break',
+      'delete',
+      'emphasis',
+      // To do: next major: removed since footnotes were added to GFM.
+      'footnote',
+      'footnoteReference',
+      'image',
+      'imageReference',
+      'inlineCode',
+      // Enabled by `mdast-util-math`:
+      'inlineMath',
+      'link',
+      'linkReference',
+      // Enabled by `mdast-util-mdx`:
+      'mdxJsxTextElement',
+      // Enabled by `mdast-util-mdx`:
+      'mdxTextExpression',
+      'strong',
+      'text',
+      // Enabled by `mdast-util-directive`:
+      'textDirective'
+    ])
+  )
+
+;// CONCATENATED MODULE: ./node_modules/zwitch/index.js
+/**
+ * @callback Handler
+ *   Handle a value, with a certain ID field set to a certain value.
+ *   The ID field is passed to `zwitch`, and it’s value is this function’s
+ *   place on the `handlers` record.
+ * @param {...any} parameters
+ *   Arbitrary parameters passed to the zwitch.
+ *   The first will be an object with a certain ID field set to a certain value.
+ * @returns {any}
+ *   Anything!
+ */
+
+/**
+ * @callback UnknownHandler
+ *   Handle values that do have a certain ID field, but it’s set to a value
+ *   that is not listed in the `handlers` record.
+ * @param {unknown} value
+ *   An object with a certain ID field set to an unknown value.
+ * @param {...any} rest
+ *   Arbitrary parameters passed to the zwitch.
+ * @returns {any}
+ *   Anything!
+ */
+
+/**
+ * @callback InvalidHandler
+ *   Handle values that do not have a certain ID field.
+ * @param {unknown} value
+ *   Any unknown value.
+ * @param {...any} rest
+ *   Arbitrary parameters passed to the zwitch.
+ * @returns {void|null|undefined|never}
+ *   This should crash or return nothing.
+ */
+
+/**
+ * @template {InvalidHandler} [Invalid=InvalidHandler]
+ * @template {UnknownHandler} [Unknown=UnknownHandler]
+ * @template {Record<string, Handler>} [Handlers=Record<string, Handler>]
+ * @typedef Options
+ *   Configuration (required).
+ * @property {Invalid} [invalid]
+ *   Handler to use for invalid values.
+ * @property {Unknown} [unknown]
+ *   Handler to use for unknown values.
+ * @property {Handlers} [handlers]
+ *   Handlers to use.
+ */
+
+const zwitch_own = {}.hasOwnProperty
+
+/**
+ * Handle values based on a field.
+ *
+ * @template {InvalidHandler} [Invalid=InvalidHandler]
+ * @template {UnknownHandler} [Unknown=UnknownHandler]
+ * @template {Record<string, Handler>} [Handlers=Record<string, Handler>]
+ * @param {string} key
+ *   Field to switch on.
+ * @param {Options<Invalid, Unknown, Handlers>} [options]
+ *   Configuration (required).
+ * @returns {{unknown: Unknown, invalid: Invalid, handlers: Handlers, (...parameters: Parameters<Handlers[keyof Handlers]>): ReturnType<Handlers[keyof Handlers]>, (...parameters: Parameters<Unknown>): ReturnType<Unknown>}}
+ */
+function zwitch(key, options) {
+  const settings = options || {}
+
+  /**
+   * Handle one value.
+   *
+   * Based on the bound `key`, a respective handler will be called.
+   * If `value` is not an object, or doesn’t have a `key` property, the special
+   * “invalid” handler will be called.
+   * If `value` has an unknown `key`, the special “unknown” handler will be
+   * called.
+   *
+   * All arguments, and the context object, are passed through to the handler,
+   * and it’s result is returned.
+   *
+   * @this {unknown}
+   *   Any context object.
+   * @param {unknown} [value]
+   *   Any value.
+   * @param {...unknown} parameters
+   *   Arbitrary parameters passed to the zwitch.
+   * @property {Handler} invalid
+   *   Handle for values that do not have a certain ID field.
+   * @property {Handler} unknown
+   *   Handle values that do have a certain ID field, but it’s set to a value
+   *   that is not listed in the `handlers` record.
+   * @property {Handlers} handlers
+   *   Record of handlers.
+   * @returns {unknown}
+   *   Anything.
+   */
+  function one(value, ...parameters) {
+    /** @type {Handler|undefined} */
+    let fn = one.invalid
+    const handlers = one.handlers
+
+    if (value && zwitch_own.call(value, key)) {
+      // @ts-expect-error Indexable.
+      const id = String(value[key])
+      // @ts-expect-error Indexable.
+      fn = zwitch_own.call(handlers, id) ? handlers[id] : one.unknown
+    }
+
+    if (fn) {
+      return fn.call(this, value, ...parameters)
+    }
+  }
+
+  one.handlers = settings.handlers || {}
+  one.invalid = settings.invalid
+  one.unknown = settings.unknown
+
+  // @ts-expect-error: matches!
+  return one
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/configure.js
+/**
+ * @import {Options, State} from './types.js'
+ */
+
+const configure_own = {}.hasOwnProperty
+
+/**
+ * Configure a base state w/ an extension.
+ *
+ * @param {State} base
+ *   Base state to configure.
+ * @param {Options} extension
+ *   Extension to apply.
+ * @returns {State}
+ *   Given `base`.
+ */
+function configure_configure(base, extension) {
+  let index = -1
+  /** @type {keyof Options} */
+  let key
+
+  // First do subextensions.
+  if (extension.extensions) {
+    while (++index < extension.extensions.length) {
+      configure_configure(base, extension.extensions[index])
+    }
+  }
+
+  for (key in extension) {
+    if (configure_own.call(extension, key)) {
+      switch (key) {
+        case 'extensions': {
+          // Empty.
+          break
+        }
+
+        /* c8 ignore next 4 */
+        case 'unsafe': {
+          configure_list(base[key], extension[key])
+          break
+        }
+
+        case 'join': {
+          configure_list(base[key], extension[key])
+          break
+        }
+
+        case 'handlers': {
+          map(base[key], extension[key])
+          break
+        }
+
+        default: {
+          // @ts-expect-error: matches.
+          base.options[key] = extension[key]
+        }
+      }
+    }
+  }
+
+  return base
+}
+
+/**
+ * Merge arrays from the extension into the base state.
+ *
+ * @template T
+ *   Kind.
+ * @param {Array<T>} left
+ *   List to merge into.
+ * @param {Array<T> | null | undefined} right
+ *   List to merge from.
+ * @returns {undefined}
+ *   Nothing.
+ */
+function configure_list(left, right) {
+  if (right) {
+    left.push(...right)
+  }
+}
+
+/**
+ * Merge objects from the extension into the base state.
+ *
+ * @template T
+ *   Kind.
+ * @param {Record<string, T>} left
+ *   Object to merge into.
+ * @param {Record<string, T> | null | undefined} right
+ *   Object to merge from.
+ * @returns {undefined}
+ *   Nothing.
+ */
+function map(left, right) {
+  if (right) {
+    Object.assign(left, right)
+  }
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/blockquote.js
+/**
+ * @import {Blockquote, Parents} from 'mdast'
+ * @import {Info, Map, State} from 'mdast-util-to-markdown'
+ */
+
+/**
+ * Serialize a blockquote node.
+ *
+ * @param {Blockquote} node
+ *   Node to serialize.
+ * @param {Parents | undefined} _
+ *   Parent node.
+ * @param {State} state
+ *   Info passed around.
+ * @param {Info} info
+ *   Info on surrounding context.
+ * @returns {string}
+ *   Serialized markdown.
+ */
+function blockquote(node, _, state, info) {
+  const exit = state.enter('blockquote')
+  const tracker = state.createTracker(info)
+  tracker.move('> ')
+  tracker.shift(2)
+  const value = state.indentLines(
+    state.containerFlow(node, tracker.current()),
+    blockquote_map
+  )
+  exit()
+  return value
+}
+
+/**
+ * Indent lines w/ blockquote markers.
+ *
+ * @type {Map}
+ */
+function blockquote_map(line, _, blank) {
+  return '>' + (blank ? '' : ' ') + line
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
+/**
+ * @import {ConstructName, Unsafe} from 'mdast-util-to-markdown'
+ */
+
+/**
+ * Check if a pattern is in scope based on the current stack of constructs.
+ *
+ * @param {Array<ConstructName>} stack
+ *   Current stack of constructs.
+ * @param {Unsafe} pattern
+ *   Pattern to check.
+ * @returns {boolean}
+ *   Whether the pattern is in scope.
+ */
+function patternInScope(stack, pattern) {
+  return (
+    listInScope(stack, pattern.inConstruct, true) &&
+    !listInScope(stack, pattern.notInConstruct, false)
+  )
+}
+
+/**
+ * Check if any of the constructs in the list are present in the stack.
+ *
+ * @param {Array<ConstructName>} stack
+ *   Current stack of constructs.
+ * @param {Unsafe['inConstruct']} list
+ *   List of constructs to check for in the stack.
+ * @param {boolean} none
+ *   Value to return if the list is empty or not provided.
+ * @returns {boolean}
+ *   Whether any of the constructs in the list are present in the stack.
+ */
+function listInScope(stack, list, none) {
+  if (typeof list === 'string') {
+    list = [list]
+  }
+
+  if (!list || list.length === 0) {
+    return none
+  }
+
+  let index = -1
+
+  while (++index < list.length) {
+    if (stack.includes(list[index])) {
+      return true
+    }
+  }
+
+  return false
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/break.js
+/**
+ * @import {Break, Parents} from 'mdast'
+ * @import {Info, State} from 'mdast-util-to-markdown'
+ */
+
+
+
+/**
+ * Serialize a break node.
+ *
+ * @param {Break} _
+ *   Node to serialize.
+ * @param {Parents | undefined} _1
+ *   Parent node.
+ * @param {State} state
+ *   Info passed around.
+ * @param {Info} info
+ *   Info on surrounding context.
+ * @returns {string}
+ *   Serialized markdown.
+ */
+function hardBreak(_, _1, state, info) {
+  let index = -1
+
+  while (++index < state.unsafe.length) {
+    const pattern = state.unsafe[index]
+
+    // If we can’t put unconditional eols in this construct (setext headings,
+    // tables), use a space instead.
+    if (
+      pattern.character === '\n' &&
+      !pattern.before &&
+      !pattern.after &&
+      patternInScope(state.stack, pattern)
+    ) {
+      return /[\t ]/.test(info.before) ? '' : ' '
+    }
+  }
+
+  return '\\\n'
+}
+
+;// CONCATENATED MODULE: ./node_modules/longest-streak/index.js
+/**
+ * Get the count of the longest repeating streak of `substring` in `value`.
+ *
+ * @param {string} value
+ *   Content to search in.
+ * @param {string} substring
+ *   Substring to look for, typically one character.
+ * @returns {number}
+ *   Count of most frequent adjacent `substring`s in `value`.
+ */
+function longestStreak(value, substring) {
+  const source = String(value)
+  let index = source.indexOf(substring)
+  let expected = index
+  let count = 0
+  let max = 0
+
+  if (typeof substring !== 'string') {
+    throw new TypeError('Expected substring')
+  }
+
+  while (index !== -1) {
+    if (index === expected) {
+      if (++count > max) {
+        max = count
+      }
+    } else {
+      count = 1
+    }
+
+    expected = index + substring.length
+    index = source.indexOf(substring, expected)
+  }
+
+  return max
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js
+/**
+ * @import {State} from 'mdast-util-to-markdown'
+ * @import {Code} from 'mdast'
+ */
+
+/**
+ * Checks if a code block can be formatted as an indented code block.
+ *
+ * @param {Code} node
+ *   Node to check.
+ * @param {State} state
+ *   Info passed around.
+ * @returns {boolean}
+ *   Whether the code can be formatted as an indented code block.
+ */
+function formatCodeAsIndented(node, state) {
+  return Boolean(
+    state.options.fences === false &&
+    node.value &&
+    // If there’s no info…
+    !node.lang &&
+    // And there’s a non-whitespace character…
+    /[^\n\r ]/.test(node.value) &&
+    // And the value doesn’t start or end in a blank…
+    !/^[\t ]*(?:[\n\r]|$)|(?:^|[\n\r])[\t ]*$/.test(node.value)
+  )
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/check-fence.js
+/**
+ * @import {Options, State} from 'mdast-util-to-markdown'
+ */
+
+/**
+ * Checks the preferred fence option.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @returns {Exclude<Options['fence'], null | undefined>}
+ *   Preferred fence marker.
+ */
+function checkFence(state) {
+  const marker = state.options.fence || '`'
+
+  if (marker !== '`' && marker !== '~') {
+    throw new Error(
+      'Cannot serialize code with `' +
+        marker +
+        '` for `options.fence`, expected `` ` `` or `~`'
+    )
+  }
+
+  return marker
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/code.js
+/**
+ * @import {Info, Map, State} from 'mdast-util-to-markdown'
+ * @import {Code, Parents} from 'mdast'
+ */
+
+
+
+
+
+/**
+ * Serialize a code node.
+ *
+ * @param {Code} node
+ *   Node to serialize.
+ * @param {Parents | undefined} _
+ *   Parent node.
+ * @param {State} state
+ *   Info passed around.
+ * @param {Info} info
+ *   Info on surrounding context.
+ * @returns {string}
+ *   Serialized markdown.
+ */
+function code(node, _, state, info) {
+  const marker = checkFence(state)
+  const raw = node.value || ''
+
+  if (formatCodeAsIndented(node, state)) {
+    const exit = state.enter('codeIndented')
+    const value = state.indentLines(raw, code_map)
+    exit()
+    return value
+  }
+
+  const tracker = state.createTracker(info)
+  const sequence = marker.repeat(Math.max(longestStreak(raw, marker) + 1, 3))
+  const exit = state.enter('codeFenced')
+  const suffix = marker === '`' ? 'GraveAccent' : 'Tilde'
+  let value = tracker.move(sequence)
+
+  if (node.lang) {
+    const subexit = state.enter(`codeFencedLang${suffix}`)
+    value += tracker.move(
+      state.safe(node.lang, {
+        before: value,
+        after: ' ',
+        encode: ['`'],
+        ...tracker.current()
+      })
+    )
+    subexit()
+  }
+
+  if (node.lang && node.meta) {
+    const subexit = state.enter(`codeFencedMeta${suffix}`)
+    value += tracker.move(' ')
+    value += tracker.move(
+      state.safe(node.meta, {
+        before: value,
+        after: '\n',
+        encode: ['`'],
+        ...tracker.current()
+      })
+    )
+    subexit()
+  }
+
+  value += tracker.move('\n')
+
+  if (raw) {
+    value += tracker.move(raw + '\n')
+  }
+
+  value += tracker.move(sequence)
+  exit()
+  return value
+}
+
+/**
+ * Indent lines w/ code indent.
+ *
+ * @type {Map}
+ */
+function code_map(line, _, blank) {
+  return (blank ? '' : '    ') + line
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/check-quote.js
+/**
+ * @import {Options, State} from 'mdast-util-to-markdown'
+ */
+
+/**
+ * Checks the preferred quote option.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @returns {Exclude<Options['quote'], null | undefined>}
+ *   Preferred quote.
+ */
+function checkQuote(state) {
+  const marker = state.options.quote || '"'
+
+  if (marker !== '"' && marker !== "'") {
+    throw new Error(
+      'Cannot serialize title with `' +
+        marker +
+        '` for `options.quote`, expected `"`, or `\'`'
+    )
+  }
+
+  return marker
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/definition.js
+/**
+ * @import {Info, State} from 'mdast-util-to-markdown'
+ * @import {Definition, Parents} from 'mdast'
+ */
+
+
+
+/**
+ * Serialize a definition node.
+ *
+ * @param {Definition} node
+ *   Node to serialize.
+ * @param {Parents | undefined} _
+ *   Parent node.
+ * @param {State} state
+ *   Info passed around.
+ * @param {Info} info
+ *   Info on surrounding context.
+ * @returns {string}
+ *   Serialized markdown.
+ */
+function definition_definition(node, _, state, info) {
+  const quote = checkQuote(state)
+  const suffix = quote === '"' ? 'Quote' : 'Apostrophe'
+  const exit = state.enter('definition')
+  let subexit = state.enter('label')
+  const tracker = state.createTracker(info)
+  let value = tracker.move('[')
+  value += tracker.move(
+    state.safe(state.associationId(node), {
+      before: value,
+      after: ']',
+      ...tracker.current()
+    })
+  )
+  value += tracker.move(']: ')
+
+  subexit()
+
+  if (
+    // If there’s no url, or…
+    !node.url ||
+    // If there are control characters or whitespace.
+    /[\0- \u007F]/.test(node.url)
+  ) {
+    subexit = state.enter('destinationLiteral')
+    value += tracker.move('<')
+    value += tracker.move(
+      state.safe(node.url, {before: value, after: '>', ...tracker.current()})
+    )
+    value += tracker.move('>')
+  } else {
+    // No whitespace, raw is prettier.
+    subexit = state.enter('destinationRaw')
+    value += tracker.move(
+      state.safe(node.url, {
+        before: value,
+        after: node.title ? ' ' : '\n',
+        ...tracker.current()
+      })
+    )
+  }
+
+  subexit()
+
+  if (node.title) {
+    subexit = state.enter(`title${suffix}`)
+    value += tracker.move(' ' + quote)
+    value += tracker.move(
+      state.safe(node.title, {
+        before: value,
+        after: quote,
+        ...tracker.current()
+      })
+    )
+    value += tracker.move(quote)
+    subexit()
+  }
+
+  exit()
+
+  return value
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js
+/**
+ * @import {Options, State} from 'mdast-util-to-markdown'
+ */
+
+/**
+ * Checks the preferred emphasis option.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @returns {Exclude<Options['emphasis'], null | undefined>}
+ *   Preferred emphasis marker.
+ */
+function checkEmphasis(state) {
+  const marker = state.options.emphasis || '*'
+
+  if (marker !== '*' && marker !== '_') {
+    throw new Error(
+      'Cannot serialize emphasis with `' +
+        marker +
+        '` for `options.emphasis`, expected `*`, or `_`'
+    )
+  }
+
+  return marker
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/emphasis.js
+/**
+ * @import {AttentionInfo, Info, State} from 'mdast-util-to-markdown'
+ * @import {Emphasis, Parents} from 'mdast'
+ */
+
+
+
+emphasis.attention = emphasis_attention
+emphasis.peek = peek
+
+/**
+ * Serialize an emphasis node.
+ *
+ * Attention is properly handled by `containerPhrasing`.
+ *
+ * @param {Emphasis} node
+ *   Node to serialize.
+ * @param {Parents | undefined} _
+ *   Parent node.
+ * @param {State} state
+ *   Info passed around.
+ * @param {Info} info
+ *   Info on surrounding context.
+ * @returns {string}
+ *   Serialized markdown.
+ */
+function emphasis(node, _, state, info) {
+  const exit = state.enter('phrasing')
+  const value = state.containerPhrasing({type: 'root', children: [node]}, info)
+  exit()
+  return value
+}
+
+/**
+ * Serialize an emphasis node as attention.
+ *
+ * @param {Emphasis} _
+ *   Node to serialize.
+ * @param {State} state
+ *   Info passed around.
+ * @returns {AttentionInfo}
+ *   Info on how to serialize the node.
+ */
+function emphasis_attention(_, state) {
+  const marker = checkEmphasis(state)
+  return {
+    construct: 'emphasis',
+    markers: marker === '*' ? ['*', '_'] : ['_', '*'],
+    sizes: [1]
+  }
+}
+
+/**
+ * Peek at this node.
+ *
+ * @param {Emphasis} _
+ *   Node to serialize.
+ * @param {Parents | undefined} _1
+ *   Parent node.
+ * @param {State} state
+ *   Info passed around.
+ * @returns {string}
+ *   Start of the serialized markdown.
+ */
+function peek(_, _1, state) {
+  return state.options.emphasis || '*'
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js
+/**
+ * Encode a code point as a character reference.
+ *
+ * @param {number} code
+ *   Code point to encode.
+ * @returns {string}
+ *   Encoded character reference.
+ */
+function encodeCharacterReference(code) {
+  return '&#x' + code.toString(16).toUpperCase() + ';'
 }
 
 ;// CONCATENATED MODULE: ./node_modules/unist-util-visit-parents/lib/color.node.js
@@ -22443,9 +22965,8 @@ function toResult(value) {
 
 ;// CONCATENATED MODULE: ./node_modules/unist-util-visit/lib/index.js
 /**
- * @typedef {import('unist').Node} UnistNode
- * @typedef {import('unist').Parent} UnistParent
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
+ * @import {Node as UnistNode, Parent as UnistParent} from 'unist'
+ * @import {VisitorResult} from 'unist-util-visit-parents'
  */
 
 /**
@@ -22495,8 +23016,8 @@ function toResult(value) {
 
 /**
  * @typedef {(
- *   Check extends Array<any>
- *   ? MatchesOne<Value, Check[keyof Check]>
+ *   Check extends ReadonlyArray<any>
+ *   ? MatchesOne<Value, Check[number]>
  *   : MatchesOne<Value, Check>
  * )} Matches
  *   Check whether a node matches a check in the type system.
@@ -22766,9 +23287,14 @@ function visit(tree, testOrVisitor, visitorOrReverse, maybeReverse) {
 
 
 /**
+ * Checks if a heading can be formatted as a setext heading.
+ *
  * @param {Heading} node
+ *   Node to check.
  * @param {State} state
+ *   Info passed around.
  * @returns {boolean}
+ *   Whether the heading can be formatted as a setext heading.
  */
 function formatHeadingAsSetext(node, state) {
   let literalWithBreak = false
@@ -22787,8 +23313,8 @@ function formatHeadingAsSetext(node, state) {
 
   return Boolean(
     (!node.depth || node.depth < 3) &&
-      lib_toString(node) &&
-      (state.options.setext || literalWithBreak)
+    lib_toString(node) &&
+    (state.options.setext || literalWithBreak)
   )
 }
 
@@ -22802,11 +23328,18 @@ function formatHeadingAsSetext(node, state) {
 
 
 /**
+ * Serialize a heading node.
+ *
  * @param {Heading} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function heading(node, _, state, info) {
   const rank = Math.max(Math.min(6, node.depth || 1), 1)
@@ -22852,9 +23385,11 @@ function heading(node, _, state, info) {
     ...tracker.current()
   })
 
-  if (/^[\t ]/.test(value)) {
+  const head = value.charCodeAt(0)
+
+  if (head === 9 /* `\t` */ || head === 32 /* ` ` */) {
     // To do: what effect has the character reference on tracking?
-    value = encodeCharacterReference(value.charCodeAt(0)) + value.slice(1)
+    value = encodeCharacterReference(head) + value.slice(1)
   }
 
   value = value ? sequence + ' ' + value : sequence
@@ -22877,15 +23412,22 @@ function heading(node, _, state, info) {
 html.peek = htmlPeek
 
 /**
+ * Serialize an HTML node.
+ *
  * @param {Html} node
+ *   Node to serialize.
  * @returns {string}
+ *   Serialized markdown.
  */
 function html(node) {
   return node.value || ''
 }
 
 /**
+ * Peek at this node.
+ *
  * @returns {string}
+ *   Start of the serialized markdown.
  */
 function htmlPeek() {
   return '<'
@@ -22902,11 +23444,18 @@ function htmlPeek() {
 image_image.peek = imagePeek
 
 /**
+ * Serialize an image node.
+ *
  * @param {Image} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function image_image(node, _, state, info) {
   const quote = checkQuote(state)
@@ -22969,7 +23518,10 @@ function image_image(node, _, state, info) {
 }
 
 /**
+ * Peek at this node.
+ *
  * @returns {string}
+ *   Start of the serialized markdown.
  */
 function imagePeek() {
   return '!'
@@ -22984,11 +23536,18 @@ function imagePeek() {
 imageReference.peek = imageReferencePeek
 
 /**
+ * Serialize an image reference node.
+ *
  * @param {ImageReference} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function imageReference(node, _, state, info) {
   const type = node.referenceType
@@ -23004,9 +23563,14 @@ function imageReference(node, _, state, info) {
   value += tracker.move(alt + '][')
 
   subexit()
-  // Hide the fact that we’re in phrasing, because escapes don’t work.
+  // Hide that we’re in phrasing as things like attention or code cannot form
+  // in references.
+  // Character escapes and references *do* work.
+  // It is important to know about other constructs, such as table cells.
   const stack = state.stack
-  state.stack = []
+  state.stack = stack.filter(function (d) {
+    return d !== 'phrasing'
+  })
   subexit = state.enter('reference')
   // Note: for proper tracking, we should reset the output positions when we end
   // up making a `shortcut` reference, because then there is no brace output.
@@ -23034,7 +23598,10 @@ function imageReference(node, _, state, info) {
 }
 
 /**
+ * Peek at this node.
+ *
  * @returns {string}
+ *   Start of the serialized markdown.
  */
 function imageReferencePeek() {
   return '!'
@@ -23049,10 +23616,16 @@ function imageReferencePeek() {
 inlineCode.peek = inlineCodePeek
 
 /**
+ * Serialize an inline code node.
+ *
  * @param {InlineCode} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @returns {string}
+ *   Serialized markdown.
  */
 function inlineCode(node, _, state) {
   let value = node.value || ''
@@ -23069,8 +23642,8 @@ function inlineCode(node, _, state) {
   // If this is not just spaces or eols (tabs don’t count), and either the
   // first or last character are a space, eol, or tick, then pad with spaces.
   if (
-    /[^ \r\n]/.test(value) &&
-    ((/^[ \r\n]/.test(value) && /[ \r\n]$/.test(value)) || /^`|`$/.test(value))
+    /[^\n\r ]/.test(value) &&
+    ((/^[\n\r ]/.test(value) && /[\n\r ]$/.test(value)) || /^`|`$/.test(value))
   ) {
     value = ' ' + value + ' '
   }
@@ -23085,13 +23658,14 @@ function inlineCode(node, _, state) {
   while (++index < state.unsafe.length) {
     const pattern = state.unsafe[index]
     const expression = state.compilePattern(pattern)
-    /** @type {RegExpExecArray | null} */
-    let match
 
     // Only look for `atBreak`s.
     // Btw: note that `atBreak` patterns will always start the regex at LF or
     // CR.
     if (!pattern.atBreak) continue
+
+    /** @type {RegExpExecArray | null} */
+    let match
 
     while ((match = expression.exec(value))) {
       let position = match.index
@@ -23112,7 +23686,10 @@ function inlineCode(node, _, state) {
 }
 
 /**
+ * Peek at this node.
+ *
  * @returns {string}
+ *   Start of the serialized markdown.
  */
 function inlineCodePeek() {
   return '`'
@@ -23127,30 +23704,35 @@ function inlineCodePeek() {
 
 
 /**
+ * Checks if a link can be formatted as an autolink.
+ *
  * @param {Link} node
+ *   Node to check.
  * @param {State} state
+ *   Info passed around.
  * @returns {boolean}
+ *   Whether the link can be formatted as an autolink.
  */
 function formatLinkAsAutolink(node, state) {
   const raw = lib_toString(node)
 
   return Boolean(
     !state.options.resourceLink &&
-      // If there’s a url…
-      node.url &&
-      // And there’s a no title…
-      !node.title &&
-      // And the content of `node` is a single text node…
-      node.children &&
-      node.children.length === 1 &&
-      node.children[0].type === 'text' &&
-      // And if the url is the same as the content…
-      (raw === node.url || 'mailto:' + raw === node.url) &&
-      // And that starts w/ a protocol…
-      /^[a-z][a-z+.-]+:/i.test(node.url) &&
-      // And that doesn’t contain ASCII control codes (character escapes and
-      // references don’t work), space, or angle brackets…
-      !/[\0- <>\u007F]/.test(node.url)
+    // If there’s a url…
+    node.url &&
+    // And there’s no title…
+    !node.title &&
+    // And the content of `node` is a single text node…
+    node.children &&
+    node.children.length === 1 &&
+    node.children[0].type === 'text' &&
+    // And if the url is the same as the content…
+    (raw === node.url || 'mailto:' + raw === node.url) &&
+    // And that starts w/ a protocol…
+    /^[a-z][+\-.a-z]+:/i.test(node.url) &&
+    // And that doesn’t contain ASCII control codes (character escapes and
+    // references don’t work), space, or angle brackets…
+    !/[\0- <>\u007F]/.test(node.url)
   )
 }
 
@@ -23167,26 +23749,35 @@ function formatLinkAsAutolink(node, state) {
 link_link.peek = linkPeek
 
 /**
+ * Serialize a link node.
+ *
  * @param {Link} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function link_link(node, _, state, info) {
   const quote = checkQuote(state)
   const suffix = quote === '"' ? 'Quote' : 'Apostrophe'
   const tracker = state.createTracker(info)
-  /** @type {Exit} */
-  let exit
-  /** @type {Exit} */
-  let subexit
 
   if (formatLinkAsAutolink(node, state)) {
-    // Hide the fact that we’re in phrasing, because escapes don’t work.
+    // Hide that we’re in phrasing as things like attention or code cannot form
+    // in autolinks.
+    // Character escapes also don’t work (nor character references),
+    // but that is a different matter, which `safe.js` handles for `autolink`.
+    // It is important to know about other constructs, such as table cells.
     const stack = state.stack
-    state.stack = []
-    exit = state.enter('autolink')
+    state.stack = stack.filter(function (d) {
+      return d !== 'phrasing'
+    })
+    const exit = state.enter('autolink')
     let value = tracker.move('<')
     value += tracker.move(
       state.containerPhrasing(node, {
@@ -23201,8 +23792,8 @@ function link_link(node, _, state, info) {
     return value
   }
 
-  exit = state.enter('link')
-  subexit = state.enter('label')
+  const exit = state.enter('link')
+  let subexit = state.enter('label')
   let value = tracker.move('[')
   value += tracker.move(
     state.containerPhrasing(node, {
@@ -23261,10 +23852,16 @@ function link_link(node, _, state, info) {
 }
 
 /**
+ * Peek at this node.
+ *
  * @param {Link} node
+ *   Node to peek at.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @returns {string}
+ *   Start of the serialized markdown.
  */
 function linkPeek(node, _, state) {
   return formatLinkAsAutolink(node, state) ? '<' : '['
@@ -23279,11 +23876,18 @@ function linkPeek(node, _, state) {
 linkReference.peek = linkReferencePeek
 
 /**
+ * Serialize a link reference node.
+ *
  * @param {LinkReference} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function linkReference(node, _, state, info) {
   const type = node.referenceType
@@ -23299,9 +23903,14 @@ function linkReference(node, _, state, info) {
   value += tracker.move(text + '][')
 
   subexit()
-  // Hide the fact that we’re in phrasing, because escapes don’t work.
+  // Hide that we’re in phrasing as things like attention or code cannot form
+  // in references.
+  // Character escapes and references *do* work.
+  // It is important to know about other constructs, such as table cells.
   const stack = state.stack
-  state.stack = []
+  state.stack = stack.filter(function (d) {
+    return d !== 'phrasing'
+  })
   subexit = state.enter('reference')
   // Note: for proper tracking, we should reset the output positions when we end
   // up making a `shortcut` reference, because then there is no brace output.
@@ -23329,7 +23938,10 @@ function linkReference(node, _, state, info) {
 }
 
 /**
+ * Peek at this node.
+ *
  * @returns {string}
+ *   Start of the serialized markdown.
  */
 function linkReferencePeek() {
   return '['
@@ -23341,8 +23953,12 @@ function linkReferencePeek() {
  */
 
 /**
+ * Checks the preferred list bullet option.
+ *
  * @param {State} state
+ *   Info passed around.
  * @returns {Exclude<Options['bullet'], null | undefined>}
+ *   Preferred list bullet.
  */
 function checkBullet(state) {
   const marker = state.options.bullet || '*'
@@ -23366,8 +23982,12 @@ function checkBullet(state) {
 
 
 /**
+ * Checks the preferred alternate list bullet option.
+ *
  * @param {State} state
+ *   Info passed around.
  * @returns {Exclude<Options['bullet'], null | undefined>}
+ *   Preferred alternate list bullet.
  */
 function checkBulletOther(state) {
   const bullet = checkBullet(state)
@@ -23404,8 +24024,12 @@ function checkBulletOther(state) {
  */
 
 /**
+ * Checks the preferred ordered list bullet option.
+ *
  * @param {State} state
+ *   Info passed around.
  * @returns {Exclude<Options['bulletOrdered'], null | undefined>}
+ *   Preferred ordered list bullet.
  */
 function checkBulletOrdered(state) {
   const marker = state.options.bulletOrdered || '.'
@@ -23427,8 +24051,12 @@ function checkBulletOrdered(state) {
  */
 
 /**
+ * Checks the preferred rule option.
+ *
  * @param {State} state
+ *   Info passed around.
  * @returns {Exclude<Options['rule'], null | undefined>}
+ *   Preferred rule marker.
  */
 function checkRule(state) {
   const marker = state.options.rule || '*'
@@ -23456,11 +24084,18 @@ function checkRule(state) {
 
 
 /**
+ * Serialize a list node.
+ *
  * @param {List} node
+ *   Node to serialize.
  * @param {Parents | undefined} parent
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function list_list(node, parent, state, info) {
   const exit = state.enter('list')
@@ -23552,8 +24187,12 @@ function list_list(node, parent, state, info) {
  */
 
 /**
+ * Checks the preferred list item indent option.
+ *
  * @param {State} state
+ *   Info passed around.
  * @returns {Exclude<Options['listItemIndent'], null | undefined>}
+ *   Preferred list item indent.
  */
 function checkListItemIndent(state) {
   const style = state.options.listItemIndent || 'one'
@@ -23579,11 +24218,18 @@ function checkListItemIndent(state) {
 
 
 /**
+ * Serialize a list item node.
+ *
  * @param {ListItem} node
+ *   Node to serialize.
  * @param {Parents | undefined} parent
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function listItem(node, parent, state, info) {
   const listItemIndent = checkListItemIndent(state)
@@ -23623,7 +24269,11 @@ function listItem(node, parent, state, info) {
 
   return value
 
-  /** @type {Map} */
+  /**
+   * Indent lines of the list item.
+   *
+   * @type {Map}
+   */
   function map(line, index, blank) {
     if (index) {
       return (blank ? '' : ' '.repeat(size)) + line
@@ -23640,11 +24290,18 @@ function listItem(node, parent, state, info) {
  */
 
 /**
+ * Serialize a paragraph node.
+ *
  * @param {Paragraph} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function paragraph(node, _, state, info) {
   const exit = state.enter('paragraph')
@@ -23655,53 +24312,6 @@ function paragraph(node, _, state, info) {
   return value
 }
 
-;// CONCATENATED MODULE: ./node_modules/mdast-util-phrasing/lib/index.js
-/**
- * @typedef {import('mdast').Html} Html
- * @typedef {import('mdast').PhrasingContent} PhrasingContent
- */
-
-
-
-/**
- * Check if the given value is *phrasing content*.
- *
- * > 👉 **Note**: Excludes `html`, which can be both phrasing or flow.
- *
- * @param node
- *   Thing to check, typically `Node`.
- * @returns
- *   Whether `value` is phrasing content.
- */
-
-const phrasing =
-  /** @type {(node?: unknown) => node is Exclude<PhrasingContent, Html>} */
-  (
-    convert([
-      'break',
-      'delete',
-      'emphasis',
-      // To do: next major: removed since footnotes were added to GFM.
-      'footnote',
-      'footnoteReference',
-      'image',
-      'imageReference',
-      'inlineCode',
-      // Enabled by `mdast-util-math`:
-      'inlineMath',
-      'link',
-      'linkReference',
-      // Enabled by `mdast-util-mdx`:
-      'mdxJsxTextElement',
-      // Enabled by `mdast-util-mdx`:
-      'mdxTextExpression',
-      'strong',
-      'text',
-      // Enabled by `mdast-util-directive`:
-      'textDirective'
-    ])
-  )
-
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/root.js
 /**
  * @import {Info, State} from 'mdast-util-to-markdown'
@@ -23711,11 +24321,18 @@ const phrasing =
 
 
 /**
+ * Serialize a root node.
+ *
  * @param {Root} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function root(node, _, state, info) {
   // Note: `html` nodes are ambiguous.
@@ -23723,8 +24340,12 @@ function root(node, _, state, info) {
     return phrasing(d)
   })
 
-  const container = hasPhrasing ? state.containerPhrasing : state.containerFlow
-  return container.call(state, node, info)
+  if (!hasPhrasing) return state.containerFlow(node, info)
+
+  const exit = state.enter('phrasing')
+  const value = state.containerPhrasing(node, info)
+  exit()
+  return value
 }
 
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/check-strong.js
@@ -23733,8 +24354,12 @@ function root(node, _, state, info) {
  */
 
 /**
+ * Checks the preferred strong option.
+ *
  * @param {State} state
+ *   Info passed around.
  * @returns {Exclude<Options['strong'], null | undefined>}
+ *   Preferred strong marker.
  */
 function checkStrong(state) {
   const marker = state.options.strong || '*'
@@ -23752,72 +24377,70 @@ function checkStrong(state) {
 
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/handle/strong.js
 /**
- * @import {Info, State} from 'mdast-util-to-markdown'
+ * @import {AttentionInfo, Info, State} from 'mdast-util-to-markdown'
  * @import {Parents, Strong} from 'mdast'
  */
 
 
 
-
-
-strong.peek = strongPeek
+strong.attention = strong_attention
+strong.peek = strong_peek
 
 /**
+ * Serialize a strong node.
+ *
+ * Attention is properly handled by `containerPhrasing`.
+ *
  * @param {Strong} node
+ *   Node to serialize.
  * @param {Parents | undefined} _
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
 function strong(node, _, state, info) {
-  const marker = checkStrong(state)
-  const exit = state.enter('strong')
-  const tracker = state.createTracker(info)
-  const before = tracker.move(marker + marker)
-
-  let between = tracker.move(
-    state.containerPhrasing(node, {
-      after: marker,
-      before,
-      ...tracker.current()
-    })
-  )
-  const betweenHead = between.charCodeAt(0)
-  const open = encodeInfo(
-    info.before.charCodeAt(info.before.length - 1),
-    betweenHead,
-    marker
-  )
-
-  if (open.inside) {
-    between = encodeCharacterReference(betweenHead) + between.slice(1)
-  }
-
-  const betweenTail = between.charCodeAt(between.length - 1)
-  const close = encodeInfo(info.after.charCodeAt(0), betweenTail, marker)
-
-  if (close.inside) {
-    between = between.slice(0, -1) + encodeCharacterReference(betweenTail)
-  }
-
-  const after = tracker.move(marker + marker)
-
+  const exit = state.enter('phrasing')
+  const value = state.containerPhrasing({type: 'root', children: [node]}, info)
   exit()
-
-  state.attentionEncodeSurroundingInfo = {
-    after: close.outside,
-    before: open.outside
-  }
-  return before + between + after
+  return value
 }
 
 /**
+ * Serialize a strong node as attention.
+ *
  * @param {Strong} _
- * @param {Parents | undefined} _1
+ *   Node to serialize.
  * @param {State} state
- * @returns {string}
+ *   Info passed around.
+ * @returns {AttentionInfo}
+ *   Info on how to serialize the node.
  */
-function strongPeek(_, _1, state) {
+function strong_attention(_, state) {
+  const marker = checkStrong(state)
+  return {
+    construct: 'strong',
+    markers: marker === '*' ? ['*', '_'] : ['_', '*'],
+    sizes: [2]
+  }
+}
+
+/**
+ * Peek at this node.
+ *
+ * @param {Strong} _
+ *   Node to serialize.
+ * @param {Parents | undefined} _1
+ *   Parent node.
+ * @param {State} state
+ *   Info passed around.
+ * @returns {string}
+ *   Start of the serialized markdown.
+ */
+function strong_peek(_, _1, state) {
   return state.options.strong || '*'
 }
 
@@ -23828,14 +24451,29 @@ function strongPeek(_, _1, state) {
  */
 
 /**
+ * Serialize a text node.
+ *
  * @param {Text} node
- * @param {Parents | undefined} _
+ *   Node to serialize.
+ * @param {Parents | undefined} parent
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @param {Info} info
+ *   Info on surrounding context.
  * @returns {string}
+ *   Serialized markdown.
  */
-function handle_text_text(node, _, state, info) {
-  return state.safe(node.value, info)
+function handle_text_text(node, parent, state, info) {
+  /* c8 ignore next -- parent always passed */
+  const siblings = parent ? parent.children : []
+  const index = siblings.indexOf(node)
+
+  return state.safe(node.value, {
+    ...info,
+    afterNode: siblings[index + 1],
+    beforeNode: siblings[index - 1]
+  })
 }
 
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/check-rule-repetition.js
@@ -23844,8 +24482,12 @@ function handle_text_text(node, _, state, info) {
  */
 
 /**
+ * Checks the preferred rule repetition option.
+ *
  * @param {State} state
+ *   Info passed around.
  * @returns {Exclude<Options['ruleRepetition'], null | undefined>}
+ *   Preferred rule repetition.
  */
 function checkRuleRepetition(state) {
   const repetition = state.options.ruleRepetition || 3
@@ -23871,10 +24513,16 @@ function checkRuleRepetition(state) {
 
 
 /**
+ * Serialize a thematic break node.
+ *
  * @param {ThematicBreak} _
+ *   Node to serialize.
  * @param {Parents | undefined} _1
+ *   Parent node.
  * @param {State} state
+ *   Info passed around.
  * @returns {string}
+ *   Serialized markdown.
  */
 function thematic_break_thematicBreak(_, _1, state) {
   const value = (
@@ -23931,6 +24579,71 @@ const handle = {
   thematicBreak: thematic_break_thematicBreak
 }
 
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/html-kind.js
+
+
+
+/**
+ * @typedef {1 | 2 | 3 | 4 | 5 | 6 | 7} Kind
+ *   Kind of HTML (flow) element.
+ */
+
+/**
+ * Infer the kind of HTML that `value` is.
+ *
+ * This works on valid trees as produced by `micromark`.
+ * Kinds:
+ *
+ * 1. raw
+ * 2. comment
+ * 3. instruction
+ * 4. declaration
+ * 5. cdata
+ * 6. block
+ * 7. other
+ *
+ * See: <https://spec.commonmark.org/0.31.2/#html-blocks>.
+ *
+ * @param {string} value
+ *   HTML.
+ * @returns {Kind | undefined}
+ *   Kind; `undefined` if unknown.
+ */
+function htmlKind(value) {
+  if (value.charCodeAt(0) !== 60 /* `<` */) return
+
+  const next = value.charCodeAt(1)
+
+  if (next === 33 /* `!` */) {
+    const code = value.charCodeAt(2)
+    if (code === 45 /* `-` */) return 2
+    if (code === 91 /* `[` */) return 5
+    if (asciiAlpha(code)) return 4
+    return
+  }
+
+  if (next === 63 /* `?` */) return 3
+
+  const closing = next === 47 /* `/` */
+  const start = closing ? 2 : 1
+  let end = start
+  let code = value.charCodeAt(end)
+
+  if (!asciiAlpha(code)) return
+
+  while (code === 45 /* `-` */ || asciiAlphanumeric(code)) {
+    code = value.charCodeAt(++end)
+  }
+
+  const name = value.slice(start, end).toLowerCase()
+
+  if (!closing && code !== 47 /* `/` */ && htmlRawNames.includes(name)) {
+    return 1
+  }
+
+  return htmlBlockNames.includes(name) ? 6 : 7
+}
+
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/join.js
 /**
  * @import {Join} from 'mdast-util-to-markdown'
@@ -23939,10 +24652,15 @@ const handle = {
 
 
 
+
 /** @type {Array<Join>} */
 const join = [joinDefaults]
 
-/** @type {Join} */
+/**
+ * Default join function.
+ *
+ * @type {Join}
+ */
 function joinDefaults(left, right, parent, state) {
   // Indented code after list or another indented code.
   if (
@@ -23966,6 +24684,18 @@ function joinDefaults(left, right, parent, state) {
         (right.type === 'heading' && formatHeadingAsSetext(right, state)))
     ) {
       return
+    }
+
+    // HTML that only ends at a blank line followed by something.
+    if (left.type === 'html') {
+      const kind = htmlKind(left.value)
+      if (kind === undefined || kind === 6 || kind === 7) return 1
+    }
+
+    // HTML that cannot interrupt a paragraph (kind 7) after one.
+    if (left.type === 'paragraph' && right.type === 'html') {
+      const kind = htmlKind(right.value)
+      if (kind === undefined || kind === 7) return 1
     }
 
     return parent.spread ? 1 : 0
@@ -24024,6 +24754,10 @@ const unsafe = [
       'headingAtx'
     ]
   },
+  {character: '\r', before: '[\\r\\n]', inConstruct: 'phrasing'},
+  {character: '\r', after: '\\r', inConstruct: 'phrasing'},
+  {character: '\n', before: '\\n', inConstruct: 'phrasing'},
+  {character: '\n', after: '[\\r\\n]', inConstruct: 'phrasing'},
   {character: ' ', after: '[\\r\\n]', inConstruct: 'phrasing'},
   {character: ' ', before: '[\\r\\n]', inConstruct: 'phrasing'},
   {
@@ -24117,8 +24851,18 @@ const unsafe = [
   // Left brace, vertical bar, right brace are not used in markdown for
   // constructs.
   // A tilde can start code (fenced).
-  {atBreak: true, character: '~'}
+  {atBreak: true, character: '~'},
+  {character: '<', inConstruct: 'autolink'},
+  {character: '>', inConstruct: 'autolink'},
+  {character: '\u007F', inConstruct: 'autolink'}
 ]
+
+// Also the low ASCII control characters including space.
+let unsafe_code = -1
+
+while (++unsafe_code < 33) {
+  unsafe.push({character: String.fromCharCode(unsafe_code), inConstruct: 'autolink'})
+}
 
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/association.js
 /**
@@ -24161,6 +24905,8 @@ function association(node) {
  */
 
 /**
+ * Compiles a pattern object into a regular expression.
+ *
  * @type {CompilePattern}
  */
 function compilePattern(pattern) {
@@ -24170,48 +24916,624 @@ function compilePattern(pattern) {
       (pattern.before ? '(?:' + pattern.before + ')' : '')
 
     pattern._compiled = new RegExp(
-      (before ? '(' + before + ')' : '') +
-        (/[|\\{}()[\]^$+*?.-]/.test(pattern.character) ? '\\' : '') +
+      (pattern.beforeNode ? '^' : before ? '(' + before + ')' : '') +
+        (/[$()*+.?[\\\]^{|}]/.test(pattern.character) ? '\\' : '') +
         pattern.character +
-        (pattern.after ? '(?:' + pattern.after + ')' : ''),
-      'g'
+        (pattern.afterNode
+          ? '$'
+          : pattern.after
+            ? '(?:' + pattern.after + ')'
+            : ''),
+      pattern.unicode ? 'gu' : 'g'
     )
   }
 
   return pattern._compiled
 }
 
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/character.js
+/**
+ * Get the first character of a value.
+ *
+ * Is aware of astral characters (such as emoji).
+ *
+ * @param {string} value
+ *   Value.
+ * @returns {string}
+ *   First character; empty if `value` is empty.
+ */
+function firstCharacter(value) {
+  const code = value.codePointAt(0)
+  return code === undefined ? '' : String.fromCodePoint(code)
+}
+
+/**
+ * Get the last character of a value.
+ *
+ * Is aware of astral characters (such as emoji).
+ *
+ * @param {string} value
+ *   Value.
+ * @returns {string}
+ *   Last character; empty if `value` is empty.
+ */
+function lastCharacter(value) {
+  // Only a surrogate pair gives a code point above the BMP.
+  const code = value.codePointAt(value.length - 2)
+  return code !== undefined && code > 0xff_ff
+    ? value.slice(-2)
+    : value.slice(-1)
+}
+
+;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/encode-info.js
+/**
+ * @import {EncodeSides} from '../types.js'
+ */
+
+
+
+/**
+ * Check whether to encode (as a character reference) the characters
+ * surrounding an attention run.
+ *
+ * Which characters are around an attention run influence whether it works or
+ * not.
+ *
+ * See <https://github.com/orgs/syntax-tree/discussions/60> for more info.
+ * See this markdown in a particular renderer to see what works:
+ *
+ * ```markdown
+ * |                         | A (letter inside) | B (punctuation inside) | C (whitespace inside) | D (nothing inside) |
+ * | ----------------------- | ----------------- | ---------------------- | --------------------- | ------------------ |
+ * | 1 (letter outside)      | x*y*z             | x*.*z                  | x* *z                 | x**z               |
+ * | 2 (punctuation outside) | .*y*.             | .*.*.                  | .* *.                 | .**.               |
+ * | 3 (whitespace outside)  | x *y* z           | x *.* z                | x * * z               | x ** z             |
+ * | 4 (nothing outside)     | *x*               | *.*                    | * *                   | **                 |
+ * ```
+ *
+ * @param {number} outside
+ *   Code point on the outer side of the run.
+ * @param {number} inside
+ *   Code point on the inner side of the run.
+ * @param {string} marker
+ *   Marker of the run.
+ *   Underscores are handled more strictly (they form less often) than
+ *   asterisks.
+ * @returns {EncodeSides}
+ *   Whether to encode characters.
+ */
+// Important: punctuation must never be encoded.
+// Punctuation is solely used by markdown constructs.
+// And by encoding itself.
+// Encoding them will break constructs or double encode things.
+function encodeInfo(outside, inside, marker) {
+  const outsideKind = classifyCharacter(outside)
+  const insideKind = classifyCharacter(inside)
+
+  // Letter outside:
+  if (outsideKind === undefined) {
+    return insideKind === undefined
+      ? // Letter inside:
+        // we have to encode *both* letters for `_` as it is looser.
+        // it already forms for `*` (and GFMs `~`).
+        marker === '_'
+        ? {inside: true, outside: true}
+        : {inside: false, outside: false}
+      : insideKind === 1
+        ? // Whitespace inside: encode both (letter, whitespace).
+          {inside: true, outside: true}
+        : // Punctuation inside: encode outer (letter)
+          {inside: false, outside: true}
+  }
+
+  // Whitespace outside:
+  if (outsideKind === 1) {
+    return insideKind === undefined
+      ? // Letter inside: already forms.
+        {inside: false, outside: false}
+      : insideKind === 1
+        ? // Whitespace inside: encode both (whitespace).
+          {inside: true, outside: true}
+        : // Punctuation inside: already forms.
+          {inside: false, outside: false}
+  }
+
+  // Punctuation outside:
+  return insideKind === undefined
+    ? // Letter inside: already forms.
+      {inside: false, outside: false}
+    : insideKind === 1
+      ? // Whitespace inside: encode inner (whitespace).
+        {inside: true, outside: false}
+      : // Punctuation inside: already forms.
+        {inside: false, outside: false}
+}
+
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/container-phrasing.js
 /**
- * @import {Handle, Info, State} from 'mdast-util-to-markdown'
+ * @import {Attention, Handle, Info, State} from 'mdast-util-to-markdown'
  * @import {PhrasingParents} from '../types.js'
  */
 
 
 
+
+
+
+
+
+/**
+ * Markers for builtin attention (emphasis, strong) to whether they are stricter:
+ * whether they cannot open and close inside words.
+ *
+ * Builtin runs pair following CommonMark rules for emphasis and strong:
+ * they are split,
+ * using one or two markers at a time,
+ * with the rule of 3.
+ * Other markers pair like GFM strikethrough:
+ * whole runs pair with a run of the same size.
+ *
+ * @type {Map<string, boolean>}
+ */
+const builtins = new Map([
+  ['*', false],
+  ['_', true]
+])
+
+/**
+ * @typedef AttentionResult
+ *   Attention, of which the sequence is chosen later.
+ * @property {Array<Item>} children
+ *   Serialized children.
+ * @property {Array<string>} sequences
+ *   Sequences that can be used, in order of preference.
+ */
+
+/**
+ * @typedef Improvement
+ *   Improvement of attention sequences.
+ * @property {Map<AttentionResult, string>} chosen
+ *   Chosen sequences for each attention.
+ * @property {Array<Token>} tokens
+ *   Tokens involved in the improvement.
+ * @property {Mistake | undefined} mistake
+ *   Mistake that led to this improvement, if any.
+ */
+
+/**
+ * @typedef {AttentionResult | string} Item
+ *   Serialized phrasing.
+ */
+
+/**
+ * @typedef Mistake
+ *   Sequence that does not form its attention.
+ * @property {Array<AttentionResult>} attention
+ *   Attention to try other sequences for.
+ * @property {number} index
+ *   Index of the token.
+ */
+
+/**
+ * @typedef Run
+ *   Sequences next to each other with the same marker.
+ * @property {boolean} close
+ *   Whether it can close.
+ * @property {number} end
+ *   Index after the last marker not used (to open).
+ * @property {Array<Token>} markers
+ *   Sequence of each marker.
+ * @property {boolean} open
+ *   Whether it can open.
+ * @property {boolean} split
+ *   Whether it can be split (built-in attention).
+ * @property {number} start
+ *   Index of the first marker not used (to close).
+ * @property {Array<Token>} tokens
+ *   Sequences.
+ */
+
+/**
+ * @typedef Token
+ *   Rendered phrasing.
+ * @property {AttentionResult | undefined} attention
+ *   Attention, if this is one of its sequences.
+ * @property {string} value
+ *   Value.
+ */
+
+/**
+ * Get candidates for a mistake:
+ * attention to try other sequences for,
+ * later first.
+ *
+ * @param {Array<Token>} tokens
+ *   Tokens.
+ * @param {Array<Token>} involved
+ *   Sequences involved in the mistake.
+ * @param {Map<Token, Run>} runOf
+ *   Run of each sequence.
+ * @returns {Array<AttentionResult>}
+ *   Candidates.
+ */
+function candidates(tokens, involved, runOf) {
+  /** @type {Set<AttentionResult | undefined>} */
+  const related = new Set()
+
+  // The attention involved, and attention in runs with its sequences.
+  for (const token of tokens) {
+    const siblings = runOf.get(token)
+    if (
+      siblings &&
+      token.attention &&
+      involved.some((d) => d.attention === token.attention)
+    ) {
+      for (const sibling of siblings.tokens) {
+        related.add(sibling.attention)
+      }
+    }
+  }
+
+  /** @type {Array<AttentionResult>} */
+  const ordered = []
+
+  for (const token of tokens) {
+    if (token.attention && related.delete(token.attention)) {
+      ordered.push(token.attention)
+    }
+  }
+
+  // Later first: attention that opens later is inner or next.
+  ordered.reverse()
+  return ordered
+}
+
+/**
+ * Check whether sequences form their attention, like `micromark`.
+ *
+ * Sequences of `*` and `_` pair like emphasis and strong in CommonMark,
+ * others like strikethrough in GFM.
+ *
+ * @param {Array<Token>} tokens
+ *   Tokens.
+ * @param {string} before
+ *   Characters before.
+ * @param {string} after
+ *   Characters after.
+ * @returns {Mistake | undefined}
+ *   First mistake, if any.
+ */
+function check(tokens, before, after) {
+  /** @type {Array<Run>} */
+  const runs = []
+  /** @type {Map<Token, Array<Token>>} */
+  const wrong = new Map()
+  /** @type {Map<Token, Run>} */
+  const runOf = new Map()
+  let index = 0
+
+  while (index < tokens.length) {
+    if (!tokens[index].attention) {
+      index++
+      continue
+    }
+
+    const marker = tokens[index].value.charAt(0)
+    const strict = builtins.get(marker)
+    let end = index + 1
+
+    while (
+      end < tokens.length &&
+      tokens[end].attention &&
+      tokens[end].value.charAt(0) === marker
+    ) {
+      end++
+    }
+
+    const head = index ? tokens[index - 1].value : before
+    const previous = classifyCharacter(head.charCodeAt(head.length - 1))
+    const next = classifyCharacter(
+      (end < tokens.length ? tokens[end].value : after).charCodeAt(0)
+    )
+    const open = !next || (next === 2 && Boolean(previous))
+    const close = !previous || (previous === 2 && Boolean(next))
+    /** @type {Run} */
+    const run = {
+      tokens: tokens.slice(index, end),
+      markers: [],
+      start: 0,
+      end: 0,
+      // Underscores are strict, they cannot open or close inside words.
+      open: strict ? open && (Boolean(previous) || !close) : open,
+      close: strict ? close && (Boolean(next) || !open) : close,
+      // All builtins can split runs.
+      split: strict !== undefined
+    }
+
+    for (const token of run.tokens) {
+      // Every sequence is wrong until it pairs with its other sequence.
+      wrong.set(token, [...run.tokens])
+      runOf.set(token, run)
+      let size = token.value.length
+      while (size--) run.markers.push(token)
+    }
+
+    run.end = run.markers.length
+    runs.push(run)
+    index = end
+  }
+
+  pair(runs, wrong)
+
+  index = -1
+
+  while (++index < tokens.length) {
+    const involved = wrong.get(tokens[index])
+    if (involved) return {attention: candidates(tokens, involved, runOf), index}
+  }
+}
+
 /**
  * Serialize the children of a parent that contains phrasing children.
  *
- * These children will be joined flush together.
- *
  * @param {PhrasingParents} parent
- *   Parent of flow nodes.
+ *   Parent of phrasing nodes.
  * @param {State} state
  *   Info passed around about the current state.
  * @param {Info} info
  *   Info on where we are in the document we are generating.
  * @returns {string}
- *   Serialized children, joined together.
+ *   Serialized result.
  */
 function containerPhrasing(parent, state, info) {
+  return serialize(container_phrasing_phrasing(parent, state, info), info.before, info.after)
+}
+
+/**
+ * Encode the first or last character of tokens as a character reference,
+ * if it is text.
+ *
+ * @param {Array<Token>} tokens
+ *   Tokens.
+ * @param {boolean} start
+ *   Whether to encode the first or last character.
+ * @returns {undefined}
+ *   Nothing.
+ */
+function encode(tokens, start) {
+  const token = tokens[start ? 0 : tokens.length - 1]
+
+  if (!token || token.attention) return
+
+  const character = start
+    ? firstCharacter(token.value)
+    : lastCharacter(token.value)
+  const reference = encodeCharacterReference(
+    /** @type {number} */ (character.codePointAt(0))
+  )
+
+  token.value = start
+    ? reference + token.value.slice(character.length)
+    : token.value.slice(0, token.value.length - character.length) + reference
+}
+
+/**
+ * Try other sequences for the candidates of a mistake and use the first that
+ * moves the mistake further.
+ *
+ * @param {Array<Item>} items
+ *   Items.
+ * @param {Map<AttentionResult, string>} chosen
+ *   Sequences to use instead of preferred sequences.
+ * @param {Mistake} mistake
+ *   Mistake.
+ * @param {string} before
+ *   Characters before.
+ * @param {string} after
+ *   Characters after.
+ * @returns {Improvement | undefined}
+ *   Result if better.
+ */
+function improve(items, chosen, mistake, before, after) {
+  for (const attention of mistake.attention) {
+    const current = chosen.get(attention) || attention.sequences[0]
+
+    for (const sequence of attention.sequences) {
+      if (sequence === current) continue
+      const trial = new Map(chosen)
+      trial.set(attention, sequence)
+      const tokens = render(items, trial, before, after)
+      const next = check(tokens, before, after)
+
+      if (!next || next.index > mistake.index) {
+        return {chosen: trial, mistake: next, tokens}
+      }
+    }
+  }
+}
+
+/**
+ * Pair runs like `micromark` and mark sequences that do form their attention
+ * as fine.
+ *
+ * Each pair uses markers from the end of an opener and the start of a closer.
+ * It forms the intended attention if those markers are exactly the whole
+ * opening and closing sequence of one attention.
+ * Otherwise attention is mixed up:
+ * either sequences of different attention pair,
+ * part of a sequence is used (such as `**` of strong as `*`),
+ * or several sequences are used together (such as `*` and `*` as `**`).
+ * Then the sequences involved are recorded with each other.
+ *
+ * @param {Array<Run>} runs
+ *   Runs.
+ * @param {Map<Token, Array<Token>>} wrong
+ *   Sequences that are wrong, with the sequences involved.
+ * @returns {undefined}
+ *   Nothing, `wrong` is changed.
+ */
+function pair(runs, wrong) {
+  let index = 0
+
+  while (index < runs.length) {
+    const closer = runs[index]
+    const marker = closer.tokens[0].value.charAt(0)
+    const closerSize = closer.end - closer.start
+    let open = closer.close && closerSize ? index : 0
+
+    while (open--) {
+      const opener = runs[open]
+      const openerSize = opener.end - opener.start
+
+      if (
+        opener.tokens[0].value.charAt(0) === marker &&
+        opener.open &&
+        openerSize &&
+        (closer.split
+          ? // The rule of 3, on the sizes that are left.
+            !((opener.close || closer.open) && closerSize % 3) ||
+            (openerSize + closerSize) % 3
+          : // Others pair whole runs of the same size.
+            openerSize === opener.markers.length && openerSize === closerSize)
+      ) {
+        const size = closer.split
+          ? openerSize > 1 && closerSize > 1
+            ? 2
+            : 1
+          : closerSize
+        const opening = opener.markers.slice(opener.end - size, opener.end)
+        const closing = closer.markers.slice(closer.start, closer.start + size)
+        const openToken = opening[0]
+        const closeToken = closing[0]
+
+        if (
+          // Whole sequences:
+          // the markers of a sequence are next to each other,
+          // so if the first and last marker are of one sequence of that size,
+          // all markers are exactly that sequence.
+          openToken === opening[size - 1] &&
+          openToken.value.length === size &&
+          closeToken === closing[size - 1] &&
+          closeToken.value.length === size &&
+          // Of the same attention, so its opening and closing sequence.
+          openToken.attention === closeToken.attention
+        ) {
+          wrong.delete(openToken)
+          wrong.delete(closeToken)
+        } else {
+          const involved = [...new Set([...opening, ...closing])]
+          // Add to what is involved already: a sequence can be in several pairs.
+          for (const token of involved) {
+            const list = wrong.get(token)
+            if (list) list.push(...involved)
+          }
+        }
+
+        opener.end -= size
+        closer.start += size
+        break
+      }
+    }
+
+    // Stay on this run if it can close more.
+    if (open === -1 || closer.start === closer.end) index++
+  }
+}
+
+/**
+ * Get the sequences that can be used for attention, in order of preference.
+ *
+ * @param {string} type
+ *   Node type.
+ * @param {Array<string>} markers
+ *   Markers.
+ * @param {Array<number>} sizes
+ *   Sizes.
+ * @returns {Array<string>}
+ *   Sequences.
+ */
+function attentionSequences(type, markers, sizes) {
+  if (markers.length === 0) {
+    throw new Error(
+      'Cannot serialize `' +
+        type +
+        '` as attention without markers, expected one or more markers'
+    )
+  }
+
+  if (sizes.length === 0) {
+    throw new Error(
+      'Cannot serialize `' +
+        type +
+        '` as attention without sizes, expected one or more sizes'
+    )
+  }
+
+  for (const size of sizes) {
+    if (!Number.isSafeInteger(size) || size < 1) {
+      throw new Error(
+        'Cannot serialize `' +
+          type +
+          '` as attention with `' +
+          size +
+          '` as size, expected positive integer'
+      )
+    }
+  }
+
+  /** @type {Array<string>} */
+  const sequences = []
+
+  for (const marker of markers) {
+    if (marker.length !== 1) {
+      throw new Error(
+        'Cannot serialize `' +
+          type +
+          '` as attention with `' +
+          marker +
+          '` as marker, expected a single ascii character'
+      )
+    }
+
+    if (!asciiPunctuation(marker.charCodeAt(0))) {
+      throw new Error(
+        'Cannot serialize `' +
+          type +
+          '` as attention with `' +
+          marker +
+          '` as marker, expected ascii punctuation'
+      )
+    }
+
+    for (const size of sizes) {
+      sequences.push(marker.repeat(size))
+    }
+  }
+
+  return sequences
+}
+
+/**
+ * Serialize the children of a parent that contains phrasing children,
+ * keeping attention separate,
+ * so that its markers can be chosen later.
+ *
+ * @param {PhrasingParents} parent
+ *   Parent of phrasing nodes.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @param {Info} info
+ *   Info on where we are in the document we are generating.
+ * @returns {Array<Item>}
+ *   Items.
+ */
+function container_phrasing_phrasing(parent, state, info) {
   const indexStack = state.indexStack
   const children = parent.children || []
-  /** @type {Array<string>} */
+  /** @type {Array<Item>} */
   const results = []
   let index = -1
   let before = info.before
-  /** @type {string | undefined} */
-  let encodeAfter
 
   indexStack.push(-1)
   let tracker = state.createTracker(info)
@@ -24227,85 +25549,210 @@ function containerPhrasing(parent, state, info) {
       /** @type {Handle} */
       // @ts-expect-error: hush, it’s actually a `zwitch`.
       let handle = state.handle.handlers[children[index + 1].type]
-      /** @type {Handle} */
       // @ts-expect-error: hush, it’s actually a `zwitch`.
       if (handle && handle.peek) handle = handle.peek
       after = handle
-        ? handle(children[index + 1], parent, state, {
-            before: '',
-            after: '',
-            ...tracker.current()
-          }).charAt(0)
+        ? firstCharacter(
+            handle(children[index + 1], parent, state, {
+              before: '',
+              after: '',
+              ...tracker.current()
+            })
+          )
         : ''
     } else {
       after = info.after
     }
 
     // In some cases, html (text) can be found in phrasing right after an eol.
-    // When we’d serialize that, in most cases that would be seen as html
-    // (flow).
-    // As we can’t escape or so to prevent it from happening, we take a somewhat
-    // reasonable approach: replace that eol with a space.
+    // When we’d serialize that, it could be seen as html (flow): all its kinds
+    // except 7 can interrupt a paragraph.
+    // As we can’t escape or so to prevent it from happening,
+    // we take a somewhat reasonable approach:
+    // replace that eol with a space.
     // See: <https://github.com/syntax-tree/mdast-util-to-markdown/issues/15>
+    const previous = results[results.length - 1]
+
     if (
-      results.length > 0 &&
+      typeof previous === 'string' &&
       (before === '\r' || before === '\n') &&
-      child.type === 'html'
+      child.type === 'html' &&
+      htmlKind(child.value) !== 7
     ) {
-      results[results.length - 1] = results[results.length - 1].replace(
-        /(\r?\n|\r)$/,
-        ' '
-      )
+      results[results.length - 1] = previous.replace(/(\r?\n|\r)$/, ' ')
       before = ' '
 
       // To do: does this work to reset tracker?
       tracker = state.createTracker(info)
-      tracker.move(results.join(''))
+      tracker.move(serialize(results, info.before, info.after))
     }
 
-    let value = state.handle(child, parent, state, {
-      ...tracker.current(),
-      after,
-      before
-    })
+    /** @type {(Handle & {attention?: Attention | undefined}) | undefined} */
+    // @ts-expect-error: hush, it’s actually a `zwitch`.
+    const handle = state.handle.handlers[child.type]
 
-    // If we had to encode the first character after the previous node and it’s
-    // still the same character,
-    // encode it.
-    if (encodeAfter && encodeAfter === value.slice(0, 1)) {
-      value =
-        encodeCharacterReference(encodeAfter.charCodeAt(0)) + value.slice(1)
+    if (handle && handle.attention) {
+      const {construct, markers, sizes} = handle.attention(child, state)
+      const sequences = attentionSequences(child.type, markers, sizes)
+      const sequence = sequences[0]
+      const exit = state.enter(construct)
+      tracker.move(sequence)
+      const inside = container_phrasing_phrasing(/** @type {PhrasingParents} */ (child), state, {
+        ...tracker.current(),
+        before: sequence,
+        after: sequence
+      })
+      tracker.move(serialize(inside, sequence, sequence))
+      tracker.move(sequence)
+      exit()
+      results.push({children: inside, sequences})
+      before = sequence.charAt(sequence.length - 1)
+    } else {
+      const value = state.handle(child, parent, state, {
+        ...tracker.current(),
+        after,
+        before
+      })
+
+      if (!value) continue
+      tracker.move(value)
+      results.push(value)
+      before = lastCharacter(value)
     }
-
-    const encodingInfo = state.attentionEncodeSurroundingInfo
-    state.attentionEncodeSurroundingInfo = undefined
-    encodeAfter = undefined
-
-    // If we have to encode the first character before the current node and
-    // it’s still the same character,
-    // encode it.
-    if (encodingInfo) {
-      if (
-        results.length > 0 &&
-        encodingInfo.before &&
-        before === results[results.length - 1].slice(-1)
-      ) {
-        results[results.length - 1] =
-          results[results.length - 1].slice(0, -1) +
-          encodeCharacterReference(before.charCodeAt(0))
-      }
-
-      if (encodingInfo.after) encodeAfter = after
-    }
-
-    tracker.move(value)
-    results.push(value)
-    before = value.slice(-1)
   }
 
   indexStack.pop()
 
-  return results.join('')
+  return results
+}
+
+/**
+ * Render items with sequences;
+ * encoding characters around attention where needed.
+ *
+ * @param {Array<Item>} items
+ *   Serialized phrasing.
+ * @param {Map<AttentionResult, string>} chosen
+ *   Sequences to use instead of preferred sequences.
+ * @param {string} before
+ *   Characters before.
+ * @param {string} after
+ *   Characters after.
+ * @returns {Array<Token>}
+ *   Tokens.
+ */
+function render(items, chosen, before, after) {
+  /** @type {Array<Token>} */
+  const tokens = []
+  /** @type {string | undefined} */
+  let encodeAfter
+  let previous = lastCharacter(before)
+  let index = -1
+
+  while (++index < items.length) {
+    const item = items[index]
+
+    if (typeof item === 'string') {
+      /** @type {Token} */
+      const token = {value: item, attention: undefined}
+
+      // If attention before had to encode the character after it, encode it.
+      if (encodeAfter && encodeAfter === firstCharacter(item)) {
+        encode([token], true)
+      }
+
+      encodeAfter = undefined
+      tokens.push(token)
+      if (token.value) previous = lastCharacter(token.value)
+      continue
+    }
+
+    const sequence = chosen.get(item) || item.sequences[0]
+    const marker = sequence.charAt(0)
+    const next = items[index + 1]
+    const outsideBefore = previous
+    const outsideAfter = firstCharacter(
+      next === undefined
+        ? after
+        : typeof next === 'string'
+          ? next
+          : chosen.get(next) || next.sequences[0]
+    )
+    const inside = render(item.children, chosen, sequence, sequence)
+    const head = inside.length > 0 ? inside[0].value : ''
+    const open = encodeInfo(
+      outsideBefore.charCodeAt(outsideBefore.length - 1),
+      head.charCodeAt(0),
+      marker
+    )
+
+    if (open.inside) encode(inside, true)
+
+    const tail =
+      inside.length > 0 ? lastCharacter(inside[inside.length - 1].value) : ''
+    const close = encodeInfo(
+      outsideAfter.charCodeAt(0),
+      tail.charCodeAt(tail.length - 1),
+      marker
+    )
+
+    if (close.inside) encode(inside, false)
+
+    if (open.outside && outsideBefore !== '\n' && outsideBefore !== '\r') {
+      encode(tokens, false)
+    }
+
+    if (close.outside) encodeAfter = outsideAfter
+
+    tokens.push({value: sequence, attention: item}, ...inside, {
+      value: sequence,
+      attention: item
+    })
+    previous = sequence.charAt(sequence.length - 1)
+  }
+
+  return tokens
+}
+
+/**
+ * Serialize phrasing with attention.
+ *
+ * Whether attention forms depends on everything around it.
+ * This checks that it does and tries other sequences if not.
+ *
+ * @param {Array<Item>} items
+ *   Phrasing items.
+ * @param {string} before
+ *   Characters before.
+ * @param {string} after
+ *   Characters after.
+ * @returns {string}
+ *   Serialized markdown.
+ */
+function serialize(items, before, after) {
+  /** @type {Map<AttentionResult, string>} */
+  let chosen = new Map()
+  const initial = render(items, chosen, before, after)
+  let tokens = initial
+  let mistake = check(tokens, before, after)
+
+  while (mistake) {
+    const next = improve(items, chosen, mistake, before, after)
+
+    if (!next) {
+      tokens = initial
+      break
+    }
+
+    chosen = next.chosen
+    tokens = next.tokens
+    mistake = next.mistake
+  }
+
+  // Join the tokens.
+  let result = ''
+  for (const token of tokens) result += token.value
+  return result
 }
 
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/container-flow.js
@@ -24315,6 +25762,8 @@ function containerPhrasing(parent, state, info) {
  */
 
 /**
+ * Serialize the children of a parent that contains flow children.
+ *
  * @param {FlowParents} parent
  *   Parent of flow nodes.
  * @param {State} state
@@ -24366,11 +25815,18 @@ function containerFlow(parent, state, info) {
 }
 
 /**
+ * Determine the markdown to insert between two flow nodes.
+ *
  * @param {FlowChildren} left
+ *   Left flow node.
  * @param {FlowChildren} right
+ *   Right flow node.
  * @param {FlowParents} parent
+ *   Parent of the flow nodes.
  * @param {State} state
+ *   Info passed around.
  * @returns {string}
+ *   Markdown to insert between the two flow nodes.
  */
 function between(left, right, parent, state) {
   let index = state.join.length
@@ -24402,6 +25858,8 @@ function between(left, right, parent, state) {
 const eol = /\r?\n|\r/g
 
 /**
+ * Indents each line.
+ *
  * @type {IndentLines}
  */
 function indentLines(value, map) {
@@ -24424,7 +25882,10 @@ function indentLines(value, map) {
   return result.join('')
 
   /**
+   * Indents a single line.
+   *
    * @param {string} value
+   *   Line.
    */
   function one(value) {
     result.push(map(value, line, !value))
@@ -24433,11 +25894,15 @@ function indentLines(value, map) {
 
 ;// CONCATENATED MODULE: ./node_modules/mdast-util-to-markdown/lib/util/safe.js
 /**
- * @import {SafeConfig, State} from 'mdast-util-to-markdown'
+ * @import {Nodes} from 'mdast'
+ * @import {SafeConfig, State, Unsafe} from 'mdast-util-to-markdown'
  */
 
 
 
+
+
+const safe_own = {}.hasOwnProperty
 
 /**
  * Make a string safe for embedding in markdown constructs.
@@ -24449,8 +25914,8 @@ function indentLines(value, map) {
  *
  * To solve this, `mdast-util-to-markdown` tracks:
  *
- * * Characters before and after something;
- * * What “constructs” we are in.
+ * * characters before and after something;
+ * * what “constructs” we are in.
  *
  * This information is then used by this function to escape or encode
  * special characters.
@@ -24472,25 +25937,36 @@ function safe(state, input, config) {
   const result = []
   /** @type {Record<number, {before: boolean, after: boolean}>} */
   const infos = {}
+  // Character escapes and references do not work in autolinks, so
+  // percent-encoding is used instead.
+  const percentEncode = state.stack.includes('autolink')
+  const offset = config.before ? config.before.length : 0
+  const end = value.length - (config.after ? config.after.length : 0)
   let index = -1
 
   while (++index < state.unsafe.length) {
     const pattern = state.unsafe[index]
 
-    if (!patternInScope(state.stack, pattern)) {
+    if (
+      !patternInScope(state.stack, pattern) ||
+      !nodeInScope(pattern.beforeNode, config.beforeNode) ||
+      !nodeInScope(pattern.afterNode, config.afterNode)
+    ) {
       continue
     }
 
     const expression = state.compilePattern(pattern)
+    const from = pattern.beforeNode ? offset : 0
+    const subject = value.slice(from, pattern.afterNode ? end : undefined)
     /** @type {RegExpExecArray | null} */
     let match
 
-    while ((match = expression.exec(value))) {
+    while ((match = expression.exec(subject))) {
       const before = 'before' in pattern || Boolean(pattern.atBreak)
       const after = 'after' in pattern
-      const position = match.index + (before ? match[1].length : 0)
+      const position = from + match.index + (before ? match[1].length : 0)
 
-      if (positions.includes(position)) {
+      if (safe_own.call(infos, position)) {
         if (infos[position].before && !before) {
           infos[position].before = false
         }
@@ -24507,8 +25983,7 @@ function safe(state, input, config) {
 
   positions.sort(numerical)
 
-  let start = config.before ? config.before.length : 0
-  const end = value.length - (config.after ? config.after.length : 0)
+  let start = offset
   index = -1
 
   while (++index < positions.length) {
@@ -24517,6 +25992,44 @@ function safe(state, input, config) {
     // Character before or after matched:
     if (position < start || position >= end) {
       continue
+    }
+
+    // Special handling for “intraword” underscores (`a_b`, `a__b`).
+    // Those are different from asterisks in forming attention.
+    // Note that `a _ b` also cannot form but not escaping it is very complex,
+    // so that’s not handled.
+    if (
+      value.charAt(position) === '_' &&
+      // Preceded by an unescaped character that is not punctuation or whitespace:
+      position > 0 &&
+      classifyCharacter(value.charCodeAt(position - 1)) === undefined &&
+      !safe_own.call(infos, position - 1) &&
+      // Characters next to attention markers can become character references
+      // later, turning `a` into `&#x61;`, so those do not count.
+      !(position - 1 === offset && /[*_]/.test(value.charAt(offset - 1)))
+    ) {
+      let sequenceEnd = position + 1
+
+      // Look for the whole run.
+      while (sequenceEnd < end && value.charAt(sequenceEnd) === '_') {
+        sequenceEnd++
+      }
+
+      const skip = sequenceEnd - position - 1
+
+      if (
+        // All underscores in the run are unsafe positions, so they can be
+        // skipped.
+        positions[index + skip] === sequenceEnd - 1 &&
+        // Rest as above.
+        sequenceEnd < value.length &&
+        classifyCharacter(value.charCodeAt(sequenceEnd)) === undefined &&
+        !safe_own.call(infos, sequenceEnd) &&
+        !(sequenceEnd === end - 1 && /[*_]/.test(value.charAt(end)))
+      ) {
+        index += skip
+        continue
+      }
     }
 
     // If this character is supposed to be escaped because it has a condition on
@@ -24537,15 +26050,23 @@ function safe(state, input, config) {
     }
 
     if (start !== position) {
+      const slice = value.slice(start, position)
       // If we have to use a character reference, an ampersand would be more
       // correct, but as backslashes only care about punctuation, either will
       // do the trick
-      result.push(escapeBackslashes(value.slice(start, position), '\\'))
+      result.push(percentEncode ? slice : escapeBackslashes(slice, '\\'))
     }
 
     start = position
 
-    if (
+    // Percent-encoding such as `%20`.
+    if (percentEncode) {
+      result.push(
+        '%' +
+          value.charCodeAt(position).toString(16).toUpperCase().padStart(2, '0')
+      )
+      start++
+    } else if (
       /[!-/:-@[-`{-~]/.test(value.charAt(position)) &&
       (!config.encode || !config.encode.includes(value.charAt(position)))
     ) {
@@ -24558,24 +26079,53 @@ function safe(state, input, config) {
     }
   }
 
-  result.push(escapeBackslashes(value.slice(start, end), config.after))
+  const rest = value.slice(start, end)
+  result.push(percentEncode ? rest : escapeBackslashes(rest, config.after))
 
   return result.join('')
 }
 
 /**
+ * Check if a node matches the node types of a pattern.
+ *
+ * @param {Array<Nodes['type']> | Nodes['type'] | null | undefined} types
+ *   Node types.
+ * @param {Nodes | undefined} node
+ *   Node.
+ * @returns {boolean}
+ *   Whether `node` matches `types`.
+ */
+function nodeInScope(types, node) {
+  if (!types) return true
+  if (!node) return false
+  return typeof types === 'string'
+    ? types === node.type
+    : types.includes(node.type)
+}
+
+/**
+ * Compare two numbers.
+ *
  * @param {number} a
+ *   Number.
  * @param {number} b
+ *   Other number.
  * @returns {number}
+ *   Result.
  */
 function numerical(a, b) {
   return a - b
 }
 
 /**
+ * Escape backslashes in a string, considering characters that follow.
+ *
  * @param {string} value
+ *   Value.
  * @param {string} after
+ *   Characters that follow the value.
  * @returns {string}
+ *   Escaped string.
  */
 function escapeBackslashes(value, after) {
   const expression = /\\(?=[!-/:-@[-`{-~])/g
@@ -24684,6 +26234,7 @@ function track(config) {
 
 
 
+
 /**
  * Turn an mdast syntax tree into markdown.
  *
@@ -24699,6 +26250,8 @@ function toMarkdown(tree, options) {
   /** @type {State} */
   const state = {
     associationId: association,
+    bulletCurrent: undefined,
+    bulletLastUsed: undefined,
     containerPhrasing: containerPhrasingBound,
     containerFlow: containerFlowBound,
     createTracker: track,
@@ -24730,12 +26283,12 @@ function toMarkdown(tree, options) {
     handlers: state.handlers
   })
 
-  let result = state.handle(tree, undefined, state, {
-    before: '\n',
-    after: '\n',
-    now: {line: 1, column: 1},
-    lineShift: 0
-  })
+  let result = state.handle(
+    phrasing(tree) ? {type: 'root', children: [tree]} : tree,
+    undefined,
+    state,
+    {before: '\n', after: '\n', now: {line: 1, column: 1}, lineShift: 0}
+  )
 
   if (
     result &&
@@ -24747,13 +26300,20 @@ function toMarkdown(tree, options) {
 
   return result
 
-  /** @type {Enter} */
+  /**
+   * Enter a construct.
+   *
+   * @type {Enter}
+   */
   function enter(name) {
     state.stack.push(name)
     return exit
 
     /**
+     * Exit a construct.
+     *
      * @returns {undefined}
+     *   Nothing.
      */
     function exit() {
       state.stack.pop()
@@ -24762,16 +26322,28 @@ function toMarkdown(tree, options) {
 }
 
 /**
+ * Handle an invalid value that cannot be processed.
+ *
  * @param {unknown} value
+ *   Value.
  * @returns {never}
+ *   Never.
+ * @throws {Error}
+ *   Always.
  */
 function invalid(value) {
   throw new Error('Cannot handle value `' + value + '`, expected node')
 }
 
 /**
+ * Handle an unknown node.
+ *
  * @param {unknown} value
+ *   Value.
  * @returns {never}
+ *   Never.
+ * @throws {Error}
+ *   Always.
  */
 function unknown(value) {
   // Always a node.
@@ -24779,7 +26351,11 @@ function unknown(value) {
   throw new Error('Cannot handle unknown node `' + node.type + '`')
 }
 
-/** @type {Join} */
+/**
+ * Join function for `tightDefinitions` option.
+ *
+ * @type {Join}
+ */
 function joinDefinition(left, right) {
   // No blank line between adjacent definitions.
   if (left.type === 'definition' && left.type === right.type) {
@@ -29039,44 +30615,6 @@ function toDate(argument, context) {
 
 /***/ }),
 
-/***/ 348:
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
-
-
-// EXPORTS
-__nccwpck_require__.d(__webpack_exports__, {
-  A: () => (/* binding */ stripAnsi)
-});
-
-;// CONCATENATED MODULE: ./node_modules/ansi-regex/index.js
-function ansiRegex({onlyFirst = false} = {}) {
-	const pattern = [
-	    '[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)',
-		'(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))'
-	].join('|');
-
-	return new RegExp(pattern, onlyFirst ? undefined : 'g');
-}
-
-;// CONCATENATED MODULE: ./node_modules/strip-ansi/index.js
-
-
-const regex = ansiRegex();
-
-function stripAnsi(string) {
-	if (typeof string !== 'string') {
-		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
-	}
-
-	// Even though the regex is global, we don't need to reset the `.lastIndex`
-	// because unlike `.exec()` and `.test()`, `.replace()` does it automatically
-	// and doing it manually has a performance penalty.
-	return string.replace(regex, '');
-}
-
-
-/***/ }),
-
 /***/ 5143:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
@@ -29838,7 +31376,7 @@ VFileMessage.prototype.source = undefined
 
 /***/ }),
 
-/***/ 375:
+/***/ 3005:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -29847,12 +31385,48 @@ __nccwpck_require__.d(__webpack_exports__, {
   Y: () => (/* binding */ reporter)
 });
 
-// EXTERNAL MODULE: ./node_modules/strip-ansi/index.js + 1 modules
-var strip_ansi = __nccwpck_require__(348);
+;// CONCATENATED MODULE: ./node_modules/vfile-reporter/node_modules/ansi-regex/index.js
+function ansiRegex({onlyFirst = false} = {}) {
+	// Valid string terminator sequences are BEL, ESC\, and 0x9c
+	const ST = '(?:\\u0007|\\u001B\\u005C|\\u009C)';
+
+	// OSC sequences only: ESC ] ... ST (or the C1 introducer 0x9d ... ST)
+	// The payload stops at the first terminator character rather than scanning ahead for one, so an unterminated `ESC ]` cannot rescan the rest of the input. Terminals likewise abort a control string on an unexpected ESC. The payload also stops at 0x9d so an unterminated C1 OSC cannot swallow the next one.
+	const osc = `(?:(?:\\u001B\\]|\\u009D)[^\\u0007\\u001B\\u009C\\u009D]*${ST})`;
+
+	// CSI and related: ESC/C1, optional intermediates, optional params (supports ; and :) then final byte
+	const csi = '[\\u001B\\u009B][[\\]()#;?]*(?:\\d{1,4}(?:[;:]\\d{0,4})*)?[\\dA-PR-TZcf-nq-uy=><~]';
+
+	const pattern = `${osc}|${csi}`;
+
+	return new RegExp(pattern, onlyFirst ? undefined : 'g');
+}
+
+;// CONCATENATED MODULE: ./node_modules/vfile-reporter/node_modules/strip-ansi/index.js
+
+
+const regex = ansiRegex();
+
+function stripAnsi(string) {
+	if (typeof string !== 'string') {
+		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
+	}
+
+	// Fast path: ANSI codes require ESC (7-bit) or CSI (8-bit) introducer
+	if (!string.includes('\u001B') && !string.includes('\u009B')) {
+		return string;
+	}
+
+	// Even though the regex is global, we don't need to reset the `.lastIndex`
+	// because unlike `.exec()` and `.test()`, `.replace()` does it automatically
+	// and doing it manually has a performance penalty.
+	return string.replace(regex, '');
+}
+
 // EXTERNAL MODULE: ./node_modules/eastasianwidth/eastasianwidth.js
 var eastasianwidth = __nccwpck_require__(1428);
-// EXTERNAL MODULE: ./node_modules/vfile-reporter/node_modules/emoji-regex/index.js
-var emoji_regex = __nccwpck_require__(2798);
+// EXTERNAL MODULE: ./node_modules/emoji-regex/index.js
+var emoji_regex = __nccwpck_require__(872);
 ;// CONCATENATED MODULE: ./node_modules/vfile-reporter/node_modules/string-width/index.js
 
 
@@ -29870,7 +31444,7 @@ function stringWidth(string, options) {
 	};
 
 	if (!options.countAnsiEscapeCodes) {
-		string = (0,strip_ansi/* default */.A)(string);
+		string = stripAnsi(string);
 	}
 
 	if (string.length === 0) {
@@ -30133,13 +31707,14 @@ var external_node_process_ = __nccwpck_require__(1708);
 const external_node_os_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:os");
 ;// CONCATENATED MODULE: external "node:tty"
 const external_node_tty_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:tty");
-;// CONCATENATED MODULE: ./node_modules/supports-color/index.js
+;// CONCATENATED MODULE: ./node_modules/vfile-reporter/node_modules/supports-color/index.js
 
 
 
 
 // From: https://github.com/sindresorhus/has-flag/blob/main/index.js
-function hasFlag(flag, argv = external_node_process_.argv) {
+/// function hasFlag(flag, argv = globalThis.Deno?.args ?? process.argv) {
+function hasFlag(flag, argv = globalThis.Deno ? globalThis.Deno.args : external_node_process_.argv) {
 	const prefix = flag.startsWith('-') ? '' : (flag.length === 1 ? '-' : '--');
 	const position = argv.indexOf(prefix + flag);
 	const terminatorPosition = argv.indexOf('--');
@@ -30216,6 +31791,12 @@ function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
 		}
 	}
 
+	// Check for Azure DevOps pipelines.
+	// Has to be above the `!streamIsTTY` check.
+	if ('TF_BUILD' in env && 'AGENT_NAME' in env) {
+		return 1;
+	}
+
 	if (haveStream && !streamIsTTY && forceColor === undefined) {
 		return 0;
 	}
@@ -30241,7 +31822,11 @@ function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
 	}
 
 	if ('CI' in env) {
-		if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'GITHUB_ACTIONS', 'BUILDKITE', 'DRONE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
+		if ('GITHUB_ACTIONS' in env || 'GITEA_ACTIONS' in env) {
+			return 3;
+		}
+
+		if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'BUILDKITE', 'DRONE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
 			return 1;
 		}
 
@@ -30252,12 +31837,11 @@ function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
 		return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
 	}
 
-	// Check for Azure DevOps pipelines
-	if ('TF_BUILD' in env && 'AGENT_NAME' in env) {
-		return 1;
+	if (env.COLORTERM === 'truecolor') {
+		return 3;
 	}
 
-	if (env.COLORTERM === 'truecolor') {
+	if (env.TERM === 'xterm-kitty') {
 		return 3;
 	}
 
@@ -30265,10 +31849,13 @@ function _supportsColor(haveStream, {streamIsTTY, sniffFlags = true} = {}) {
 		const version = Number.parseInt((env.TERM_PROGRAM_VERSION || '').split('.')[0], 10);
 
 		switch (env.TERM_PROGRAM) {
-			case 'iTerm.app':
+			case 'iTerm.app': {
 				return version >= 3 ? 3 : 2;
-			case 'Apple_Terminal':
+			}
+
+			case 'Apple_Terminal': {
 				return 2;
+			}
 			// No default
 		}
 	}
@@ -32941,6 +34528,8 @@ function mergeDeep(config1, config2) {
     }
     Object.assign(target, config1);
     for (const key of Object.keys(config2)) {
+        if (key === '__proto__')
+            continue;
         if (isObject(config2[key]) && isObject(target[key])) {
             target[key] = mergeDeep(config1[key], config2[key]);
         }
@@ -33011,7 +34600,7 @@ class YError extends Error {
 /* harmony import */ var _build_lib_utils_apply_extends_js__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(5246);
 /* harmony import */ var _build_lib_utils_process_argv_js__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(6526);
 /* harmony import */ var yargs_parser__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(5374);
-/* harmony import */ var _lib_platform_shims_esm_mjs__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(5688);
+/* harmony import */ var _lib_platform_shims_esm_mjs__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(2380);
 
 
 
@@ -33037,8 +34626,8 @@ __nccwpck_require__.d(__webpack_exports__, {
 
 // UNUSED EXPORTS: module.exports
 
-// EXTERNAL MODULE: ./node_modules/yargs/lib/platform-shims/esm.mjs + 15 modules
-var esm = __nccwpck_require__(5688);
+// EXTERNAL MODULE: ./node_modules/yargs/lib/platform-shims/esm.mjs + 23 modules
+var esm = __nccwpck_require__(2380);
 ;// CONCATENATED MODULE: ./node_modules/yargs/build/lib/typings/common-types.js
 function assertNotStrictEqual(actual, expected, shim, message) {
     shim.assert.notStrictEqual(actual, expected, message);
@@ -34410,11 +35999,20 @@ _{{app_name}}_yargs_completions()
     _default
   fi
 }
-if [[ "'\${zsh_eval_context[-1]}" == "loadautofunc" ]]; then
+if [[ "\${zsh_eval_context[-1]}" == "loadautofunc" ]]; then
   _{{app_name}}_yargs_completions "$@"
 else
   compdef _{{app_name}}_yargs_completions {{app_name}}
 fi
+###-end-{{app_name}}-completions-###
+`;
+const completionFishTemplate = `###-begin-{{app_name}}-completions-###
+#
+# yargs command completion script
+#
+# Installation: {{app_path}} {{completion_command}} > ~/.config/fish/completions/{{app_name}}.fish
+#
+complete -f -c {{app_name}} -a '({{app_path}} --get-yargs-completions (commandline -o)[2..-1])'
 ###-end-{{app_name}}-completions-###
 `;
 
@@ -34426,7 +36024,7 @@ fi
 
 class Completion {
     constructor(yargs, usage, command, shim) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d, _e;
         this.yargs = yargs;
         this.usage = usage;
         this.command = command;
@@ -34438,6 +36036,7 @@ class Completion {
         this.zshShell =
             (_c = (((_a = this.shim.getEnv('SHELL')) === null || _a === void 0 ? void 0 : _a.includes('zsh')) ||
                 ((_b = this.shim.getEnv('ZSH_NAME')) === null || _b === void 0 ? void 0 : _b.includes('zsh')))) !== null && _c !== void 0 ? _c : false;
+        this.fishShell = (_e = (_d = this.shim.getEnv('SHELL')) === null || _d === void 0 ? void 0 : _d.includes('fish')) !== null && _e !== void 0 ? _e : false;
     }
     defaultCompletion(args, argv, current, done) {
         const handlers = this.command.getCommandHandlers();
@@ -34469,12 +36068,15 @@ class Completion {
             this.usage.getCommands().forEach(usageCommand => {
                 const commandName = parseCommand(usageCommand[0]).cmd;
                 if (args.indexOf(commandName) === -1) {
-                    if (!this.zshShell) {
-                        completions.push(commandName);
+                    const desc = usageCommand[1] || '';
+                    if (this.fishShell) {
+                        completions.push(commandName + '\t' + desc);
+                    }
+                    else if (this.zshShell) {
+                        completions.push(commandName.replace(/:/g, '\\:') + ':' + desc);
                     }
                     else {
-                        const desc = usageCommand[1] || '';
-                        completions.push(commandName.replace(/:/g, '\\:') + ':' + desc);
+                        completions.push(commandName);
                     }
                 }
             });
@@ -34501,7 +36103,12 @@ class Completion {
         if (this.previousArgHasChoices(args)) {
             const choices = this.getPreviousArgChoices(args);
             if (choices && choices.length > 0) {
-                completions.push(...choices.map(c => c.replace(/:/g, '\\:')));
+                if (this.fishShell) {
+                    completions.push(...choices);
+                }
+                else {
+                    completions.push(...choices.map(c => c.replace(/:/g, '\\:')));
+                }
             }
         }
     }
@@ -34521,7 +36128,12 @@ class Completion {
         const choices = this.yargs.getOptions().choices[positionalKey] || [];
         for (const choice of choices) {
             if (choice.startsWith(current)) {
-                completions.push(choice.replace(/:/g, '\\:'));
+                if (this.fishShell) {
+                    completions.push(choice);
+                }
+                else {
+                    completions.push(choice.replace(/:/g, '\\:'));
+                }
             }
         }
     }
@@ -34575,7 +36187,7 @@ class Completion {
     completeOptionKey(key, completions, current, negable) {
         var _a, _b, _c, _d;
         let keyWithDesc = key;
-        if (this.zshShell) {
+        if (this.zshShell || this.fishShell) {
             const descs = this.usage.getDescriptions();
             const aliasKey = (_b = (_a = this === null || this === void 0 ? void 0 : this.aliases) === null || _a === void 0 ? void 0 : _a[key]) === null || _b === void 0 ? void 0 : _b.find(alias => {
                 const desc = descs[alias];
@@ -34583,9 +36195,15 @@ class Completion {
             });
             const descFromAlias = aliasKey ? descs[aliasKey] : undefined;
             const desc = (_d = (_c = descs[key]) !== null && _c !== void 0 ? _c : descFromAlias) !== null && _d !== void 0 ? _d : '';
-            keyWithDesc = `${key.replace(/:/g, '\\:')}:${desc
+            const cleanedDesc = desc
                 .replace('__yargsString__:', '')
-                .replace(/(\r\n|\n|\r)/gm, ' ')}`;
+                .replace(/(\r\n|\n|\r)/gm, ' ');
+            if (this.fishShell) {
+                keyWithDesc = `${key}\t${cleanedDesc}`;
+            }
+            else {
+                keyWithDesc = `${key.replace(/:/g, '\\:')}:${cleanedDesc}`;
+            }
         }
         const startsByTwoDashes = (s) => /^--/.test(s);
         const isShortOption = (s) => /^[^0-9]$/.test(s);
@@ -34636,9 +36254,16 @@ class Completion {
             : completionFunction(argv);
     }
     generateCompletionScript($0, cmd) {
-        let script = this.zshShell
-            ? completionZshTemplate
-            : completionShTemplate;
+        let script;
+        if (this.zshShell) {
+            script = completionZshTemplate;
+        }
+        else if (this.fishShell) {
+            script = completionFishTemplate;
+        }
+        else {
+            script = completionShTemplate;
+        }
         const name = this.shim.path.basename($0);
         if ($0.match(/\.js$/))
             $0 = `./${$0}`;
@@ -36050,7 +37675,7 @@ class YargsInstance {
     [kGetDollarZero]() {
         let $0 = '';
         let default$0;
-        if (/\b(node|iojs|electron)(\.exe)?$/.test(__classPrivateFieldGet(this, _YargsInstance_shim, "f").process.argv()[0])) {
+        if (/\b(node|iojs|electron|bun)(\.exe)?$/.test(__classPrivateFieldGet(this, _YargsInstance_shim, "f").process.argv()[0])) {
             default$0 = __classPrivateFieldGet(this, _YargsInstance_shim, "f").process.argv().slice(1, 2);
         }
         else {
@@ -36542,7 +38167,7 @@ const Yargs = YargsFactory(esm/* default */.A);
 
 /***/ }),
 
-/***/ 5688:
+/***/ 2380:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -36842,412 +38467,212 @@ function cliui(opts, _mixin) {
     });
 }
 
-// EXTERNAL MODULE: ./node_modules/strip-ansi/index.js + 1 modules
-var strip_ansi = __nccwpck_require__(348);
+;// CONCATENATED MODULE: ./node_modules/cliui/node_modules/ansi-regex/index.js
+function ansiRegex({onlyFirst = false} = {}) {
+	// Valid string terminator sequences are BEL, ESC\, and 0x9c
+	const ST = '(?:\\u0007|\\u001B\\u005C|\\u009C)';
+
+	// OSC sequences only: ESC ] ... ST (or the C1 introducer 0x9d ... ST)
+	// The payload stops at the first terminator character rather than scanning ahead for one, so an unterminated `ESC ]` cannot rescan the rest of the input. Terminals likewise abort a control string on an unexpected ESC. The payload also stops at 0x9d so an unterminated C1 OSC cannot swallow the next one.
+	const osc = `(?:(?:\\u001B\\]|\\u009D)[^\\u0007\\u001B\\u009C\\u009D]*${ST})`;
+
+	// CSI and related: ESC/C1, optional intermediates, optional params (supports ; and :) then final byte
+	const csi = '[\\u001B\\u009B][[\\]()#;?]*(?:\\d{1,4}(?:[;:]\\d{0,4})*)?[\\dA-PR-TZcf-nq-uy=><~]';
+
+	const pattern = `${osc}|${csi}`;
+
+	return new RegExp(pattern, onlyFirst ? undefined : 'g');
+}
+
+;// CONCATENATED MODULE: ./node_modules/cliui/node_modules/strip-ansi/index.js
+
+
+const regex = ansiRegex();
+
+function stripAnsi(string) {
+	if (typeof string !== 'string') {
+		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
+	}
+
+	// Fast path: ANSI codes require ESC (7-bit) or CSI (8-bit) introducer
+	if (!string.includes('\u001B') && !string.includes('\u009B')) {
+		return string;
+	}
+
+	// Even though the regex is global, we don't need to reset the `.lastIndex`
+	// because unlike `.exec()` and `.test()`, `.replace()` does it automatically
+	// and doing it manually has a performance penalty.
+	return string.replace(regex, '');
+}
+
+;// CONCATENATED MODULE: ./node_modules/get-east-asian-width/lookup-data.js
+// Generated by scripts/build.js
+
+const ambiguousMinimalCodePoint = 161;
+const ambiguousMaximumCodePoint = 1114109;
+const ambiguousRanges = [161, 161, 164, 164, 167, 168, 170, 170, 173, 174, 176, 180, 182, 186, 188, 191, 198, 198, 208, 208, 215, 216, 222, 225, 230, 230, 232, 234, 236, 237, 240, 240, 242, 243, 247, 250, 252, 252, 254, 254, 257, 257, 273, 273, 275, 275, 283, 283, 294, 295, 299, 299, 305, 307, 312, 312, 319, 322, 324, 324, 328, 331, 333, 333, 338, 339, 358, 359, 363, 363, 462, 462, 464, 464, 466, 466, 468, 468, 470, 470, 472, 472, 474, 474, 476, 476, 593, 593, 609, 609, 708, 708, 711, 711, 713, 715, 717, 717, 720, 720, 728, 731, 733, 733, 735, 735, 768, 879, 913, 929, 931, 937, 945, 961, 963, 969, 1025, 1025, 1040, 1103, 1105, 1105, 8208, 8208, 8211, 8214, 8216, 8217, 8220, 8221, 8224, 8226, 8228, 8231, 8240, 8240, 8242, 8243, 8245, 8245, 8251, 8251, 8254, 8254, 8308, 8308, 8319, 8319, 8321, 8324, 8364, 8364, 8451, 8451, 8453, 8453, 8457, 8457, 8467, 8467, 8470, 8470, 8481, 8482, 8486, 8486, 8491, 8491, 8531, 8532, 8539, 8542, 8544, 8555, 8560, 8569, 8585, 8585, 8592, 8601, 8632, 8633, 8658, 8658, 8660, 8660, 8679, 8679, 8704, 8704, 8706, 8707, 8711, 8712, 8715, 8715, 8719, 8719, 8721, 8721, 8725, 8725, 8730, 8730, 8733, 8736, 8739, 8739, 8741, 8741, 8743, 8748, 8750, 8750, 8756, 8759, 8764, 8765, 8776, 8776, 8780, 8780, 8786, 8786, 8800, 8801, 8804, 8807, 8810, 8811, 8814, 8815, 8834, 8835, 8838, 8839, 8853, 8853, 8857, 8857, 8869, 8869, 8895, 8895, 8978, 8978, 9312, 9449, 9451, 9547, 9552, 9587, 9600, 9615, 9618, 9621, 9632, 9633, 9635, 9641, 9650, 9651, 9654, 9655, 9660, 9661, 9664, 9665, 9670, 9672, 9675, 9675, 9678, 9681, 9698, 9701, 9711, 9711, 9733, 9734, 9737, 9737, 9742, 9743, 9756, 9756, 9758, 9758, 9792, 9792, 9794, 9794, 9824, 9825, 9827, 9829, 9831, 9834, 9836, 9837, 9839, 9839, 9886, 9887, 9919, 9919, 9926, 9933, 9935, 9939, 9941, 9953, 9955, 9955, 9960, 9961, 9963, 9969, 9972, 9972, 9974, 9977, 9979, 9980, 9982, 9983, 10045, 10045, 10102, 10111, 11094, 11097, 12872, 12879, 57344, 63743, 65024, 65039, 65533, 65533, 127232, 127242, 127248, 127277, 127280, 127337, 127344, 127373, 127375, 127376, 127387, 127404, 917760, 917999, 983040, 1048573, 1048576, 1114109];
+
+const fullwidthMinimalCodePoint = 12288;
+const fullwidthMaximumCodePoint = 65510;
+const fullwidthRanges = [12288, 12288, 65281, 65376, 65504, 65510];
+
+const lookup_data_halfwidthMinimalCodePoint = 8361;
+const lookup_data_halfwidthMaximumCodePoint = 65518;
+const lookup_data_halfwidthRanges = (/* unused pure expression or super */ null && ([8361, 8361, 65377, 65470, 65474, 65479, 65482, 65487, 65490, 65495, 65498, 65500, 65512, 65518]));
+
+const lookup_data_narrowMinimalCodePoint = 32;
+const lookup_data_narrowMaximumCodePoint = 10630;
+const lookup_data_narrowRanges = (/* unused pure expression or super */ null && ([32, 126, 162, 163, 165, 166, 172, 172, 175, 175, 10214, 10221, 10629, 10630]));
+
+const wideMinimalCodePoint = 4352;
+const wideMaximumCodePoint = 262141;
+const wideRanges = [4352, 4447, 8986, 8987, 9001, 9002, 9193, 9196, 9200, 9200, 9203, 9203, 9725, 9726, 9748, 9749, 9776, 9783, 9800, 9811, 9855, 9855, 9866, 9871, 9875, 9875, 9889, 9889, 9898, 9899, 9917, 9918, 9924, 9925, 9934, 9934, 9940, 9940, 9962, 9962, 9970, 9971, 9973, 9973, 9978, 9978, 9981, 9981, 9989, 9989, 9994, 9995, 10024, 10024, 10060, 10060, 10062, 10062, 10067, 10069, 10071, 10071, 10133, 10135, 10160, 10160, 10175, 10175, 11035, 11036, 11088, 11088, 11093, 11093, 11904, 11929, 11931, 12019, 12032, 12245, 12272, 12287, 12289, 12350, 12353, 12438, 12441, 12543, 12549, 12591, 12593, 12686, 12688, 12773, 12783, 12830, 12832, 12871, 12880, 42124, 42128, 42182, 43360, 43388, 44032, 55203, 63744, 64255, 65040, 65049, 65072, 65106, 65108, 65126, 65128, 65131, 94176, 94180, 94192, 94198, 94208, 101594, 101631, 101664, 101760, 101874, 101888, 102801, 102816, 102866, 110576, 110579, 110581, 110587, 110589, 110590, 110592, 110888, 110898, 110898, 110928, 110930, 110933, 110933, 110948, 110952, 110960, 111355, 119552, 119638, 119648, 119670, 126980, 126980, 127183, 127183, 127374, 127374, 127377, 127386, 127406, 127406, 127488, 127490, 127504, 127547, 127552, 127560, 127568, 127569, 127584, 127589, 127744, 127776, 127789, 127797, 127799, 127868, 127870, 127891, 127904, 127946, 127951, 127955, 127968, 127984, 127988, 127988, 127992, 128062, 128064, 128064, 128066, 128252, 128255, 128317, 128331, 128334, 128336, 128359, 128378, 128378, 128405, 128406, 128420, 128420, 128507, 128591, 128640, 128709, 128716, 128716, 128720, 128722, 128725, 128729, 128732, 128735, 128747, 128748, 128756, 128764, 128986, 128986, 128992, 129003, 129008, 129008, 129292, 129338, 129340, 129349, 129351, 129535, 129648, 129660, 129664, 129734, 129736, 129736, 129740, 129757, 129759, 129771, 129775, 129786, 131072, 196605, 196608, 262141];
+
+;// CONCATENATED MODULE: ./node_modules/get-east-asian-width/utilities.js
+/**
+Binary search on a sorted flat array of [start, end] pairs.
+
+@param {number[]} ranges - Flat array of inclusive [start, end] range pairs, e.g. [0, 5, 10, 20].
+@param {number} codePoint - The value to search for.
+@returns {boolean} Whether the value falls within any of the ranges.
+*/
+const utilities_isInRange = (ranges, codePoint) => {
+	let low = 0;
+	let high = Math.floor(ranges.length / 2) - 1;
+	while (low <= high) {
+		const mid = Math.floor((low + high) / 2);
+		const i = mid * 2;
+		if (codePoint < ranges[i]) {
+			high = mid - 1;
+		} else if (codePoint > ranges[i + 1]) {
+			low = mid + 1;
+		} else {
+			return true;
+		}
+	}
+
+	return false;
+};
+
 ;// CONCATENATED MODULE: ./node_modules/get-east-asian-width/lookup.js
-// Generated code.
 
-function isAmbiguous(x) {
-	return x === 0xA1
-		|| x === 0xA4
-		|| x === 0xA7
-		|| x === 0xA8
-		|| x === 0xAA
-		|| x === 0xAD
-		|| x === 0xAE
-		|| x >= 0xB0 && x <= 0xB4
-		|| x >= 0xB6 && x <= 0xBA
-		|| x >= 0xBC && x <= 0xBF
-		|| x === 0xC6
-		|| x === 0xD0
-		|| x === 0xD7
-		|| x === 0xD8
-		|| x >= 0xDE && x <= 0xE1
-		|| x === 0xE6
-		|| x >= 0xE8 && x <= 0xEA
-		|| x === 0xEC
-		|| x === 0xED
-		|| x === 0xF0
-		|| x === 0xF2
-		|| x === 0xF3
-		|| x >= 0xF7 && x <= 0xFA
-		|| x === 0xFC
-		|| x === 0xFE
-		|| x === 0x101
-		|| x === 0x111
-		|| x === 0x113
-		|| x === 0x11B
-		|| x === 0x126
-		|| x === 0x127
-		|| x === 0x12B
-		|| x >= 0x131 && x <= 0x133
-		|| x === 0x138
-		|| x >= 0x13F && x <= 0x142
-		|| x === 0x144
-		|| x >= 0x148 && x <= 0x14B
-		|| x === 0x14D
-		|| x === 0x152
-		|| x === 0x153
-		|| x === 0x166
-		|| x === 0x167
-		|| x === 0x16B
-		|| x === 0x1CE
-		|| x === 0x1D0
-		|| x === 0x1D2
-		|| x === 0x1D4
-		|| x === 0x1D6
-		|| x === 0x1D8
-		|| x === 0x1DA
-		|| x === 0x1DC
-		|| x === 0x251
-		|| x === 0x261
-		|| x === 0x2C4
-		|| x === 0x2C7
-		|| x >= 0x2C9 && x <= 0x2CB
-		|| x === 0x2CD
-		|| x === 0x2D0
-		|| x >= 0x2D8 && x <= 0x2DB
-		|| x === 0x2DD
-		|| x === 0x2DF
-		|| x >= 0x300 && x <= 0x36F
-		|| x >= 0x391 && x <= 0x3A1
-		|| x >= 0x3A3 && x <= 0x3A9
-		|| x >= 0x3B1 && x <= 0x3C1
-		|| x >= 0x3C3 && x <= 0x3C9
-		|| x === 0x401
-		|| x >= 0x410 && x <= 0x44F
-		|| x === 0x451
-		|| x === 0x2010
-		|| x >= 0x2013 && x <= 0x2016
-		|| x === 0x2018
-		|| x === 0x2019
-		|| x === 0x201C
-		|| x === 0x201D
-		|| x >= 0x2020 && x <= 0x2022
-		|| x >= 0x2024 && x <= 0x2027
-		|| x === 0x2030
-		|| x === 0x2032
-		|| x === 0x2033
-		|| x === 0x2035
-		|| x === 0x203B
-		|| x === 0x203E
-		|| x === 0x2074
-		|| x === 0x207F
-		|| x >= 0x2081 && x <= 0x2084
-		|| x === 0x20AC
-		|| x === 0x2103
-		|| x === 0x2105
-		|| x === 0x2109
-		|| x === 0x2113
-		|| x === 0x2116
-		|| x === 0x2121
-		|| x === 0x2122
-		|| x === 0x2126
-		|| x === 0x212B
-		|| x === 0x2153
-		|| x === 0x2154
-		|| x >= 0x215B && x <= 0x215E
-		|| x >= 0x2160 && x <= 0x216B
-		|| x >= 0x2170 && x <= 0x2179
-		|| x === 0x2189
-		|| x >= 0x2190 && x <= 0x2199
-		|| x === 0x21B8
-		|| x === 0x21B9
-		|| x === 0x21D2
-		|| x === 0x21D4
-		|| x === 0x21E7
-		|| x === 0x2200
-		|| x === 0x2202
-		|| x === 0x2203
-		|| x === 0x2207
-		|| x === 0x2208
-		|| x === 0x220B
-		|| x === 0x220F
-		|| x === 0x2211
-		|| x === 0x2215
-		|| x === 0x221A
-		|| x >= 0x221D && x <= 0x2220
-		|| x === 0x2223
-		|| x === 0x2225
-		|| x >= 0x2227 && x <= 0x222C
-		|| x === 0x222E
-		|| x >= 0x2234 && x <= 0x2237
-		|| x === 0x223C
-		|| x === 0x223D
-		|| x === 0x2248
-		|| x === 0x224C
-		|| x === 0x2252
-		|| x === 0x2260
-		|| x === 0x2261
-		|| x >= 0x2264 && x <= 0x2267
-		|| x === 0x226A
-		|| x === 0x226B
-		|| x === 0x226E
-		|| x === 0x226F
-		|| x === 0x2282
-		|| x === 0x2283
-		|| x === 0x2286
-		|| x === 0x2287
-		|| x === 0x2295
-		|| x === 0x2299
-		|| x === 0x22A5
-		|| x === 0x22BF
-		|| x === 0x2312
-		|| x >= 0x2460 && x <= 0x24E9
-		|| x >= 0x24EB && x <= 0x254B
-		|| x >= 0x2550 && x <= 0x2573
-		|| x >= 0x2580 && x <= 0x258F
-		|| x >= 0x2592 && x <= 0x2595
-		|| x === 0x25A0
-		|| x === 0x25A1
-		|| x >= 0x25A3 && x <= 0x25A9
-		|| x === 0x25B2
-		|| x === 0x25B3
-		|| x === 0x25B6
-		|| x === 0x25B7
-		|| x === 0x25BC
-		|| x === 0x25BD
-		|| x === 0x25C0
-		|| x === 0x25C1
-		|| x >= 0x25C6 && x <= 0x25C8
-		|| x === 0x25CB
-		|| x >= 0x25CE && x <= 0x25D1
-		|| x >= 0x25E2 && x <= 0x25E5
-		|| x === 0x25EF
-		|| x === 0x2605
-		|| x === 0x2606
-		|| x === 0x2609
-		|| x === 0x260E
-		|| x === 0x260F
-		|| x === 0x261C
-		|| x === 0x261E
-		|| x === 0x2640
-		|| x === 0x2642
-		|| x === 0x2660
-		|| x === 0x2661
-		|| x >= 0x2663 && x <= 0x2665
-		|| x >= 0x2667 && x <= 0x266A
-		|| x === 0x266C
-		|| x === 0x266D
-		|| x === 0x266F
-		|| x === 0x269E
-		|| x === 0x269F
-		|| x === 0x26BF
-		|| x >= 0x26C6 && x <= 0x26CD
-		|| x >= 0x26CF && x <= 0x26D3
-		|| x >= 0x26D5 && x <= 0x26E1
-		|| x === 0x26E3
-		|| x === 0x26E8
-		|| x === 0x26E9
-		|| x >= 0x26EB && x <= 0x26F1
-		|| x === 0x26F4
-		|| x >= 0x26F6 && x <= 0x26F9
-		|| x === 0x26FB
-		|| x === 0x26FC
-		|| x === 0x26FE
-		|| x === 0x26FF
-		|| x === 0x273D
-		|| x >= 0x2776 && x <= 0x277F
-		|| x >= 0x2B56 && x <= 0x2B59
-		|| x >= 0x3248 && x <= 0x324F
-		|| x >= 0xE000 && x <= 0xF8FF
-		|| x >= 0xFE00 && x <= 0xFE0F
-		|| x === 0xFFFD
-		|| x >= 0x1F100 && x <= 0x1F10A
-		|| x >= 0x1F110 && x <= 0x1F12D
-		|| x >= 0x1F130 && x <= 0x1F169
-		|| x >= 0x1F170 && x <= 0x1F18D
-		|| x === 0x1F18F
-		|| x === 0x1F190
-		|| x >= 0x1F19B && x <= 0x1F1AC
-		|| x >= 0xE0100 && x <= 0xE01EF
-		|| x >= 0xF0000 && x <= 0xFFFFD
-		|| x >= 0x100000 && x <= 0x10FFFD;
+
+
+const commonCjkCodePoint = 0x4E_00;
+const [wideFastPathStart, wideFastPathEnd] = /* #__PURE__ */ findWideFastPathRange(wideRanges);
+
+// Use a hot-path range so common `isWide` calls can skip binary search.
+// The range containing U+4E00 covers common CJK ideographs;
+// fallback to the largest range for resilience to Unicode table changes.
+function findWideFastPathRange(ranges) {
+	let fastPathStart = ranges[0];
+	let fastPathEnd = ranges[1];
+
+	for (let index = 0; index < ranges.length; index += 2) {
+		const start = ranges[index];
+		const end = ranges[index + 1];
+
+		if (
+			commonCjkCodePoint >= start
+			&& commonCjkCodePoint <= end
+		) {
+			return [start, end];
+		}
+
+		if ((end - start) > (fastPathEnd - fastPathStart)) {
+			fastPathStart = start;
+			fastPathEnd = end;
+		}
+	}
+
+	return [fastPathStart, fastPathEnd];
 }
 
-function isFullWidth(x) {
-	return x === 0x3000
-		|| x >= 0xFF01 && x <= 0xFF60
-		|| x >= 0xFFE0 && x <= 0xFFE6;
-}
+const isAmbiguous = codePoint => {
+	if (
+		codePoint < ambiguousMinimalCodePoint
+		|| codePoint > ambiguousMaximumCodePoint
+	) {
+		return false;
+	}
 
-function isWide(x) {
-	return x >= 0x1100 && x <= 0x115F
-		|| x === 0x231A
-		|| x === 0x231B
-		|| x === 0x2329
-		|| x === 0x232A
-		|| x >= 0x23E9 && x <= 0x23EC
-		|| x === 0x23F0
-		|| x === 0x23F3
-		|| x === 0x25FD
-		|| x === 0x25FE
-		|| x === 0x2614
-		|| x === 0x2615
-		|| x >= 0x2630 && x <= 0x2637
-		|| x >= 0x2648 && x <= 0x2653
-		|| x === 0x267F
-		|| x >= 0x268A && x <= 0x268F
-		|| x === 0x2693
-		|| x === 0x26A1
-		|| x === 0x26AA
-		|| x === 0x26AB
-		|| x === 0x26BD
-		|| x === 0x26BE
-		|| x === 0x26C4
-		|| x === 0x26C5
-		|| x === 0x26CE
-		|| x === 0x26D4
-		|| x === 0x26EA
-		|| x === 0x26F2
-		|| x === 0x26F3
-		|| x === 0x26F5
-		|| x === 0x26FA
-		|| x === 0x26FD
-		|| x === 0x2705
-		|| x === 0x270A
-		|| x === 0x270B
-		|| x === 0x2728
-		|| x === 0x274C
-		|| x === 0x274E
-		|| x >= 0x2753 && x <= 0x2755
-		|| x === 0x2757
-		|| x >= 0x2795 && x <= 0x2797
-		|| x === 0x27B0
-		|| x === 0x27BF
-		|| x === 0x2B1B
-		|| x === 0x2B1C
-		|| x === 0x2B50
-		|| x === 0x2B55
-		|| x >= 0x2E80 && x <= 0x2E99
-		|| x >= 0x2E9B && x <= 0x2EF3
-		|| x >= 0x2F00 && x <= 0x2FD5
-		|| x >= 0x2FF0 && x <= 0x2FFF
-		|| x >= 0x3001 && x <= 0x303E
-		|| x >= 0x3041 && x <= 0x3096
-		|| x >= 0x3099 && x <= 0x30FF
-		|| x >= 0x3105 && x <= 0x312F
-		|| x >= 0x3131 && x <= 0x318E
-		|| x >= 0x3190 && x <= 0x31E5
-		|| x >= 0x31EF && x <= 0x321E
-		|| x >= 0x3220 && x <= 0x3247
-		|| x >= 0x3250 && x <= 0xA48C
-		|| x >= 0xA490 && x <= 0xA4C6
-		|| x >= 0xA960 && x <= 0xA97C
-		|| x >= 0xAC00 && x <= 0xD7A3
-		|| x >= 0xF900 && x <= 0xFAFF
-		|| x >= 0xFE10 && x <= 0xFE19
-		|| x >= 0xFE30 && x <= 0xFE52
-		|| x >= 0xFE54 && x <= 0xFE66
-		|| x >= 0xFE68 && x <= 0xFE6B
-		|| x >= 0x16FE0 && x <= 0x16FE4
-		|| x >= 0x16FF0 && x <= 0x16FF6
-		|| x >= 0x17000 && x <= 0x18CD5
-		|| x >= 0x18CFF && x <= 0x18D1E
-		|| x >= 0x18D80 && x <= 0x18DF2
-		|| x >= 0x1AFF0 && x <= 0x1AFF3
-		|| x >= 0x1AFF5 && x <= 0x1AFFB
-		|| x === 0x1AFFD
-		|| x === 0x1AFFE
-		|| x >= 0x1B000 && x <= 0x1B122
-		|| x === 0x1B132
-		|| x >= 0x1B150 && x <= 0x1B152
-		|| x === 0x1B155
-		|| x >= 0x1B164 && x <= 0x1B167
-		|| x >= 0x1B170 && x <= 0x1B2FB
-		|| x >= 0x1D300 && x <= 0x1D356
-		|| x >= 0x1D360 && x <= 0x1D376
-		|| x === 0x1F004
-		|| x === 0x1F0CF
-		|| x === 0x1F18E
-		|| x >= 0x1F191 && x <= 0x1F19A
-		|| x >= 0x1F200 && x <= 0x1F202
-		|| x >= 0x1F210 && x <= 0x1F23B
-		|| x >= 0x1F240 && x <= 0x1F248
-		|| x === 0x1F250
-		|| x === 0x1F251
-		|| x >= 0x1F260 && x <= 0x1F265
-		|| x >= 0x1F300 && x <= 0x1F320
-		|| x >= 0x1F32D && x <= 0x1F335
-		|| x >= 0x1F337 && x <= 0x1F37C
-		|| x >= 0x1F37E && x <= 0x1F393
-		|| x >= 0x1F3A0 && x <= 0x1F3CA
-		|| x >= 0x1F3CF && x <= 0x1F3D3
-		|| x >= 0x1F3E0 && x <= 0x1F3F0
-		|| x === 0x1F3F4
-		|| x >= 0x1F3F8 && x <= 0x1F43E
-		|| x === 0x1F440
-		|| x >= 0x1F442 && x <= 0x1F4FC
-		|| x >= 0x1F4FF && x <= 0x1F53D
-		|| x >= 0x1F54B && x <= 0x1F54E
-		|| x >= 0x1F550 && x <= 0x1F567
-		|| x === 0x1F57A
-		|| x === 0x1F595
-		|| x === 0x1F596
-		|| x === 0x1F5A4
-		|| x >= 0x1F5FB && x <= 0x1F64F
-		|| x >= 0x1F680 && x <= 0x1F6C5
-		|| x === 0x1F6CC
-		|| x >= 0x1F6D0 && x <= 0x1F6D2
-		|| x >= 0x1F6D5 && x <= 0x1F6D8
-		|| x >= 0x1F6DC && x <= 0x1F6DF
-		|| x === 0x1F6EB
-		|| x === 0x1F6EC
-		|| x >= 0x1F6F4 && x <= 0x1F6FC
-		|| x >= 0x1F7E0 && x <= 0x1F7EB
-		|| x === 0x1F7F0
-		|| x >= 0x1F90C && x <= 0x1F93A
-		|| x >= 0x1F93C && x <= 0x1F945
-		|| x >= 0x1F947 && x <= 0x1F9FF
-		|| x >= 0x1FA70 && x <= 0x1FA7C
-		|| x >= 0x1FA80 && x <= 0x1FA8A
-		|| x >= 0x1FA8E && x <= 0x1FAC6
-		|| x === 0x1FAC8
-		|| x >= 0x1FACD && x <= 0x1FADC
-		|| x >= 0x1FADF && x <= 0x1FAEA
-		|| x >= 0x1FAEF && x <= 0x1FAF8
-		|| x >= 0x20000 && x <= 0x2FFFD
-		|| x >= 0x30000 && x <= 0x3FFFD;
-}
+	return utilities_isInRange(ambiguousRanges, codePoint);
+};
 
-function lookup_getCategory(x) {
-	if (isAmbiguous(x)) return 'ambiguous';
+const isFullwidth = codePoint => {
+	if (
+		codePoint < fullwidthMinimalCodePoint
+		|| codePoint > fullwidthMaximumCodePoint
+	) {
+		return false;
+	}
 
-	if (isFullWidth(x)) return 'fullwidth';
+	return utilities_isInRange(fullwidthRanges, codePoint);
+};
+
+const isHalfwidth = codePoint => {
+	if (
+		codePoint < halfwidthMinimalCodePoint
+		|| codePoint > halfwidthMaximumCodePoint
+	) {
+		return false;
+	}
+
+	return isInRange(halfwidthRanges, codePoint);
+};
+
+const isNarrow = codePoint => {
+	if (
+		codePoint < narrowMinimalCodePoint
+		|| codePoint > narrowMaximumCodePoint
+	) {
+		return false;
+	}
+
+	return isInRange(narrowRanges, codePoint);
+};
+
+const isWide = codePoint => {
+	if (
+		codePoint >= wideFastPathStart
+		&& codePoint <= wideFastPathEnd
+	) {
+		return true;
+	}
 
 	if (
-		x === 0x20A9
-		|| x >= 0xFF61 && x <= 0xFFBE
-		|| x >= 0xFFC2 && x <= 0xFFC7
-		|| x >= 0xFFCA && x <= 0xFFCF
-		|| x >= 0xFFD2 && x <= 0xFFD7
-		|| x >= 0xFFDA && x <= 0xFFDC
-		|| x >= 0xFFE8 && x <= 0xFFEE
+		codePoint < wideMinimalCodePoint
+		|| codePoint > wideMaximumCodePoint
 	) {
+		return false;
+	}
+
+	return utilities_isInRange(wideRanges, codePoint);
+};
+
+function lookup_getCategory(codePoint) {
+	if (isAmbiguous(codePoint)) {
+		return 'ambiguous';
+	}
+
+	if (isFullwidth(codePoint)) {
+		return 'fullwidth';
+	}
+
+	if (isHalfwidth(codePoint)) {
 		return 'halfwidth';
 	}
 
-	if (
-		x >= 0x20 && x <= 0x7E
-		|| x === 0xA2
-		|| x === 0xA3
-		|| x === 0xA5
-		|| x === 0xA6
-		|| x === 0xAC
-		|| x === 0xAF
-		|| x >= 0x27E6 && x <= 0x27ED
-		|| x === 0x2985
-		|| x === 0x2986
-	) {
+	if (isNarrow(codePoint)) {
 		return 'narrow';
 	}
 
-	if (isWide(x)) return 'wide';
+	if (isWide(codePoint)) {
+		return 'wide';
+	}
 
 	return 'neutral';
 }
-
-
 
 ;// CONCATENATED MODULE: ./node_modules/get-east-asian-width/index.js
 
@@ -37268,7 +38693,7 @@ function eastAsianWidth(codePoint, {ambiguousAsWide = false} = {}) {
 	validate(codePoint);
 
 	if (
-		isFullWidth(codePoint)
+		isFullwidth(codePoint)
 		|| isWide(codePoint)
 		|| (ambiguousAsWide && isAmbiguous(codePoint))
 	) {
@@ -37281,8 +38706,8 @@ function eastAsianWidth(codePoint, {ambiguousAsWide = false} = {}) {
 // Private exports for https://github.com/sindresorhus/is-fullwidth-code-point
 
 
-// EXTERNAL MODULE: ./node_modules/cliui/node_modules/emoji-regex/index.js
-var emoji_regex = __nccwpck_require__(6976);
+// EXTERNAL MODULE: ./node_modules/emoji-regex/index.js
+var emoji_regex = __nccwpck_require__(872);
 ;// CONCATENATED MODULE: ./node_modules/cliui/node_modules/string-width/index.js
 
 
@@ -37303,7 +38728,7 @@ function stringWidth(string, options = {}) {
 	} = options;
 
 	if (!countAnsiEscapeCodes) {
-		string = (0,strip_ansi/* default */.A)(string);
+		string = stripAnsi(string);
 	}
 
 	if (string.length === 0) {
@@ -37367,8 +38792,44 @@ function stringWidth(string, options = {}) {
 	return width;
 }
 
-// EXTERNAL MODULE: ./node_modules/wrap-ansi/node_modules/emoji-regex/index.js
-var node_modules_emoji_regex = __nccwpck_require__(3692);
+;// CONCATENATED MODULE: ./node_modules/wrap-ansi/node_modules/ansi-regex/index.js
+function ansi_regex_ansiRegex({onlyFirst = false} = {}) {
+	// Valid string terminator sequences are BEL, ESC\, and 0x9c
+	const ST = '(?:\\u0007|\\u001B\\u005C|\\u009C)';
+
+	// OSC sequences only: ESC ] ... ST (or the C1 introducer 0x9d ... ST)
+	// The payload stops at the first terminator character rather than scanning ahead for one, so an unterminated `ESC ]` cannot rescan the rest of the input. Terminals likewise abort a control string on an unexpected ESC. The payload also stops at 0x9d so an unterminated C1 OSC cannot swallow the next one.
+	const osc = `(?:(?:\\u001B\\]|\\u009D)[^\\u0007\\u001B\\u009C\\u009D]*${ST})`;
+
+	// CSI and related: ESC/C1, optional intermediates, optional params (supports ; and :) then final byte
+	const csi = '[\\u001B\\u009B][[\\]()#;?]*(?:\\d{1,4}(?:[;:]\\d{0,4})*)?[\\dA-PR-TZcf-nq-uy=><~]';
+
+	const pattern = `${osc}|${csi}`;
+
+	return new RegExp(pattern, onlyFirst ? undefined : 'g');
+}
+
+;// CONCATENATED MODULE: ./node_modules/wrap-ansi/node_modules/strip-ansi/index.js
+
+
+const strip_ansi_regex = ansi_regex_ansiRegex();
+
+function strip_ansi_stripAnsi(string) {
+	if (typeof string !== 'string') {
+		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
+	}
+
+	// Fast path: ANSI codes require ESC (7-bit) or CSI (8-bit) introducer
+	if (!string.includes('\u001B') && !string.includes('\u009B')) {
+		return string;
+	}
+
+	// Even though the regex is global, we don't need to reset the `.lastIndex`
+	// because unlike `.exec()` and `.test()`, `.replace()` does it automatically
+	// and doing it manually has a performance penalty.
+	return string.replace(strip_ansi_regex, '');
+}
+
 ;// CONCATENATED MODULE: ./node_modules/wrap-ansi/node_modules/string-width/index.js
 
 
@@ -37389,7 +38850,7 @@ function string_width_stringWidth(string, options = {}) {
 	} = options;
 
 	if (!countAnsiEscapeCodes) {
-		string = (0,strip_ansi/* default */.A)(string);
+		string = strip_ansi_stripAnsi(string);
 	}
 
 	if (string.length === 0) {
@@ -37442,7 +38903,7 @@ function string_width_stringWidth(string, options = {}) {
 		}
 
 		// TODO: Use `/\p{RGI_Emoji}/v` when targeting Node.js 20.
-		if (node_modules_emoji_regex().test(character)) {
+		if (emoji_regex().test(character)) {
 			width += 2;
 			continue;
 		}
@@ -37709,7 +39170,7 @@ const wrapWord = (rows, word, columns) => {
 
 	let isInsideEscape = false;
 	let isInsideLinkEscape = false;
-	let visible = string_width_stringWidth((0,strip_ansi/* default */.A)(rows.at(-1)));
+	let visible = string_width_stringWidth(strip_ansi_stripAnsi(rows.at(-1)));
 
 	for (const [index, character] of characters.entries()) {
 		const characterLength = string_width_stringWidth(character);
@@ -37912,7 +39373,7 @@ function wrapAnsi(string, columns, options) {
 function ui (opts) {
   return cliui(opts, {
     stringWidth: stringWidth,
-    stripAnsi: strip_ansi/* default */.A,
+    stripAnsi: stripAnsi,
     wrap: wrapAnsi
   })
 }
@@ -37951,19 +39412,192 @@ const external_url_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.met
 var lib = __nccwpck_require__(5374);
 // EXTERNAL MODULE: ./node_modules/yargs/build/lib/utils/process-argv.js
 var process_argv = __nccwpck_require__(6526);
-// EXTERNAL MODULE: ./node_modules/yargs/node_modules/emoji-regex/index.js
-var yargs_node_modules_emoji_regex = __nccwpck_require__(6486);
-;// CONCATENATED MODULE: ./node_modules/yargs/node_modules/string-width/index.js
+;// CONCATENATED MODULE: ./node_modules/string-width/node_modules/ansi-regex/index.js
+function node_modules_ansi_regex_ansiRegex({onlyFirst = false} = {}) {
+	// Valid string terminator sequences are BEL, ESC\, and 0x9c
+	const ST = '(?:\\u0007|\\u001B\\u005C|\\u009C)';
+
+	// OSC sequences only: ESC ] ... ST (or the C1 introducer 0x9d ... ST)
+	// The payload stops at the first terminator character rather than scanning ahead for one, so an unterminated `ESC ]` cannot rescan the rest of the input. Terminals likewise abort a control string on an unexpected ESC. The payload also stops at 0x9d so an unterminated C1 OSC cannot swallow the next one.
+	const osc = `(?:(?:\\u001B\\]|\\u009D)[^\\u0007\\u001B\\u009C\\u009D]*${ST})`;
+
+	// CSI and related: ESC/C1, optional intermediates, optional params (supports ; and :) then final byte
+	const csi = '[\\u001B\\u009B][[\\]()#;?]*(?:\\d{1,4}(?:[;:]\\d{0,4})*)?[\\dA-PR-TZcf-nq-uy=><~]';
+
+	const pattern = `${osc}|${csi}`;
+
+	return new RegExp(pattern, onlyFirst ? undefined : 'g');
+}
+
+;// CONCATENATED MODULE: ./node_modules/string-width/node_modules/strip-ansi/index.js
+
+
+const node_modules_strip_ansi_regex = node_modules_ansi_regex_ansiRegex();
+
+function node_modules_strip_ansi_stripAnsi(string) {
+	if (typeof string !== 'string') {
+		throw new TypeError(`Expected a \`string\`, got \`${typeof string}\``);
+	}
+
+	// Fast path: ANSI codes require ESC (7-bit) or CSI (8-bit) introducer
+	if (!string.includes('\u001B') && !string.includes('\u009B')) {
+		return string;
+	}
+
+	// Even though the regex is global, we don't need to reset the `.lastIndex`
+	// because unlike `.exec()` and `.test()`, `.replace()` does it automatically
+	// and doing it manually has a performance penalty.
+	return string.replace(node_modules_strip_ansi_regex, '');
+}
+
+;// CONCATENATED MODULE: ./node_modules/string-width/index.js
 
 
 
+/**
+Logic:
+- Segment graphemes to match how terminals render clusters.
+- Width rules:
+	1. Skip non-printing clusters (Default_Ignorable, Control, pure nonspacing/enclosing Mark, lone Surrogates). Tabs are ignored by design.
+	2. RGI emoji clusters (\p{RGI_Emoji}) are double-width.
+	3. Minimally-qualified/unqualified emoji clusters (ZWJ sequences with 2+ Extended_Pictographic, or keycap sequences) are double-width.
+	4. Hangul jamo collapse each standard modern Hangul L+V or L+V+T syllable piece to width 2.
+	   Unmatched repeated leading/vowel/trailing jamo stay additive because that matches how the terminals we target render them.
+	5. Otherwise use East Asian Width of the cluster's first visible code point, and add widths for trailing spacing marks and Halfwidth/Fullwidth Forms within the same cluster (e.g., dakuten/handakuten/prolonged sound mark).
+*/
 
 const node_modules_string_width_segmenter = new Intl.Segmenter();
 
-const node_modules_string_width_defaultIgnorableCodePointRegex = /^\p{Default_Ignorable_Code_Point}$/u;
+// Matches a visible (printing) character. Used to find the base scalar of a cluster (skipping leading Prepend/Format/Marks) and to detect whole-cluster zero-width.
+// Intentionally a single negated class without a quantifier: a repeated pattern like `^(?:…|…)+$` backtracks exponentially on overlapping properties, and even `^[…]+$` overflows V8's backtrack stack (RangeError) on clusters with millions of marks.
+const visibleCharacterRegex = /[^\p{Default_Ignorable_Code_Point}\p{Control}\p{Format}\p{Nonspacing_Mark}\p{Enclosing_Mark}\p{Surrogate}]/v;
+const spacingMarkRegex = /\p{Spacing_Mark}/v;
 
-function node_modules_string_width_stringWidth(string, options = {}) {
-	if (typeof string !== 'string' || string.length === 0) {
+// RGI emoji sequences
+const rgiEmojiRegex = /^\p{RGI_Emoji}$/v;
+
+// Detect minimally-qualified/unqualified emoji sequences (missing VS16 but still render as double-width)
+const unqualifiedKeycapRegex = /^[\d#*]\u20E3$/;
+const extendedPictographicRegex = /\p{Extended_Pictographic}/gu;
+
+function isDoubleWidthNonRgiEmojiSequence(segment) {
+	// Real emoji clusters are < 30 chars; guard against pathological input
+	if (segment.length > 50) {
+		return false;
+	}
+
+	if (unqualifiedKeycapRegex.test(segment)) {
+		return true;
+	}
+
+	// ZWJ sequences with 2+ Extended_Pictographic
+	if (segment.includes('\u200D')) {
+		const pictographics = segment.match(extendedPictographicRegex);
+		return pictographics !== null && pictographics.length >= 2;
+	}
+
+	return false;
+}
+
+// Returns the cluster starting at its first visible character, or `undefined` if the whole cluster is zero-width.
+function baseVisible(segment) {
+	const index = segment.search(visibleCharacterRegex);
+	return index === -1 ? undefined : segment.slice(index);
+}
+
+function isHangulLeadingJamo(codePoint) {
+	return (codePoint >= 0x11_00 && codePoint <= 0x11_5F)
+		|| (codePoint >= 0xA9_60 && codePoint <= 0xA9_7C);
+}
+
+function isHangulVowelJamo(codePoint) {
+	return (codePoint >= 0x11_60 && codePoint <= 0x11_A7)
+		|| (codePoint >= 0xD7_B0 && codePoint <= 0xD7_C6);
+}
+
+function isHangulTrailingJamo(codePoint) {
+	return (codePoint >= 0x11_A8 && codePoint <= 0x11_FF)
+		|| (codePoint >= 0xD7_CB && codePoint <= 0xD7_FB);
+}
+
+function isHangulJamo(codePoint) {
+	return isHangulLeadingJamo(codePoint)
+		|| isHangulVowelJamo(codePoint)
+		|| isHangulTrailingJamo(codePoint);
+}
+
+function hangulClusterWidth(visibleSegment, eastAsianWidthOptions) {
+	const codePoints = [];
+
+	for (const character of visibleSegment) {
+		if (!visibleCharacterRegex.test(character)) {
+			continue;
+		}
+
+		codePoints.push(character.codePointAt(0));
+	}
+
+	if (codePoints.length === 0) {
+		return undefined;
+	}
+
+	let width = 0;
+
+	for (let index = 0; index < codePoints.length; index++) {
+		const codePoint = codePoints[index];
+		if (!isHangulJamo(codePoint)) {
+			if (width === 0) {
+				return undefined;
+			}
+
+			// Mixed cluster (e.g., L + precomposed syllable): use EAW for non-jamo remainder
+			for (let remaining = index; remaining < codePoints.length; remaining++) {
+				width += eastAsianWidth(codePoints[remaining], eastAsianWidthOptions);
+			}
+
+			return width;
+		}
+
+		// Modern Hangul L+V(+T) shapes as one syllable block. Unmatched jamo stay additive:
+		// U+1100 U+1100 U+1161 => U+1100 + (U+1100 U+1161) => 2 + 2.
+		if (
+			isHangulLeadingJamo(codePoint)
+			&& isHangulVowelJamo(codePoints[index + 1])
+		) {
+			width += 2;
+			index += isHangulTrailingJamo(codePoints[index + 2]) ? 2 : 1;
+			continue;
+		}
+
+		width += eastAsianWidth(codePoint, eastAsianWidthOptions);
+	}
+
+	return width;
+}
+
+function trailingWidth(visibleSegment, eastAsianWidthOptions) {
+	let extra = 0;
+	let first = true;
+
+	for (const character of visibleSegment) {
+		if (first) {
+			first = false;
+			continue;
+		}
+
+		if (
+			spacingMarkRegex.test(character)
+			|| (character >= '\uFF00' && character <= '\uFFEF')
+		) {
+			extra += eastAsianWidth(character.codePointAt(0), eastAsianWidthOptions);
+		}
+	}
+
+	return extra;
+}
+
+function node_modules_string_width_stringWidth(input, options = {}) {
+	if (typeof input !== 'string' || input.length === 0) {
 		return 0;
 	}
 
@@ -37972,66 +39606,50 @@ function node_modules_string_width_stringWidth(string, options = {}) {
 		countAnsiEscapeCodes = false,
 	} = options;
 
-	if (!countAnsiEscapeCodes) {
-		string = (0,strip_ansi/* default */.A)(string);
+	let string = input;
+
+	// Avoid calling stripAnsi when there are no ANSI escape sequences (ESC = 0x1B, CSI = 0x9B)
+	if (!countAnsiEscapeCodes && (string.includes('\u001B') || string.includes('\u009B'))) {
+		string = node_modules_strip_ansi_stripAnsi(string);
 	}
 
 	if (string.length === 0) {
 		return 0;
 	}
 
+	// Fast path: printable ASCII (0x20–0x7E) needs no segmenter, regex, or EAW lookup — width equals length.
+	if (/^[\u0020-\u007E]*$/.test(string)) {
+		return string.length;
+	}
+
 	let width = 0;
 	const eastAsianWidthOptions = {ambiguousAsWide: !ambiguousIsNarrow};
 
-	for (const {segment: character} of node_modules_string_width_segmenter.segment(string)) {
-		const codePoint = character.codePointAt(0);
-
-		// Ignore control characters
-		if (codePoint <= 0x1F || (codePoint >= 0x7F && codePoint <= 0x9F)) {
+	for (const {segment} of node_modules_string_width_segmenter.segment(string)) {
+		// Zero-width / non-printing clusters
+		const visibleSegment = baseVisible(segment);
+		if (visibleSegment === undefined) {
 			continue;
 		}
 
-		// Ignore zero-width characters
-		if (
-			(codePoint >= 0x20_0B && codePoint <= 0x20_0F) // Zero-width space, non-joiner, joiner, left-to-right mark, right-to-left mark
-			|| codePoint === 0xFE_FF // Zero-width no-break space
-		) {
-			continue;
-		}
-
-		// Ignore combining characters
-		if (
-			(codePoint >= 0x3_00 && codePoint <= 0x3_6F) // Combining diacritical marks
-			|| (codePoint >= 0x1A_B0 && codePoint <= 0x1A_FF) // Combining diacritical marks extended
-			|| (codePoint >= 0x1D_C0 && codePoint <= 0x1D_FF) // Combining diacritical marks supplement
-			|| (codePoint >= 0x20_D0 && codePoint <= 0x20_FF) // Combining diacritical marks for symbols
-			|| (codePoint >= 0xFE_20 && codePoint <= 0xFE_2F) // Combining half marks
-		) {
-			continue;
-		}
-
-		// Ignore surrogate pairs
-		if (codePoint >= 0xD8_00 && codePoint <= 0xDF_FF) {
-			continue;
-		}
-
-		// Ignore variation selectors
-		if (codePoint >= 0xFE_00 && codePoint <= 0xFE_0F) {
-			continue;
-		}
-
-		// This covers some of the above cases, but we still keep them for performance reasons.
-		if (node_modules_string_width_defaultIgnorableCodePointRegex.test(character)) {
-			continue;
-		}
-
-		// TODO: Use `/\p{RGI_Emoji}/v` when targeting Node.js 20.
-		if (yargs_node_modules_emoji_regex().test(character)) {
+		// Emoji width logic
+		if (rgiEmojiRegex.test(segment) || isDoubleWidthNonRgiEmojiSequence(segment)) {
 			width += 2;
 			continue;
 		}
 
+		const hangulWidth = hangulClusterWidth(visibleSegment, eastAsianWidthOptions);
+		if (hangulWidth !== undefined) {
+			width += hangulWidth;
+			continue;
+		}
+
+		// Everything else: EAW of the cluster’s first visible scalar
+		const codePoint = visibleSegment.codePointAt(0);
 		width += eastAsianWidth(codePoint, eastAsianWidthOptions);
+
+		// Add width for trailing spacing marks and Halfwidth/Fullwidth Forms (e.g., ﾞ, ﾟ, ｰ)
+		width += trailingWidth(visibleSegment, eastAsianWidthOptions);
 	}
 
 	return width;
@@ -38358,6 +39976,9 @@ const esm_require = (0,external_node_module_.createRequire)(import.meta.url);
 /******/ }
 /******/ 
 /************************************************************************/
+/******/ /* webpack/runtime/asset-relocator-loader */
+/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = decodeURIComponent(new URL('.', import.meta.url).pathname).slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
+/******/ 
 /******/ /* webpack/runtime/async module */
 /******/ (() => {
 /******/ 	var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
@@ -38463,10 +40084,6 @@ const esm_require = (0,external_node_module_.createRequire)(import.meta.url);
 /******/ 		return module;
 /******/ 	};
 /******/ })();
-/******/ 
-/******/ /* webpack/runtime/compat */
-/******/ 
-/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
 /******/ 
 /************************************************************************/
 /******/ 
