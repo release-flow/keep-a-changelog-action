@@ -3,6 +3,10 @@
   "version": "3.0.1",
   "description": "A CLI and set of GitHub Actions to work with a changelog that adheres to keep-a-changelog and Semantic Versioning conventions.",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/release-flow/keep-a-changelog-action"
+  },
   "bin": {
     "kac": "dist/cli/index.js"
   },
