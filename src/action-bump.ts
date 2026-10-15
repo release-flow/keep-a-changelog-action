@@ -39,7 +39,11 @@ function getBumpOptions(): BumpOptions | undefined {
     changelogPath = path.join(root, changelogPath);
   }
 
-  let releaseType: string | semver.SemVer = core.getInput('version') ?? 'patch';
+  let releaseType: string | semver.SemVer = core.getInput('version');
+  if (!releaseType.trim()) {
+    core.setFailed("Input 'version' is required.");
+    return;
+  }
   if (!isValidReleaseType(releaseType)) {
     if (semver.valid(releaseType)) {
       // It's a valid semver, so use that

@@ -16,7 +16,7 @@ async function run(): Promise<void> {
       break;
 
     default:
-      core.error(`'Invalid value for input 'command': '${command}'`);
+      core.setFailed(`Input 'command' has an invalid value '${command}'. The value must be one of: bump, query.`);
       break;
   }
 }

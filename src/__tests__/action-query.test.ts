@@ -44,6 +44,15 @@ describe('gh start action', () => {
     }
   });
 
+  it('errors when version is omitted', () => {
+    const params = { ...DefaultParams };
+    params.version = null;
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(getActionErrors(result)).toContain("Input 'version' is required.");
+  });
+
   it('errors when version is invalid', () => {
     const params = { ...DefaultParams };
     params.version = 'burble';

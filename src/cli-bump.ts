@@ -24,7 +24,7 @@ function getBumpOptions(argv: CliBumpArguments): BumpOptions | string {
     changelogPath = path.join(root, changelogPath);
   }
 
-  let releaseType: string | semver.SemVer = argv.version ?? 'patch';
+  let releaseType: string | semver.SemVer = argv.version;
   if (!isValidReleaseType(releaseType)) {
     if (semver.valid(releaseType)) {
       // It's a valid semver, so use that

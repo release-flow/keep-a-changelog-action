@@ -23,7 +23,7 @@ function getQueryOptions(argv: CliQueryArguments): QueryOptions | string {
     changelogPath = path.join(root, changelogPath);
   }
 
-  const version = argv.version ?? 'latest';
+  const version = argv.version;
   let target: QueryVersionOptionSpec;
 
   switch (version) {

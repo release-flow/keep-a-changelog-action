@@ -6958,7 +6958,7 @@ function getBumpOptions(argv) {
     if (!external_path_.isAbsolute(changelogPath)) {
         changelogPath = external_path_.join(root, changelogPath);
     }
-    let releaseType = argv.version ?? 'patch';
+    let releaseType = argv.version;
     if (!(0,types/* isValidReleaseType */.CF)(releaseType)) {
         if (semver.valid(releaseType)) {
             // It's a valid semver, so use that
@@ -7077,7 +7077,7 @@ function getQueryOptions(argv) {
     if (!path__WEBPACK_IMPORTED_MODULE_0__.isAbsolute(changelogPath)) {
         changelogPath = path__WEBPACK_IMPORTED_MODULE_0__.join(root, changelogPath);
     }
-    const version = argv.version ?? 'latest';
+    const version = argv.version;
     let target;
     switch (version) {
         case 'unreleased':
@@ -7166,9 +7166,8 @@ try {
         version: {
             alias: 'v',
             type: 'string',
-            describe: 'Specifies how to calculate the next version number. See readme for a full' +
-                ' description and a list of special values.',
-            default: 'patch',
+            describe: 'Specifies how to calculate the next version number. See the bump command documentation' +
+                ' (docs/bump.md) for a full description and a list of special values.',
             demandOption: true,
         },
         'release-date': {
@@ -7231,8 +7230,8 @@ try {
         version: {
             alias: 'v',
             type: 'string',
-            describe: 'Indicates the release version for which to extract the release information. See readme for a full' +
-                ' description and a list of values.',
+            describe: 'Indicates the release version for which to extract the release information. See the query command' +
+                ' documentation (docs/query.md) for a full description and a list of values.',
             demandOption: true,
         },
     }, async (argv) => {
@@ -26980,7 +26979,14 @@ const calculate_next_release_attacher = function (options) {
             file.data['nextReleaseVersion'] = options.version.format();
         }
         else {
-            file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid) ?? undefined;
+            const next = semver.inc(latestVersion.format(), options.version, undefined, options.preid);
+            if (!next) {
+                if (options.version === 'release' && latestVersion.prerelease.length === 0) {
+                    file.fail(`Version type 'release' can only be used when the latest release is a prerelease, but the latest version is ${latestVersion.format()}. Use major, minor or patch, or specify an explicit version.`);
+                }
+                file.fail(`Unable to calculate the next version from ${latestVersion.format()} using version type '${options.version}'.`);
+            }
+            file.data['nextReleaseVersion'] = next;
         }
     }
 };

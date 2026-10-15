@@ -182,6 +182,42 @@ describe('bump CLI subcommand', () => {
     expect(actualFile).toMatchFileSnapshot(expectedFile);
   });
 
+  it('errors when version is omitted', () => {
+    const params = { ...DefaultParams };
+    params.version = null;
+    params.outputFile = 'dummy.md';
+    const result = runCommand(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(result.stderr).toMatch(/Missing required argument: version/);
+  });
+
+  it('errors when version is release and the latest release is not a prerelease', () => {
+    const params = { ...DefaultParams };
+    params.version = 'release';
+    params.outputFile = 'dummy.md';
+    const result = runCommand(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(result.exitCode).toBe(255);
+    expect(getCliErrors(result)).toContain(
+      "Version type 'release' can only be used when the latest release is a prerelease, but the latest version is 1.0.0. Use major, minor or patch, or specify an explicit version."
+    );
+  });
+
+  it('removes the prerelease part when version is release and the latest release is a prerelease', async () => {
+    const params = { ...DefaultParams };
+    params.changelog = 'changelog_latest_prerelease.md';
+    params.version = 'release';
+    params.outputFile = 'changelog_release_output_cli.md';
+    const result = runCommand(params);
+
+    expect(result.isError).toBeFalsy();
+
+    const output = await fs.readFile(path.join(__dirname, 'changelog_release_output_cli.md'), 'utf-8');
+    expect(output).toMatch(/^## \[1\.1\.0\] - 2022-03-31$/m);
+  });
+
   it('keeps the unreleased section', () => {
     const params = { ...DefaultParams };
     params.outputFile = 'changelog_1_keep_unreleased_output_cli.md';

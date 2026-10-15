@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Remove ESLint and replace with oxlint
 - Update `@actions/core` to v3.0.1
+- Document the command line tool, and correct and complete the user documentation.
+- The action now fails if the `command` input is missing or is not `bump` or `query`, instead of reporting an error
+  but succeeding.
+- Fail with a clear error when the `release` version type is used and the latest release is not a prerelease.
+- The `version` input is now required by the action for both commands, with a clear error if it is missing. The
+  `kac bump` command no longer defaults `--version` to `patch`, for consistency.
 
 ## [3.0.1] - 2024-07-30
 

@@ -33,7 +33,21 @@ const attacher: Plugin<any, Root, Root> = function (options: BumpOptions) {
 
       file.data['nextReleaseVersion'] = options.version.format();
     } else {
-      file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid) ?? undefined;
+      const next = semver.inc(latestVersion.format(), options.version, undefined, options.preid);
+
+      if (!next) {
+        if (options.version === 'release' && latestVersion.prerelease.length === 0) {
+          file.fail(
+            `Version type 'release' can only be used when the latest release is a prerelease, but the latest version is ${latestVersion.format()}. Use major, minor or patch, or specify an explicit version.`
+          );
+        }
+
+        file.fail(
+          `Unable to calculate the next version from ${latestVersion.format()} using version type '${options.version}'.`
+        );
+      }
+
+      file.data['nextReleaseVersion'] = next;
     }
   }
 };
