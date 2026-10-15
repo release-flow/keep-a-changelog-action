@@ -63710,7 +63710,14 @@ const calculate_next_release_attacher = function (options) {
             file.data['nextReleaseVersion'] = options.version.format();
         }
         else {
-            file.data['nextReleaseVersion'] = semver.inc(latestVersion.format(), options.version, undefined, options.preid) ?? undefined;
+            const next = semver.inc(latestVersion.format(), options.version, undefined, options.preid);
+            if (!next) {
+                if (options.version === 'release' && latestVersion.prerelease.length === 0) {
+                    file.fail(`Version type 'release' can only be used when the latest release is a prerelease, but the latest version is ${latestVersion.format()}. Use major, minor or patch, or specify an explicit version.`);
+                }
+                file.fail(`Unable to calculate the next version from ${latestVersion.format()} using version type '${options.version}'.`);
+            }
+            file.data['nextReleaseVersion'] = next;
         }
     }
 };
@@ -64134,7 +64141,11 @@ function getBumpOptions() {
         const root = external_process_namespaceObject.env['GITHUB_WORKSPACE'] ?? external_process_namespaceObject.cwd();
         changelogPath = external_path_namespaceObject.join(root, changelogPath);
     }
-    let releaseType = getInput('version') ?? 'patch';
+    let releaseType = getInput('version');
+    if (!releaseType.trim()) {
+        setFailed("Input 'version' is required.");
+        return;
+    }
     if (!isValidReleaseType(releaseType)) {
         if (semver.valid(releaseType)) {
             // It's a valid semver, so use that
@@ -64241,7 +64252,11 @@ function getQueryOptions() {
         const root = external_process_namespaceObject.env['GITHUB_WORKSPACE'] ?? external_process_namespaceObject.cwd();
         changelogPath = external_path_namespaceObject.join(root, changelogPath);
     }
-    const version = getInput('version') ?? 'latest';
+    const version = getInput('version');
+    if (!version.trim()) {
+        setFailed("Input 'version' is required.");
+        return;
+    }
     let target;
     switch (version) {
         case 'unreleased':
@@ -64326,7 +64341,7 @@ async function run() {
             await bumpAction();
             break;
         default:
-            core_error(`'Invalid value for input 'command': '${command}'`);
+            setFailed(`Input 'command' has an invalid value '${command}'. The value must be one of: bump, query.`);
             break;
     }
 }

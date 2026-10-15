@@ -40,6 +40,15 @@ describe('gh start action', () => {
     }
   });
 
+  it('errors when version is omitted', () => {
+    const params = { ...DefaultParams };
+    params.version = null;
+    const result = runCommand(params);
+
+    expect(result.cli.isError).toBeTruthy();
+    expect(result.cli.stderr).toMatch(/Missing required argument: version/);
+  });
+
   it('errors when version is invalid', () => {
     const params = { ...DefaultParams };
     params.version = 'burble';

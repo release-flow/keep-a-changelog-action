@@ -14,9 +14,35 @@ automatically incremented according to the action parameters.
 
 Queries release information for a specified version from a changelog.
 
+## Quick start
+
+```yml
+    - uses: actions/checkout@v4
+
+    - name: Get the latest release notes
+      id: release
+      uses: release-flow/keep-a-changelog-action@v3
+      with:
+        command: query
+        version: latest
+```
+
+The changelog must follow the [format](./docs/bump.md#changelog-format) described in the `bump` documentation.
+
+## Command line
+
+The commands are also available from the command line, using the `kac` tool in the
+[`@release-flow/keep-a-changelog`](https://www.npmjs.com/package/@release-flow/keep-a-changelog) npm package:
+
+```sh
+npx @release-flow/keep-a-changelog query --version latest
+```
+
+See the [command line documentation](./docs/cli.md) for all options.
+
 ## Updating from V1 to V2
 
-The upgrade is fairly straightforward, documented [here](./docs/upgrade-v2.md).
+The upgrade is fairly straightforward, documented in the [V2 upgrade guide](./docs/upgrade-v2.md).
 
 ## License
 

@@ -18,7 +18,8 @@ inputs:
   version:
     description: >-
       The release version. When bumping, determines the next version number. When querying, indicates the version for
-      which to extract the release information. See readme for a full description and a list of special values.
+      which to extract the release information. See the bump and query documentation (docs/bump.md and docs/query.md)
+      for a full description and a list of special values.
     required: true
   preid:
     description: >-
@@ -62,11 +63,13 @@ outputs:
       The markdown content of the changelog section for the release.
   release-date:
     description: >-
-      The release date in the form yyyy-MM-dd, or blank if the matched version was '[unreleased]'.
+      When querying, the release date in the form yyyy-MM-dd, or blank if the matched version was '[unreleased]'. Not
+      set when bumping.
   release-suffix:
     description: >-
-      The final part of the release heading, after the version and date have been parsed. For example, if the release
-      heading  is '## [0.0.5] - 2014-12-13 [YANKED]', this output would contain '[YANKED]'.
+      When querying, the final part of the release heading, after the version and date have been parsed. For example,
+      if the release heading is '## [0.0.5] - 2014-12-13 [YANKED]', this output would contain '[YANKED]'. Not set when
+      bumping.
 runs:
     using: 'node24'
     main: dist/index.js

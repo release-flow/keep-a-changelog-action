@@ -190,6 +190,38 @@ describe('bump subcommand', () => {
     );
   });
 
+  it('errors when version is omitted', () => {
+    const params = { ...DefaultParams };
+    params.version = null;
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(getActionErrors(result)).toContain("Input 'version' is required.");
+  });
+
+  it('errors when version is release and the latest release is not a prerelease', () => {
+    const params = { ...DefaultParams };
+    params.version = 'release';
+    params.outputFile = 'dummy.md';
+    const result = runAction(params);
+
+    expect(result.isError).toBeTruthy();
+    expect(getActionErrors(result)).toContain(
+      "Version type 'release' can only be used when the latest release is a prerelease, but the latest version is 1.0.0. Use major, minor or patch, or specify an explicit version."
+    );
+  });
+
+  it('removes the prerelease part when version is release and the latest release is a prerelease', () => {
+    const params = { ...DefaultParams };
+    params.changelog = 'changelog_latest_prerelease.md';
+    params.version = 'release';
+    params.outputFile = 'changelog_release_output.md';
+    const result = runAction(params);
+
+    expect(result.isError).toBeFalsy();
+    expect(result.outputs).toHaveProperty('version', '1.1.0');
+  });
+
   it('keeps the unreleased section', () => {
     const params = { ...DefaultParams };
     params.outputFile = 'changelog_1_keep_unreleased_output.md';

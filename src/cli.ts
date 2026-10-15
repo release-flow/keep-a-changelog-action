@@ -25,9 +25,8 @@ try {
           alias: 'v',
           type: 'string',
           describe:
-            'Specifies how to calculate the next version number. See readme for a full' +
-            ' description and a list of special values.',
-          default: 'patch',
+            'Specifies how to calculate the next version number. See the bump command documentation' +
+            ' (docs/bump.md) for a full description and a list of special values.',
           demandOption: true,
         },
         'release-date': {
@@ -103,8 +102,8 @@ try {
           alias: 'v',
           type: 'string',
           describe:
-            'Indicates the release version for which to extract the release information. See readme for a full' +
-            ' description and a list of values.',
+            'Indicates the release version for which to extract the release information. See the query command' +
+            ' documentation (docs/query.md) for a full description and a list of values.',
           demandOption: true,
         },
       },

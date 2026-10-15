@@ -24,7 +24,11 @@ function getQueryOptions(): QueryOptions | undefined {
     changelogPath = path.join(root, changelogPath);
   }
 
-  const version = core.getInput('version') ?? 'latest';
+  const version = core.getInput('version');
+  if (!version.trim()) {
+    core.setFailed("Input 'version' is required.");
+    return;
+  }
   let target: QueryVersionOptionSpec;
 
   switch (version) {

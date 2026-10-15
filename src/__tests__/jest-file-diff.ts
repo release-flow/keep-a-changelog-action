@@ -1,8 +1,6 @@
 import fs from 'fs';
 import { diffLinesUnified, DiffOptions } from 'jest-diff';
 
-export {};
-
 declare global {
   namespace jest {
     interface Matchers<R> {
