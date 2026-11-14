@@ -20,8 +20,16 @@ Both expose two commands that operate on a [Keep a Changelog](https://keepachang
 npm ci --legacy-peer-deps
 ```
 
-Installing also sets up [husky](https://typicode.github.io/husky/); the pre-commit hook runs `lint-staged`, which
-runs `oxlint` on staged `src/**/*.{js,jsx,ts,tsx}` files.
+Installing also sets up the Git hooks in `lefthook.yml` (via the `prepare` script, which runs
+[`lefthook install`](https://lefthook.dev/)):
+
+- **pre-commit** runs `oxlint --deny-warnings` (so warnings block the commit) on staged `src/**/*.{js,jsx,ts,tsx}` files
+  and `prettier --check` on staged `*.ts` files. Fix formatting with `npm run format`.
+- **pre-push** rebuilds `dist/` and fails if it differs from what is committed, like `check-dist.yml` does. The rebuilt
+  files are left in your working tree, ready to commit.
+
+Skip the hooks for one command with `LEFTHOOK=0` or `--no-verify`. Put personal overrides in `lefthook-local.yml`. If
+you are upgrading a checkout that used husky, run `git config --unset core.hooksPath` and then `npx lefthook install`.
 
 ## Project layout
 
@@ -67,7 +75,7 @@ runs `oxlint` on staged `src/**/*.{js,jsx,ts,tsx}` files.
 | `npm run clean`            | Remove `lib/`                                                              |
 | `npm run format`           | Prettier write for `**/*.ts`                                               |
 | `npm run format-check`     | Prettier check for `**/*.ts`                                               |
-| `npm run lint`             | `oxlint` on `src/**/*.ts`                                                  |
+| `npm run lint`             | `oxlint` on `src/**/*.ts`; fails on warnings as well as errors             |
 | `npm run package`          | Bundle `lib/` into `dist/` and `dist/cli/` with `@vercel/ncc`              |
 | `npm run all`              | build, format-check, lint, test and package; run this before pushing       |
 
@@ -92,7 +100,8 @@ CI (`ci.yml` and `check-dist.yml`) rebuilds and fails the pull request if `dist/
 
 - TypeScript, strict, ESM with `NodeNext` resolution: relative imports **must** use the `.js` extension.
 - Prettier: 120 columns, single quotes, ES5 trailing commas. Only `**/*.ts` is formatted by the scripts.
-- `oxlint` is the linter (configured in `.oxlintrc.json`); most rules are warnings and do not fail the script.
+- `oxlint` is the linter (configured in `.oxlintrc.json`). It runs with `--deny-warnings`, so warnings fail the
+  `lint` script and the pre-commit hook just as errors do.
 - Markdown follows `.markdownlint.json` (120-column lines; code blocks and tables exempt).
 
 ## Changelog and versioning

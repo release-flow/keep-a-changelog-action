@@ -17,8 +17,11 @@ npm run format              # prettier --write **/*.ts
 - Tests run against compiled `lib/`, so **build before `npm test`**.
 - `dist/` is committed and CI fails if it is stale: run `npm run all` and commit `dist/` with any `src/` or
   dependency change. Never edit `dist/` by hand.
+- Git hooks (`lefthook.yml`): pre-commit runs oxlint and `prettier --check` on staged files; pre-push fails if `dist/`
+  is stale.
 - ESM with `NodeNext`: relative imports in `src/` need the `.js` extension.
-- Linting is `oxlint` (not ESLint); formatting is Prettier (120 cols, single quotes) for `**/*.ts` only.
+- Linting is `oxlint` (not ESLint) with `--deny-warnings`, so warnings fail; formatting is Prettier (120 cols, single
+  quotes) for `**/*.ts` only.
 - Add user-visible changes under `## [Unreleased]` in `CHANGELOG.md`; use `**BREAKING**:` for breaking changes. Don't
   hand-edit the generated link definitions.
 - `package.json` version is a placeholder; the release workflow sets the real version.
