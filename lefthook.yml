@@ -1,0 +1,26 @@
+# Git hooks, installed by `npm ci` / `npm install` via the `prepare` script (`lefthook install`).
+# Skip with `LEFTHOOK=0 git ...` or `git commit --no-verify`; personal overrides go in lefthook-local.yml.
+
+glob_matcher: doublestar # standard ** semantics: src/**/*.ts also matches src/foo.ts
+
+pre-commit:
+  parallel: true
+  commands:
+    oxlint:
+      glob: 'src/**/*.{js,jsx,ts,tsx}'
+      run: npx oxlint --deny-warnings {staged_files}
+    prettier:
+      glob: '**/*.ts'
+      run: npx prettier --check {staged_files}
+
+pre-push:
+  commands:
+    # Mirrors .github/workflows/check-dist.yml: rebuild dist/ and fail if it differs from what is committed.
+    check-dist:
+      run: |
+        npm run build --silent && npm run package --silent > /dev/null || exit 1
+        if [ -n "$(git diff --ignore-space-at-eol --ignore-cr-at-eol --name-only -- dist/ ':(exclude)*.js.map')" ]; then
+          echo "dist/ is stale. The rebuilt files are in your working tree; commit them and push again:"
+          git diff --stat -- dist/ ':(exclude)*.js.map'
+          exit 1
+        fi
