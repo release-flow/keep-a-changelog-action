@@ -24,7 +24,10 @@ npm run format              # prettier --write **/*.ts
   quotes) for `**/*.ts` only.
 - Add user-visible changes under `## [Unreleased]` in `CHANGELOG.md`; use `**BREAKING**:` for breaking changes. Don't
   hand-edit the generated link definitions.
-- `package.json` version is a placeholder; the release workflow sets the real version.
+- `package.json`/`package-lock.json` versions are set by `npm run release -- prepare` and must match the latest
+  changelog release (the release workflows check this); don't edit them by hand.
+- `scripts/release.ts` runs directly under Node (type stripping): Node built-ins only, erasable TS syntax only, and
+  check it with `npm run check-scripts`.
 - Branch off `main`. Name bug fix branches `bugfix/<issue>-<short-description>` (e.g.
   `bugfix/98-oldest-release-notes-definitions`), not `fix/`. Include the issue number whenever there is one.
 
@@ -33,12 +36,15 @@ npm run format              # prettier --write **/*.ts
 - `action.yml`: inputs/outputs; entry `dist/index.js` (`node24`).
 - `src/index.ts` dispatches to `action-bump.ts` / `action-query.ts`; `src/cli.ts` (+ `cli-*.ts`) is the yargs CLI.
 - `src/commands.ts`: core `bump()` / `query()` as unified/remark pipelines; plugins live in `src/plugins/`.
+- `scripts/release.ts`: release tooling (`prepare`, plus `verify`/`check-newer`/... helpers used by the workflows),
+  tested by `scripts/release.test.ts` (`node:test`).
 - `src/__tests__/`: Jest tests that spawn the action/CLI and diff against markdown fixtures.
 - `docs/`: user docs (`bump.md`, `query.md`, `cli.md`, `upgrade-v2.md`) and the development guide. Keep them in sync
   with `action.yml` and the yargs options in `src/cli.ts` when inputs/options change.
 
 ## Releasing
 
-Run the "[autorelease] Prepare release PR" workflow, merge the generated PR, publish the draft release, then
+From a clean, up-to-date `main`, run `npm run release -- prepare <type> --dry-run`, then the same without
+`--dry-run`; it opens a `chore/release-<version>` PR with your `gh` login. Merge it, publish the draft release, then
 **manually publish the staged npm package** (the workflow only runs `npm stage publish`). See
 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md#releasing).

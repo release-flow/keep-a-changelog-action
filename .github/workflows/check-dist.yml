@@ -7,44 +7,48 @@ name: Ensure dist files are updated
 
 on:
   pull_request:
-    branches: 
-    - main
-    - autorelease/*
+    branches:
+      - main
   workflow_dispatch:
-    
-    
+
+permissions: {}
+
 jobs:
   check-dist:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
 
-    - name: Set Node.js version
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: '.nvmrc'
+      - name: Set Node.js version
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: '.nvmrc'
 
-    - name: Install dependencies
-      run: npm ci --legacy-peer-deps
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
 
-    - name: Rebuild the dist directory
-      run: |
-        npm run build
-        npm run package
+      - name: Rebuild the dist directory
+        run: |
+          npm run build
+          npm run package
 
-    - name: Compare the expected and actual dist/ directories
-      run: |
-        if [ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]; then
-          echo "Detected uncommitted changes after build.  See status below:"
-          git diff
-          exit 1
-        fi
-      id: diff
+      - name: Compare the expected and actual dist/ directories
+        run: |
+          if [ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]; then
+            echo "Detected uncommitted changes after build.  See status below:"
+            git diff
+            exit 1
+          fi
+        id: diff
 
-    # If index.js was different than expected, upload the expected version as an artifact
-    - uses: actions/upload-artifact@v4
-      if: ${{ failure() && steps.diff.conclusion == 'failure' }}
-      with:
-        name: dist
-        path: dist/
+      # If index.js was different than expected, upload the expected version as an artifact
+      - uses: actions/upload-artifact@v7.0.2
+        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
+        with:
+          name: dist
+          path: dist/

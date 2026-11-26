@@ -7,7 +7,7 @@ pre-commit:
   parallel: true
   commands:
     oxlint:
-      glob: 'src/**/*.{js,jsx,ts,tsx}'
+      glob: '{src,scripts}/**/*.{js,jsx,ts,tsx}'
       run: npx oxlint --deny-warnings {staged_files}
     prettier:
       glob: '**/*.ts'
