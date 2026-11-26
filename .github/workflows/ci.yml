@@ -71,6 +71,6 @@ jobs:
           set -euo pipefail
           version=$(node scripts/release.ts parse-branch "$HEAD_REF")
           node scripts/release.ts verify "$version"
-          { git tag --list 'v*'; gh api "repos/$REPO/releases" --paginate --jq '.[].tag_name'; } > "$RUNNER_TEMP/existing.txt"
+          { git tag --list 'v*.*.*'; gh api "repos/$REPO/releases" --paginate --jq '.[].tag_name'; } > "$RUNNER_TEMP/existing.txt"
           node scripts/release.ts check-newer "$version" --existing "$RUNNER_TEMP/existing.txt"
           echo "Release pull request for $version is consistent" >> "$GITHUB_STEP_SUMMARY"
