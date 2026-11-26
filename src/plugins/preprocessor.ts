@@ -8,7 +8,6 @@ import { is } from 'unist-util-is';
 
 import { isReleaseSpec, ReleaseHeading, ReleaseSpec } from '../types.js';
 
-
 // Augment the unified.Data interface to include our processor data
 declare module 'mdast' {
   interface HeadingData {
@@ -18,14 +17,14 @@ declare module 'mdast' {
 }
 
 const attacher: Plugin<[], Root, Root> = function () {
-
   return (tree: Root, file: VFile) => {
     let previousReleaseHeading: Heading | null = null;
     let previousDefinition: Definition | null = null;
     const releaseHeadings: ReleaseHeading[] = [];
 
     // First pass - add the 'nextSection' data property to each release heading node to indicate the
-    // node that starts the next section
+    // node that starts the next section: the next release heading or, for the last release section,
+    // the first of the link definitions at the end of the changelog
     visit(tree, [{ type: 'heading', depth: 2 }, 'definition'], (node, _index, parent) => {
       if (is(node, 'heading')) {
         const currentRelease = node.data?.release;
@@ -54,7 +53,10 @@ const attacher: Plugin<[], Root, Root> = function () {
       }
 
       if (is(node, 'definition') && previousReleaseHeading) {
-        previousReleaseHeading.data!['nextSection'] = node;
+        // Only the first definition terminates the last release section
+        if (!previousDefinition) {
+          previousReleaseHeading.data!['nextSection'] = node;
+        }
         previousDefinition = node;
       }
     });

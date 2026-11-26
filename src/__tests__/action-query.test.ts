@@ -142,6 +142,17 @@ it('sets the output variables for a specified version, old output mechanism', ()
   expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Some features%0A');
 });
 
+it('excludes the link definitions from the release notes of the oldest version', () => {
+  const params = { ...DefaultParams };
+  params.version = '0.8.2-beta.1';
+  const result = runAction(params);
+
+  expect(result.isError).toBeFalsy();
+
+  expect(result.outputs).toHaveProperty('version', '0.8.2-beta.1');
+  expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- 0.8.2 features%0A');
+});
+
 it('returns latest version when latest-or-unreleased requested and the changelog has a release section', () => {
   const params = { ...DefaultParams };
   params.changelog = 'good_changelog.md';
