@@ -65,7 +65,7 @@ jobs:
           version=$(node scripts/release.ts parse-branch "$HEAD_REF")
           node scripts/release.ts verify "$version"
           # Drafts are included: this token can see them.
-          { git tag --list 'v*'; gh api "repos/$REPO/releases" --paginate --jq '.[].tag_name'; } > "$RUNNER_TEMP/existing.txt"
+          { git tag --list 'v*.*.*'; gh api "repos/$REPO/releases" --paginate --jq '.[].tag_name'; } > "$RUNNER_TEMP/existing.txt"
           node scripts/release.ts check-newer "$version" --existing "$RUNNER_TEMP/existing.txt"
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "prerelease=$(node scripts/release.ts is-prerelease "$version")" >> "$GITHUB_OUTPUT"
