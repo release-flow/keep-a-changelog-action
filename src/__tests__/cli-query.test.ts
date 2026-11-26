@@ -56,7 +56,7 @@ describe('gh start action', () => {
 
     expect(result.cli.isError).toBeTruthy();
     expect(getCliErrors(result.cli)).toContain(
-      "Input 'version' contains invalid value 'burble'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')"
+      "Option '--version' has an invalid value 'burble'. The value must be one of: latest, unreleased, or latest-or-unreleased. Alternatively, it can be a valid semantic version number."
     );
   });
 
@@ -67,7 +67,7 @@ describe('gh start action', () => {
     const result = runCommand(params);
 
     expect(result.cli.isError).toBeTruthy();
-    expect(getCliErrors(result.cli)).toContain("The specified release, 'unreleased', was not found in the changelog");
+    expect(getCliErrors(result.cli)).toContain("The specified release, 'unreleased', was not found in the changelog.");
   });
 
   it('errors when the changelog does not have the specified version', () => {
@@ -76,7 +76,7 @@ describe('gh start action', () => {
     const result = runCommand(params);
 
     expect(result.cli.isError).toBeTruthy();
-    expect(getCliErrors(result.cli)).toContain("The specified release, '17.18.19', was not found in the changelog");
+    expect(getCliErrors(result.cli)).toContain("The specified release, '17.18.19', was not found in the changelog.");
   });
 
   it('errors when latest requested but the changelog does not have any versions', () => {
@@ -86,7 +86,7 @@ describe('gh start action', () => {
     const result = runCommand(params);
 
     expect(result.cli.isError).toBeTruthy();
-    expect(getCliErrors(result.cli)).toContain("The specified release, 'latest', was not found in the changelog");
+    expect(getCliErrors(result.cli)).toContain("The specified release, 'latest', was not found in the changelog.");
   });
 
   it('sets the output variables for the latest version', () => {
@@ -167,7 +167,7 @@ it('errors when latest-or-unreleased requested but the changelog does not have a
   const result = runCommand(params);
 
   expect(result.cli.isError).toBeTruthy();
-  expect(getCliErrors(result.cli)).toContain('No release headings in changelog');
+  expect(getCliErrors(result.cli)).toContain('The changelog does not contain any release sections.');
 });
 
 function runCommand(params: CliParams): ParsedResult {

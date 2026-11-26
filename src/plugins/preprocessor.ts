@@ -37,7 +37,7 @@ const attacher: Plugin<[], Root, Root> = function () {
 
         if (previousDefinition) {
           const msg = file.message(
-            'All release link definitions must be located at the end of the changelog',
+            'All release link definitions must be located at the end of the changelog.',
             previousDefinition.position
           );
           msg.fatal = true;
@@ -80,7 +80,7 @@ const attacher: Plugin<[], Root, Root> = function () {
       if (currentHeading.release === 'unreleased') {
         // The unreleased section must be first in the file. Clearly it isn't!
         const msg = file.message(
-          "The 'Unreleased' section must be unique, and must be the first release section in the file",
+          'The [Unreleased] section must be unique, and must be the first release section in the file.',
           currentHeading.node.position
         );
         msg.fatal = true;
@@ -88,7 +88,7 @@ const attacher: Plugin<[], Root, Root> = function () {
       }
 
       if (semver.gte(currentHeading.release.version, previousHeading.release.version)) {
-        const msg = file.message('Release sections must be in descending order', currentHeading.node.position);
+        const msg = file.message('Release sections must be in descending order.', currentHeading.node.position);
         msg.fatal = true;
       }
     }

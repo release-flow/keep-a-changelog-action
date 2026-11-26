@@ -4,7 +4,7 @@ import { VFile } from 'vfile';
 
 function transformer(_tree: Node, file: VFile) {
   if (file.messages.some((m) => m.fatal === true)) {
-    file.fail('Invalid changelog: fatal errors were detected');
+    file.fail('Invalid changelog: fatal errors were detected.');
   }
 }
 

@@ -17,13 +17,15 @@ const attacher: Plugin<[BumpOptions], Root, Root> = function checkUnreleasedSect
 
     // If there are no releases then pass on an empty document
     if (releaseHeadings.length === 0) {
-      file.message('No release sections found. The changelog must contain an unreleased section').fatal = true;
+      file.message(
+        'The changelog does not contain any release sections. It must contain an [Unreleased] section.'
+      ).fatal = true;
       return;
     }
 
     // If the first release section is not 'Unreleased' then pass on an empty document
     if (releaseHeadings[0].release !== 'unreleased') {
-      let message = "The changelog must contain an 'unreleased' section as the first release section";
+      let message = 'The changelog must contain an [Unreleased] section as the first release section.';
 
       const nextReleaseVersion = file.data.nextReleaseVersion;
       if (
@@ -33,7 +35,7 @@ const attacher: Plugin<[BumpOptions], Root, Root> = function checkUnreleasedSect
         semver.prerelease(nextReleaseVersion) === null
       ) {
         message +=
-          '. To release the prereleases without an [Unreleased] section, enable merge-prereleases to merge them into the new release';
+          ' To release the prereleases without an [Unreleased] section, enable merge-prereleases to merge them into the new release.';
       }
 
       file.message(message).fatal = true;

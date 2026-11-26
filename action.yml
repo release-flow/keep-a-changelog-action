@@ -43,21 +43,21 @@ inputs:
     required: false
   keep-unreleased-section:
     description: >-
-      When bumping, keeps an empty 'Unreleased' section in the output changelog after bumping the input changelog's
-      'Unreleased' section.
+      When bumping, keeps an empty [Unreleased] section in the output changelog after bumping the input changelog's
+      [Unreleased] section.
     required: false
     default: 'false'
   fail-on-empty-release-notes:
     description: >-
-      When bumping, if this input is true then the action will report an error if it detects an empty 'Unreleased'
+      When bumping, if this input is true then the action fails if it detects an empty [Unreleased]
       section in the input changelog.
     required: false
     default: 'false'
   merge-prereleases:
     description: >-
       When bumping, merges all the prerelease sections since the latest full release into the new release, together
-      with the 'Unreleased' section if there is one. The new version must be a full (non-prerelease) version. The
-      'Unreleased' section is not required when there are prereleases to merge.
+      with the [Unreleased] section if there is one. The new version must be a full (non-prerelease) version. The
+      [Unreleased] section is not required when there are prereleases to merge.
     required: false
     default: 'false'
 outputs:

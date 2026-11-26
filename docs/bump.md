@@ -38,8 +38,8 @@ The command is also available from the [command line](./cli.md#kac-bump).
 | `tag-prefix` | The prefix that is applied to the release number to generate the release tag. It is used when generating the link definitions at the end of the changelog. | `v` |
 | `changelog` | The path to the changelog to modify. If a relative path is specified, it is appended to the GitHub workspace path. | `CHANGELOG.md` |
 | `output-file` | The name of the modified changelog file, which is written relative to the directory of the input changelog. If not specified, the input changelog is overwritten. | Empty string |
-| `keep-unreleased-section` | Keeps an empty 'Unreleased' section in the output changelog after bumping the input changelog's 'Unreleased' section. Must be `true` or `false`. | `false` |
-| `fail-on-empty-release-notes` | If this input is `true` then the action will fail if it detects an empty 'Unreleased' section in the input changelog. Must be `true` or `false`. | `false` |
+| `keep-unreleased-section` | Keeps an empty `[Unreleased]` section in the output changelog after bumping the input changelog's `[Unreleased]` section. Must be `true` or `false`. | `false` |
+| `fail-on-empty-release-notes` | If this input is `true` then the action will fail if it detects an empty `[Unreleased]` section in the input changelog. Must be `true` or `false`. | `false` |
 | `merge-prereleases` | Merges the prerelease sections since the latest full release into the new release. The new version must be a full (non-prerelease) version, otherwise the action fails. See [Merging prereleases](#merging-prereleases). Must be `true` or `false`. | `false` |
 
 ### The `version` input

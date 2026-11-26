@@ -42,7 +42,7 @@ function getQueryOptions(): QueryOptions | undefined {
       const parsed = semver.parse(version);
       if (!parsed) {
         core.setFailed(
-          `Input 'version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')`
+          `Input 'version' has an invalid value '${version}'. The value must be one of: latest, unreleased, or latest-or-unreleased. Alternatively, it can be a valid semantic version number.`
         );
         return;
       }
@@ -100,7 +100,7 @@ export default async function queryAction(): Promise<void> {
       core.error(error);
       core.endGroup();
     } else {
-      core.setFailed('An unexpected error occurred');
+      core.setFailed('An unexpected error occurred.');
       console.error(error);
     }
   }

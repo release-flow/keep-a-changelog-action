@@ -80,7 +80,7 @@ describe('bump subcommand', () => {
 
     expect(result.isError).toBeTruthy();
     expect(getActionErrors(result)).toContain(
-      "Input 'release-date' has an invalid value '12/21/2022'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'"
+      "Input 'release-date' has an invalid value '12/21/2022'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'."
     );
   });
 
@@ -102,7 +102,7 @@ describe('bump subcommand', () => {
 
     expect(result.isError).toBeTruthy();
     expect(getActionErrors(result)).toContain(
-      'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.'
+      'The changelog does not contain any release notes in the [Unreleased] section, and fail-on-empty-release-notes is enabled.'
     );
   });
 
@@ -187,7 +187,9 @@ describe('bump subcommand', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getActionErrors(result)).toContain('Specified version 0.1.1 must be greater than latest version 1.0.0');
+    expect(getActionErrors(result)).toContain(
+      'The specified version 0.1.1 must be greater than the latest version, 1.0.0.'
+    );
   });
 
   it('errors when version is omitted', () => {
@@ -350,7 +352,7 @@ describe('bump subcommand', () => {
       const result = runAction(params);
 
       expect(result.isError).toBeTruthy();
-      expect(result.stdout).toMatch(/must contain an 'unreleased' section/);
+      expect(result.stdout).toMatch(/must contain an \[Unreleased\] section/);
       expect(result.stdout).not.toMatch(/merge-prereleases/);
     });
   });

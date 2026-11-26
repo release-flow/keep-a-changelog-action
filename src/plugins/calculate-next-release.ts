@@ -27,7 +27,7 @@ const attacher: Plugin<any, Root, Root> = function (options: BumpOptions) {
     if (options.version instanceof SemVer) {
       if (options.version.compare(latestVersion) <= 0) {
         file.fail(
-          `Specified version ${options.version.format()} must be greater than latest version ${latestVersion.format()}`
+          `The specified version ${options.version.format()} must be greater than the latest version, ${latestVersion.format()}.`
         );
       }
 
