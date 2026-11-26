@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [3.1.1] - 2026-11-26
+
 ### Fixed
 
 - Fix `release-notes` for the oldest release including the changelog's trailing link definitions when there are two
@@ -137,6 +139,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Initial content including change log
+
+[Unreleased]: https://github.com/release-flow/keep-a-changelog-action/compare/v3.1.1...HEAD
+
+[3.1.1]: https://github.com/release-flow/keep-a-changelog-action/compare/v3.1.0...v3.1.1
 
 [3.1.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v3.0.1...v3.1.0
 
