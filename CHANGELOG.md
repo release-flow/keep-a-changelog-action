@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-11-26
+
 ### Added
 
 - Add the `merge-prereleases` input (`--merge-prereleases` in the CLI), which merges the prerelease sections since the
@@ -154,7 +156,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Initial content including change log
 
-[Unreleased]: https://github.com/release-flow/keep-a-changelog-action/compare/v3.1.1...HEAD
+[Unreleased]: https://github.com/release-flow/keep-a-changelog-action/compare/v3.2.0...HEAD
+
+[3.2.0]: https://github.com/release-flow/keep-a-changelog-action/compare/v3.1.1...v3.2.0
 
 [3.1.1]: https://github.com/release-flow/keep-a-changelog-action/compare/v3.1.0...v3.1.1
 

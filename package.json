@@ -1,6 +1,6 @@
 {
   "name": "@release-flow/keep-a-changelog",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "A CLI and set of GitHub Actions to work with a changelog that adheres to keep-a-changelog and Semantic Versioning conventions.",
   "type": "module",
   "repository": {
