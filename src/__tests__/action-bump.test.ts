@@ -185,9 +185,7 @@ describe('bump subcommand', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getActionErrors(result)).toContain(
-      'Specified version 0.1.1 must be greater than latest version 1.0.0'
-    );
+    expect(getActionErrors(result)).toContain('Specified version 0.1.1 must be greater than latest version 1.0.0');
   });
 
   it('errors when version is omitted', () => {
@@ -246,6 +244,16 @@ describe('bump subcommand', () => {
     expect(result.outputs).toHaveProperty('version', '1.1.0-beta.0');
     expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
   });
+});
+
+it('sets the release-notes output when the only section is followed by multiple link definitions', () => {
+  const params = { ...DefaultParams };
+  params.changelog = 'initial_changelog_3.md';
+  const result = runAction(params);
+
+  expect(result.isError).toBeFalsy();
+
+  expect(result.outputs).toHaveProperty('release-notes', '### Added%0A%0A- Initial content including change log%0A');
 });
 
 function runAction(params: ActionParams): ActionResult {

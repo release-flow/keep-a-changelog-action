@@ -25,6 +25,8 @@ npm run format              # prettier --write **/*.ts
 - Add user-visible changes under `## [Unreleased]` in `CHANGELOG.md`; use `**BREAKING**:` for breaking changes. Don't
   hand-edit the generated link definitions.
 - `package.json` version is a placeholder; the release workflow sets the real version.
+- Branch off `main`. Name bug fix branches `bugfix/<issue>-<short-description>` (e.g.
+  `bugfix/98-oldest-release-notes-definitions`), not `fix/`. Include the issue number whenever there is one.
 
 ## Layout
 

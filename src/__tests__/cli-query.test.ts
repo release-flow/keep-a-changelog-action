@@ -125,6 +125,17 @@ it('sets the output variables for a specified version', () => {
   expect(result.output).toHaveProperty('release-notes', '### Added\n\n- Some features\n');
 });
 
+it('excludes the link definitions from the release notes of the oldest version', () => {
+  const params = { ...DefaultParams };
+  params.version = '0.8.2-beta.1';
+  const result = runCommand(params);
+
+  expect(result.cli.isError).toBeFalsy();
+
+  expect(result.output).toHaveProperty('version', '0.8.2-beta.1');
+  expect(result.output).toHaveProperty('release-notes', '### Added\n\n- 0.8.2 features\n');
+});
+
 it('returns latest version when latest-or-unreleased requested and the changelog has a release section', () => {
   const params = { ...DefaultParams };
   params.changelog = 'good_changelog.md';

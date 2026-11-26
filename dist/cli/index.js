@@ -6909,8 +6909,8 @@ var to_vfile_lib = __nccwpck_require__(5143);
 var semver = __nccwpck_require__(2088);
 // EXTERNAL MODULE: ./lib/types.js
 var types = __nccwpck_require__(4170);
-// EXTERNAL MODULE: ./lib/commands.js + 132 modules
-var commands = __nccwpck_require__(2009);
+// EXTERNAL MODULE: ./lib/commands.js + 133 modules
+var commands = __nccwpck_require__(3128);
 ;// CONCATENATED MODULE: ./lib/release-link-generator.js
 
 class GitHubReleaseLinkGenerator {
@@ -7056,7 +7056,7 @@ function getRepoOptions(githubRepo) {
 /* harmony import */ var semver__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2088);
 /* harmony import */ var to_vfile__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(5143);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(3277);
-/* harmony import */ var _commands_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(2009);
+/* harmony import */ var _commands_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(3128);
 /* harmony import */ var vfile_reporter__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(3005);
 /* harmony import */ var vfile_message__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(3092);
 
@@ -7260,7 +7260,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 2009:
+/***/ 3128:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -26633,7 +26633,8 @@ const preprocessor_attacher = function () {
         let previousDefinition = null;
         const releaseHeadings = [];
         // First pass - add the 'nextSection' data property to each release heading node to indicate the
-        // node that starts the next section
+        // node that starts the next section: the next release heading or, for the last release section,
+        // the first of the link definitions at the end of the changelog
         visit(tree, [{ type: 'heading', depth: 2 }, 'definition'], (node, _index, parent) => {
             if (is(node, 'heading')) {
                 const currentRelease = node.data?.release;
@@ -26654,7 +26655,10 @@ const preprocessor_attacher = function () {
                 releaseHeadings.push({ node, parent: parent || tree, release: currentRelease });
             }
             if (is(node, 'definition') && previousReleaseHeading) {
-                previousReleaseHeading.data['nextSection'] = node;
+                // Only the first definition terminates the last release section
+                if (!previousDefinition) {
+                    previousReleaseHeading.data['nextSection'] = node;
+                }
                 previousDefinition = node;
             }
         });
@@ -26856,12 +26860,13 @@ const findAllAfter =
     }
   )
 
-;// CONCATENATED MODULE: ./lib/plugins/extract-release-notes.js
+;// CONCATENATED MODULE: ./lib/plugins/release-notes.js
 
 
-
-const { SemVer } = semver;
-
+/**
+ * Returns the release notes for a release section: the nodes between its heading and the start of
+ * the next section, as recorded by the preprocessor.
+ */
 function getReleaseNotes(heading, tree) {
     const root = { type: 'root', children: [] };
     // The terminator node can be undefined, e.g. if the section is the last section in the file
@@ -26871,6 +26876,12 @@ function getReleaseNotes(heading, tree) {
     root.children.push(...result);
     return root;
 }
+//# sourceMappingURL=release-notes.js.map
+;// CONCATENATED MODULE: ./lib/plugins/extract-release-notes.js
+
+const { SemVer } = semver;
+
+
 function findReleaseHeading(target, headings) {
     for (let i = 0; i < headings.length; i++) {
         const heading = headings[i];
@@ -27230,20 +27241,10 @@ function isQuerySpecialVersionOption(maybe) {
 //# sourceMappingURL=options.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/extract-release-info.js
 
-
-
 const { SemVer: extract_release_info_SemVer } = semver;
 
 
-function extract_release_info_getReleaseNotes(heading, tree) {
-    const root = { type: 'root', children: [] };
-    // The terminator node can be undefined, e.g. if the section is the last section in the file
-    // and there are no definitions at the end
-    const terminatorNode = heading.node.data?.['nextSection'];
-    const result = terminatorNode ? unist_util_find_all_between(tree, heading.node, terminatorNode) : findAllAfter(tree, heading.node);
-    root.children.push(...result);
-    return root;
-}
+
 function extract_release_info_findReleaseHeading(target, headings) {
     let unreleasedHeading = null;
     for (let i = 0; i < headings.length; i++) {
@@ -27288,7 +27289,7 @@ const extract_release_info_attacher = function extractUnreleasedContents(target)
             file.data['matchedReleaseDate'] = undefined;
             file.data['matchedReleaseSuffix'] = undefined;
         }
-        return extract_release_info_getReleaseNotes(heading, tree);
+        return getReleaseNotes(heading, tree);
     };
 };
 /* harmony default export */ const extract_release_info = (extract_release_info_attacher);
