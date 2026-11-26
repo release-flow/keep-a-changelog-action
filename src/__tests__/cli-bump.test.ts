@@ -22,6 +22,7 @@ interface CliParams {
   githubRepo: string | null;
   keepUnreleasedSection: boolean;
   failOnEmptyReleaseNotes: boolean;
+  mergePrereleases: boolean;
 }
 
 const DefaultParams: CliParams = {
@@ -34,6 +35,7 @@ const DefaultParams: CliParams = {
   githubRepo: 'test/dummy',
   keepUnreleasedSection: false,
   failOnEmptyReleaseNotes: false,
+  mergePrereleases: false,
 };
 
 describe('bump CLI subcommand', () => {
@@ -218,6 +220,134 @@ describe('bump CLI subcommand', () => {
     expect(output).toMatch(/^## \[1\.1\.0\] - 2022-03-31$/m);
   });
 
+  describe('when merging prereleases', () => {
+    const MergeParams: typeof DefaultParams = {
+      ...DefaultParams,
+      changelog: 'changelog_prereleases_no_unreleased.md',
+      version: 'release',
+      releaseDate: '2022-02-05',
+      mergePrereleases: true,
+    };
+
+    it('merges the prereleases into the new release when there is no [Unreleased] section', () => {
+      const params = { ...MergeParams, outputFile: 'changelog_prereleases_no_unreleased_output_cli.md' };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeFalsy();
+
+      const expectedFile = path.join(__dirname, 'changelog_prereleases_no_unreleased_merged_expected.md');
+      const actualFile = path.join(__dirname, 'changelog_prereleases_no_unreleased_output_cli.md');
+      expect(actualFile).toMatchFileSnapshot(expectedFile);
+    });
+
+    it('merges the [Unreleased] section and the prereleases into the new release', () => {
+      const params = {
+        ...MergeParams,
+        changelog: 'changelog_prereleases_with_unreleased.md',
+        outputFile: 'changelog_prereleases_with_unreleased_output_cli.md',
+      };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeFalsy();
+
+      const expectedFile = path.join(__dirname, 'changelog_prereleases_with_unreleased_merged_expected.md');
+      const actualFile = path.join(__dirname, 'changelog_prereleases_with_unreleased_output_cli.md');
+      expect(actualFile).toMatchFileSnapshot(expectedFile);
+    });
+
+    it('merges the prereleases into an explicit version', () => {
+      const params = { ...MergeParams, version: '1.0.0', outputFile: 'changelog_prereleases_explicit_output_cli.md' };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeFalsy();
+
+      const expectedFile = path.join(__dirname, 'changelog_prereleases_no_unreleased_merged_expected.md');
+      const actualFile = path.join(__dirname, 'changelog_prereleases_explicit_output_cli.md');
+      expect(actualFile).toMatchFileSnapshot(expectedFile);
+    });
+
+    it.each(['prerelease', '1.0.0-beta.3'])('errors when the next version (%s) is a prerelease', (version) => {
+      const params = { ...MergeParams, version, outputFile: 'dummy.md' };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeTruthy();
+      expect(getCliErrors(result)).toContain(
+        'Prereleases can only be merged into a full release, but the next version is 1.0.0-beta.3. Use release, major, minor or patch, or specify an explicit non-prerelease version.'
+      );
+    });
+
+    it('errors when the next version is a prerelease even if there are no prereleases to merge', () => {
+      const params = { ...MergeParams, changelog: 'good_changelog.md', version: 'preminor', outputFile: 'dummy.md' };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeTruthy();
+      expect(getCliErrors(result)[0]).toMatch(/^Prereleases can only be merged into a full release/);
+    });
+
+    it('behaves as normal when the latest release is not a prerelease', () => {
+      const params = { ...DefaultParams, mergePrereleases: true, outputFile: 'changelog_1_merge_output_cli.md' };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeFalsy();
+
+      const expectedFile = path.join(__dirname, 'changelog_1_expected.md');
+      const actualFile = path.join(__dirname, 'changelog_1_merge_output_cli.md');
+      expect(actualFile).toMatchFileSnapshot(expectedFile);
+    });
+
+    it('keeps an empty [Unreleased] section above the merged release', async () => {
+      const params = {
+        ...MergeParams,
+        keepUnreleasedSection: true,
+        outputFile: 'changelog_prereleases_keep_unreleased_output_cli.md',
+      };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeFalsy();
+
+      const actual = await fs.readFile(
+        path.join(__dirname, 'changelog_prereleases_keep_unreleased_output_cli.md'),
+        'utf-8'
+      );
+      expect(actual).toContain('## [Unreleased]\n\n## [1.0.0] - 2022-02-05\n\n### Added\n\n- Final polish\n');
+      expect(actual).not.toContain('beta.2');
+    });
+
+    it('errors when the merged release notes are empty and configured to check', () => {
+      const params = {
+        ...MergeParams,
+        changelog: 'changelog_empty_prereleases.md',
+        failOnEmptyReleaseNotes: true,
+        outputFile: 'dummy.md',
+      };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeTruthy();
+      expect(getCliErrors(result)).toContain(
+        'The release notes for 1.0.0 are empty after merging the prereleases, and fail-on-empty-release-notes is enabled.'
+      );
+    });
+
+    it('suggests merging when there is no [Unreleased] section and merging is not enabled', () => {
+      const params = { ...MergeParams, mergePrereleases: false, outputFile: 'dummy.md' };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeTruthy();
+      expect(result.stderr).toMatch(
+        /To release the prereleases without an \[Unreleased\] section, enable merge-prereleases/
+      );
+    });
+
+    it("doesn't suggest merging when the latest release is not a prerelease", () => {
+      const params = { ...DefaultParams, changelog: 'changelog_no_unreleased.md', outputFile: 'dummy.md' };
+      const result = runCommand(params);
+
+      expect(result.isError).toBeTruthy();
+      expect(result.stderr).toMatch(/must contain an 'unreleased' section/);
+      expect(result.stderr).not.toMatch(/merge-prereleases/);
+    });
+  });
+
   it('keeps the unreleased section', () => {
     const params = { ...DefaultParams };
     params.outputFile = 'changelog_1_keep_unreleased_output_cli.md';
@@ -272,6 +402,9 @@ function runCommand(params: CliParams): CliResult {
   }
   if (params.failOnEmptyReleaseNotes) {
     argv.push('--fail-on-empty-release-notes');
+  }
+  if (params.mergePrereleases) {
+    argv.push('--merge-prereleases');
   }
   if (params.githubRepo !== null) {
     argv.push('--github-repo');

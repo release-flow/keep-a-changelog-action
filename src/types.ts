@@ -92,5 +92,7 @@ declare module 'vfile' {
   interface DataMap {
     releaseHeadings: ReleaseHeading[];
     nextReleaseVersion: string;
+    // The versions of the prerelease sections that were merged into the new release, if any
+    mergedPrereleaseVersions: string[];
   }
 }

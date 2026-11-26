@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Add the `merge-prereleases` input (`--merge-prereleases` in the CLI), which merges the prerelease sections since the
+  latest full release into the new release when bumping, so that a full release can be made after prereleases without
+  an `[Unreleased]` section (#48).
+
+### Changed
+
+- `kac bump` now lists the problems found in an invalid changelog, as the action already does.
+
 ## [3.1.1] - 2026-11-26
 
 ### Fixed

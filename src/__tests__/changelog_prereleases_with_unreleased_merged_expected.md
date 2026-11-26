@@ -1,0 +1,55 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [1.0.0] - 2022-02-05
+
+Preamble text.
+
+### Security
+
+- Unreleased security fix
+
+### Added
+
+- Unreleased feature
+- Final polish
+- Some features
+
+### Fixed
+
+- Beta 2 fix
+- Beta 1 fix
+
+### Changed
+
+- Beta 1 change
+
+## [0.9.0] - 2022-02-02
+
+### Added
+
+- 0.9.0 features
+
+## [0.8.3] - 2022-02-01
+
+### Added
+
+- 0.8.3 features
+
+## [0.8.2-beta.1] - 2022-01-30 \[YANKED]
+
+### Added
+
+- 0.8.2 features
+
+[1.0.0]: https://github.com/test/dummy/compare/v0.9.0...v1.0.0
+
+[0.9.0]: https://github.com/test/dummy/compare/v0.8.3...v0.9.0
+
+[0.8.3]: https://github.com/test/dummy/compare/v0.8.2-beta.1...v0.8.3
+
+[0.8.2-beta.1]: https://github.com/test/dummy/releases/tag/v0.8.2-beta.1

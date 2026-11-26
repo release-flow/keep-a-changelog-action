@@ -40,6 +40,7 @@ The command is also available from the [command line](./cli.md#kac-bump).
 | `output-file` | The name of the modified changelog file, which is written relative to the directory of the input changelog. If not specified, the input changelog is overwritten. | Empty string |
 | `keep-unreleased-section` | Keeps an empty 'Unreleased' section in the output changelog after bumping the input changelog's 'Unreleased' section. Must be `true` or `false`. | `false` |
 | `fail-on-empty-release-notes` | If this input is `true` then the action will fail if it detects an empty 'Unreleased' section in the input changelog. Must be `true` or `false`. | `false` |
+| `merge-prereleases` | Merges the prerelease sections since the latest full release into the new release. The new version must be a full (non-prerelease) version, otherwise the action fails. See [Merging prereleases](#merging-prereleases). Must be `true` or `false`. | `false` |
 
 ### The `version` input
 
@@ -65,6 +66,62 @@ latest release in the changelog, otherwise the action fails.
 If the changelog does not contain any releases yet then the calculation starts from `0.0.0`, so `release` cannot be
 used until there is a prerelease.
 
+## Merging prereleases
+
+When `merge-prereleases` is `true`, the prerelease sections at the top of the changelog (every prerelease since the
+latest full release) are merged into a single section for the new release, together with the `[Unreleased]` section
+if there is one. The prerelease sections and their link definitions are removed, so the release notes for the full
+release describe everything that has changed since the previous full release.
+
+This makes it possible to release a full version after one or more prereleases without making any further changes:
+the `[Unreleased]` section is not required when there are prereleases to merge.
+
+- The new version must be a full release, for example by using `release`, `major`, `minor`, `patch` or an explicit
+  version such as `1.0.0`. The action fails if the new version is a prerelease.
+- Subsections with the same heading (such as `### Added`) are combined, in the order in which they first appear, and
+  their lists are joined into one list. The newest entries come first, starting with the `[Unreleased]` section.
+- Older prereleases that come before a full release are not changed.
+- If there are no prereleases since the latest full release then the changelog is bumped as normal.
+
+For example, bumping this changelog with `version: release` and `merge-prereleases: true`:
+
+```md
+## [1.0.0-beta.2] - 2022-02-04
+
+### Added
+
+- Final polish
+
+## [1.0.0-beta.1] - 2022-02-03
+
+### Added
+
+- Some features
+
+### Fixed
+
+- A bug
+
+## [0.9.0] - 2022-02-02
+```
+
+produces:
+
+```md
+## [1.0.0] - 2022-02-05
+
+### Added
+
+- Final polish
+- Some features
+
+### Fixed
+
+- A bug
+
+## [0.9.0] - 2022-02-02
+```
+
 ## Action outputs
 
 The following outputs can be used by subsequent workflow steps.
@@ -72,7 +129,7 @@ The following outputs can be used by subsequent workflow steps.
 | Name | Description |
 | --- | --- |
 | `version` | The release version that was calculated from the changelog and the input parameters, and was used to update the changelog. |
-| `release-notes` | The markdown content of the previously unreleased changelog section. |
+| `release-notes` | The markdown content of the previously unreleased changelog section, or of the merged section when [merging prereleases](#merging-prereleases). |
 
 Step outputs can be accessed as in the following example. Note that in order to read the step outputs the action step
 must have an id.
@@ -95,7 +152,8 @@ must have an id.
 The changelog must follow the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) conventions:
 
 - Each release is a level 2 heading (`##`). The first release heading must be `Unreleased`, which is case-insensitive.
-  The command fails if the changelog has no `Unreleased` section, or if it is not the first release section.
+  The command fails if the changelog has no `Unreleased` section, or if it is not the first release section, unless
+  [prereleases are being merged](#merging-prereleases).
 
 - Release headings are in the form `## [1.2.3] - 2022-03-03` or `## 1.2.3 - 2022-03-03`. The version must be a valid
   semantic version and the date must be in `yyyy-MM-dd` format. Any text after the date is preserved as the release

@@ -71,6 +71,7 @@ function getBumpOptions(argv: CliBumpArguments): BumpOptions | string {
 
   const keepUnreleasedSection = argv.keepUnreleasedSection;
   const failOnEmptyReleaseNotes = argv.failOnEmptyReleaseNotes;
+  const mergePrereleases = argv.mergePrereleases;
 
   const options: BumpOptions = {
     changelogPath,
@@ -81,6 +82,7 @@ function getBumpOptions(argv: CliBumpArguments): BumpOptions | string {
     outputFile,
     keepUnreleasedSection,
     failOnEmptyReleaseNotes,
+    mergePrereleases,
     linkGenerator,
   };
 
@@ -106,6 +108,9 @@ export default async function bump(argv: CliBumpArguments): Promise<number> {
   } catch (error) {
     if (error instanceof VFileMessage) {
       console.error(`ERROR: ${error.message}`);
+      if (changelog.messages.length > 0) {
+        console.error(reporter(changelog));
+      }
       return -1;
     }
 

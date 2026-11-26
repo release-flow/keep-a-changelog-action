@@ -6909,8 +6909,8 @@ var to_vfile_lib = __nccwpck_require__(5143);
 var semver = __nccwpck_require__(2088);
 // EXTERNAL MODULE: ./lib/types.js
 var types = __nccwpck_require__(4170);
-// EXTERNAL MODULE: ./lib/commands.js + 133 modules
-var commands = __nccwpck_require__(3128);
+// EXTERNAL MODULE: ./lib/commands.js + 134 modules
+var commands = __nccwpck_require__(1802);
 ;// CONCATENATED MODULE: ./lib/release-link-generator.js
 
 class GitHubReleaseLinkGenerator {
@@ -6999,6 +6999,7 @@ function getBumpOptions(argv) {
     const outputFile = argv.outputFile;
     const keepUnreleasedSection = argv.keepUnreleasedSection;
     const failOnEmptyReleaseNotes = argv.failOnEmptyReleaseNotes;
+    const mergePrereleases = argv.mergePrereleases;
     const options = {
         changelogPath,
         releaseDate,
@@ -7008,6 +7009,7 @@ function getBumpOptions(argv) {
         outputFile,
         keepUnreleasedSection,
         failOnEmptyReleaseNotes,
+        mergePrereleases,
         linkGenerator,
     };
     return options;
@@ -7029,6 +7031,9 @@ async function bump(argv) {
     catch (error) {
         if (error instanceof vfile_message_lib/* VFileMessage */.o) {
             console.error(`ERROR: ${error.message}`);
+            if (changelog.messages.length > 0) {
+                console.error((0,lib/* reporter */.Y)(changelog));
+            }
             return -1;
         }
         console.error(error);
@@ -7056,7 +7061,7 @@ function getRepoOptions(githubRepo) {
 /* harmony import */ var semver__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2088);
 /* harmony import */ var to_vfile__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(5143);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(3277);
-/* harmony import */ var _commands_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(3128);
+/* harmony import */ var _commands_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1802);
 /* harmony import */ var vfile_reporter__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(3005);
 /* harmony import */ var vfile_message__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(3092);
 
@@ -7207,6 +7212,15 @@ try {
                 " empty 'Unreleased' section in the input changelog.",
             default: false,
         },
+        'merge-prereleases': {
+            type: 'boolean',
+            alias: 'm',
+            describe: 'If this input is true then all the prerelease sections since the latest full release are merged into' +
+                " the new release, together with the 'Unreleased' section if there is one. The new version must be a" +
+                " full (non-prerelease) version. The 'Unreleased' section is not required when there are prereleases to" +
+                ' merge.',
+            default: false,
+        },
         'github-repo': {
             type: 'string',
             alias: 'g',
@@ -7260,7 +7274,7 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 3128:
+/***/ 1802:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
@@ -26694,18 +26708,148 @@ const preprocessor_attacher = function () {
 /* harmony default export */ const preprocessor = (preprocessor_attacher);
 //# sourceMappingURL=preprocessor.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/assert.js
+function transformer(_tree, file) {
+    if (file.messages.some((m) => m.fatal === true)) {
+        file.fail('Invalid changelog: fatal errors were detected');
+    }
+}
 const assert_attacher = function () {
-    return (_tree, file) => {
-        if (file.messages.some((m) => m.fatal === true)) {
-            file.fail('Invalid changelog: fatal errors were detected');
-        }
-    };
+    return transformer;
+};
+/**
+ * The same check as the default export, for use a second time in a pipeline: unified ignores repeated uses of the
+ * same plugin, so a distinct attacher is needed.
+ */
+const reassert = function () {
+    return transformer;
 };
 /* harmony default export */ const assert = (assert_attacher);
 //# sourceMappingURL=assert.js.map
+;// CONCATENATED MODULE: ./lib/plugins/merge-prereleases.js
+
+
+
+
+/**
+ * Returns true if the release heading is for a prerelease version, e.g. 1.0.0-beta.1.
+ */
+function isPrereleaseHeading(heading) {
+    return heading !== undefined && (0,types/* isReleaseProps */.KK)(heading.release) && heading.release.version.prerelease.length > 0;
+}
+function appendToSubsection(subsection, node) {
+    if (is(node, 'list')) {
+        const existing = subsection.content.find((n) => is(n, 'list') && n.ordered === node.ordered);
+        if (existing) {
+            existing.children.push(...node.children);
+            existing.spread = Boolean(existing.spread || node.spread);
+            return;
+        }
+    }
+    subsection.content.push(node);
+}
+/**
+ * Merges the contents of several release sections (newest first) into the contents of a single section. Level 3
+ * subsections with the same heading text (e.g. '### Added') are combined into one subsection, in the order in which
+ * they first appear, and lists within a subsection are joined into a single list. Content that precedes the first
+ * level 3 heading of a section is gathered at the start of the merged section.
+ *
+ * @param sections The contents of each section, excluding the release headings, newest first.
+ * @returns The merged section contents.
+ */
+function mergeSections(sections) {
+    const preamble = { heading: null, content: [] };
+    const subsections = new Map();
+    for (const section of sections) {
+        let current = preamble;
+        for (const node of section) {
+            if (is(node, 'heading') && node.depth === 3) {
+                const key = lib_toString(node).trim().toLowerCase();
+                let subsection = subsections.get(key);
+                if (!subsection) {
+                    subsection = { heading: node, content: [] };
+                    subsections.set(key, subsection);
+                }
+                current = subsection;
+                continue;
+            }
+            appendToSubsection(current, node);
+        }
+    }
+    const result = [...preamble.content];
+    for (const subsection of subsections.values()) {
+        result.push(subsection.heading, ...subsection.content);
+    }
+    return result;
+}
+/**
+ * A unified attacher that, when the mergePrereleases option is set, merges all the prerelease sections since the
+ * latest full release (together with the 'Unreleased' section, if present) into a single section that is then
+ * treated as the 'Unreleased' section by the rest of the bump pipeline. Must run after calculateNextRelease.
+ */
+const merge_prereleases_attacher = function mergePrereleases(options) {
+    return (tree, file) => {
+        if (!options.mergePrereleases) {
+            return;
+        }
+        const releaseHeadings = file.data.releaseHeadings;
+        const nextReleaseVersion = file.data.nextReleaseVersion;
+        if (!releaseHeadings || !nextReleaseVersion) {
+            throw new types/* BoneheadedError */.MC('File should have been preprocessed and the next release calculated');
+        }
+        if (semver.prerelease(nextReleaseVersion) !== null) {
+            file.fail(`Prereleases can only be merged into a full release, but the next version is ${nextReleaseVersion}. Use release, major, minor or patch, or specify an explicit non-prerelease version.`);
+        }
+        const start = releaseHeadings[0]?.release === 'unreleased' ? 1 : 0;
+        let end = start;
+        while (end < releaseHeadings.length && isPrereleaseHeading(releaseHeadings[end])) {
+            end++;
+        }
+        if (end === start) {
+            // No prereleases to merge
+            return;
+        }
+        // The section that receives the merged content: the 'Unreleased' section if present, otherwise the latest
+        // prerelease, which becomes the section to be released
+        const group = releaseHeadings.slice(0, end);
+        const target = group[0];
+        const last = group[group.length - 1];
+        const parent = target.parent;
+        if (group.some((h) => h.parent !== parent)) {
+            throw new types/* BoneheadedError */.MC('Release headings should share the same parent');
+        }
+        const children = parent.children;
+        const startIndex = children.indexOf(target.node);
+        const terminator = last.node.data?.nextSection;
+        const terminatorIndex = terminator ? children.indexOf(terminator) : -1;
+        const endIndex = terminatorIndex >= 0 ? terminatorIndex : children.length;
+        // Split the nodes between the target heading and the end of the last merged section into per-release sections
+        const groupNodes = new Set(group.map((h) => h.node));
+        const sections = [[]];
+        for (const node of children.slice(startIndex + 1, endIndex)) {
+            if (groupNodes.has(node)) {
+                sections.push([]);
+            }
+            else {
+                sections[sections.length - 1].push(node);
+            }
+        }
+        children.splice(startIndex + 1, endIndex - startIndex - 1, ...mergeSections(sections));
+        file.data.mergedPrereleaseVersions = group
+            .map((h) => h.release)
+            .filter(types/* isReleaseProps */.KK)
+            .map((r) => r.version.format());
+        target.node.data = { ...target.node.data, nextSection: terminator };
+        target.release = 'unreleased';
+        releaseHeadings.splice(1, end - 1);
+    };
+};
+/* harmony default export */ const merge_prereleases = (merge_prereleases_attacher);
+//# sourceMappingURL=merge-prereleases.js.map
 ;// CONCATENATED MODULE: ./lib/plugins/check-unreleased-section-exists.js
 
-const check_unreleased_section_exists_attacher = function checkUnreleasedSectionExists() {
+
+
+const check_unreleased_section_exists_attacher = function checkUnreleasedSectionExists(options) {
     return (_tree, file) => {
         const releaseHeadings = file.data.releaseHeadings;
         if (!releaseHeadings) {
@@ -26718,7 +26862,16 @@ const check_unreleased_section_exists_attacher = function checkUnreleasedSection
         }
         // If the first release section is not 'Unreleased' then pass on an empty document
         if (releaseHeadings[0].release !== 'unreleased') {
-            file.message("The changelog must contain an 'unreleased' section as the first release section").fatal = true;
+            let message = "The changelog must contain an 'unreleased' section as the first release section";
+            const nextReleaseVersion = file.data.nextReleaseVersion;
+            if (!options.mergePrereleases &&
+                isPrereleaseHeading(releaseHeadings[0]) &&
+                nextReleaseVersion &&
+                semver.prerelease(nextReleaseVersion) === null) {
+                message +=
+                    '. To release the prereleases without an [Unreleased] section, enable merge-prereleases to merge them into the new release';
+            }
+            file.message(message).fatal = true;
             return;
         }
     };
@@ -26915,7 +27068,10 @@ const extract_release_notes_attacher = function extractReleaseNotes(target, opti
         if (options.failOnEmptyReleaseNotes) {
             const hasEmptyReleaseNotes = releaseNotes.children.length === 0;
             if (hasEmptyReleaseNotes) {
-                file.fail('The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.', heading.node.position);
+                const message = file.data.mergedPrereleaseVersions?.length
+                    ? `The release notes for ${file.data.nextReleaseVersion} are empty after merging the prereleases, and fail-on-empty-release-notes is enabled.`
+                    : 'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.';
+                file.fail(message, heading.node.position);
             }
         }
         return releaseNotes;
@@ -27311,14 +27467,18 @@ const extract_release_info_attacher = function extractUnreleasedContents(target)
 
 
 
+
 async function processBumpChangelog(file, options) {
     let processor = remark()
         .use(releaseParser)
         .use(preprocessor)
-        .use(check_unreleased_section_exists)
         .use(assert)
-        .use(bridge, 'releaseNotes', unified().use(extract_release_notes, 'unreleased', options).use(remarkStringify, { listItemIndent: 'one', bullet: '-' }))
+        // The next release must be calculated before merging prereleases, which removes the latest release heading
         .use(calculate_next_release, options)
+        .use(merge_prereleases, options)
+        .use(check_unreleased_section_exists, options)
+        .use(reassert)
+        .use(bridge, 'releaseNotes', unified().use(extract_release_notes, 'unreleased', options).use(remarkStringify, { listItemIndent: 'one', bullet: '-' }))
         .use(increment_release, options);
     if (options.keepUnreleasedSection) {
         processor = processor.use(add_unreleased_section);

@@ -61,6 +61,7 @@
   "dependencies": {
     "@actions/core": "^3.0.1",
     "date-fns": "^4.1.0",
+    "mdast-util-to-string": "^4.0.0",
     "remark": "^15.0.1",
     "remark-stringify": "^11.0.0",
     "semver": "^7.3.5",
