@@ -19,7 +19,7 @@ function getRepoOptions(): RepoSpec | undefined {
 
   if (!owner || !repo) {
     core.setFailed(
-      'Unable to determine the repository name - check that the GITHUB_REPOSITORY environment variable is correctly set'
+      'Unable to determine the repository name. Check that the GITHUB_REPOSITORY environment variable is set correctly.'
     );
     return;
   }
@@ -63,7 +63,7 @@ function getBumpOptions(): BumpOptions | undefined {
 
     if (!isValid(releaseDate)) {
       core.setFailed(
-        `Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`
+        `Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'.`
       );
       return;
     }
@@ -142,7 +142,7 @@ export default async function bumpAction(): Promise<void> {
       core.error(error);
       core.endGroup();
     } else {
-      core.setFailed('An unexpected error occurred');
+      core.setFailed('An unexpected error occurred.');
       console.error(error);
     }
   }

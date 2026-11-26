@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - `kac bump` now lists the problems found in an invalid changelog, as the action already does.
+- Make error messages consistent: the `[Unreleased]` section is always named that way, the CLI refers to options
+  (e.g. `--version`) rather than inputs and no longer mentions "the action", the `query` command's invalid `version`
+  message matches the `bump` command's, and all messages end with a full stop. If you match on error text, check
+  your patterns.
 
 ## [3.1.1] - 2026-11-26
 

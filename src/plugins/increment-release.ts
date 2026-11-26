@@ -19,7 +19,7 @@ const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptio
     }
 
     if (releaseHeadings.length === 0 || releaseHeadings[0].release !== 'unreleased') {
-      file.fail("The 'Unreleased' section must be present");
+      file.fail('The [Unreleased] section must be present.');
     }
 
     const unreleasedSection = releaseHeadings[0].node;

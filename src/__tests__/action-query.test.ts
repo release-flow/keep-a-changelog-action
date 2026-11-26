@@ -60,7 +60,7 @@ describe('gh start action', () => {
 
     expect(result.isError).toBeTruthy();
     expect(getActionErrors(result)).toContain(
-      "Input 'version' contains invalid value 'burble'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')"
+      "Input 'version' has an invalid value 'burble'. The value must be one of: latest, unreleased, or latest-or-unreleased. Alternatively, it can be a valid semantic version number."
     );
   });
 
@@ -71,7 +71,7 @@ describe('gh start action', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getActionErrors(result)).toContain("The specified release, 'unreleased', was not found in the changelog");
+    expect(getActionErrors(result)).toContain("The specified release, 'unreleased', was not found in the changelog.");
   });
 
   it('errors when the changelog does not have the specified version', () => {
@@ -80,7 +80,7 @@ describe('gh start action', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getActionErrors(result)).toContain("The specified release, '17.18.19', was not found in the changelog");
+    expect(getActionErrors(result)).toContain("The specified release, '17.18.19', was not found in the changelog.");
   });
 
   it('errors when latest requested but the changelog does not have any versions', () => {
@@ -90,7 +90,7 @@ describe('gh start action', () => {
     const result = runAction(params);
 
     expect(result.isError).toBeTruthy();
-    expect(getActionErrors(result)).toContain("The specified release, 'latest', was not found in the changelog");
+    expect(getActionErrors(result)).toContain("The specified release, 'latest', was not found in the changelog.");
   });
 
   it('sets the output variables for the latest version, new mechanism', () => {
@@ -184,7 +184,7 @@ it('errors when latest-or-unreleased requested but the changelog does not have a
   const result = runAction(params);
 
   expect(result.isError).toBeTruthy();
-  expect(getActionErrors(result)).toContain('No release headings in changelog');
+  expect(getActionErrors(result)).toContain('The changelog does not contain any release sections.');
 });
 
 function runAction(params: ActionParams): ActionResult {

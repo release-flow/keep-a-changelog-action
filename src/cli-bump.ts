@@ -30,7 +30,7 @@ function getBumpOptions(argv: CliBumpArguments): BumpOptions | string {
       // It's a valid semver, so use that
       releaseType = new semver.SemVer(releaseType);
     } else {
-      return `Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number.`;
+      return `Option '--version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number.`;
     }
   }
 
@@ -40,7 +40,7 @@ function getBumpOptions(argv: CliBumpArguments): BumpOptions | string {
     releaseDate = parseISO(releaseDateText);
 
     if (!isValid(releaseDate)) {
-      return `Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`;
+      return `Option '--release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'.`;
     }
   }
 
@@ -58,7 +58,7 @@ function getBumpOptions(argv: CliBumpArguments): BumpOptions | string {
   if (githubRepo) {
     const repoOptions = getRepoOptions(githubRepo);
     if (typeof repoOptions === 'string') {
-      return `Input 'github-repo' has an invalid value '${githubRepo}'. The value must be in the format 'owner/repo'`;
+      return `Option '--github-repo' has an invalid value '${githubRepo}'. The value must be in the format 'owner/repo'.`;
     }
     linkGenerator = new GitHubReleaseLinkGenerator(repoOptions, tagPrefix);
   } else {

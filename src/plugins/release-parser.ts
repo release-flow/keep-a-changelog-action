@@ -15,7 +15,7 @@ function parseReleaseHeadingTextOnly(node: Heading, file: VFile): void {
 
   const m = textNode.value.match(/^\[?([A-Za-z0-9.+-]+)\]?(\s+-\s*(\d{4}-\d{2}-\d{2}))?\s*(.*)$/);
   if (!m) {
-    const msg = file.message('Level 2 heading in incorrect format', textNode.position);
+    const msg = file.message('Level 2 heading in incorrect format.', textNode.position);
     msg.fatal = true;
     msg.expected = ['1.2.3 - yyyy-mm-dd', '[1.2.3] - yyyy-mm-dd'];
     msg.actual = textNode.value;
@@ -32,7 +32,7 @@ function parseReleaseHeadingTextOnly(node: Heading, file: VFile): void {
 
     if (!version) {
       const msg = file.message(
-        `Unable to parse semantic version from level 2 heading: '${m[1]}' is not a valid version`,
+        `Unable to parse semantic version from level 2 heading: '${m[1]}' is not a valid version.`,
         textNode.position
       );
       msg.fatal = true;
@@ -63,7 +63,7 @@ function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
 
   if (!version) {
     const msg = file.message(
-      `Unable to parse semantic version from level 2 heading: '${linkNode.label || ''}' is not a valid version`,
+      `Unable to parse semantic version from level 2 heading: '${linkNode.label || ''}' is not a valid version.`,
       linkNode.position
     );
     msg.fatal = true;
@@ -73,20 +73,20 @@ function parseReleaseHeadingWithLink(node: Heading, file: VFile): void {
 
   if (node.children.length === 1) {
     // We are expecting a release date as a sibling text node
-    file.message('Release date missing', node.position).fatal = true;
+    file.message('Release date missing.', node.position).fatal = true;
     return;
   }
 
   const textNode = node.children[1];
 
   if (!is(textNode, 'text')) {
-    file.message('Expected release date text to follow version link', textNode.position).fatal = true;
+    file.message('Expected release date text to follow version link.', textNode.position).fatal = true;
     return;
   }
 
   const m = textNode.value.match(/^\s*-\s*(\d{4}-\d{2}-\d{2})\s*(.*)$/);
   if (!m) {
-    const msg = file.message("Release date in incorrect format. Expected ' - yyyy-mm-dd'", textNode.position);
+    const msg = file.message("Release date in incorrect format. Expected ' - yyyy-mm-dd'.", textNode.position);
     msg.fatal = true;
     msg.actual = textNode.value;
     return;
@@ -107,7 +107,7 @@ function parseReleaseHeading(node: Heading, file: VFile): void {
   // In this case there is either a text node or a linkReference
 
   if (node.children.length === 0) {
-    file.message('Heading is empty', node.position).fatal = true;
+    file.message('Heading is empty.', node.position).fatal = true;
     return;
   }
 
@@ -116,7 +116,7 @@ function parseReleaseHeading(node: Heading, file: VFile): void {
   } else if (is(node.children[0], 'text')) {
     parseReleaseHeadingTextOnly(node, file);
   } else {
-    const msg = file.message('Level 2 heading must define a release version', node.position);
+    const msg = file.message('Level 2 heading must define a release version.', node.position);
     msg.fatal = true;
   }
 }

@@ -59,26 +59,23 @@ try {
           type: 'boolean',
           alias: 'k',
           describe:
-            "If this input is true then the output changelog keeps an empty 'Unreleased' section after bumping the" +
-            " input changelog's 'Unreleased' section.",
+            'Keep an empty [Unreleased] section at the top of the output changelog after bumping the input' +
+            " changelog's [Unreleased] section.",
           default: false,
         },
         'fail-on-empty-release-notes': {
           type: 'boolean',
           alias: 'f',
-          describe:
-            'If this input is true then the action will report an error if it detects an' +
-            " empty 'Unreleased' section in the input changelog.",
+          describe: "Fail if the input changelog's [Unreleased] section is empty.",
           default: false,
         },
         'merge-prereleases': {
           type: 'boolean',
           alias: 'm',
           describe:
-            'If this input is true then all the prerelease sections since the latest full release are merged into' +
-            " the new release, together with the 'Unreleased' section if there is one. The new version must be a" +
-            " full (non-prerelease) version. The 'Unreleased' section is not required when there are prereleases to" +
-            ' merge.',
+            'Merge all the prerelease sections since the latest full release into the new release, together with' +
+            ' the [Unreleased] section if there is one. The new version must be a full (non-prerelease) version.' +
+            ' The [Unreleased] section is not required when there are prereleases to merge.',
           default: false,
         },
         'github-repo': {

@@ -36,7 +36,7 @@ function getQueryOptions(argv: CliQueryArguments): QueryOptions | string {
     default:
       const parsed = semver.parse(version);
       if (!parsed) {
-        return `Input 'version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')`;
+        return `Option '--version' has an invalid value '${version}'. The value must be one of: latest, unreleased, or latest-or-unreleased. Alternatively, it can be a valid semantic version number.`;
       }
       target = parsed;
       break;

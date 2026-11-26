@@ -37,13 +37,13 @@ const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root> = func
     }
 
     if (releaseHeadings.length === 0) {
-      file.fail('No releases in changelog');
+      file.fail('The changelog does not contain any release sections.');
     }
 
     const heading = findReleaseHeading(target, releaseHeadings);
     if (!heading) {
       const releaseText = target === 'unreleased' ? 'unreleased' : target.format();
-      file.fail(`The specified release, '${releaseText}', was not found in the changelog`);
+      file.fail(`The specified release, '${releaseText}', was not found in the changelog.`);
     }
 
     const releaseNotes = getReleaseNotes(heading, tree);
@@ -54,7 +54,7 @@ const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root> = func
       if (hasEmptyReleaseNotes) {
         const message = file.data.mergedPrereleaseVersions?.length
           ? `The release notes for ${file.data.nextReleaseVersion} are empty after merging the prereleases, and fail-on-empty-release-notes is enabled.`
-          : 'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.';
+          : 'The changelog does not contain any release notes in the [Unreleased] section, and fail-on-empty-release-notes is enabled.';
         file.fail(message, heading.node.position);
       }
     }

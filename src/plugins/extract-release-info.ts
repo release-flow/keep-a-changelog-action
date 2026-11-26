@@ -40,13 +40,13 @@ const attacher: Plugin<[QueryVersionOptionSpec], Root, Root> = function extractU
     }
 
     if (releaseHeadings.length === 0) {
-      file.fail('No release headings in changelog');
+      file.fail('The changelog does not contain any release sections.');
     }
 
     const heading = findReleaseHeading(target, releaseHeadings);
     if (!heading) {
       const releaseText = isQuerySpecialVersionOption(target) ? target : target.format();
-      file.fail(`The specified release, '${releaseText}', was not found in the changelog`);
+      file.fail(`The specified release, '${releaseText}', was not found in the changelog.`);
     }
 
     if (isReleaseProps(heading.release)) {

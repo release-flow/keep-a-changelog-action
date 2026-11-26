@@ -58,7 +58,7 @@ describe('bump CLI subcommand', () => {
 
     expect(result.isError).toBeTruthy();
 
-    expect(result.stderr).toMatch(/Input 'version' has an invalid value 'invalid'./);
+    expect(result.stderr).toMatch(/Option '--version' has an invalid value 'invalid'./);
     expect(result.stderr).toMatch(
       /The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number./
     );
@@ -71,7 +71,7 @@ describe('bump CLI subcommand', () => {
 
     expect(result.isError).toBeTruthy();
     expect(getCliErrors(result)).toContain(
-      "Input 'release-date' has an invalid value '12/21/2022'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'"
+      "Option '--release-date' has an invalid value '12/21/2022'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'."
     );
   });
 
@@ -93,7 +93,7 @@ describe('bump CLI subcommand', () => {
 
     expect(result.isError).toBeTruthy();
     expect(getCliErrors(result)).toContain(
-      'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.'
+      'The changelog does not contain any release notes in the [Unreleased] section, and fail-on-empty-release-notes is enabled.'
     );
   });
 
@@ -343,7 +343,7 @@ describe('bump CLI subcommand', () => {
       const result = runCommand(params);
 
       expect(result.isError).toBeTruthy();
-      expect(result.stderr).toMatch(/must contain an 'unreleased' section/);
+      expect(result.stderr).toMatch(/must contain an \[Unreleased\] section/);
       expect(result.stderr).not.toMatch(/merge-prereleases/);
     });
   });

@@ -6965,7 +6965,7 @@ function getBumpOptions(argv) {
             releaseType = new semver.SemVer(releaseType);
         }
         else {
-            return `Input 'version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number.`;
+            return `Option '--version' has an invalid value '${releaseType}'. The value must be one of: major, premajor, minor, preminor, patch, prepatch, prerelease, or release. Alternatively, it can be a valid semantic version number.`;
         }
     }
     let releaseDate = new Date();
@@ -6973,7 +6973,7 @@ function getBumpOptions(argv) {
     if (releaseDateText) {
         releaseDate = parseISO(releaseDateText);
         if (!(0,isValid/* isValid */.f)(releaseDate)) {
-            return `Input 'release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'`;
+            return `Option '--release-date' has an invalid value '${releaseDateText}'. The value must be a date in ISO 8601 format, e.g. '2022-03-03'.`;
         }
     }
     let githubRepo = argv.githubRepo;
@@ -6988,7 +6988,7 @@ function getBumpOptions(argv) {
     if (githubRepo) {
         const repoOptions = getRepoOptions(githubRepo);
         if (typeof repoOptions === 'string') {
-            return `Input 'github-repo' has an invalid value '${githubRepo}'. The value must be in the format 'owner/repo'`;
+            return `Option '--github-repo' has an invalid value '${githubRepo}'. The value must be in the format 'owner/repo'.`;
         }
         linkGenerator = new GitHubReleaseLinkGenerator(repoOptions, tagPrefix);
     }
@@ -7093,7 +7093,7 @@ function getQueryOptions(argv) {
         default:
             const parsed = semver__WEBPACK_IMPORTED_MODULE_1__.parse(version);
             if (!parsed) {
-                return `Input 'version' contains invalid value '${version}'. It must contain a valid version or one of the values ('latest', 'unreleased', 'latest-or-unreleased')`;
+                return `Option '--version' has an invalid value '${version}'. The value must be one of: latest, unreleased, or latest-or-unreleased. Alternatively, it can be a valid semantic version number.`;
             }
             target = parsed;
             break;
@@ -7201,24 +7201,22 @@ try {
         'keep-unreleased-section': {
             type: 'boolean',
             alias: 'k',
-            describe: "If this input is true then the output changelog keeps an empty 'Unreleased' section after bumping the" +
-                " input changelog's 'Unreleased' section.",
+            describe: 'Keep an empty [Unreleased] section at the top of the output changelog after bumping the input' +
+                " changelog's [Unreleased] section.",
             default: false,
         },
         'fail-on-empty-release-notes': {
             type: 'boolean',
             alias: 'f',
-            describe: 'If this input is true then the action will report an error if it detects an' +
-                " empty 'Unreleased' section in the input changelog.",
+            describe: "Fail if the input changelog's [Unreleased] section is empty.",
             default: false,
         },
         'merge-prereleases': {
             type: 'boolean',
             alias: 'm',
-            describe: 'If this input is true then all the prerelease sections since the latest full release are merged into' +
-                " the new release, together with the 'Unreleased' section if there is one. The new version must be a" +
-                " full (non-prerelease) version. The 'Unreleased' section is not required when there are prereleases to" +
-                ' merge.',
+            describe: 'Merge all the prerelease sections since the latest full release into the new release, together with' +
+                ' the [Unreleased] section if there is one. The new version must be a full (non-prerelease) version.' +
+                ' The [Unreleased] section is not required when there are prereleases to merge.',
             default: false,
         },
         'github-repo': {
@@ -26532,7 +26530,7 @@ function parseReleaseHeadingTextOnly(node, file) {
     }
     const m = textNode.value.match(/^\[?([A-Za-z0-9.+-]+)\]?(\s+-\s*(\d{4}-\d{2}-\d{2}))?\s*(.*)$/);
     if (!m) {
-        const msg = file.message('Level 2 heading in incorrect format', textNode.position);
+        const msg = file.message('Level 2 heading in incorrect format.', textNode.position);
         msg.fatal = true;
         msg.expected = ['1.2.3 - yyyy-mm-dd', '[1.2.3] - yyyy-mm-dd'];
         msg.actual = textNode.value;
@@ -26546,7 +26544,7 @@ function parseReleaseHeadingTextOnly(node, file) {
     else {
         const version = semver.parse(m[1]);
         if (!version) {
-            const msg = file.message(`Unable to parse semantic version from level 2 heading: '${m[1]}' is not a valid version`, textNode.position);
+            const msg = file.message(`Unable to parse semantic version from level 2 heading: '${m[1]}' is not a valid version.`, textNode.position);
             msg.fatal = true;
             msg.actual = m[1];
             return;
@@ -26568,24 +26566,24 @@ function parseReleaseHeadingWithLink(node, file) {
     }
     const version = semver.parse(linkNode.label);
     if (!version) {
-        const msg = file.message(`Unable to parse semantic version from level 2 heading: '${linkNode.label || ''}' is not a valid version`, linkNode.position);
+        const msg = file.message(`Unable to parse semantic version from level 2 heading: '${linkNode.label || ''}' is not a valid version.`, linkNode.position);
         msg.fatal = true;
         msg.actual = linkNode.label ?? undefined;
         return;
     }
     if (node.children.length === 1) {
         // We are expecting a release date as a sibling text node
-        file.message('Release date missing', node.position).fatal = true;
+        file.message('Release date missing.', node.position).fatal = true;
         return;
     }
     const textNode = node.children[1];
     if (!is(textNode, 'text')) {
-        file.message('Expected release date text to follow version link', textNode.position).fatal = true;
+        file.message('Expected release date text to follow version link.', textNode.position).fatal = true;
         return;
     }
     const m = textNode.value.match(/^\s*-\s*(\d{4}-\d{2}-\d{2})\s*(.*)$/);
     if (!m) {
-        const msg = file.message("Release date in incorrect format. Expected ' - yyyy-mm-dd'", textNode.position);
+        const msg = file.message("Release date in incorrect format. Expected ' - yyyy-mm-dd'.", textNode.position);
         msg.fatal = true;
         msg.actual = textNode.value;
         return;
@@ -26602,7 +26600,7 @@ function parseReleaseHeading(node, file) {
     // A third possibility exists, only for the [Unreleased] version, which omits the release-date.
     // In this case there is either a text node or a linkReference
     if (node.children.length === 0) {
-        file.message('Heading is empty', node.position).fatal = true;
+        file.message('Heading is empty.', node.position).fatal = true;
         return;
     }
     if (is(node.children[0], 'linkReference')) {
@@ -26612,7 +26610,7 @@ function parseReleaseHeading(node, file) {
         parseReleaseHeadingTextOnly(node, file);
     }
     else {
-        const msg = file.message('Level 2 heading must define a release version', node.position);
+        const msg = file.message('Level 2 heading must define a release version.', node.position);
         msg.fatal = true;
     }
 }
@@ -26658,7 +26656,7 @@ const preprocessor_attacher = function () {
                     return;
                 }
                 if (previousDefinition) {
-                    const msg = file.message('All release link definitions must be located at the end of the changelog', previousDefinition.position);
+                    const msg = file.message('All release link definitions must be located at the end of the changelog.', previousDefinition.position);
                     msg.fatal = true;
                     return;
                 }
@@ -26691,12 +26689,12 @@ const preprocessor_attacher = function () {
             }
             if (currentHeading.release === 'unreleased') {
                 // The unreleased section must be first in the file. Clearly it isn't!
-                const msg = file.message("The 'Unreleased' section must be unique, and must be the first release section in the file", currentHeading.node.position);
+                const msg = file.message('The [Unreleased] section must be unique, and must be the first release section in the file.', currentHeading.node.position);
                 msg.fatal = true;
                 break;
             }
             if (semver.gte(currentHeading.release.version, previousHeading.release.version)) {
-                const msg = file.message('Release sections must be in descending order', currentHeading.node.position);
+                const msg = file.message('Release sections must be in descending order.', currentHeading.node.position);
                 msg.fatal = true;
             }
         }
@@ -26710,7 +26708,7 @@ const preprocessor_attacher = function () {
 ;// CONCATENATED MODULE: ./lib/plugins/assert.js
 function transformer(_tree, file) {
     if (file.messages.some((m) => m.fatal === true)) {
-        file.fail('Invalid changelog: fatal errors were detected');
+        file.fail('Invalid changelog: fatal errors were detected.');
     }
 }
 const assert_attacher = function () {
@@ -26857,19 +26855,19 @@ const check_unreleased_section_exists_attacher = function checkUnreleasedSection
         }
         // If there are no releases then pass on an empty document
         if (releaseHeadings.length === 0) {
-            file.message('No release sections found. The changelog must contain an unreleased section').fatal = true;
+            file.message('The changelog does not contain any release sections. It must contain an [Unreleased] section.').fatal = true;
             return;
         }
         // If the first release section is not 'Unreleased' then pass on an empty document
         if (releaseHeadings[0].release !== 'unreleased') {
-            let message = "The changelog must contain an 'unreleased' section as the first release section";
+            let message = 'The changelog must contain an [Unreleased] section as the first release section.';
             const nextReleaseVersion = file.data.nextReleaseVersion;
             if (!options.mergePrereleases &&
                 isPrereleaseHeading(releaseHeadings[0]) &&
                 nextReleaseVersion &&
                 semver.prerelease(nextReleaseVersion) === null) {
                 message +=
-                    '. To release the prereleases without an [Unreleased] section, enable merge-prereleases to merge them into the new release';
+                    ' To release the prereleases without an [Unreleased] section, enable merge-prereleases to merge them into the new release.';
             }
             file.message(message).fatal = true;
             return;
@@ -27057,12 +27055,12 @@ const extract_release_notes_attacher = function extractReleaseNotes(target, opti
             throw new types/* BoneheadedError */.MC('File should have been preprocessed before calling this plugin');
         }
         if (releaseHeadings.length === 0) {
-            file.fail('No releases in changelog');
+            file.fail('The changelog does not contain any release sections.');
         }
         const heading = findReleaseHeading(target, releaseHeadings);
         if (!heading) {
             const releaseText = target === 'unreleased' ? 'unreleased' : target.format();
-            file.fail(`The specified release, '${releaseText}', was not found in the changelog`);
+            file.fail(`The specified release, '${releaseText}', was not found in the changelog.`);
         }
         const releaseNotes = getReleaseNotes(heading, tree);
         if (options.failOnEmptyReleaseNotes) {
@@ -27070,7 +27068,7 @@ const extract_release_notes_attacher = function extractReleaseNotes(target, opti
             if (hasEmptyReleaseNotes) {
                 const message = file.data.mergedPrereleaseVersions?.length
                     ? `The release notes for ${file.data.nextReleaseVersion} are empty after merging the prereleases, and fail-on-empty-release-notes is enabled.`
-                    : 'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.';
+                    : 'The changelog does not contain any release notes in the [Unreleased] section, and fail-on-empty-release-notes is enabled.';
                 file.fail(message, heading.node.position);
             }
         }
@@ -27094,7 +27092,7 @@ const increment_release_attacher = function (options) {
             throw new types/* BoneheadedError */.MC('File should have been preprocessed before calling this plugin');
         }
         if (releaseHeadings.length === 0 || releaseHeadings[0].release !== 'unreleased') {
-            file.fail("The 'Unreleased' section must be present");
+            file.fail('The [Unreleased] section must be present.');
         }
         const unreleasedSection = releaseHeadings[0].node;
         const versionText = nextReleaseVersion;
@@ -27141,7 +27139,7 @@ const calculate_next_release_attacher = function (options) {
         const latestVersion = latestRelease ? latestRelease.release.version : new calculate_next_release_SemVer('0.0.0');
         if (options.version instanceof calculate_next_release_SemVer) {
             if (options.version.compare(latestVersion) <= 0) {
-                file.fail(`Specified version ${options.version.format()} must be greater than latest version ${latestVersion.format()}`);
+                file.fail(`The specified version ${options.version.format()} must be greater than the latest version, ${latestVersion.format()}.`);
             }
             file.data['nextReleaseVersion'] = options.version.format();
         }
@@ -27428,12 +27426,12 @@ const extract_release_info_attacher = function extractUnreleasedContents(target)
             throw new types/* BoneheadedError */.MC('File should have been preprocessed before calling this plugin');
         }
         if (releaseHeadings.length === 0) {
-            file.fail('No release headings in changelog');
+            file.fail('The changelog does not contain any release sections.');
         }
         const heading = extract_release_info_findReleaseHeading(target, releaseHeadings);
         if (!heading) {
             const releaseText = isQuerySpecialVersionOption(target) ? target : target.format();
-            file.fail(`The specified release, '${releaseText}', was not found in the changelog`);
+            file.fail(`The specified release, '${releaseText}', was not found in the changelog.`);
         }
         if ((0,types/* isReleaseProps */.KK)(heading.release)) {
             file.data['matchedReleaseVersion'] = heading.release.version.format();
