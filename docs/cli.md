@@ -30,6 +30,7 @@ Converts the `[Unreleased]` section to a new release. The changelog is overwritt
 | `--output-file` | `-o` | string | Input file | The name of the modified changelog file, relative to the input changelog's directory. |
 | `--keep-unreleased-section` | `-k` | boolean | `false` | Keep an empty `[Unreleased]` section at the top of the output changelog. |
 | `--fail-on-empty-release-notes` | `-f` | boolean | `false` | Fail if the `[Unreleased]` section is empty. |
+| `--merge-prereleases` | `-m` | boolean | `false` | Merge the prerelease sections since the latest full release into the new release. The new version must be a full release. See [Merging prereleases](./bump.md#merging-prereleases). |
 | `--github-repo` | `-g` | string | Empty | The GitHub repository, in the form `owner/repo`, used to generate the link definitions at the end of the changelog. If empty, no link definitions are written. |
 
 Unlike the action, the CLI cannot discover the repository from the environment, so `--github-repo` must be supplied if

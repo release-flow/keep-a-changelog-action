@@ -52,10 +52,10 @@ const attacher: Plugin<[semver.SemVer | 'unreleased', BumpOptions], Root> = func
       const hasEmptyReleaseNotes = releaseNotes.children.length === 0;
 
       if (hasEmptyReleaseNotes) {
-        file.fail(
-          'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.',
-          heading.node.position
-        );
+        const message = file.data.mergedPrereleaseVersions?.length
+          ? `The release notes for ${file.data.nextReleaseVersion} are empty after merging the prereleases, and fail-on-empty-release-notes is enabled.`
+          : 'The changelog does not contain any release notes in the [Unreleased] section, and the action is configured to fail if this is empty.';
+        file.fail(message, heading.node.position);
       }
     }
 

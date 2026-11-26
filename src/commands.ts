@@ -9,11 +9,12 @@ import { BumpOptions, QueryOptions } from './options.js';
 import bridge from './plugins/bridge.js';
 import releaseParser from './plugins/release-parser.js';
 import preprocess from './plugins/preprocessor.js';
-import assert from './plugins/assert.js';
+import assert, { reassert } from './plugins/assert.js';
 import checkUnreleasedSectionExists from './plugins/check-unreleased-section-exists.js';
 import extractReleaseNotes from './plugins/extract-release-notes.js';
 import incrementRelease from './plugins/increment-release.js';
 import calculateNextRelease from './plugins/calculate-next-release.js';
+import mergePrereleases from './plugins/merge-prereleases.js';
 import updateLinkDefinitions from './plugins/update-link-definitions.js';
 import addEmptyUnreleasedSection from './plugins/add-unreleased-section.js';
 import path from 'path';
@@ -23,14 +24,17 @@ async function processBumpChangelog(file: VFile, options: BumpOptions): Promise<
   let processor = remark()
     .use(releaseParser)
     .use(preprocess)
-    .use(checkUnreleasedSectionExists)
     .use(assert)
+    // The next release must be calculated before merging prereleases, which removes the latest release heading
+    .use(calculateNextRelease, options)
+    .use(mergePrereleases, options)
+    .use(checkUnreleasedSectionExists, options)
+    .use(reassert)
     .use(
       bridge,
       'releaseNotes',
       unified().use(extractReleaseNotes, 'unreleased', options).use(stringify, { listItemIndent: 'one', bullet: '-' })
     )
-    .use(calculateNextRelease, options)
     .use(incrementRelease, options);
 
   if (options.keepUnreleasedSection) {

@@ -1,10 +1,13 @@
 import { Plugin } from 'unified';
 import { VFile } from 'vfile';
 import type { Root } from 'mdast';
+import semver from 'semver';
 
 import { BoneheadedError } from '../types.js';
+import { BumpOptions } from '../options.js';
+import { isPrereleaseHeading } from './merge-prereleases.js';
 
-const attacher: Plugin<any, Root, Root> = function checkUnreleasedSectionExists() {
+const attacher: Plugin<[BumpOptions], Root, Root> = function checkUnreleasedSectionExists(options: BumpOptions) {
   return (_tree: Root, file: VFile) => {
     const releaseHeadings = file.data.releaseHeadings;
 
@@ -20,7 +23,20 @@ const attacher: Plugin<any, Root, Root> = function checkUnreleasedSectionExists(
 
     // If the first release section is not 'Unreleased' then pass on an empty document
     if (releaseHeadings[0].release !== 'unreleased') {
-      file.message("The changelog must contain an 'unreleased' section as the first release section").fatal = true;
+      let message = "The changelog must contain an 'unreleased' section as the first release section";
+
+      const nextReleaseVersion = file.data.nextReleaseVersion;
+      if (
+        !options.mergePrereleases &&
+        isPrereleaseHeading(releaseHeadings[0]) &&
+        nextReleaseVersion &&
+        semver.prerelease(nextReleaseVersion) === null
+      ) {
+        message +=
+          '. To release the prereleases without an [Unreleased] section, enable merge-prereleases to merge them into the new release';
+      }
+
+      file.message(message).fatal = true;
       return;
     }
   };

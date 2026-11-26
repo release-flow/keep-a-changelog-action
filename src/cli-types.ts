@@ -8,6 +8,7 @@ export interface CliBumpArguments {
   outputFile: string | undefined;
   keepUnreleasedSection: boolean;
   failOnEmptyReleaseNotes: boolean;
+  mergePrereleases: boolean;
   githubRepo: string | undefined;
   $0: string;
 }

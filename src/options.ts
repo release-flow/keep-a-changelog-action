@@ -22,6 +22,7 @@ export interface BumpOptions {
   outputFile: string | undefined;
   keepUnreleasedSection: boolean;
   failOnEmptyReleaseNotes: boolean;
+  mergePrereleases: boolean;
 }
 
 export type QuerySpecialVersionOption = 'unreleased' | 'latest' | 'latest-or-unreleased';

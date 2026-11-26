@@ -88,6 +88,7 @@ function getBumpOptions(): BumpOptions | undefined {
 
   const keepUnreleasedSection = core.getBooleanInput('keep-unreleased-section');
   const failOnEmptyReleaseNotes = core.getBooleanInput('fail-on-empty-release-notes');
+  const mergePrereleases = core.getBooleanInput('merge-prereleases');
 
   const options: BumpOptions = {
     changelogPath,
@@ -98,6 +99,7 @@ function getBumpOptions(): BumpOptions | undefined {
     outputFile,
     keepUnreleasedSection,
     failOnEmptyReleaseNotes,
+    mergePrereleases,
     linkGenerator: linkGenerator,
   };
 

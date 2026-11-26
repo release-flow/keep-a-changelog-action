@@ -71,6 +71,16 @@ try {
             " empty 'Unreleased' section in the input changelog.",
           default: false,
         },
+        'merge-prereleases': {
+          type: 'boolean',
+          alias: 'm',
+          describe:
+            'If this input is true then all the prerelease sections since the latest full release are merged into' +
+            " the new release, together with the 'Unreleased' section if there is one. The new version must be a" +
+            " full (non-prerelease) version. The 'Unreleased' section is not required when there are prereleases to" +
+            ' merge.',
+          default: false,
+        },
         'github-repo': {
           type: 'string',
           alias: 'g',
