@@ -5,7 +5,6 @@ import type { Root } from 'mdast';
 import { BoneheadedError } from '../types.js';
 
 const attacher: Plugin<any, Root, Root> = function checkUnreleasedSectionExists() {
-  
   return (_tree: Root, file: VFile) => {
     const releaseHeadings = file.data.releaseHeadings;
 

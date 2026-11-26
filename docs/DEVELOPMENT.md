@@ -75,7 +75,7 @@ you are upgrading a checkout that used husky, run `git config --unset core.hooks
 | `npm run clean`            | Remove `lib/`                                                              |
 | `npm run format`           | Prettier write for `**/*.ts`                                               |
 | `npm run format-check`     | Prettier check for `**/*.ts`                                               |
-| `npm run lint`             | `oxlint` on `src/**/*.ts`; fails on warnings as well as errors             |
+| `npm run lint`             | `oxlint` on everything under `src/`; fails on warnings as well as errors   |
 | `npm run package`          | Bundle `lib/` into `dist/` and `dist/cli/` with `@vercel/ncc`              |
 | `npm run all`              | build, format-check, lint, test and package; run this before pushing       |
 
