@@ -27,9 +27,11 @@
     "build": "tsc",
     "format": "prettier --write \"**/*.ts\"",
     "format-check": "prettier --check \"**/*.ts\"",
-    "lint": "npx oxlint --deny-warnings src",
+    "lint": "npx oxlint --deny-warnings src scripts",
     "package": "ncc build lib/index.js --source-map --license licenses.txt -o dist && ncc build lib/cli.js --source-map --license licenses.txt -o dist/cli",
-    "all": "npm run build && npm run format-check && npm run lint && npm test && npm run package",
+    "all": "npm run build && npm run format-check && npm run lint && npm test && npm run check-scripts && npm run package",
+    "check-scripts": "tsc -p scripts && node --test \"scripts/**/*.test.ts\"",
+    "release": "node scripts/release.ts",
     "prepare": "lefthook install"
   },
   "author": "Release Flow <info@releaseflow.io>",

@@ -1,38 +1,76 @@
 name: CI Build
 
+# Releases are not published here: see release-pr-merged.yml, release-published.yml and docs/DEVELOPMENT.md#releasing.
+
 on:
   pull_request:
-    branches: 
-    - main
-    - autorelease/*
+  push:
+    branches:
+      - main
   workflow_dispatch:
-    
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
     name: 'Build & Test'
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version-file: '.nvmrc'
-    - run: npm ci --legacy-peer-deps
-    - run: npm run all
-    - name: Ensure dist/ directory is up to date
-      id: diff
-      run: |
-        echo '======='
-        if [[ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol --text -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]]; then
-          echo "Detected uncommitted changes after build.  See status below:"
-          git diff --ignore-space-at-eol --ignore-cr-at-eol --text -- dist/ ':(exclude)*.js.map'
-          exit 1
-        fi
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+      - run: npm ci --legacy-peer-deps
+      - run: npm run all
+      - name: Ensure dist/ directory is up to date
+        id: diff
+        run: |
+          if [[ "$(git diff --ignore-space-at-eol --ignore-cr-at-eol --text -- dist/ ':(exclude)*.js.map' | wc -l)" -gt "0" ]]; then
+            echo "Detected uncommitted changes after build.  See status below:"
+            git diff --ignore-space-at-eol --ignore-cr-at-eol --text -- dist/ ':(exclude)*.js.map'
+            exit 1
+          fi
 
-    # If index.js was different than expected, upload the generated version as an artifact so we can compare
-    - uses: actions/upload-artifact@v4
-      if: ${{ failure() && steps.diff.conclusion == 'failure' }}
-      with:
-        name: dist
-        path: dist/
+      # If index.js was different than expected, upload the generated version as an artifact so we can compare
+      - uses: actions/upload-artifact@v7.0.2
+        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
+        with:
+          name: dist
+          path: dist/
+
+  # Release pull requests (branch chore/release-<version>, opened by `scripts/release.ts prepare`): the branch name,
+  # package.json, package-lock.json and CHANGELOG.md must agree, and the version must be newer than every release.
+  release-pr:
+    name: Release PR check
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'chore/release-')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+      - name: Check the release version
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version=$(node scripts/release.ts parse-branch "$HEAD_REF")
+          node scripts/release.ts verify "$version"
+          { git tag --list 'v*'; gh api "repos/$REPO/releases" --paginate --jq '.[].tag_name'; } > "$RUNNER_TEMP/existing.txt"
+          node scripts/release.ts check-newer "$version" --existing "$RUNNER_TEMP/existing.txt"
+          echo "Release pull request for $version is consistent" >> "$GITHUB_STEP_SUMMARY"

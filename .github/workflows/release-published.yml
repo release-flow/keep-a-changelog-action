@@ -1,85 +1,114 @@
+name: Release published
+
+# Publishing a release (normally the draft made by release-pr-merged.yml) verifies the tag, moves the floating major
+# tag (stable releases only) and stages the npm package. A maintainer must then publish the staged package on
+# npmjs.com. See docs/DEVELOPMENT.md#releasing.
+
 on:
   release:
     types: [published]
 
+permissions: {}
 
-name: '[autorelease] Release published'
-
-permissions:
-  contents: write
+concurrency:
+  group: publish-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
 
 jobs:
-  update-ref:
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.get-release-version.outputs.version }}
-      is-prerelease: ${{ steps.get-release-version.outputs.is-prerelease }}
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Get release version
-      id: get-release-version
-      run: |
-        VERSION="${{ github.event.release.tag_name }}"
-
-        RE='^[vV]?([0-9]+)[.]([0-9]+)[.]([0-9]+)(-[0-9A-Za-z.+-]*)?'
-        if [[ $VERSION =~ $RE ]]; then
-          MAJOR="${BASH_REMATCH[1]}"
-          MINOR="${BASH_REMATCH[2]}"
-          PATCH="${BASH_REMATCH[3]}"
-          PRERELEASE="${BASH_REMATCH[4]}"
-        else
-          echo "::error::Version '$VERSION' is not in a valid format" && exit 1
-        fi
-
-        if [[ "$PRERELEASE" ]]; then pre=true; else pre=false; fi
-        if [[ -f $GITHUB_OUTPUT ]]; then
-          echo "major-ref=v$MAJOR" >> $GITHUB_OUTPUT
-          echo "version=$MAJOR.$MINOR.$PATCH$PRERELEASE" >> $GITHUB_OUTPUT
-          echo "is-prerelease=$pre" >> $GITHUB_OUTPUT
-        else
-          echo "::set-output name=major-ref::v$MAJOR"
-          echo "::set-output name=version::$MAJOR.$MINOR.$PATCH$PRERELEASE"
-          echo "::set-output name=is-prerelease::$pre"
-        fi
-
-    - name: Prerelease
-      if: fromJSON(steps.get-release-version.outputs.is-prerelease)
-      run: |
-        echo "::notice::Pre-release version detected, not moving ref  ${{ steps.get-release-version.outputs.major-ref }}"
-
-    - name: Update release tag
-      if: ${{ ! fromJSON(steps.get-release-version.outputs.is-prerelease) }}
-      run: |
-        git config user.name "${GITHUB_ACTOR}"
-        git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-
-        git tag -fa ${{ steps.get-release-version.outputs.major-ref }} -m "Update ${{ steps.get-release-version.outputs.major-ref }} tag"
-        git push origin ${{ steps.get-release-version.outputs.major-ref }} --force
-        echo "::notice::Updated ref ${{ steps.get-release-version.outputs.major-ref }}"
-
-  publish-npm:
-    needs: update-ref
+  verify:
+    name: Verify release
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+    outputs:
+      version: ${{ steps.check.outputs.version }}
+      prerelease: ${{ steps.check.outputs.prerelease }}
+      commit: ${{ steps.check.outputs.commit }}
+      major-ref: ${{ steps.check.outputs.major-ref }}
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+      - name: Check the tag and release files
+        id: check
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+          RELEASE_PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          set -euo pipefail
+          if [[ "$TAG" != v* ]]; then echo "::error::tag '$TAG' does not start with v"; exit 1; fi
+          version="${TAG#v}"
+          commit=$(git rev-parse "refs/tags/$TAG^{commit}")
+          if ! git merge-base --is-ancestor "$commit" origin/main; then
+            echo "::error::tag $TAG ($commit) is not on main"; exit 1
+          fi
+          node scripts/release.ts verify "$version" # also checks it is a valid release version
+          prerelease=$(node scripts/release.ts is-prerelease "$version")
+          if [[ "$prerelease" != "$RELEASE_PRERELEASE" ]]; then
+            echo "::error::the release's prerelease flag ($RELEASE_PRERELEASE) does not match version $version"; exit 1
+          fi
+          {
+            echo "version=$version"
+            echo "prerelease=$prerelease"
+            echo "commit=$commit"
+            echo "major-ref=v${version%%.*}"
+          } >> "$GITHUB_OUTPUT"
 
-    - uses: actions/setup-node@v4
-      with:
-        node-version-file: '.nvmrc'
-        registry-url: 'https://registry.npmjs.org'
+  update-ref:
+    name: Move the major tag
+    needs: verify
+    if: needs.verify.outputs.prerelease == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # push the major tag
+    steps:
+      # Keeps the checkout credentials: they push the tag.
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ needs.verify.outputs.commit }}
+      - name: Update the major tag
+        env:
+          MAJOR_REF: ${{ needs.verify.outputs.major-ref }}
+          COMMIT: ${{ needs.verify.outputs.commit }}
+        run: |
+          set -euo pipefail
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git tag -fa "$MAJOR_REF" -m "Update $MAJOR_REF tag" "$COMMIT"
+          git push origin "refs/tags/$MAJOR_REF" --force
+          echo "::notice::Updated ref $MAJOR_REF"
 
-    - run: npm ci --legacy-peer-deps
+  publish-npm:
+    name: Stage the npm package
+    needs: [verify, update-ref]
+    # Also runs for prereleases, when update-ref is skipped.
+    if: ${{ !cancelled() && needs.verify.result == 'success' && needs.update-ref.result != 'failure' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing and provenance (OIDC)
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ needs.verify.outputs.commit }}
+          persist-credentials: false
 
-    - run: npm run build && npm run package
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
 
-    - name: Set package version to match release
-      run: npm pkg set version=${{ needs.update-ref.outputs.version }}
+      - run: npm ci --legacy-peer-deps
 
-    - name: Stage publish
-      run: npm stage publish --tag ${{ fromJSON(needs.update-ref.outputs.is-prerelease) && 'next' || 'latest' }} --provenance
+      - run: npm run build && npm run package
+
+      # package.json already has the release version: the verify job checked it.
+      - name: Stage publish
+        env:
+          DIST_TAG: ${{ needs.verify.outputs.prerelease == 'true' && 'next' || 'latest' }}
+        run: npm stage publish --tag "$DIST_TAG" --provenance
