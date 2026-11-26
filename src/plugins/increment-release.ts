@@ -10,7 +10,6 @@ import { BoneheadedError } from '../types.js';
 const { SemVer } = semver;
 
 const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptions) {
-
   return (tree: Root, file: VFile) => {
     const releaseHeadings = file.data.releaseHeadings;
     const nextReleaseVersion = file.data['nextReleaseVersion'] as string;
@@ -18,7 +17,7 @@ const attacher: Plugin<[BumpOptions], Root, Root> = function (options: BumpOptio
     if (!releaseHeadings) {
       throw new BoneheadedError('File should have been preprocessed before calling this plugin');
     }
-    
+
     if (releaseHeadings.length === 0 || releaseHeadings[0].release !== 'unreleased') {
       file.fail("The 'Unreleased' section must be present");
     }

@@ -25,9 +25,9 @@
     "build-and-test": "tsc --incremental && npm test",
     "rebuild-and-test": "npm run clean && npm run build && npm test",
     "build": "tsc",
-    "format": "prettier --write **/*.ts",
-    "format-check": "prettier --check **/*.ts",
-    "lint": "npx oxlint --deny-warnings src/**/*.ts",
+    "format": "prettier --write \"**/*.ts\"",
+    "format-check": "prettier --check \"**/*.ts\"",
+    "lint": "npx oxlint --deny-warnings src",
     "package": "ncc build lib/index.js --source-map --license licenses.txt -o dist && ncc build lib/cli.js --source-map --license licenses.txt -o dist/cli",
     "all": "npm run build && npm run format-check && npm run lint && npm test && npm run package",
     "prepare": "lefthook install"

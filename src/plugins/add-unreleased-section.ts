@@ -6,14 +6,13 @@ import { BoneheadedError, ReleaseHeading } from '../types.js';
 import { Parent } from 'unist';
 
 const attacher: Plugin<any, Root, Root> = function () {
-
   return (tree: Root, file: VFile) => {
     const releaseHeadings = file.data.releaseHeadings;
 
     if (!releaseHeadings) {
       throw new BoneheadedError('File should have been preprocessed before calling this plugin');
     }
-    
+
     if (releaseHeadings.length > 0 && releaseHeadings[0].release === 'unreleased') {
       // Unreleased already exists - no-op
       return tree;
